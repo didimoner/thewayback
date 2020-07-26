@@ -1,16 +1,25 @@
 #include <iostream>
-#include <SDL.h>
-#include "res_path.h"
-#include <string>
+#include "Game.h"
 
 int main(int, char**) {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+	Game* pGame = new Game();
+	bool initialized = pGame->init("Test title",
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		640, 480,
+		SDL_WINDOW_SHOWN
+	);
+
+	if (!initialized) {
+		std::cout << "Game initialisation failed" << std::endl;
 		return 1;
 	}
 
-	std::cout << "Resource path is: " << getResourcePath() << std::endl;
+	while (pGame->isRunning()) {
+		pGame->handleEvents();
+		pGame->update();
+		pGame->render();
+	}
 
-	SDL_Quit();
+	pGame->clean();
 	return 0;
 }
