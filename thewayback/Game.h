@@ -26,6 +26,10 @@ private:
 	SDL_Window* _pWindow = NULL;
 	SDL_Renderer* _pRenderer = NULL;
 
+	SDL_Texture* _pTexture = NULL;
+	SDL_Rect _sourceRect;
+	SDL_Rect _destinationRect;
+
 	bool _running = false;
 
 };
