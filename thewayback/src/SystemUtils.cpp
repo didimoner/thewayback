@@ -1,21 +1,10 @@
-#ifndef RES_PATH_H
-#define RES_PATH_H
+#include "pch.h"
+#include "SystemUtils.h"
 
-#include <iostream>
-#include <string>
 #include <SDL.h>
 
-/*
- * Get the resource path for resources located in res/subDir
- * It's assumed the project directory is structured like:
- * bin/
- *  the executable
- * res/
- *  Res1/
- *  Res2/
- *
- */
-std::string getResourcePath(const std::string& subDir = "") {
+
+std::string SystemUtils::getResourcePath(const std::string& subDir) {
 #ifdef _WIN32
 	const char PATH_SEP = '\\';
 #else
@@ -43,5 +32,3 @@ std::string getResourcePath(const std::string& subDir = "") {
 	//append it to the base path. This would be something like Lessons/res/Lesson0
 	return subDir.empty() ? baseRes : baseRes + subDir + PATH_SEP;
 }
-
-#endif

@@ -1,7 +1,8 @@
+#include "pch.h"
 #include "Game.h"
-#include <iostream>
-#include "res_path.h"
 #include <SDL_image.h>
+#include "SystemUtils.h"
+
 
 bool Game::init(const char* title, int x, int y, int width, int height, int flags) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -21,7 +22,7 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 
 	_running = true;
 
-	std::string filename = getResourcePath("images") + "newchar02-2.png";
+	std::string filename = SystemUtils::getResourcePath("images") + "newchar02-2.png";
 	SDL_Surface* pSurface = IMG_Load(filename.c_str());
 	_pTexture = SDL_CreateTextureFromSurface(_pRenderer, pSurface);
 	SDL_FreeSurface(pSurface);

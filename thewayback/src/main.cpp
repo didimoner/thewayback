@@ -1,5 +1,9 @@
-#include <iostream>
+#include "pch.h"
+#include <SDL.h>
+#include "SystemUtils.h"
+
 #include "Game.h"
+
 
 int main(int, char**) {
 	Game* pGame = new Game();
@@ -21,5 +25,6 @@ int main(int, char**) {
 	}
 
 	pGame->clean();
+
 	return 0;
 }

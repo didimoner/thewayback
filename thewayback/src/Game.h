@@ -1,5 +1,4 @@
-#ifndef __GAME__
-#define __GAME__
+#pragma once
 
 #include <SDL.h>
 
@@ -23,15 +22,13 @@ public:
 
 private:
 
-	SDL_Window* _pWindow = NULL;
-	SDL_Renderer* _pRenderer = NULL;
+	SDL_Window* _pWindow = nullptr;
+	SDL_Renderer* _pRenderer = nullptr;
 
-	SDL_Texture* _pTexture = NULL;
+	SDL_Texture* _pTexture = nullptr;
 	SDL_Rect _sourceRect;
 	SDL_Rect _destinationRect;
 
 	bool _running = false;
 
 };
-
-#endif // !__GAME__
