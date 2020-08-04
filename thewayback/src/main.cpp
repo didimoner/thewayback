@@ -6,7 +6,7 @@
 
 
 int main(int, char**) {
-	Game* pGame = new Game();
+	Game* pGame = Game::instance();
 	bool initialized = pGame->init("Test title",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		640, 480,

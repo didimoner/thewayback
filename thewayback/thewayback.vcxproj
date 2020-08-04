@@ -161,18 +161,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseObject.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\SDLBaseObject.cpp" />
     <ClCompile Include="src\SystemUtils.cpp" />
+    <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BaseObject.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\SDLBaseObject.h" />
     <ClInclude Include="src\SystemUtils.h" />
+    <ClInclude Include="src\TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

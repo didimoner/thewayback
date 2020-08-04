@@ -5,10 +5,16 @@
 class Game {
 
 public:
+	Game(const Game&) = delete;
+	Game& operator=(const Game&) = delete;
 
-	Game() {}
-	~Game() {}
-
+	static Game* instance() {
+		if (s_pInstance == nullptr) {
+			s_pInstance = new Game();
+		}
+		return s_pInstance;
+	}
+	
 	bool init(const char* title, int x, int y, int width, int height, int flags);
 	void render();
 	void update() {}
@@ -16,19 +22,16 @@ public:
 	void clean();
 
 	bool isRunning() {
-		return _running;
+		return m_running;
 	}
 
-
 private:
+	Game() {}
+	static Game* s_pInstance;
 
-	SDL_Window* _pWindow = nullptr;
-	SDL_Renderer* _pRenderer = nullptr;
+	SDL_Window* m_pWindow = nullptr;
+	SDL_Renderer* m_pRenderer = nullptr;
 
-	SDL_Texture* _pTexture = nullptr;
-	SDL_Rect _sourceRect;
-	SDL_Rect _destinationRect;
-
-	bool _running = false;
+	bool m_running = false;
 
 };
