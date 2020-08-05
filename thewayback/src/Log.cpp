@@ -3,13 +3,23 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include "SystemUtils.h"
 
-Log::Log() {
-    m_name = "root";
-}
+INIReader* Log::s_pConfigReader = nullptr;
 
 Log::Log(std::string loggerName) {
     m_name = loggerName;
+
+    if (s_pConfigReader == nullptr) {
+        std::string configsDirPath = SystemUtils::getResourcePath("configs");
+        s_pConfigReader = new INIReader(configsDirPath + "log_config.ini");
+
+        if (s_pConfigReader->ParseError() != 0) {
+            std::cout << "Error while initialising Logger config." << std::endl;
+        }
+    }
+
+    m_logLevel = static_cast<Level>(s_pConfigReader->GetInteger("Log", "level", 2));
 }
 
 void Log::trace(std::string msg) const {
@@ -50,10 +60,6 @@ void Log::error(std::string msg) const {
     }
     
     this->print("ERROR", msg);
-}
-
-void Log::setLogLevel(Level level) {
-    m_logLevel = level;
 }
 
 void Log::print(std::string levelStr, std::string msg) const {

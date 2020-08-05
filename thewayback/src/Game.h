@@ -47,6 +47,7 @@ private:
 
 	bool m_running = false;
 
+	// TODO: delete in descructor
 	std::vector<BaseObject*> m_gameObjects;
 
 };

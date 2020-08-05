@@ -10,11 +10,11 @@ public:
 	TextureManager& operator=(const TextureManager&) = delete;
 
 	static TextureManager* instance() {
-		if (s_pTextureManager == nullptr) {
-			s_pTextureManager = new TextureManager();
+		if (s_pInstance == nullptr) {
+			s_pInstance = new TextureManager();
 		}
 
-		return s_pTextureManager;
+		return s_pInstance;
 	}
 
 	// ----------------------------------------------------------------------
@@ -35,7 +35,7 @@ public:
 private:
 	TextureManager() {}
 
-	static TextureManager* s_pTextureManager;
+	static TextureManager* s_pInstance;
 	static Log* Logger;
 
 	std::map<std::string, SDL_Texture*> m_textureMap;

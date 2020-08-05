@@ -4,6 +4,7 @@
 #include "SystemUtils.h"
 #include "Player.h"
 #include "TextureManager.h"
+#include "Config.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -27,8 +28,12 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 
 	// -----------------------------------------
 
-	TextureManager::instance()->load("newchar02-2.png", "player", m_pRenderer);
+	// loading configs
+	Config::instance()->load("system.ini", "system");
 
+	// loading textures
+	TextureManager::instance()->load("newchar02-2.png", "player", m_pRenderer);
+	
 	BaseObject* pPlayer = new Player(25, 50, 32, 32, "player");
 	m_gameObjects.push_back(pPlayer);
 

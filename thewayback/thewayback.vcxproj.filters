@@ -13,6 +13,9 @@
     <Filter Include="Engine\Managers">
       <UniqueIdentifier>{7c792af5-355c-4816-9eec-402781775e9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vendor">
+      <UniqueIdentifier>{78e3c992-2776-4edc-a6c6-1b88ecc63c8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SystemUtils.cpp">
@@ -38,6 +41,9 @@
     <ClCompile Include="src\Log.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\Config.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SystemUtils.h">
@@ -60,6 +66,12 @@
       <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Log.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\INIReader.h">
+      <Filter>Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
