@@ -1,20 +1,19 @@
 #include "pch.h"
 #include "TextureManager.h"
-#include "SystemUtils.h"
 #include <SDL_image.h>
+#include "SystemUtils.h"
+
 
 TextureManager* TextureManager::s_pTextureManager = nullptr;
+Log* TextureManager::Logger = new Log(typeid(TextureManager).name());
 
 bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pRenderer) {
     std::string resourcesPath = SystemUtils::getResourcePath("images");
-    const char* filepath = (resourcesPath.append(filename)).c_str();
-    SDL_Surface* pSurface = IMG_Load(filepath);
-
-    std::cout << filepath << std::endl;
+    std::string filepath = resourcesPath.append(filename);
+    SDL_Surface* pSurface = IMG_Load(filepath.c_str());
 
     if (pSurface == 0) {
-        std::cout << "surface error" << std::endl;
-        // todo: log error
+        Logger->error("Cannot load surface from image: " + filepath);
         return false;
     }
 
@@ -23,8 +22,7 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
     SDL_FreeSurface(pSurface);
 
     if (pTexture == 0) {
-        std::cout << "texture error" << std::endl;
-        // todo: log error
+        Logger->error("Cannot load texture from surface: " + filepath);
         return false;
     }
 
@@ -40,7 +38,9 @@ void TextureManager::draw(std::string textureId, int x, int y, int width, int he
         SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textureMap[textureId];
     
-    // todo: check if a texture exists
+    if (pTexture == nullptr) {
+        Logger->warn("Texture not found in the map: " + textureId);
+    }
 
     SDL_Rect sourceRect;
     sourceRect.x = 0;
@@ -66,7 +66,9 @@ void TextureManager::drawFrame(std::string textureId, int x, int y, int width, i
         int currentRow, int currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textureMap[textureId];
 
-    // todo: check if a texture exists
+    if (pTexture == nullptr) {
+        Logger->warn("Texture not found in the map: " + textureId);
+    }
 
     SDL_Rect sourceRect;
     sourceRect.x = width * currentFrame;

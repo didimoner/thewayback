@@ -23,6 +23,8 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 		return false;
 	}
 
+	m_pLogger = new Log();
+
 	// -----------------------------------------
 
 	TextureManager::instance()->load("newchar02-2.png", "player", m_pRenderer);
@@ -72,6 +74,8 @@ void Game::clean() {
 	for (BaseObject* object : m_gameObjects) {
 		object->clean();
 	}
+
+	delete m_pLogger;
 
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include "Log.h"
 
 class TextureManager {
 
@@ -33,7 +34,9 @@ public:
 
 private:
 	TextureManager() {}
+
 	static TextureManager* s_pTextureManager;
+	static Log* Logger;
 
 	std::map<std::string, SDL_Texture*> m_textureMap;
 

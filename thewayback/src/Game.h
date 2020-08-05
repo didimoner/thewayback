@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "BaseObject.h"
+#include "Log.h"
 
 class Game {
 
@@ -32,12 +33,17 @@ public:
 		return m_pRenderer;
 	}
 
+	Log* getLogger() const {
+		return m_pLogger;
+	}
+
 private:
 	Game() {}
 	static Game* s_pInstance;
 
 	SDL_Window* m_pWindow = nullptr;
 	SDL_Renderer* m_pRenderer = nullptr;
+	Log* m_pLogger = nullptr;
 
 	bool m_running = false;
 

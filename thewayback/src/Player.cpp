@@ -3,7 +3,6 @@
 
 Player::Player(int x, int y, int w, int h, std::string textureId) 
 	: SDLBaseObject(x, y, w, h, textureId) {
-
 }
 
 void Player::draw() {

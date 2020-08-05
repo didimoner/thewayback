@@ -1,0 +1,28 @@
+#pragma once
+
+class Log {
+
+public:
+    enum class Level {
+        ERROR = 0, WARNING, INFO, DEBUG, TRACE
+    };
+
+    Log();
+    Log(std::string loggerName);
+
+    void trace(std::string msg) const;
+    void debug(std::string msg) const;
+    void info(std::string msg) const;
+    void warn(std::string msg) const;
+    void error(std::string msg) const;
+
+    void setLogLevel(Level level);
+
+private:
+    Level m_logLevel = Level::INFO;
+    std::string m_name;
+
+    void print(std::string level, std::string msg) const;
+    static std::string getNow();
+
+};
