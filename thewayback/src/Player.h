@@ -2,7 +2,7 @@
 
 #include "SDLBaseObject.h"
 
-class Player : SDLBaseObject {
+class Player : public SDLBaseObject {
 
 public:
 	Player(int x, int y, int w, int h, std::string textureId);

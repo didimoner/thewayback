@@ -2,7 +2,8 @@
 #include "Game.h"
 #include <SDL_image.h>
 #include "SystemUtils.h"
-
+#include "Player.h"
+#include "TextureManager.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -22,6 +23,15 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 		return false;
 	}
 
+	// -----------------------------------------
+
+	TextureManager::instance()->load("newchar02-2.png", "player", m_pRenderer);
+
+	BaseObject* pPlayer = new Player(25, 50, 32, 32, "player");
+	m_gameObjects.push_back(pPlayer);
+
+	// -----------------------------------------
+
 	m_running = true;
 
 	return true;
@@ -30,7 +40,18 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 void Game::render() {
 	SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_pRenderer);
+
+	for (BaseObject* object : m_gameObjects) {
+		object->draw();
+	}
+
 	SDL_RenderPresent(m_pRenderer);
+}
+
+void Game::update() {
+	for (BaseObject* object : m_gameObjects) {
+		object->update();
+	}
 }
 
 void Game::handleEvents() {
@@ -48,6 +69,10 @@ void Game::handleEvents() {
 }
 
 void Game::clean() {
+	for (BaseObject* object : m_gameObjects) {
+		object->clean();
+	}
+
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();

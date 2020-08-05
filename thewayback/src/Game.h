@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include "BaseObject.h"
 
 class Game {
 
@@ -14,15 +15,21 @@ public:
 		}
 		return s_pInstance;
 	}
+
+	// ----------------------------------------------------------------------
 	
 	bool init(const char* title, int x, int y, int width, int height, int flags);
 	void render();
-	void update() {}
+	void update();
 	void handleEvents();
 	void clean();
 
-	bool isRunning() {
+	bool isRunning() const {
 		return m_running;
+	}
+
+	SDL_Renderer* getRenderer() const {
+		return m_pRenderer;
 	}
 
 private:
@@ -33,5 +40,7 @@ private:
 	SDL_Renderer* m_pRenderer = nullptr;
 
 	bool m_running = false;
+
+	std::vector<BaseObject*> m_gameObjects;
 
 };
