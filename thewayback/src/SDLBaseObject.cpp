@@ -25,6 +25,8 @@ void SDLBaseObject::draw() {
 }
 
 void SDLBaseObject::update() {
+	m_velocity += m_acceleration;
+	m_position += m_velocity;
 }
 
 void SDLBaseObject::clean() {

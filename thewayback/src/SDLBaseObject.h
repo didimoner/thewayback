@@ -18,6 +18,7 @@ public:
 protected:
 	Vector2f m_position;
 	Vector2f m_velocity;
+	Vector2f m_acceleration;
 
 	int m_width;
 	int m_height;

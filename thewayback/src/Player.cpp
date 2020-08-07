@@ -4,7 +4,8 @@
 Player::Player(float x, float y, int w, int h, std::string textureId)
 	: SDLBaseObject(x, y, w, h, textureId) {
 
-	m_velocity.setY(1.f);
+	//m_velocity.setY(1.f);
+	//m_acceleration.setY(0.02f);
 }
 
 void Player::draw() {
@@ -12,11 +13,11 @@ void Player::draw() {
 }
 
 void Player::update() {
-	m_position += m_velocity;
-
 	m_currentFrame = int(((SDL_GetTicks() / 250) % 3));
+
+	SDLBaseObject::update();
 }
 
 void Player::clean() {
-
+	SDLBaseObject::clean();
 }
