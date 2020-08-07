@@ -2,11 +2,12 @@
 
 #include <SDL.h>
 #include "BaseObject.h"
+#include "Vector2f.h"
 
 class SDLBaseObject : public BaseObject {
 
 public:
-	SDLBaseObject(int x, int y, int w, int h, std::string textureId);
+	SDLBaseObject(float x, float y, int w, int h, std::string textureId);
 
 	SDL_Rect getRect() const;
 
@@ -15,8 +16,8 @@ public:
 	virtual void clean();
 
 protected:
-	int m_x;
-	int m_y;
+	Vector2f m_position;
+	Vector2f m_velocity;
 
 	int m_width;
 	int m_height;

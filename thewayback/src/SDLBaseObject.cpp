@@ -3,10 +3,9 @@
 #include "TextureManager.h"
 #include "Game.h"
 
-SDLBaseObject::SDLBaseObject(int x, int y, int w, int h, std::string textureId)
+SDLBaseObject::SDLBaseObject(float x, float y, int w, int h, std::string textureId)
 		: BaseObject(x, y, w, h, textureId) {
-	m_x = x;
-	m_y = y;
+	m_position = Vector2f(x, y);
 	m_width = w;
 	m_height = h;
 	m_textureId = textureId;
@@ -16,7 +15,7 @@ SDLBaseObject::SDLBaseObject(int x, int y, int w, int h, std::string textureId)
 }
 
 SDL_Rect SDLBaseObject::getRect() const {
-	return { m_x, m_y, m_width, m_height };
+	return { (int) m_position.getX(), (int) m_position.getY(), m_width, m_height };
 }
 
 void SDLBaseObject::draw() {

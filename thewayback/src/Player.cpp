@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "Player.h"
 
-Player::Player(int x, int y, int w, int h, std::string textureId) 
+Player::Player(float x, float y, int w, int h, std::string textureId)
 	: SDLBaseObject(x, y, w, h, textureId) {
+
+	m_velocity.setY(1.f);
 }
 
 void Player::draw() {
@@ -10,6 +12,8 @@ void Player::draw() {
 }
 
 void Player::update() {
+	m_position += m_velocity;
+
 	m_currentFrame = int(((SDL_GetTicks() / 250) % 3));
 }
 

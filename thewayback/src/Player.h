@@ -5,7 +5,7 @@
 class Player : public SDLBaseObject {
 
 public:
-	Player(int x, int y, int w, int h, std::string textureId);
+	Player(float x, float y, int w, int h, std::string textureId);
 
 	virtual void draw();
 	virtual void update();

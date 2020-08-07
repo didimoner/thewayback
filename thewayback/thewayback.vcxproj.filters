@@ -16,6 +16,9 @@
     <Filter Include="Vendor">
       <UniqueIdentifier>{78e3c992-2776-4edc-a6c6-1b88ecc63c8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{d5ac8a56-926c-4065-8d66-ee43451c0994}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SystemUtils.cpp">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="src\Config.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vector2f.h">
+      <Filter>Engine\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
