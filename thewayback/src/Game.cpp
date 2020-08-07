@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "TextureManager.h"
 #include "Config.h"
+#include "InputHandler.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -62,17 +63,11 @@ void Game::update() {
 }
 
 void Game::handleEvents() {
-	SDL_Event event;
-	if (SDL_PollEvent(&event)) {
-		switch (event.type) {
-			case SDL_QUIT:
-				m_running = false;
-				break;
+	InputHandler::instance()->update();
+}
 
-			default:
-				break;
-		}
-	}
+void Game::quit() {
+	m_running = false;
 }
 
 void Game::clean() {
@@ -80,9 +75,11 @@ void Game::clean() {
 		object->clean();
 	}
 
-	delete m_pLogger;
+	InputHandler::instance()->clean();
 
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();
+
+	delete m_pLogger;
 }

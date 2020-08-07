@@ -24,6 +24,7 @@ public:
 	void update();
 	void handleEvents();
 	void clean();
+	void quit();
 
 	bool isRunning() const {
 		return m_running;

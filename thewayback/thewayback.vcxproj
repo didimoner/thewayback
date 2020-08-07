@@ -164,6 +164,7 @@
     <ClCompile Include="src\BaseObject.cpp" />
     <ClCompile Include="src\Config.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">
@@ -180,6 +181,7 @@
     <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\INIReader.h" />
+    <ClInclude Include="src\InputHandler.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Player.h" />

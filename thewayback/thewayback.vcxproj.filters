@@ -19,6 +19,9 @@
     <Filter Include="Engine\Common">
       <UniqueIdentifier>{d5ac8a56-926c-4065-8d66-ee43451c0994}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\System">
+      <UniqueIdentifier>{491901ab-ae18-4afa-9e89-71c8e4fde16b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SystemUtils.cpp">
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="src\Config.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputHandler.cpp">
+      <Filter>Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="src\Vector2f.h">
       <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputHandler.h">
+      <Filter>Engine\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

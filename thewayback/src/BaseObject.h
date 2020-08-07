@@ -8,7 +8,7 @@ public:
 	virtual void clean() = 0;
 
 protected:
-	BaseObject(int x, int y, int w, int h, std::string textureId) {}
+	BaseObject(float x, float y, int w, int h, std::string textureId) {}
 	virtual ~BaseObject() {}
 
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <math.h>
+#include <sstream>
 
 class Vector2f {
 
@@ -13,6 +14,8 @@ public:
 
     float getY() const { return m_y; }
     void setY(float y) { m_y = y; }
+
+    void set(float x, float y) { m_x = x; m_y = y; }
 
     float length() const { 
         return sqrt(pow(m_x, 2) + pow(m_y, 2));
@@ -63,6 +66,12 @@ public:
         if (l > 0) {
             (*this) *= 1 / l;
         }
+    }
+
+    std::string toString() const {
+        std::stringstream ss;
+        ss << "(" << m_x << ", " << m_y << ")";
+        return ss.str();
     }
 
 private:
