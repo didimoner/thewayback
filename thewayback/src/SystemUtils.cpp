@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "SystemUtils.h"
-
 #include <SDL.h>
 
 

@@ -161,9 +161,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\BaseObject.cpp" />
+    <ClCompile Include="src\PlayState.cpp" />
+    <ClCompile Include="src\MenuState.cpp" />
+    <ClCompile Include="src\GameState.h" />
     <ClCompile Include="src\Config.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameStateMachine.cpp" />
     <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -172,20 +175,26 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\SDLBaseObject.cpp" />
+    <ClCompile Include="src\SDLGameObject.cpp" />
+    <ClCompile Include="src\SplashState.cpp" />
     <ClCompile Include="src\SystemUtils.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\BaseObject.h" />
+    <ClInclude Include="src\MenuState.h" />
+    <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\EGameState.h" />
+    <ClInclude Include="src\GameStateMachine.h" />
     <ClInclude Include="src\INIReader.h" />
     <ClInclude Include="src\InputHandler.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Player.h" />
-    <ClInclude Include="src\SDLBaseObject.h" />
+    <ClInclude Include="src\PlayState.h" />
+    <ClInclude Include="src\SDLGameObject.h" />
+    <ClInclude Include="src\SplashState.h" />
     <ClInclude Include="src\SystemUtils.h" />
     <ClInclude Include="src\TextureManager.h" />
     <ClInclude Include="src\Vector2f.h" />

@@ -22,7 +22,7 @@ Log::Log(std::string loggerName) {
     m_logLevel = static_cast<Level>(s_pConfigReader->GetInteger("Log", "level", 2));
 }
 
-void Log::trace(std::string msg) const {
+void Log::trace(const std::string& msg) const {
     if (m_logLevel < Level::TRACE) {
         return;
     }
@@ -30,7 +30,7 @@ void Log::trace(std::string msg) const {
     this->print("TRACE", msg);
 }
 
-void Log::debug(std::string msg) const {
+void Log::debug(const std::string& msg) const {
     if (m_logLevel < Level::DEBUG) {
         return;
     }
@@ -38,7 +38,7 @@ void Log::debug(std::string msg) const {
     this->print("DEBUG", msg);
 }
 
-void Log::info(std::string msg) const {
+void Log::info(const std::string& msg) const {
     if (m_logLevel < Level::INFO) {
         return;
     }
@@ -46,7 +46,7 @@ void Log::info(std::string msg) const {
     this->print("INFO", msg);
 }
 
-void Log::warn(std::string msg) const {
+void Log::warn(const std::string& msg) const {
     if (m_logLevel < Level::WARNING) {
         return;
     }
@@ -54,7 +54,7 @@ void Log::warn(std::string msg) const {
     this->print("WARNING", msg);
 }
 
-void Log::error(std::string msg) const {
+void Log::error(const std::string& msg) const {
     if (m_logLevel < Level::ERROR) {
         return;
     }

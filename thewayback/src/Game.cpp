@@ -6,6 +6,8 @@
 #include "TextureManager.h"
 #include "Config.h"
 #include "InputHandler.h"
+#include "MenuState.h"
+#include "PlayState.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -26,6 +28,7 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 	}
 
 	m_pLogger = new Log();
+	m_pGameStateMachine = new GameStateMachine();
 
 	// -----------------------------------------
 
@@ -34,32 +37,27 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 
 	// loading textures
 	TextureManager::instance()->load("newchar02-2.png", "player", m_pRenderer);
-	
-	BaseObject* pPlayer = new Player(25, 50, 32, 32, "player");
-	m_gameObjects.push_back(pPlayer);
 
 	// -----------------------------------------
 
-	m_running = true;
+	m_pGameStateMachine->pushState(new MenuState());
 
+	m_running = true;
 	return true;
 }
+
+void Game::update() {
+	m_pGameStateMachine->update();
+}
+
 
 void Game::render() {
 	SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_pRenderer);
 
-	for (BaseObject* object : m_gameObjects) {
-		object->draw();
-	}
+	m_pGameStateMachine->draw();
 
 	SDL_RenderPresent(m_pRenderer);
-}
-
-void Game::update() {
-	for (BaseObject* object : m_gameObjects) {
-		object->update();
-	}
 }
 
 void Game::handleEvents() {
@@ -71,10 +69,6 @@ void Game::quit() {
 }
 
 void Game::clean() {
-	for (BaseObject* object : m_gameObjects) {
-		object->clean();
-	}
-
 	InputHandler::instance()->clean();
 
 	SDL_DestroyWindow(m_pWindow);
@@ -82,4 +76,16 @@ void Game::clean() {
 	SDL_Quit();
 
 	delete m_pLogger;
+}
+
+bool Game::isRunning() const {
+	return m_running;
+}
+
+SDL_Renderer* Game::getRenderer() const {
+	return m_pRenderer;
+}
+
+Log* Game::getLogger() const {
+	return m_pLogger;
 }

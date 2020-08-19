@@ -1,17 +1,14 @@
 #pragma once
+#include "SDLGameObject.h"
 
-#include "SDLBaseObject.h"
-
-class Player : public SDLBaseObject {
+class Player : public SDLGameObject {
 
 public:
 	Player(float x, float y, int w, int h, std::string textureId);
+	virtual ~Player() { }
 
-	virtual void draw();
 	virtual void update();
+	virtual void draw();
 	virtual void clean();
-
-private:
-
 
 };

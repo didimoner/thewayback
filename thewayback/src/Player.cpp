@@ -3,14 +3,10 @@
 #include "InputHandler.h"
 
 Player::Player(float x, float y, int w, int h, std::string textureId)
-	: SDLBaseObject(x, y, w, h, textureId) {
+	: SDLGameObject(x, y, w, h, textureId) {
 
 	//m_velocity.setY(1.f);
 	//m_acceleration.setY(0.02f);
-}
-
-void Player::draw() {
-	SDLBaseObject::draw();
 }
 
 void Player::update() {
@@ -29,9 +25,13 @@ void Player::update() {
 		m_velocity.set(0, 0);
 	}
 
-	SDLBaseObject::update();
+	SDLGameObject::update();
+}
+
+void Player::draw() {
+	SDLGameObject::draw();
 }
 
 void Player::clean() {
-	SDLBaseObject::clean();
+	SDLGameObject::clean();
 }

@@ -5,6 +5,14 @@
 
 class TextureManager {
 
+private:
+	TextureManager() {}
+
+	static TextureManager* s_pInstance;
+	static Log* Logger;
+
+	std::map<std::string, SDL_Texture*> m_textureMap;
+
 public:
 	TextureManager(const TextureManager&) = delete;
 	TextureManager& operator=(const TextureManager&) = delete;
@@ -17,7 +25,7 @@ public:
 		return s_pInstance;
 	}
 
-	// ----------------------------------------------------------------------
+	// ---------------------
 
 	bool load(std::string filename, std::string id, SDL_Renderer* pRenderer);
 
@@ -31,13 +39,5 @@ public:
 	void drawFrame(std::string textureId, int x, int y, int width, int height, 
 		int currentRow, int currentFrame,
 		SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
-
-private:
-	TextureManager() {}
-
-	static TextureManager* s_pInstance;
-	static Log* Logger;
-
-	std::map<std::string, SDL_Texture*> m_textureMap;
 
 };

@@ -5,6 +5,15 @@
 
 class Config {
 
+private:
+    Config() {}
+    ~Config();
+
+    std::map<std::string, INIReader*> m_readers;
+
+    static Config* s_pInstance;
+    static Log* Logger;
+
 public:
     Config(const Config&) = delete;
     Config& operator=(Config&) = delete;
@@ -21,14 +30,5 @@ public:
 
     bool load(std::string filename, std::string id);
     INIReader* get(std::string key);
-
-private:
-    Config() {}
-    ~Config();
-
-    std::map<std::string, INIReader*> m_readers;
-
-    static Config* s_pInstance;
-    static Log* Logger;
 
 };
