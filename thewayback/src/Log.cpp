@@ -6,6 +6,7 @@
 #include "SystemUtils.h"
 
 INIReader* Log::s_pConfigReader = nullptr;
+Log* Log::s_pLogger = new Log("RootLogger");
 
 Log::Log(std::string loggerName) {
     m_name = loggerName;
@@ -20,6 +21,10 @@ Log::Log(std::string loggerName) {
     }
 
     m_logLevel = static_cast<Level>(s_pConfigReader->GetInteger("Log", "level", 2));
+}
+
+const Log* Log::getLogger() {
+    return s_pLogger;
 }
 
 void Log::trace(const std::string& msg) const {

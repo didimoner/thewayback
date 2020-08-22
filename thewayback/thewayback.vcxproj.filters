@@ -10,12 +10,6 @@
     <Filter Include="Engine\Managers">
       <UniqueIdentifier>{7c792af5-355c-4816-9eec-402781775e9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Vendor">
-      <UniqueIdentifier>{78e3c992-2776-4edc-a6c6-1b88ecc63c8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Common">
-      <UniqueIdentifier>{d5ac8a56-926c-4065-8d66-ee43451c0994}</UniqueIdentifier>
-    </Filter>
     <Filter Include="States">
       <UniqueIdentifier>{314e9632-d195-4156-9232-15875e17fccc}</UniqueIdentifier>
     </Filter>
@@ -24,6 +18,9 @@
     </Filter>
     <Filter Include="Engine\Utils">
       <UniqueIdentifier>{0fa818a0-8dea-49f8-ade3-2ad14e82219c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\DataObjects">
+      <UniqueIdentifier>{d5ac8a56-926c-4065-8d66-ee43451c0994}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -92,14 +89,11 @@
     <ClInclude Include="src\Log.h">
       <Filter>Engine\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\INIReader.h">
-      <Filter>Vendor</Filter>
-    </ClInclude>
     <ClInclude Include="src\Config.h">
       <Filter>Engine\Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\Vector2f.h">
-      <Filter>Engine\Common</Filter>
+      <Filter>Engine\DataObjects</Filter>
     </ClInclude>
     <ClInclude Include="src\EGameState.h">
       <Filter>States</Filter>
@@ -140,5 +134,9 @@
     <ClInclude Include="src\Game.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\INIReader.h">
+      <Filter>Engine\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bootstrap.h" />
   </ItemGroup>
 </Project>

@@ -6,46 +6,30 @@
 #include "Config.h"
 #include "InputHandler.h"
 
-// todo: move this outside
-#include "MenuState.h"
-#include "GameObjectFactory.h"
-#include "Player.h"
-
 Game* Game::s_pInstance = nullptr;
+Log* Game::Logger = new Log(typeid(Game).name());
 
-bool Game::init(const char* title, int x, int y, int width, int height, int flags) {
+bool Game::init(const char* title, int x, int y, int width, int height, int flags, 
+		GameStateMachine* pGameStateMachine, GameState* pInitialState) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+		Logger->error("SDL_Init Error: " + std::string(SDL_GetError()));
 		return false;
 	}
 
 	m_pWindow = SDL_CreateWindow(title, x, y, width, height, flags);
 	if (m_pWindow == 0) {
+		Logger->error("Cannot initialise windows.");
 		return false;
 	}
 
 	m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (m_pRenderer == 0) {
+		Logger->error("Cannot create renderer.");
 		return false;
 	}
 
-	m_pLogger = new Log();
-	m_pGameStateMachine = new GameStateMachine();
-
-	// -----------------------------------------
-
-	// loading configs
-	Config::instance()->load("system.ini", "system");
-
-	// -----------------------------------------
-
-	// TODO: move this outside of engine
-	GameObjectFactory::instance()->registerType("player", new PlayerCreator());
-
-	// -----------------------------------------
-
-	m_pGameStateMachine->pushState(new MenuState());
-
+	m_pGameStateMachine = pGameStateMachine;
+	m_pGameStateMachine->pushState(pInitialState);
 	m_running = true;
 	return true;
 }
@@ -53,7 +37,6 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 void Game::update() {
 	m_pGameStateMachine->update();
 }
-
 
 void Game::render() {
 	SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
@@ -78,8 +61,6 @@ void Game::clean() {
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();
-
-	delete m_pLogger;
 }
 
 bool Game::isRunning() const {
@@ -88,8 +69,4 @@ bool Game::isRunning() const {
 
 SDL_Renderer* Game::getRenderer() const {
 	return m_pRenderer;
-}
-
-Log* Game::getLogger() const {
-	return m_pLogger;
 }

@@ -12,12 +12,14 @@ private:
     std::string m_name;
     Level m_logLevel;
 
+    static Log* s_pLogger;
     static INIReader* s_pConfigReader;
-    static std::string getNow();
 
 public:
     Log() : Log("root") {};
     Log(std::string loggerName);
+
+    static const Log* getLogger();
 
     void trace(const std::string& msg) const;
     void debug(const std::string& msg) const;
@@ -27,5 +29,6 @@ public:
 
 private:
     void print(std::string level, std::string msg) const;
+    static std::string getNow();
 
 };

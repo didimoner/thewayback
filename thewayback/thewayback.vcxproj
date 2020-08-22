@@ -186,6 +186,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bootstrap.h" />
     <ClInclude Include="src\GameObjectFactory.h" />
     <ClInclude Include="src\MenuState.h" />
     <ClInclude Include="src\GameObject.h" />

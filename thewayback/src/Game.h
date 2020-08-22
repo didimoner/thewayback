@@ -1,5 +1,4 @@
 #pragma once
-
 #include <SDL.h>
 #include "GameObject.h"
 #include "Log.h"
@@ -10,10 +9,10 @@ class Game {
 private:
 	Game() {}
 	static Game* s_pInstance;
+	static Log* Logger;
 
 	SDL_Window* m_pWindow = nullptr;
 	SDL_Renderer* m_pRenderer = nullptr;
-	Log* m_pLogger = nullptr;
 	GameStateMachine* m_pGameStateMachine = nullptr;
 
 	bool m_running = false;
@@ -31,7 +30,8 @@ public:
 
 	// --------------------
 	
-	bool init(const char* title, int x, int y, int width, int height, int flags);
+	bool init(const char* title, int x, int y, int width, int height, int flags, 
+		GameStateMachine* pGameStateMachine, GameState* pInitialState);
 	void update();
 	void render();
 	void handleEvents();
@@ -40,6 +40,5 @@ public:
 
 	bool isRunning() const;
 	SDL_Renderer* getRenderer() const;
-	Log* getLogger() const;
 
 };
