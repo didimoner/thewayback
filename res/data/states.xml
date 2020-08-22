@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<STATES>
+
+    <MENU_STATE>
+        <TEXTURES>
+            <texture filename="newchar02-2.png" id="player"/>
+        </TEXTURES>
+
+        <OBJECTS>
+            <object type="player" x="25" y="50" width="32" height="32" textureId="player"/>
+        </OBJECTS>
+    </MENU_STATE>
+
+    <PLAY_STATE></PLAY_STATE>
+    <SPLASH_STATE></SPLASH_STATE>
+
+</STATES>

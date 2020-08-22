@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{0fa818a0-8dea-49f8-ade3-2ad14e82219c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{38b68d0d-a3d9-404d-a647-53cb49fc4080}</UniqueIdentifier>
     </Filter>
@@ -19,16 +16,19 @@
     <Filter Include="Engine\Common">
       <UniqueIdentifier>{d5ac8a56-926c-4065-8d66-ee43451c0994}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\System">
-      <UniqueIdentifier>{491901ab-ae18-4afa-9e89-71c8e4fde16b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="States">
       <UniqueIdentifier>{314e9632-d195-4156-9232-15875e17fccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Vendor">
+      <UniqueIdentifier>{793ea665-6075-479a-ba5f-073fdf986a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utils">
+      <UniqueIdentifier>{0fa818a0-8dea-49f8-ade3-2ad14e82219c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SystemUtils.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Engine\Utils</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp" />
@@ -39,17 +39,10 @@
       <Filter>Engine\Managers</Filter>
     </ClCompile>
     <ClCompile Include="src\Log.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Engine\Utils</Filter>
     </ClCompile>
     <ClCompile Include="src\Config.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="src\InputHandler.cpp">
-      <Filter>Engine\System</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GameStateMachine.cpp">
-      <Filter>Engine\System</Filter>
+      <Filter>Engine\Utils</Filter>
     </ClCompile>
     <ClCompile Include="src\GameState.h">
       <Filter>Engine</Filter>
@@ -66,10 +59,28 @@
     <ClCompile Include="src\SDLGameObject.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjectFactory.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameStateMachine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputHandler.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateParser.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxml2.cpp">
+      <Filter>Engine\Vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SystemUtils.h">
-      <Filter>Utils</Filter>
+      <Filter>Engine\Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Player.h">
@@ -79,23 +90,16 @@
       <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\Log.h">
-      <Filter>Utils</Filter>
+      <Filter>Engine\Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\INIReader.h">
       <Filter>Vendor</Filter>
     </ClInclude>
     <ClInclude Include="src\Config.h">
-      <Filter>Utils</Filter>
+      <Filter>Engine\Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\Vector2f.h">
       <Filter>Engine\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="src\InputHandler.h">
-      <Filter>Engine\System</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\GameStateMachine.h">
-      <Filter>Engine\System</Filter>
     </ClInclude>
     <ClInclude Include="src\EGameState.h">
       <Filter>States</Filter>
@@ -114,6 +118,27 @@
     </ClInclude>
     <ClInclude Include="src\SDLGameObject.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectCreator.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectFactory.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStateMachine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputHandler.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StateParser.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tinyxml2.h">
+      <Filter>Engine\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

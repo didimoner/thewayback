@@ -1,14 +1,27 @@
 #pragma once
 #include "SDLGameObject.h"
+#include "GameObjectCreator.h"
 
 class Player : public SDLGameObject {
 
 public:
-	Player(float x, float y, int w, int h, std::string textureId);
-	virtual ~Player() { }
+	Player() : SDLGameObject() {}
+	~Player() {}
 
-	virtual void update();
-	virtual void draw();
-	virtual void clean();
+	void load(float x, float y, int w, int h, std::string textureId);
+	void update();
+	void draw();
+	void clean();
+
+};
+
+class PlayerCreator : public GameObjectCreator {
+
+public:
+	~PlayerCreator() {}
+
+	GameObject* create() const {
+		return new Player();
+	}
 
 };

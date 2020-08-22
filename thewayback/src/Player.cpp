@@ -2,11 +2,8 @@
 #include "Player.h"
 #include "InputHandler.h"
 
-Player::Player(float x, float y, int w, int h, std::string textureId)
-	: SDLGameObject(x, y, w, h, textureId) {
-
-	//m_velocity.setY(1.f);
-	//m_acceleration.setY(0.02f);
+void Player::load(float x, float y, int w, int h, std::string textureId) {
+	SDLGameObject::load(x, y, w, h, textureId);
 }
 
 void Player::update() {

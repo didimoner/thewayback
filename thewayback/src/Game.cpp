@@ -2,12 +2,14 @@
 #include "Game.h"
 #include <SDL_image.h>
 #include "SystemUtils.h"
-#include "Player.h"
 #include "TextureManager.h"
 #include "Config.h"
 #include "InputHandler.h"
+
+// todo: move this outside
 #include "MenuState.h"
-#include "PlayState.h"
+#include "GameObjectFactory.h"
+#include "Player.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -35,8 +37,10 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 	// loading configs
 	Config::instance()->load("system.ini", "system");
 
-	// loading textures
-	TextureManager::instance()->load("newchar02-2.png", "player", m_pRenderer);
+	// -----------------------------------------
+
+	// TODO: move this outside of engine
+	GameObjectFactory::instance()->registerType("player", new PlayerCreator());
 
 	// -----------------------------------------
 

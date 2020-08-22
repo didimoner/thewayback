@@ -11,7 +11,7 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
     Logger->debug("Loading texture: " + filename);
 
     std::string resourcesPath = SystemUtils::getResourcePath("images");
-    std::string filepath = resourcesPath.append(filename);
+    std::string filepath = resourcesPath + filename;
     SDL_Surface* pSurface = IMG_Load(filepath.c_str());
 
     if (pSurface == 0) {

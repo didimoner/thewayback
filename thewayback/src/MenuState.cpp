@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "MenuState.h"
-#include "Player.h"
+#include "Game.h"
+#include "StateParser.h"
 
 Log* MenuState::Logger = new Log(typeid(MenuState).name());
 const std::string MenuState::s_stateId = "MENU_STATE";
@@ -18,8 +19,8 @@ void MenuState::draw() {
 }
 
 void MenuState::onActivate() {
-    GameObject* pPlayer = new Player(25, 50, 32, 32, "player");
-    m_gameObjects.push_back(pPlayer);
+    StateParser stateParser;
+    stateParser.parse("states.xml", getStateId(), m_gameObjects);
 
     Logger->debug("Menu activated");
 }

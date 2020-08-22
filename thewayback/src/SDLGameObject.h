@@ -10,18 +10,19 @@ protected:
 	Vector2f m_velocity;
 	Vector2f m_acceleration;
 
-	int m_width;
-	int m_height;
+	int m_width = 0;
+	int m_height = 0;
 
-	int m_currentRow;
-	int m_currentFrame;
+	int m_currentRow = 1;
+	int m_currentFrame = 1;
 
 	std::string m_textureId;
 
 public:
-	SDLGameObject(float x, float y, int w, int h, std::string textureId);
-	virtual ~SDLGameObject() { }
+	SDLGameObject() : GameObject() {}
+	virtual ~SDLGameObject() {}
 
+	virtual void load(float x, float y, int w, int h, std::string textureId);
 	virtual void update();
 	virtual void draw();
 	virtual void clean();

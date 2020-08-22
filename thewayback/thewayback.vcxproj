@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameObjectFactory.cpp" />
     <ClCompile Include="src\PlayState.cpp" />
     <ClCompile Include="src\MenuState.cpp" />
     <ClCompile Include="src\GameState.h" />
@@ -177,10 +178,15 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\SDLGameObject.cpp" />
     <ClCompile Include="src\SplashState.cpp" />
+    <ClCompile Include="src\StateParser.cpp" />
     <ClCompile Include="src\SystemUtils.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="src\tinyxml2.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameObjectFactory.h" />
     <ClInclude Include="src\MenuState.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Config.h" />
@@ -190,13 +196,16 @@
     <ClInclude Include="src\INIReader.h" />
     <ClInclude Include="src\InputHandler.h" />
     <ClInclude Include="src\Log.h" />
+    <ClInclude Include="src\GameObjectCreator.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\PlayState.h" />
     <ClInclude Include="src\SDLGameObject.h" />
     <ClInclude Include="src\SplashState.h" />
+    <ClInclude Include="src\StateParser.h" />
     <ClInclude Include="src\SystemUtils.h" />
     <ClInclude Include="src\TextureManager.h" />
+    <ClInclude Include="src\tinyxml2.h" />
     <ClInclude Include="src\Vector2f.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

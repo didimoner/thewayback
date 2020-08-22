@@ -4,9 +4,10 @@
 class GameObject {
 
 public:
-	GameObject(float x, float y, int w, int h, std::string textureId) {}
-	virtual ~GameObject() { }
+	GameObject() {}
+	virtual ~GameObject() {}
 
+	virtual void load(float x, float y, int w, int h, std::string textureId) = 0;
 	virtual void update() = 0;
 	virtual void draw() = 0;
 	virtual void clean() = 0;
