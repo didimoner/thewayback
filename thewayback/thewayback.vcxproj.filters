@@ -95,6 +95,7 @@
     <ClCompile Include="src\LevelParser.cpp">
       <Filter>Engine\Map</Filter>
     </ClCompile>
+    <ClCompile Include="src\SystemUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SystemUtils.h">

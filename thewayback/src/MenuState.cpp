@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "StateParser.h"
 #include "LevelParser.h"
-#include "Log.h";
+#include "Log.h"
 #include "GameObject.h"
 
 Log* MenuState::Logger = new Log(typeid(MenuState).name());

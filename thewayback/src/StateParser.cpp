@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "GameObjectFactory.h"
 #include "Log.h"
-#include "GameObject.h";
+#include "GameObject.h"
 
 Log* StateParser::Logger = new Log(typeid(StateParser).name());
 

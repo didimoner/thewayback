@@ -187,6 +187,7 @@
     <ClCompile Include="src\SDLGameObject.cpp" />
     <ClCompile Include="src\SplashState.cpp" />
     <ClCompile Include="src\StateParser.cpp" />
+    <ClCompile Include="src\SystemUtils.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\TileLayer.cpp" />
     <ClCompile Include="src\tinyxml2.cpp">

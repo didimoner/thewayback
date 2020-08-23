@@ -5,9 +5,9 @@
 #include "TextureManager.h"
 #include "Config.h"
 #include "InputHandler.h"
-#include "Log.h"
-#include "GameStateMachine.h";
+#include "GameStateMachine.h"
 #include "GameState.h"
+#include "Log.h"
 
 Game* Game::s_pInstance = nullptr;
 Log* Game::Logger = new Log(typeid(Game).name());
