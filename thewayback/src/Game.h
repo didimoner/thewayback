@@ -1,8 +1,9 @@
 #pragma once
 #include <SDL.h>
-#include "GameObject.h"
-#include "Log.h"
-#include "GameStateMachine.h"
+
+class GameStateMachine;
+class GameState;
+class Log;
 
 class Game {
 

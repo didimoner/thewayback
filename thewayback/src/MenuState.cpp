@@ -2,6 +2,9 @@
 #include "MenuState.h"
 #include "Game.h"
 #include "StateParser.h"
+#include "LevelParser.h"
+#include "Log.h";
+#include "GameObject.h"
 
 Log* MenuState::Logger = new Log(typeid(MenuState).name());
 const std::string MenuState::s_stateId = "MENU_STATE";
@@ -21,6 +24,9 @@ void MenuState::draw() {
 void MenuState::onActivate() {
     StateParser stateParser;
     stateParser.parse("states.xml", getStateId(), m_gameObjects);
+
+    LevelParser levelParser;
+    levelParser.parse("test5.tmx");
 
     Logger->debug("Menu activated");
 }

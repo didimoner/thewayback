@@ -1,7 +1,8 @@
 #pragma once
 
 #include "INIReader.h"
-#include "Log.h"
+
+class Log;
 
 class Config {
 

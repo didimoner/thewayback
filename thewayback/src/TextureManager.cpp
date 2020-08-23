@@ -2,7 +2,7 @@
 #include "TextureManager.h"
 #include <SDL_image.h>
 #include "SystemUtils.h"
-
+#include "Log.h"
 
 TextureManager* TextureManager::s_pInstance = nullptr;
 Log* TextureManager::Logger = new Log(typeid(TextureManager).name());
@@ -10,7 +10,7 @@ Log* TextureManager::Logger = new Log(typeid(TextureManager).name());
 bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pRenderer) {
     Logger->debug("Loading texture: " + filename);
 
-    std::string resourcesPath = SystemUtils::getResourcePath("images");
+    std::string resourcesPath = getResourcePath("images");
     std::string filepath = resourcesPath + filename;
     SDL_Surface* pSurface = IMG_Load(filepath.c_str());
 

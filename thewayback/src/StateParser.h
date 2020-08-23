@@ -1,7 +1,10 @@
 #pragma once
-#include "GameObject.h"
-#include "Log.h"
 #include "tinyxml2.h"
+
+class Log;
+class GameObject;
+
+using namespace tinyxml2;
 
 class StateParser {
 
@@ -12,7 +15,7 @@ public:
     bool parse(std::string filename, std::string stateId, std::vector<GameObject*> &gameObjects);
 
 private:
-    void parseTextures(tinyxml2::XMLElement* pTexturesRoot);
-    void parseObjects(tinyxml2::XMLElement* pObjectsRoot, std::vector<GameObject*> &gameObjects);
+    void parseTextures(XMLElement* pTexturesRoot);
+    void parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*> &gameObjects);
 
 };

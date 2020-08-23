@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "GameState.h"
 #include "GameStateMachine.h"
 
 void GameStateMachine::pushState(GameState* pState) {

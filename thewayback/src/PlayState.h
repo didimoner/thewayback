@@ -1,6 +1,7 @@
 #pragma once
 #include "GameState.h"
-#include "Log.h"
+
+class Log;
 
 class PlayState : public GameState {
 

@@ -1,7 +1,8 @@
 #pragma once
-#include "GameObjectCreator.h"
-#include "GameObject.h"
-#include "Log.h"
+
+class GameObject;
+class GameObjectCreator;
+class Log;
 
 class GameObjectFactory {
 

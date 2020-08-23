@@ -2,6 +2,7 @@
 #include "SDLGameObject.h"
 #include "TextureManager.h"
 #include "Game.h"
+#include "GameObject.h"
 
 void SDLGameObject::load(float x, float y, int w, int h, std::string textureId) {
 	m_position = Vector2f(x, y);

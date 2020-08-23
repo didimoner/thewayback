@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL.h>
-#include "GameObject.h"
 #include "Vector2f.h"
+#include "GameObject.h"
 
 class SDLGameObject : public GameObject {
 

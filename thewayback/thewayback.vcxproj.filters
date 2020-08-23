@@ -22,11 +22,14 @@
     <Filter Include="Engine\DataObjects">
       <UniqueIdentifier>{d5ac8a56-926c-4065-8d66-ee43451c0994}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Map">
+      <UniqueIdentifier>{8ccaf1e0-8ba0-435a-8e46-1311ced5d893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Map\Layers">
+      <UniqueIdentifier>{a2147a33-8002-4714-aae1-b55232d600a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SystemUtils.cpp">
-      <Filter>Engine\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp" />
     <ClCompile Include="src\Player.cpp">
@@ -73,6 +76,24 @@
     </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base64.cpp">
+      <Filter>Engine\Vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Level.cpp">
+      <Filter>Engine\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Layer.cpp">
+      <Filter>Engine\Map\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TileLayer.cpp">
+      <Filter>Engine\Map\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObjectLayer.cpp">
+      <Filter>Engine\Map\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LevelParser.cpp">
+      <Filter>Engine\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,5 +159,26 @@
       <Filter>Engine\Vendor</Filter>
     </ClInclude>
     <ClInclude Include="src\Bootstrap.h" />
+    <ClInclude Include="src\base64.h">
+      <Filter>Engine\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Level.h">
+      <Filter>Engine\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tileset.h">
+      <Filter>Engine\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Layer.h">
+      <Filter>Engine\Map\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileLayer.h">
+      <Filter>Engine\Map\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectLayer.h">
+      <Filter>Engine\Map\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LevelParser.h">
+      <Filter>Engine\Map</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

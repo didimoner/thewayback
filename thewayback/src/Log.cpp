@@ -12,7 +12,7 @@ Log::Log(std::string loggerName) {
     m_name = loggerName;
 
     if (s_pConfigReader == nullptr) {
-        std::string configsDirPath = SystemUtils::getResourcePath("configs");
+        std::string configsDirPath = getResourcePath("configs");
         s_pConfigReader = new INIReader(configsDirPath + "log_config.ini");
 
         if (s_pConfigReader->ParseError() != 0) {

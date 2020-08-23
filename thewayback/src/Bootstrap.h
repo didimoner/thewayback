@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Config.h"
 #include "Game.h"
+#include "Log.h"
 
 const int FPS = 60;
 const int DELAY_TIME = (int)(1000.0f / FPS);

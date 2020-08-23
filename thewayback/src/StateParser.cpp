@@ -4,15 +4,15 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "GameObjectFactory.h"
-
-using namespace tinyxml2;
+#include "Log.h"
+#include "GameObject.h";
 
 Log* StateParser::Logger = new Log(typeid(StateParser).name());
 
 bool StateParser::parse(std::string filename, std::string stateId, std::vector<GameObject*>& gameObjects) {
     Logger->debug("Loading state " + stateId + " from " + filename);
 
-    std::string resourcesPath = SystemUtils::getResourcePath("data");
+    std::string resourcesPath = getResourcePath("data");
     std::string filepath = resourcesPath + filename;
 
     XMLDocument xmlDoc;

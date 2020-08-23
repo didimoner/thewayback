@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "PlayState.h"
+#include "Log.h"
 
 Log* PlayState::Logger = new Log(typeid(PlayState).name());
 const std::string PlayState::s_stateId = "PLAY_STATE";

@@ -1,7 +1,7 @@
 #pragma once
-
 #include <SDL.h>
-#include "Log.h"
+
+class Log;
 
 class TextureManager {
 

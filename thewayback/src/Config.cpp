@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "Config.h"
+#include "Log.h"
 #include "SystemUtils.h"
 
 Config* Config::s_pInstance = nullptr;
 Log* Config::Logger = new Log(typeid(Config).name());
 
 bool Config::load(std::string filename, std::string id) { 
-    std::string configsDirPath = SystemUtils::getResourcePath("configs");
+    std::string configsDirPath = getResourcePath("configs");
     std::string filepath = configsDirPath + filename;
 
     INIReader* pReader = new INIReader(filepath);

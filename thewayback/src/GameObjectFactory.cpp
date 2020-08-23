@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "GameObjectFactory.h"
+#include "Log.h"
+#include "GameObjectCreator.h"
 
 GameObjectFactory* GameObjectFactory::s_pInstance = nullptr;
 Log* GameObjectFactory::Logger = new Log(typeid(GameObjectFactory).name());
