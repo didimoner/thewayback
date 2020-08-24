@@ -1,4 +1,6 @@
 #pragma once
+#include "Tileset.h"
+
 class Layer {
 
 protected:

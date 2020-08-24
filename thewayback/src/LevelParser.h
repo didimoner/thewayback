@@ -17,6 +17,8 @@ public:
     
 private:
     void parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>* pTilesets);
-    void parseLayer(XMLElement* pLayerRoot);
+    void parseLayer(XMLElement* pLayerRoot, Level* pLevel);
+    
+    // TODO: parse objectGroups
 };
 

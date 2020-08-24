@@ -9,10 +9,10 @@ private:
     friend class LevelParser;
     Level() {}
 
-    unsigned int width = 0;
-    unsigned int height = 0;
-    unsigned short tileWidth= 0;
-    unsigned short tileHeight = 0;
+    unsigned int m_width = 0;
+    unsigned int m_height = 0;
+    unsigned short m_tileWidth= 0;
+    unsigned short m_tileHeight = 0;
 
     std::vector<Tileset> m_tilesets;
     std::vector<Layer*> m_layers;
