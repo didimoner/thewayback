@@ -7,6 +7,7 @@ class TextureManager {
 
 private:
 	TextureManager() {}
+	~TextureManager();
 
 	static TextureManager* s_pInstance;
 	static Log* Logger;
@@ -29,15 +30,14 @@ public:
 
 	bool load(std::string filename, std::string id, SDL_Renderer* pRenderer);
 
-	void draw(std::string textureId, SDL_Rect rect, SDL_Renderer* pRenderer,
-		SDL_RendererFlip flip = SDL_FLIP_NONE);
-	void draw(std::string textureId, int x, int y, int width, int height, 
+	void draw(std::string textureId, float x, float y, int width, int height,
 		SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-	void drawFrame(std::string textureId, SDL_Rect rect, int currentRow, int currentFrame,
+	void drawFrame(std::string textureId, float x, float y, int width, int height,
+		unsigned currentRow, unsigned currentFrame,
 		SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
-	void drawFrame(std::string textureId, int x, int y, int width, int height, 
-		int currentRow, int currentFrame,
-		SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
+
+	//void drawTile(std::string textureId, float x, float y, int width, int height,
+	//	unsigned tileId, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 };

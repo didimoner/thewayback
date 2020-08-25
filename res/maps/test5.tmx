@@ -6,6 +6,9 @@
  <tileset firstgid="1" name="tilea5" tilewidth="32" tileheight="32" tilecount="128" columns="8">
   <image source="../images/tilea5.png" width="256" height="512"/>
  </tileset>
+ <tileset firstgid="129" name="tilea6" tilewidth="32" tileheight="32" tilecount="128" columns="8">
+  <image source="../images/tilea6.png" width="256" height="512"/>
+ </tileset>
  <layer id="1" name="grass" width="40" height="20">
   <data encoding="base64" compression="zlib">
    eJztw0ENAAAMA6FzUf9O52IvSFg1VVXVhwfuj0fh
@@ -13,12 +16,12 @@
  </layer>
  <layer id="2" name="objects" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDCcggYTxARUkTC8gwUCe++jlRnLdRy9ArNtGwSgYBYMHWBCJR8EoGEkAAOE1BOk=
+   eJxjZGBgaGCAgEaGUTAKRsFQBxJIGB9QQcL0AhIM5LmPXm4k1330AsS6bRSMglEweIAFkXgUjIKRBABy7AXr
   </data>
  </layer>
  <layer id="3" name="other" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFtADZQJxDA3NroJhSUAzEJVQwhxCghltJAaFIeCBAMAH5gXbfcAPVUDwKqA/K0fBgAxVomJqAUD4mBlDTfYTckwnEWSSaScvwQweFQFyEQy4Mhzg93UcOaEDDgw0M9vAb7O6rR8O0AtQoa4YqAACTexqX
+   eJxjYBgFtADZQJxDA3NroJhSUAzEJVQwhxCghltJAaFIeCBAMAF5aruvBYoHK+hgoK37qqGYXDDYw28gQTkaHmygAg1TExDKx8QAarqPkHsygTiLRDNpGX7ooBCIi3DIheEQp6f7yAENaHiwgcEefoPdffVomFaAGmXNUAUA0kIdsw==
   </data>
  </layer>
  <objectgroup id="4" name="ol">

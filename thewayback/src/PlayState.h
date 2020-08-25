@@ -2,12 +2,15 @@
 #include "GameState.h"
 
 class Log;
+class Level;
 
 class PlayState : public GameState {
 
 private:
     static const std::string s_stateId;
     static Log* Logger;
+
+    Level* m_pLevel;
 
 public:
     virtual void update();

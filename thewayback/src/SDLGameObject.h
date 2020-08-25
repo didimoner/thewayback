@@ -13,8 +13,8 @@ protected:
 	int m_width = 0;
 	int m_height = 0;
 
-	int m_currentRow = 1;
-	int m_currentFrame = 1;
+	int m_currentRow = 0;
+	int m_currentFrame = 0;
 
 	std::string m_textureId;
 
@@ -26,7 +26,5 @@ public:
 	virtual void update();
 	virtual void draw();
 	virtual void clean();
-
-	SDL_Rect getRect() const;
 
 };

@@ -1,14 +1,17 @@
 #pragma once
 #include "Layer.h"
 
+class Log;
+
 class TileLayer : public Layer {
 
 private:
-    unsigned short id = 0;
-    std::string name;
-
+    unsigned short m_id = 0;
+    std::string m_name;
     const std::vector<Tileset> &m_tilesets;
     std::vector<std::vector<unsigned>> m_tileIds;
+
+    static Log* Logger;
     
 public:
     TileLayer(const std::vector<Tileset>& tilesets);
@@ -18,14 +21,17 @@ public:
     void draw();
 
     void setId(unsigned short id) {
-        this->id = id;
+        this->m_id = id;
     }
     void setName(std::string name) {
-        this->name = name;
+        this->m_name = name;
     }
     void setTileIds(const std::vector<std::vector<unsigned>>& data) {
         m_tileIds = data;
     }
+
+private:
+    unsigned findTilesetIndex(unsigned tileId) const;
 
 };
 

@@ -17,13 +17,10 @@ void SDLGameObject::update() {
 }
 
 void SDLGameObject::draw() {
-	TextureManager::instance()->drawFrame(m_textureId, this->getRect(),
+	TextureManager::instance()->drawFrame(m_textureId, 
+		m_position.getX(), m_position.getY(), m_width, m_height, 
 		m_currentRow, m_currentFrame, Game::instance()->getRenderer());
 }
 
 void SDLGameObject::clean() {
-}
-
-SDL_Rect SDLGameObject::getRect() const {
-	return { (int)m_position.getX(), (int)m_position.getY(), m_width, m_height };
 }

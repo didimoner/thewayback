@@ -51,7 +51,7 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>*
         }
 
         Tileset tileset;
-        tileset.firstGridId = e->IntAttribute("firstgid");
+        tileset.firstGlobalId = e->IntAttribute("firstgid");
         tileset.tileWidth = e->IntAttribute("tilewidth");
         tileset.tileHeight = e->IntAttribute("tileheight");
         tileset.tileCount = e->IntAttribute("tilecount");
