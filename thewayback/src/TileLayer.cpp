@@ -37,12 +37,16 @@ void TileLayer::draw() {
 
             Tileset tileset = m_tilesets[tilesetIndex];
             Vector2f cameraPos = Game::instance()->getCurrentState()->getCameraPosition();
+            Vector2f bottomCameraPos(cameraPos.getX() + Game::instance()->getWindowWidth(), 
+                cameraPos.getY() + Game::instance()->getWindowHeight());
+            int safeOffset = 1;
 
-            float bottomX = cameraPos.getX() + Game::instance()->getWindowWidth();
-            float bottomY = cameraPos.getY() + Game::instance()->getWindowHeight();
+            bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight 
+                || column + safeOffset < cameraPos.getX() / tileset.tileWidth;
+            bool botPosCheck = row - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
+                || column - safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
 
-            if ((row + 1 < cameraPos.getY() / tileset.tileHeight || column + 1 < cameraPos.getX() / tileset.tileWidth)
-                || (row - 1 > bottomY / tileset.tileWidth || column - 1 > bottomX / tileset.tileHeight)) {
+            if (topPosCheck || botPosCheck) {
                 continue;
             }
 

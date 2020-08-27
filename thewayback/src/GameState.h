@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "Camera.h"
+#include "Game.h"
 
 class Vector2f;
 
