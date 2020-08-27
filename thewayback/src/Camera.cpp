@@ -1,12 +1,16 @@
 #include "pch.h"
-#include "Player.h"
+#include "Camera.h"
 #include "InputHandler.h"
 
-void Player::load(float x, float y, int w, int h, std::string textureId) {
-	SDLGameObject::load(x, y, w, h, textureId);
+Vector2f Camera::getPosition() const {
+    return m_position;
 }
 
-void Player::update() {
+void Camera::setPosition(float x, float y) {
+    m_position.set(x, y);
+}
+
+void Camera::update() {
 	InputHandler* pInputHandler = InputHandler::instance();
 	if (pInputHandler->isKeyPressed(SDL_SCANCODE_UP)) {
 		m_velocity.setY(-1.f);
@@ -20,13 +24,5 @@ void Player::update() {
 		m_velocity.set(0, 0);
 	}
 
-	SDLGameObject::update();
-}
-
-void Player::draw() {
-	SDLGameObject::draw();
-}
-
-void Player::clean() {
-	SDLGameObject::clean();
+	m_position += m_velocity;
 }

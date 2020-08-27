@@ -8,6 +8,7 @@ Log* PlayState::Logger = new Log(typeid(PlayState).name());
 const std::string PlayState::s_stateId = "PLAY_STATE";
 
 void PlayState::update() {
+    m_camera.update();
     m_pLevel->update();
 }
 
@@ -17,6 +18,8 @@ void PlayState::draw() {
 
 void PlayState::onActivate() {
     Logger->debug("Play activated");
+
+     m_camera.setPosition(13 * 32, 3 * 32);
 
     LevelParser levelParser;
     m_pLevel = levelParser.parse("test5.tmx");

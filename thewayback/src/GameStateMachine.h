@@ -15,4 +15,6 @@ public:
     void update();
     void draw();
 
+    const GameState* const getCurrentState() const;
+
 };

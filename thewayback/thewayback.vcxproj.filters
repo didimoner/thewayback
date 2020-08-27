@@ -28,6 +28,9 @@
     <Filter Include="Engine\Map\Layers">
       <UniqueIdentifier>{a2147a33-8002-4714-aae1-b55232d600a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObjects">
+      <UniqueIdentifier>{f5399f15-ca78-4603-84bb-3e6bb4f62272}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -55,9 +58,6 @@
     </ClCompile>
     <ClCompile Include="src\PlayState.cpp">
       <Filter>States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SDLGameObject.cpp">
-      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjectFactory.cpp">
       <Filter>Engine</Filter>
@@ -95,7 +95,15 @@
     <ClCompile Include="src\LevelParser.cpp">
       <Filter>Engine\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\SystemUtils.cpp" />
+    <ClCompile Include="src\SDLGameObject.cpp">
+      <Filter>Engine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SystemUtils.cpp">
+      <Filter>Engine\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SystemUtils.h">
@@ -128,12 +136,6 @@
     </ClInclude>
     <ClInclude Include="src\PlayState.h">
       <Filter>States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObject.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SDLGameObject.h">
-      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjectCreator.h">
       <Filter>Engine</Filter>
@@ -180,6 +182,15 @@
     </ClInclude>
     <ClInclude Include="src\LevelParser.h">
       <Filter>Engine\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.h">
+      <Filter>Engine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SDLGameObject.h">
+      <Filter>Engine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

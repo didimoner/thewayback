@@ -83,25 +83,3 @@ void TextureManager::drawFrame(std::string textureId, float x, float y, int widt
 
     SDL_RenderCopyEx(pRenderer, pTexture, &sourceRect, &destRect, 0, 0, flip);
 }
-
-//void TextureManager::drawTile(std::string textureId, float x, float y, int width, int height,
-//        unsigned tileId, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
-//    SDL_Texture* pTexture = m_textureMap[textureId];
-//    if (pTexture == nullptr) {
-//        Logger->warn("Texture not found in the map: " + textureId);
-//    }
-//
-//    SDL_Rect sourceRect;
-//    sourceRect.x = width * currentFrame;
-//    sourceRect.y = height * (currentRow - 1);
-//    sourceRect.w = width;
-//    sourceRect.h = height;
-//
-//    SDL_Rect destRect;
-//    destRect.x = (int) x;
-//    destRect.y = (int) y;
-//    destRect.w = width;
-//    destRect.h = height;
-//
-//    SDL_RenderCopyEx(pRenderer, pTexture, &sourceRect, &destRect, 0, 0, flip);
-//}

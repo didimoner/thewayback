@@ -53,3 +53,7 @@ void GameStateMachine::draw() {
 
     m_gameStates.back()->draw();
 }
+
+const GameState* const GameStateMachine::getCurrentState() const {
+    return m_gameStates.back();
+}

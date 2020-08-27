@@ -3,6 +3,7 @@
 #include "Log.h"
 #include "TextureManager.h"
 #include "Game.h"
+#include "GameState.h"
 
 Log* TileLayer::Logger = new Log(typeid(TileLayer).name());
 
@@ -35,14 +36,24 @@ void TileLayer::draw() {
             }
 
             Tileset tileset = m_tilesets[tilesetIndex];
+            Vector2f cameraPos = Game::instance()->getCurrentState()->getCameraPosition();
+
+            float bottomX = cameraPos.getX() + Game::instance()->getWindowWidth();
+            float bottomY = cameraPos.getY() + Game::instance()->getWindowHeight();
+
+            if ((row + 1 < cameraPos.getY() / tileset.tileHeight || column + 1 < cameraPos.getX() / tileset.tileWidth)
+                || (row - 1 > bottomY / tileset.tileWidth || column - 1 > bottomX / tileset.tileHeight)) {
+                continue;
+            }
+
             unsigned localTileId = tileId - tileset.firstGlobalId;
             float x = (float) (column * tileset.tileWidth);
             float y = (float) (row * tileset.tileHeight);
             unsigned tilesetRow = localTileId / tileset.columns;
             unsigned tilesetColumn = localTileId % tileset.columns;
 
-            TextureManager::instance()->drawFrame(tileset.name, x, y, tileset.tileWidth, tileset.tileHeight, 
-                tilesetRow, tilesetColumn, Game::instance()->getRenderer());
+            TextureManager::instance()->drawFrame(tileset.name, x - cameraPos.getX(), y - cameraPos.getY(), 
+                tileset.tileWidth, tileset.tileHeight, tilesetRow, tilesetColumn, Game::instance()->getRenderer());
         }
     }
 }

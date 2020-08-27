@@ -34,6 +34,8 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 	m_pGameStateMachine = pGameStateMachine;
 	m_pGameStateMachine->pushState(pInitialState);
 	m_running = true;
+	m_windowWidth = width;
+	m_windowHeight = height;
 	return true;
 }
 
@@ -70,6 +72,18 @@ bool Game::isRunning() const {
 	return m_running;
 }
 
+int Game::getWindowWidth() const {
+	return m_windowWidth;
+}
+
+int Game::getWindowHeight() const {
+	return m_windowHeight;
+}
+
 SDL_Renderer* Game::getRenderer() const {
 	return m_pRenderer;
+}
+
+const GameState* const Game::getCurrentState() const {
+	return m_pGameStateMachine->getCurrentState();
 }

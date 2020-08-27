@@ -13,13 +13,13 @@ private:
     Level* m_pLevel;
 
 public:
-    virtual void update();
-    virtual void draw();
+    void update();
+    void draw();
 
-    virtual void onActivate();
-    virtual bool onDeactivate();
+    void onActivate();
+    bool onDeactivate();
 
-    virtual std::string getStateId() const {
+    std::string getStateId() const {
         return s_stateId;
     }
 

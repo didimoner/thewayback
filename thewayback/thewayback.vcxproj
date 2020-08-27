@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\LevelParser.cpp" />
     <ClCompile Include="src\ObjectLayer.cpp" />
     <ClCompile Include="src\base64.cpp">
@@ -200,6 +201,7 @@
   <ItemGroup>
     <ClInclude Include="src\base64.h" />
     <ClInclude Include="src\Bootstrap.h" />
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\GameObjectFactory.h" />
     <ClInclude Include="src\Layer.h" />
     <ClInclude Include="src\Level.h" />
