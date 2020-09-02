@@ -3,6 +3,7 @@
 #include "GameStateMachine.h"
 #include "MenuState.h"
 #include "PlayState.h"
+#include "SplashState.h"
 #include "GameObjectFactory.h"
 #include "Player.h"
 #include "Config.h"
@@ -22,7 +23,7 @@ public:
 
 		Game* pGame = Game::instance();
 		bool initialized = pGame->init(title, x, y, width, height, flags, 
-			new GameStateMachine(), new PlayState());
+			new GameStateMachine(), new SplashState());
 
 		if (!initialized) {
 			Log::getLogger()->error("Game initialisation failed");

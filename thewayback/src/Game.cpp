@@ -1,8 +1,4 @@
 #include "pch.h"
-#include "Game.h"
-#include <SDL_image.h>
-#include "SystemUtils.h"
-#include "TextureManager.h"
 #include "Config.h"
 #include "InputHandler.h"
 #include "GameStateMachine.h"

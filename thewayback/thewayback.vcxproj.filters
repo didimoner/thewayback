@@ -104,6 +104,9 @@
     <ClCompile Include="src\Camera.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\FontManager.cpp">
+      <Filter>Engine\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SystemUtils.h">
@@ -191,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FontManager.h">
+      <Filter>Engine\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

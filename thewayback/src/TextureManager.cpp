@@ -7,12 +7,18 @@
 TextureManager* TextureManager::s_pInstance = nullptr;
 Log* TextureManager::Logger = new Log(typeid(TextureManager).name());
 
+TextureManager::TextureManager() {
+    if (IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) != 0) {
+        Logger->error("SDL_Image initialisation error: " + std::string(IMG_GetError()));
+    }
+}
+
 TextureManager::~TextureManager() {
-    for (auto const& entry : m_textureMap) {
+    for (auto const& entry : m_textures) {
         SDL_DestroyTexture(entry.second);
     }
 
-    m_textureMap.clear();
+    m_textures.clear();
 }
 
 bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pRenderer) {
@@ -36,15 +42,16 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
         return false;
     }
 
-    m_textureMap[id] = pTexture;
+    m_textures[id] = pTexture;
     return true;
 }
 
 void TextureManager::draw(std::string textureId, float x, float y, int width, int height,
         SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
-    SDL_Texture* pTexture = m_textureMap[textureId];
+    SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger->warn("Texture not found in the map: " + textureId);
+        return;
     }
 
     SDL_Rect sourceRect;
@@ -64,9 +71,10 @@ void TextureManager::draw(std::string textureId, float x, float y, int width, in
 
 void TextureManager::drawFrame(std::string textureId, float x, float y, int width, int height,
         unsigned currentRow, unsigned currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
-    SDL_Texture* pTexture = m_textureMap[textureId];
+    SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger->warn("Texture not found in the map: " + textureId);
+        return;
     }
 
     SDL_Rect sourceRect;

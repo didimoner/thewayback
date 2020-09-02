@@ -6,13 +6,13 @@ class Log;
 class TextureManager {
 
 private:
-	TextureManager() {}
+	TextureManager();
 	~TextureManager();
 
 	static TextureManager* s_pInstance;
 	static Log* Logger;
 
-	std::map<std::string, SDL_Texture*> m_textureMap;
+	std::map<std::string, SDL_Texture*> m_textures;
 
 public:
 	TextureManager(const TextureManager&) = delete;
@@ -36,8 +36,5 @@ public:
 	void drawFrame(std::string textureId, float x, float y, int width, int height,
 		unsigned currentRow, unsigned currentFrame,
 		SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
-
-	//void drawTile(std::string textureId, float x, float y, int width, int height,
-	//	unsigned tileId, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 };
