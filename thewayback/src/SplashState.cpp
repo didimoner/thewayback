@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "SplashState.h"
 #include "Log.h"
 #include "FontManager.h"
@@ -17,8 +17,9 @@ void SplashState::draw() {
 void SplashState::onActivate() {
     Logger->debug("Splash activated");
 
-    FontManager::instance()->loadFont("segoeui.ttf", "segoeui", 58);
-    FontManager::instance()->createTexture("segoeui", "hello_text", "Hello World!", { 255,255,255 }, Game::instance()->getRenderer());
+    FontManager::instance()->loadFont("segoeui.ttf", "segoeui", 16);
+    FontManager::instance()->createMultilineTexture("segoeui", "hello_text", "Hello my dear friend!\nHow are you doing?", 320,
+        { 255,255,255 }, Game::instance()->getRenderer());
 }
 
 bool SplashState::onDeactivate() {

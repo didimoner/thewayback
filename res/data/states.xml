@@ -13,6 +13,10 @@
     </MENU_STATE>
 
     <PLAY_STATE></PLAY_STATE>
-    <SPLASH_STATE></SPLASH_STATE>
+    <SPLASH_STATE>
+		<FONTS>
+			<font filename="segoeui.ttf" id="segoeui" size="58"/>
+		</FONTS>
+	</SPLASH_STATE>
 
 </STATES>

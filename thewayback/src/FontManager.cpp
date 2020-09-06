@@ -57,6 +57,23 @@ void FontManager::createTexture(std::string fontId, std::string textureId,
     m_textures[textureId] = pTexture;
 }
 
+void FontManager::createMultilineTexture(std::string fontId, std::string textureId,
+    std::string text, unsigned lineWidth, SDL_Color color, SDL_Renderer* pRenderer) {
+    Logger->debug("Creating multiline texture " + textureId + " from font " + fontId 
+        + " with line width " +std::to_string(lineWidth));
+    TTF_Font* pFont = m_fonts[fontId];
+    if (pFont == nullptr) {
+        Logger->warn("Font not found in the map: " + fontId);
+        return;
+    }
+
+    SDL_Surface* pSurface = TTF_RenderText_Blended_Wrapped(pFont, text.c_str(), color, lineWidth);
+    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
+    SDL_FreeSurface(pSurface);
+
+    m_textures[textureId] = pTexture;
+}
+
 void FontManager::removeTexture(std::string textureId) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
