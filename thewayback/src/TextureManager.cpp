@@ -8,7 +8,9 @@ TextureManager* TextureManager::s_pInstance = nullptr;
 Log* TextureManager::Logger = new Log(typeid(TextureManager).name());
 
 TextureManager::TextureManager() {
-    if (IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) != 0) {
+    int initFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+
+    if ((IMG_Init(initFlags) & initFlags) != initFlags) {
         Logger->error("SDL_Image initialisation error: " + std::string(IMG_GetError()));
     }
 }

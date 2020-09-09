@@ -23,7 +23,7 @@ public:
 
 		Game* pGame = Game::instance();
 		bool initialized = pGame->init(title, x, y, width, height, flags, 
-			new GameStateMachine(), new SplashState());
+			new GameStateMachine(), new MenuState());
 
 		if (!initialized) {
 			Log::getLogger()->error("Game initialisation failed");

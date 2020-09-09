@@ -13,6 +13,9 @@ public:
 	void draw();
 	void clean();
 
+private:
+	void handleKeyboardInput();
+
 };
 
 class PlayerCreator : public GameObjectCreator {
