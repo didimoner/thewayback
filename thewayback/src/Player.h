@@ -4,6 +4,17 @@
 
 class Player : public SDLGameObject {
 
+private:
+	enum class PlayerState {
+		IDLE,
+		MOVING_UP,
+		MOVING_RIGHT,
+		MOVING_DOWN,
+		MOVING_LEFT
+	};
+
+	PlayerState m_playerState = PlayerState::IDLE;
+
 public:
 	Player() : SDLGameObject() {}
 	~Player() {}
@@ -15,6 +26,7 @@ public:
 
 private:
 	void handleKeyboardInput();
+	void updatePlayerState();
 
 };
 
