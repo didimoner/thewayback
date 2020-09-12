@@ -3,6 +3,7 @@
 #include "Log.h"
 #include "LevelParser.h"
 #include "Level.h"
+#include "StateParser.h"
 
 Log* PlayState::Logger = new Log(typeid(PlayState).name());
 const std::string PlayState::s_stateId = "PLAY_STATE";
@@ -19,7 +20,11 @@ void PlayState::draw() {
 void PlayState::onActivate() {
     Logger->debug("Play activated");
 
-     m_camera.setPosition(13 * 32, 3 * 32);
+    m_camera.setPosition(13 * 32, 3 * 32);
+
+    StateParser stateParser;
+    std::vector<GameObject*> gameObjects;
+    stateParser.parse("states.xml", getStateId(), gameObjects);
 
     LevelParser levelParser;
     m_pLevel = levelParser.parse("test5.tmx");

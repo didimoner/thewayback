@@ -22,7 +22,7 @@ public:
 	SDLGameObject() : GameObject() {}
 	virtual ~SDLGameObject() {}
 
-	virtual void load(float x, float y, int w, int h, std::string textureId);
+	virtual void init(float x, float y, int w, int h, std::string textureId);
 	virtual void update();
 	virtual void draw();
 	virtual void clean();

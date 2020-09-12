@@ -2,8 +2,8 @@
 #include "Player.h"
 #include "InputHandler.h"
 
-void Player::load(float x, float y, int w, int h, std::string textureId) {
-	SDLGameObject::load(x, y, w, h, textureId);
+void Player::init(float x, float y, int w, int h, std::string textureId) {
+	SDLGameObject::init(x, y, w, h, textureId);
 }
 
 void Player::update() {
@@ -59,6 +59,7 @@ void Player::updatePlayerState() {
 	}
 
 	if (m_playerState != PlayerState::IDLE) {
+		// TODO: move amount of frames outside
 		m_currentFrame = (SDL_GetTicks() / (100 * 2)) % 3;
 	} else {
 		m_currentFrame = 1;

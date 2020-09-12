@@ -19,7 +19,7 @@ public:
 	Player() : SDLGameObject() {}
 	~Player() {}
 
-	void load(float x, float y, int w, int h, std::string textureId);
+	void init(float x, float y, int w, int h, std::string textureId);
 	void update();
 	void draw();
 	void clean();

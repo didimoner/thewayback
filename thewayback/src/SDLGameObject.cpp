@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "GameObject.h"
 
-void SDLGameObject::load(float x, float y, int w, int h, std::string textureId) {
+void SDLGameObject::init(float x, float y, int w, int h, std::string textureId) {
 	m_position = Vector2f(x, y);
 	m_width = w;
 	m_height = h;

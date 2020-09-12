@@ -31,20 +31,20 @@ bool StateParser::parse(std::string filename, std::string stateId, std::vector<G
 
     XMLElement* pStateElement = pRoot->FirstChildElement(stateId.c_str());
     if (pStateElement == nullptr) {
-        Logger->warn("No state " + stateId + " element found in " + filename);
+        Logger->warn("No " + stateId + " element found in " + filename);
         return false;
     }
 
     XMLElement* pTexturesElement = pStateElement->FirstChildElement("TEXTURES");
     if (pTexturesElement == nullptr) {
-        Logger->warn("No TEXTURES element found in state " + stateId + " in file " + filename);
+        Logger->warn("No TEXTURES element found in " + stateId + " in " + filename);
         return false;
     }
     parseTextures(pTexturesElement);
 
     XMLElement* pObjectsElement = pStateElement->FirstChildElement("OBJECTS");
     if (pObjectsElement == nullptr) {
-        Logger->warn("No OBJECTS element found in state " + stateId + " in file " + filename);
+        Logger->warn("No OBJECTS element found in " + stateId + " in " + filename);
         return false;
     }
     parseObjects(pObjectsElement, gameObjects);
@@ -72,7 +72,7 @@ void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*
         int height = e->IntAttribute("height");
 
         GameObject* object = GameObjectFactory::instance()->create(type);
-        object->load((float) x, (float) y, width, height, textureId);
+        object->init((float) x, (float) y, width, height, textureId);
 
         gameObjects.push_back(object);
     }

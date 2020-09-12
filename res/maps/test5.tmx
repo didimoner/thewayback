@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="15">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="20">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
+ <properties>
+  <property name="player" value="newchar02-2.png"/>
+ </properties>
  <tileset firstgid="1" name="tilea5" tilewidth="32" tileheight="32" tilecount="128" columns="8">
   <image source="../images/tilea5.png" width="256" height="512"/>
  </tileset>
  <tileset firstgid="129" name="tilea6" tilewidth="32" tileheight="32" tilecount="128" columns="8">
   <image source="../images/tilea6.png" width="256" height="512"/>
  </tileset>
- <layer id="1" name="grass" width="40" height="20">
+ <layer id="1" name="grass" width="40" height="20" locked="1">
   <data encoding="base64" compression="zlib">
    eJztw0ENAAAMA6FzUf9O52IvSFg1VVXVhwfuj0fh
   </data>
  </layer>
- <layer id="2" name="objects" width="40" height="20">
+ <layer id="2" name="objects" width="40" height="20" locked="1">
   <data encoding="base64" compression="zlib">
    eJztzrsJACAQBNG1CwsQa7A87dzA5BI/nHCi7oPJxwHIaAqI6HZeNBJEVjx0f1aP2j8rq2+3iqcHJvi359e/tJj86EX0igrmfgez
   </data>
  </layer>
- <layer id="3" name="other" width="40" height="20">
+ <layer id="3" name="other" width="40" height="20" locked="1">
   <data encoding="base64" compression="zlib">
    eJxjYBgFtADZQJxDA3NroJhSUAzEJVQwhxCghltJAaFIeCBAMAF5aruvBYoHK+hgoK37qqGYXDDYw28gQTkaHmygAg1TExDKx8QAarqPkHsygTiLRDNpGX7ooBCIi3DIheEQp6f7yAENaHiwgcEefoPdffVomFaAGmXNUAUA0kIdsw==
   </data>
  </layer>
- <objectgroup id="4" name="collidable">
+ <objectgroup id="4" name="collidables" locked="1">
   <properties>
    <property name="type" value="collidable"/>
   </properties>
@@ -32,13 +35,14 @@
   <object id="2" x="128" y="191" width="129" height="127"/>
   <object id="4" x="193" y="64" width="63" height="64"/>
  </objectgroup>
- <objectgroup id="5" name="npc">
+ <objectgroup id="5" name="game_objects">
   <properties>
-   <property name="type" value="npc"/>
+   <property name="type" value="game_objects"/>
   </properties>
-  <object id="12" gid="5" x="416" y="63" width="32" height="32"/>
-  <object id="14" x="567.5" y="30.5" width="83" height="19">
-   <text wrap="1">Hello World</text>
+  <object id="19" name="player" type="player" x="321" y="63" width="32" height="32">
+   <properties>
+    <property name="textureId" value="player"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

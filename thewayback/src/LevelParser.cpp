@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <zlib.h>
+#include <SDL_rect.h>
 #include "base64.h"
 #include "LevelParser.h"
 #include "SystemUtils.h"
@@ -10,7 +11,9 @@
 #include "Log.h"
 #include "TileLayer.h"
 #include "CollidableLayer.h"
-#include <SDL_rect.h>
+#include "GameObject.h"
+#include "Player.h"
+#include "GameObjectFactory.h"
 
 Log* LevelParser::Logger = new Log(typeid(LevelParser).name());
 
@@ -40,11 +43,22 @@ Level* LevelParser::parse(std::string filename) {
     pLevel->m_tileWidth = pRoot->IntAttribute("tilewidth");
     pLevel->m_tileHeight = pRoot->IntAttribute("tileheight");
 
+    parseMapProps(pRoot);
     parseTilesets(pRoot, pLevel->getTilesets());
     parseTileLayers(pRoot, pLevel);
     parseObjectLayers(pRoot, pLevel);
 
     return pLevel;
+}
+
+void LevelParser::parseMapProps(XMLElement* pPropsRoot) {
+    XMLElement* pPropsElement = pPropsRoot->FirstChildElement("properties");
+    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
+        std::string textureId = p->Attribute("name");
+        std::string filename = p->Attribute("value");
+
+        TextureManager::instance()->load(filename, textureId, Game::instance()->getRenderer());
+    }
 }
 
 void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>* pTilesets) {
@@ -117,32 +131,59 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
             continue;
         }
 
-        std::string layerType = getCustomProperty(e, "type")->Attribute("value");
-        if (layerType == "collidable") {
-            CollidableLayer* pCollidableLayer = new CollidableLayer();
-
-            for (XMLElement* o = e->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-                SDL_Rect boundary;
-                boundary.x = o->IntAttribute("x");
-                boundary.y = o->IntAttribute("y");
-                boundary.w = o->IntAttribute("width");
-                boundary.h = o->IntAttribute("height");
-                pCollidableLayer->getCollidables()->push_back(boundary);
-            }
-
-            pLevel->getCollidableLayers()->push_back(pCollidableLayer);
-        }  
+        std::string layerType = getStringProperty(e, "type");
+        if (layerType == "collidables") {
+            parseCollidables(e, pLevel);
+        } else if (layerType == "game_objects") {
+            parseGameObjects(e, pLevel);
+        }
     }
 
 }
 
-const XMLElement* const LevelParser::getCustomProperty(XMLElement* pElementRoot, std::string name) const {
+void LevelParser::parseCollidables(XMLElement* pRoot, Level* pLevel) {
+    CollidableLayer* pCollidableLayer = new CollidableLayer();
+
+    for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
+        SDL_Rect boundary;
+        boundary.x = o->IntAttribute("x");
+        boundary.y = o->IntAttribute("y");
+        boundary.w = o->IntAttribute("width");
+        boundary.h = o->IntAttribute("height");
+        pCollidableLayer->getCollidables()->push_back(boundary);
+    }
+
+    pLevel->getCollidableLayers()->push_back(pCollidableLayer);
+}
+
+void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
+    for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
+        int x = o->IntAttribute("x");
+        int y = o->IntAttribute("y");
+        int width = o->IntAttribute("width");
+        int height = o->IntAttribute("height");
+        std::string type = o->Attribute("type");
+        std::string textureId = getStringProperty(o, "textureId");
+
+        GameObject* object = GameObjectFactory::instance()->create(type);
+        object->init((float)x, (float)y, width, height, textureId);
+
+        if (type == "player" && pLevel->m_pPlayer == nullptr) {
+            pLevel->m_pPlayer = dynamic_cast<Player*>(object);
+        }
+
+        // todo: other game object types
+    }
+}
+
+std::string LevelParser::getStringProperty(XMLElement* pElementRoot, std::string name) const {
     XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
     for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
         if (p->Attribute("name") == name) {
-            return p;
+            return p->Attribute("value");
         }
     }
 
-    return nullptr;
+    Logger->warn("There is no property with name " + name);
+    return "";
 }

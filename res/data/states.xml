@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
-
 <STATES>
-
     <MENU_STATE>
         <TEXTURES>
             <texture filename="newchar02-2.png" id="player"/>
@@ -12,11 +10,12 @@
         </OBJECTS>
     </MENU_STATE>
 
-    <PLAY_STATE></PLAY_STATE>
+    <PLAY_STATE>
+	</PLAY_STATE>
+	
     <SPLASH_STATE>
 		<FONTS>
 			<font filename="segoeui.ttf" id="segoeui" size="58"/>
 		</FONTS>
 	</SPLASH_STATE>
-
 </STATES>

@@ -4,6 +4,7 @@
 
 class TileLayer;
 class CollidableLayer;
+class Player;
 
 class Level {
 
@@ -15,6 +16,8 @@ private:
     unsigned int m_height = 0;
     unsigned short m_tileWidth= 0;
     unsigned short m_tileHeight = 0;
+
+    Player* m_pPlayer = nullptr;
 
     std::vector<Tileset> m_tilesets;
     std::vector<TileLayer*> m_tileLayers;

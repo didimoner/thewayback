@@ -92,9 +92,6 @@
     <ClCompile Include="src\SDLGameObject.cpp">
       <Filter>Engine\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="src\SystemUtils.cpp">
-      <Filter>Engine\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -103,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="src\CollidableLayer.cpp">
       <Filter>Engine\Map\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SystemUtils.cpp">
+      <Filter>Engine\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
