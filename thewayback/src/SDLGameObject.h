@@ -27,4 +27,6 @@ public:
 	virtual void draw();
 	virtual void clean();
 
+	SDL_Rect getRect();
+
 };

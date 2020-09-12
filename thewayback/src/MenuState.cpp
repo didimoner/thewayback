@@ -25,9 +25,6 @@ void MenuState::onActivate() {
     StateParser stateParser;
     stateParser.parse("states.xml", getStateId(), m_gameObjects);
 
-    LevelParser levelParser;
-    levelParser.parse("test5.tmx");
-
     Logger->debug("Menu activated");
 }
 

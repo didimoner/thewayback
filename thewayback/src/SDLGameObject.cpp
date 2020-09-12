@@ -24,3 +24,7 @@ void SDLGameObject::draw() {
 
 void SDLGameObject::clean() {
 }
+
+SDL_Rect SDLGameObject::getRect() {
+	return { (int) m_position.getX(), (int) m_position.getY(), m_width, m_height };
+}

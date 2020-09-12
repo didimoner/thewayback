@@ -1,18 +1,18 @@
 #include "pch.h"
 #include "Level.h"
-#include "Layer.h"
+#include "TileLayer.h"
 
 Level::~Level() {
 }
 
 void Level::update() {
-    for (Layer* pLayer : m_layers) {
+    for (TileLayer* pLayer : m_tileLayers) {
         pLayer->update();
     }
 }
 
 void Level::draw() {
-    for (Layer* pLayer : m_layers) {
+    for (TileLayer* pLayer : m_tileLayers) {
         pLayer->draw();
     }
 }

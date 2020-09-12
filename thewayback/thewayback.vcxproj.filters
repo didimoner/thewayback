@@ -83,13 +83,7 @@
     <ClCompile Include="src\Level.cpp">
       <Filter>Engine\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\Layer.cpp">
-      <Filter>Engine\Map\Layers</Filter>
-    </ClCompile>
     <ClCompile Include="src\TileLayer.cpp">
-      <Filter>Engine\Map\Layers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ObjectLayer.cpp">
       <Filter>Engine\Map\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\LevelParser.cpp">
@@ -106,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="src\FontManager.cpp">
       <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollidableLayer.cpp">
+      <Filter>Engine\Map\Layers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,13 +171,7 @@
     <ClInclude Include="src\Tileset.h">
       <Filter>Engine\Map</Filter>
     </ClInclude>
-    <ClInclude Include="src\Layer.h">
-      <Filter>Engine\Map\Layers</Filter>
-    </ClInclude>
     <ClInclude Include="src\TileLayer.h">
-      <Filter>Engine\Map\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ObjectLayer.h">
       <Filter>Engine\Map\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\LevelParser.h">
@@ -197,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="src\FontManager.h">
       <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collision.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollidableLayer.h">
+      <Filter>Engine\Map\Layers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

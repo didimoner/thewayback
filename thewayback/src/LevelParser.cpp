@@ -9,6 +9,8 @@
 #include "Tileset.h"
 #include "Log.h"
 #include "TileLayer.h"
+#include "CollidableLayer.h"
+#include <SDL_rect.h>
 
 Log* LevelParser::Logger = new Log(typeid(LevelParser).name());
 
@@ -39,7 +41,8 @@ Level* LevelParser::parse(std::string filename) {
     pLevel->m_tileHeight = pRoot->IntAttribute("tileheight");
 
     parseTilesets(pRoot, pLevel->getTilesets());
-    parseLayer(pRoot, pLevel);
+    parseTileLayers(pRoot, pLevel);
+    parseObjectLayers(pRoot, pLevel);
 
     return pLevel;
 }
@@ -65,7 +68,7 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>*
     }
 }
 
-void LevelParser::parseLayer(XMLElement* pLayerRoot, Level* pLevel) {
+void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
     for (XMLElement* e = pLayerRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("layer")) {
             continue;
@@ -104,6 +107,42 @@ void LevelParser::parseLayer(XMLElement* pLayerRoot, Level* pLevel) {
         pTileLayer->setName(e->Attribute("name"));
         pTileLayer->setTileIds(tileIds);
 
-        pLevel->getLayers()->push_back(pTileLayer);
+        pLevel->getTileLayers()->push_back(pTileLayer);
     }
+}
+
+void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
+    for (XMLElement* e = pObjectsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+        if (e->Value() != std::string("objectgroup")) {
+            continue;
+        }
+
+        std::string layerType = getCustomProperty(e, "type")->Attribute("value");
+        if (layerType == "collidable") {
+            CollidableLayer* pCollidableLayer = new CollidableLayer();
+
+            for (XMLElement* o = e->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
+                SDL_Rect boundary;
+                boundary.x = o->IntAttribute("x");
+                boundary.y = o->IntAttribute("y");
+                boundary.w = o->IntAttribute("width");
+                boundary.h = o->IntAttribute("height");
+                pCollidableLayer->getCollidables()->push_back(boundary);
+            }
+
+            pLevel->getCollidableLayers()->push_back(pCollidableLayer);
+        }  
+    }
+
+}
+
+const XMLElement* const LevelParser::getCustomProperty(XMLElement* pElementRoot, std::string name) const {
+    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
+    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
+        if (p->Attribute("name") == name) {
+            return p;
+        }
+    }
+
+    return nullptr;
 }

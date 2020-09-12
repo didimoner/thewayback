@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="11">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="15">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -24,11 +24,21 @@
    eJxjYBgFtADZQJxDA3NroJhSUAzEJVQwhxCghltJAaFIeCBAMAF5aruvBYoHK+hgoK37qqGYXDDYw28gQTkaHmygAg1TExDKx8QAarqPkHsygTiLRDNpGX7ooBCIi3DIheEQp6f7yAENaHiwgcEefoPdffVomFaAGmXNUAUA0kIdsw==
   </data>
  </layer>
- <objectgroup id="4" name="ol">
-  <object id="1" x="453" y="41" width="70" height="66"/>
-  <object id="2" x="193" y="326" width="122" height="82"/>
-  <object id="3" x="585" y="77"/>
-  <object id="4" x="35" y="71" width="67" height="78"/>
-  <object id="5" x="134" y="167"/>
+ <objectgroup id="4" name="collidable">
+  <properties>
+   <property name="type" value="collidable"/>
+  </properties>
+  <object id="1" x="481" y="189" width="93" height="96"/>
+  <object id="2" x="128" y="191" width="129" height="127"/>
+  <object id="4" x="193" y="64" width="63" height="64"/>
+ </objectgroup>
+ <objectgroup id="5" name="npc">
+  <properties>
+   <property name="type" value="npc"/>
+  </properties>
+  <object id="12" gid="5" x="416" y="63" width="32" height="32"/>
+  <object id="14" x="567.5" y="30.5" width="83" height="19">
+   <text wrap="1">Hello World</text>
+  </object>
  </objectgroup>
 </map>

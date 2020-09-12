@@ -1,9 +1,9 @@
 #pragma once
-#include "Layer.h"
+#include "Tileset.h"
 
 class Log;
 
-class TileLayer : public Layer {
+class TileLayer {
 
 private:
     unsigned short m_id = 0;

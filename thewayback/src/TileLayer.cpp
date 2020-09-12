@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "GameState.h"
+#include "Tileset.h"
 
 Log* TileLayer::Logger = new Log(typeid(TileLayer).name());
 

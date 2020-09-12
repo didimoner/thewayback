@@ -1,7 +1,9 @@
 #pragma once
 #include "Tileset.h"
+#include <SDL_rect.h>
 
-class Layer;
+class TileLayer;
+class CollidableLayer;
 
 class Level {
 
@@ -15,7 +17,8 @@ private:
     unsigned short m_tileHeight = 0;
 
     std::vector<Tileset> m_tilesets;
-    std::vector<Layer*> m_layers;
+    std::vector<TileLayer*> m_tileLayers;
+    std::vector<CollidableLayer*> m_collidableLayers;
 
 public:
     ~Level();
@@ -23,8 +26,11 @@ public:
     std::vector<Tileset>* const getTilesets() {
         return &m_tilesets;
     }
-    std::vector<Layer*>* const getLayers() {
-        return &m_layers;
+    std::vector<TileLayer*>* const getTileLayers() {
+        return &m_tileLayers;
+    }
+    std::vector<CollidableLayer*>* const getCollidableLayers() {
+        return &m_collidableLayers;
     }
 
     void update();
