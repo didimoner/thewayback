@@ -39,7 +39,7 @@
   <properties>
    <property name="type" value="game_objects"/>
   </properties>
-  <object id="19" name="player" type="player" x="321" y="63" width="32" height="32">
+  <object id="19" name="player" type="player" x="700" y="224" width="32" height="32">
    <properties>
     <property name="textureId" value="player"/>
    </properties>
