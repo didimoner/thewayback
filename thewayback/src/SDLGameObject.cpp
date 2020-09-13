@@ -25,6 +25,7 @@ void SDLGameObject::draw() {
 void SDLGameObject::clean() {
 }
 
-SDL_Rect SDLGameObject::getRect() const {
-	return { (int) m_position.getX(), (int) m_position.getY(), m_width, m_height };
+std::vector<SDL_Rect> SDLGameObject::getBoundaries() const {
+	SDL_Rect rect = { (int)m_position.getX(), (int)m_position.getY(), m_width, m_height };
+	return { rect };
 }

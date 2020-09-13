@@ -4,13 +4,13 @@
 class Log {
 
 public:
-    enum class Level {
+    enum class ELevel {
         ERROR = 0, WARNING, INFO, DEBUG, TRACE
     };
 
 private:
     std::string m_name;
-    Level m_logLevel;
+    ELevel m_logLevel;
 
     static Log* s_pLogger;
     static INIReader* s_pConfigReader;

@@ -2,12 +2,13 @@
 #include "pch.h"
 #include <SDL_rect.h>
 
-enum class CollisionType;
+enum class ECollisionType;
 
 class Collidable {
     
 public:
-    virtual SDL_Rect getRect() const = 0;
-    virtual void onCollide(CollisionType type, std::string objectId) = 0;
+    virtual std::string getId() const = 0;
+    virtual std::vector<SDL_Rect> getBoundaries() const = 0;
+    virtual void onCollide(ECollisionType type, std::string objectId) = 0;
 
 };

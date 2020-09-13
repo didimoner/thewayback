@@ -3,6 +3,7 @@
 #include "Vector2f.h"
 #include "GameObject.h"
 #include "Collidable.h"
+#include "ECollisionType.h"
 
 class SDLGameObject : public GameObject, public Collidable {
 
@@ -14,6 +15,7 @@ protected:
 	int m_currentFrame = 0;
 
 	std::string m_textureId;
+	std::string m_objectId;
 
 public:
 	SDLGameObject() : GameObject() {}
@@ -24,7 +26,10 @@ public:
 	virtual void draw();
 	virtual void clean();
 
-	virtual void onCollide(CollisionType type, std::string objectId) {}
-	SDL_Rect getRect() const;
+	std::string getId() const {
+		return m_objectId;
+	}
+	virtual void onCollide(ECollisionType type, std::string objectId) {}
+	std::vector<SDL_Rect> getBoundaries() const;
 
 };

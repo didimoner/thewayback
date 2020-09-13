@@ -2,10 +2,12 @@
 #include "SDLGameObject.h"
 #include "GameObjectCreator.h"
 
+class Log;
+
 class Player : public SDLGameObject {
 
 private:
-	enum class PlayerState {
+	enum class EPlayerState {
 		IDLE,
 		MOVING_UP,
 		MOVING_RIGHT,
@@ -13,16 +15,21 @@ private:
 		MOVING_LEFT
 	};
 
-	PlayerState m_playerState = PlayerState::IDLE;
+	EPlayerState m_playerState = EPlayerState::IDLE;
+	static Log* Logger;
 
 public:
-	Player() : SDLGameObject() {}
+	Player() : SDLGameObject() {
+		m_objectId = "Player";
+	}
 	~Player() {}
 
 	void init(float x, float y, int w, int h, std::string textureId);
 	void update();
 	void draw();
 	void clean();
+
+	void onCollide(ECollisionType type, std::string objectId);
 
 private:
 	void handleKeyboardInput();

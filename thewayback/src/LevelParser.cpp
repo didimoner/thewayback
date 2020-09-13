@@ -143,6 +143,7 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
 
 void LevelParser::parseCollidables(XMLElement* pRoot, Level* pLevel) {
     CollidableLayer* pCollidableLayer = new CollidableLayer();
+    pCollidableLayer->setId(pRoot->Attribute("name"));
 
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
         SDL_Rect boundary;

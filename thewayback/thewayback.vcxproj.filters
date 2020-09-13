@@ -203,5 +203,8 @@
     <ClInclude Include="src\Bootstrap.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="src\ECollisionType.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

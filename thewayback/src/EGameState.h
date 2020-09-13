@@ -1,7 +1,7 @@
 #pragma once
 
 enum class EGameState {
-    SPLASH = 0,
+    SPLASH,
     MENU,
     PLAY,
     PAUSE,

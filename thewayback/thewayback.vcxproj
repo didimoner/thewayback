@@ -204,6 +204,7 @@
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Collidable.h" />
     <ClInclude Include="src\Collision.h" />
+    <ClInclude Include="src\ECollisionType.h" />
     <ClInclude Include="src\FontManager.h" />
     <ClInclude Include="src\GameObjectFactory.h" />
     <ClInclude Include="src\Level.h" />
