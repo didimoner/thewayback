@@ -6,7 +6,7 @@
         </TEXTURES>
 
         <OBJECTS>
-            <object type="player" x="25" y="50" width="32" height="32" textureId="player"/>
+            <object type="player" x="25" y="50" width="32" height="32" textureId="player", frames="3"/>
         </OBJECTS>
     </MENU_STATE>
 

@@ -5,9 +5,10 @@
 #include "GameState.h"
 #include "GameObject.h"
 
-void SDLGameObject::init(float x, float y, int w, int h, std::string textureId) {
+void SDLGameObject::init(float x, float y, int w, int h, std::string textureId, Uint16 frames) {
 	GameObject::init(x, y, w, h);
 	m_textureId = textureId;
+	m_frames = frames;
 }
 
 void SDLGameObject::update() {

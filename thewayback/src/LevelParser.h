@@ -24,4 +24,5 @@ private:
     void parseGameObjects(XMLElement* pRoot, Level* pLevel);
 
     std::string getStringProperty(XMLElement* pElementRoot, std::string name) const;
+    int getIntProperty(XMLElement* pElementRoot, std::string name) const;
 };

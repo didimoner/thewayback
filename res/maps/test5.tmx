@@ -50,6 +50,7 @@
   <object id="19" name="player" type="player" x="622.5" y="223.5" width="32" height="32">
    <properties>
     <property name="textureId" value="player"/>
+    <property name="frames" value="3"/>
    </properties>
   </object>
  </objectgroup>

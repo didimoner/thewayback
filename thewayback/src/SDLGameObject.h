@@ -14,6 +14,7 @@ protected:
 	int m_currentRow = 0;
 	int m_currentFrame = 0;
 
+	Uint16 m_frames = 0;
 	std::string m_textureId;
 	std::string m_objectId;
 
@@ -21,7 +22,7 @@ public:
 	SDLGameObject() : GameObject() {}
 	virtual ~SDLGameObject() {}
 
-	virtual void init(float x, float y, int w, int h, std::string textureId);
+	virtual void init(float x, float y, int w, int h, std::string textureId, Uint16 frames);
 	virtual void update();
 	virtual void draw();
 	virtual void clean();

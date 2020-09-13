@@ -70,9 +70,10 @@ void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*
         int y = e->IntAttribute("y");
         int width = e->IntAttribute("width");
         int height = e->IntAttribute("height");
+        int frames = e->IntAttribute("frames");
 
         SDLGameObject* object = static_cast<SDLGameObject*>(GameObjectFactory::instance()->create(type));
-        object->init((float) x, (float) y, width, height, textureId);
+        object->init((float) x, (float) y, width, height, textureId, frames);
 
         gameObjects.push_back(object);
     }

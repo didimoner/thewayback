@@ -6,10 +6,6 @@
 
 Log* Player::Logger = new Log(typeid(Player).name());
 
-void Player::init(float x, float y, int w, int h, std::string textureId) {
-	SDLGameObject::init(x, y, w, h, textureId);
-}
-
 void Player::update() {
 	handleKeyboardInput();
 	updatePlayerState();
@@ -74,8 +70,7 @@ void Player::updatePlayerState() {
 	}
 
 	if (m_playerState != EPlayerState::IDLE) {
-		// TODO: move amount of frames outside
-		m_currentFrame = (SDL_GetTicks() / (100 * 2)) % 3;
+		m_currentFrame = (SDL_GetTicks() / (100 * 2)) % m_frames;
 	} else {
 		m_currentFrame = 1;
 	}

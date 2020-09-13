@@ -24,7 +24,6 @@ public:
 	}
 	~Player() {}
 
-	void init(float x, float y, int w, int h, std::string textureId);
 	void update();
 	void draw();
 	void clean();

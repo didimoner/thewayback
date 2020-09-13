@@ -165,9 +165,10 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         int height = o->IntAttribute("height");
         std::string type = o->Attribute("type");
         std::string textureId = getStringProperty(o, "textureId");
+        Uint16 frames = getIntProperty(o, "frames");
 
         SDLGameObject* object = static_cast<SDLGameObject*>(GameObjectFactory::instance()->create(type));
-        object->init((float)x, (float)y, width, height, textureId);
+        object->init((float)x, (float)y, width, height, textureId, frames);
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
             pLevel->m_pPlayer = static_cast<Player*>(object);
@@ -187,4 +188,16 @@ std::string LevelParser::getStringProperty(XMLElement* pElementRoot, std::string
 
     Logger->warn("There is no property with name " + name);
     return "";
+}
+
+int LevelParser::getIntProperty(XMLElement* pElementRoot, std::string name) const {
+    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
+    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
+        if (p->Attribute("name") == name) {
+            return p->IntAttribute("value");
+        }
+    }
+
+    Logger->warn("There is no property with name " + name);
+    return 0;
 }
