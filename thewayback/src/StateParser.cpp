@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "GameObjectFactory.h"
 #include "Log.h"
-#include "GameObject.h"
+#include "SDLGameObject.h"
 
 Log* StateParser::Logger = new Log(typeid(StateParser).name());
 
@@ -71,7 +71,7 @@ void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*
         int width = e->IntAttribute("width");
         int height = e->IntAttribute("height");
 
-        GameObject* object = GameObjectFactory::instance()->create(type);
+        SDLGameObject* object = static_cast<SDLGameObject*>(GameObjectFactory::instance()->create(type));
         object->init((float) x, (float) y, width, height, textureId);
 
         gameObjects.push_back(object);

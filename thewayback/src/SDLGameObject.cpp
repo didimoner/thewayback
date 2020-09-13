@@ -6,9 +6,7 @@
 #include "GameObject.h"
 
 void SDLGameObject::init(float x, float y, int w, int h, std::string textureId) {
-	m_position = Vector2f(x, y);
-	m_width = w;
-	m_height = h;
+	GameObject::init(x, y, w, h);
 	m_textureId = textureId;
 }
 
@@ -27,6 +25,6 @@ void SDLGameObject::draw() {
 void SDLGameObject::clean() {
 }
 
-SDL_Rect SDLGameObject::getRect() {
+SDL_Rect SDLGameObject::getRect() const {
 	return { (int) m_position.getX(), (int) m_position.getY(), m_width, m_height };
 }

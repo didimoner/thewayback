@@ -7,6 +7,8 @@ Level::~Level() {
 }
 
 void Level::update() {
+    // TODO: check collisions
+
     for (TileLayer* pLayer : m_tileLayers) {
         pLayer->update();
     }

@@ -11,7 +11,7 @@
 #include "Log.h"
 #include "TileLayer.h"
 #include "CollidableLayer.h"
-#include "GameObject.h"
+#include "SDLGameObject.h"
 #include "Player.h"
 #include "GameObjectFactory.h"
 
@@ -165,11 +165,11 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         std::string type = o->Attribute("type");
         std::string textureId = getStringProperty(o, "textureId");
 
-        GameObject* object = GameObjectFactory::instance()->create(type);
+        SDLGameObject* object = static_cast<SDLGameObject*>(GameObjectFactory::instance()->create(type));
         object->init((float)x, (float)y, width, height, textureId);
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
-            pLevel->m_pPlayer = dynamic_cast<Player*>(object);
+            pLevel->m_pPlayer = static_cast<Player*>(object);
         }
 
         // todo: other game object types

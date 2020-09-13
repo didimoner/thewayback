@@ -2,16 +2,13 @@
 #include <SDL.h>
 #include "Vector2f.h"
 #include "GameObject.h"
+#include "Collidable.h"
 
-class SDLGameObject : public GameObject {
+class SDLGameObject : public GameObject, public Collidable {
 
 protected:
-	Vector2f m_position;
 	Vector2f m_velocity;
 	Vector2f m_acceleration;
-
-	int m_width = 0;
-	int m_height = 0;
 
 	int m_currentRow = 0;
 	int m_currentFrame = 0;
@@ -27,6 +24,7 @@ public:
 	virtual void draw();
 	virtual void clean();
 
-	SDL_Rect getRect();
+	virtual void onCollide(CollisionType type, std::string objectId) {}
+	SDL_Rect getRect() const;
 
 };
