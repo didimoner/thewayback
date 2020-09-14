@@ -32,15 +32,15 @@
    <property name="type" value="collidables"/>
   </properties>
   <object id="1" x="481" y="189" width="93" height="96"/>
-  <object id="2" x="128" y="191" width="129" height="127"/>
+  <object id="2" x="128" y="185.25" width="129" height="127"/>
   <object id="4" x="193" y="64" width="63" height="64"/>
-  <object id="20" x="640" y="321" width="31.5" height="189.5"/>
-  <object id="21" x="448" y="479.5" width="191.5" height="32"/>
-  <object id="22" x="577.5" y="384.5" width="61.5" height="62.5"/>
+  <object id="20" x="641.852" y="323.909" width="31.5" height="189.5"/>
+  <object id="21" x="445.636" y="479.682" width="191.5" height="32"/>
+  <object id="22" x="575.682" y="385.045" width="61.5" height="62.5"/>
   <object id="23" x="448" y="352.5" width="31.5" height="29.5"/>
   <object id="24" x="575" y="224" width="31.5" height="30.5"/>
   <object id="25" x="768" y="223" width="63.5" height="30.5"/>
-  <object id="26" x="640" y="127.5" width="95.5" height="63"/>
+  <object id="26" x="642.25" y="128.25" width="95.5" height="63"/>
   <object id="27" x="800" y="416" width="30.5" height="31"/>
  </objectgroup>
  <objectgroup id="5" name="game_objects">
@@ -49,8 +49,8 @@
   </properties>
   <object id="19" name="player" type="player" x="622.5" y="223.5" width="32" height="32">
    <properties>
-    <property name="textureId" value="player"/>
     <property name="frames" value="3"/>
+    <property name="textureId" value="player"/>
    </properties>
   </object>
  </objectgroup>

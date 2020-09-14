@@ -16,7 +16,6 @@ protected:
 
 	Uint16 m_frames = 0;
 	std::string m_textureId;
-	std::string m_objectId;
 
 public:
 	SDLGameObject() : GameObject() {}
@@ -27,10 +26,9 @@ public:
 	virtual void draw();
 	virtual void clean();
 
-	std::string getId() const {
-		return m_objectId;
-	}
-	virtual void onCollide(ECollisionType type, std::string objectId) {}
-	std::vector<SDL_Rect> getBoundaries() const;
+	Vector2f getPosition() const;
+
+	virtual void onCollide(ECollisionType type, std::string objectId) { }
+	SDL_FRect getBoundary() const;
 
 };

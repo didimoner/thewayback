@@ -95,9 +95,6 @@
     <ClCompile Include="src\FontManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="src\CollidableLayer.cpp">
-      <Filter>Game\Map\Layers</Filter>
-    </ClCompile>
     <ClCompile Include="src\SystemUtils.cpp">
       <Filter>Engine\Utils</Filter>
     </ClCompile>
@@ -106,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="src\SDLGameObject.cpp">
       <Filter>Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObstacleLayer.cpp">
+      <Filter>Game\Map\Layers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +188,6 @@
     <ClInclude Include="src\Collision.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\CollidableLayer.h">
-      <Filter>Game\Map\Layers</Filter>
-    </ClInclude>
     <ClInclude Include="src\Collidable.h">
       <Filter>Engine\GameObjects</Filter>
     </ClInclude>
@@ -205,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="src\ECollisionType.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObstacleLayer.h">
+      <Filter>Game\Map\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obstacle.h">
+      <Filter>Game\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

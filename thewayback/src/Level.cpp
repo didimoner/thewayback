@@ -2,9 +2,10 @@
 #include "Level.h"
 #include "TileLayer.h"
 #include "Player.h"
-#include "CollidableLayer.h"
+#include "ObstacleLayer.h"
 #include "Collision.h"
 #include "ECollisionType.h"
+#include "Obstacle.h"
 
 Level::~Level() {
     delete m_pPlayer;
@@ -14,10 +15,10 @@ Level::~Level() {
     }
     m_tileLayers.clear();
 
-    for (CollidableLayer* pCollidableLayer : m_collidableLayers) {
+    for (ObstacleLayer* pCollidableLayer : m_obstacleLayers) {
         delete pCollidableLayer;
     }
-    m_collidableLayers.clear();
+    m_obstacleLayers.clear();
 }
 
 void Level::update() {
@@ -26,9 +27,13 @@ void Level::update() {
     }
     
     m_pPlayer->update();
-    
-    for (CollidableLayer* pCollidableLayer : m_collidableLayers) {
-        Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pCollidableLayer);
+
+    Vector2f playetPosition = m_pPlayer->getPosition();
+    for (ObstacleLayer* pObstacleLayer : m_obstacleLayers) {
+        std::vector<Obstacle*> obstacles = pObstacleLayer->getObstacles(playetPosition.getX(), playetPosition.getY());
+        for (Obstacle* pObstacle : obstacles) {
+            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pObstacle);
+        }
     }
 }
 

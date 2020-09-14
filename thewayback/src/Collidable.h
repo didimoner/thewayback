@@ -5,10 +5,19 @@
 enum class ECollisionType;
 
 class Collidable {
+
+protected:
+    std::string m_objectId;
     
 public:
-    virtual std::string getId() const = 0;
-    virtual std::vector<SDL_Rect> getBoundaries() const = 0;
+    std::string getObjectId() const {
+        return m_objectId;
+    }
+    void setObjectId(std::string id) {
+        m_objectId = id;
+    }
+
+    virtual SDL_FRect getBoundary() const = 0;
     virtual void onCollide(ECollisionType type, std::string objectId) = 0;
 
 };

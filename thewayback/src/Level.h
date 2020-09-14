@@ -3,7 +3,7 @@
 #include <SDL_rect.h>
 
 class TileLayer;
-class CollidableLayer;
+class ObstacleLayer;
 class Player;
 
 class Level {
@@ -21,7 +21,7 @@ private:
 
     std::vector<Tileset> m_tilesets;
     std::vector<TileLayer*> m_tileLayers;
-    std::vector<CollidableLayer*> m_collidableLayers;
+    std::vector<ObstacleLayer*> m_obstacleLayers;
 
 public:
     ~Level();
@@ -32,8 +32,8 @@ public:
     std::vector<TileLayer*>* const getTileLayers() {
         return &m_tileLayers;
     }
-    std::vector<CollidableLayer*>* const getCollidableLayers() {
-        return &m_collidableLayers;
+    std::vector<ObstacleLayer*>* const getObstacleLayers() {
+        return &m_obstacleLayers;
     }
 
     void update();

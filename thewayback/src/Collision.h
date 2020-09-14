@@ -8,22 +8,24 @@ enum class ECollisionType;
 class Collision {
 
 private:
-    static const int offset = 4;
+    static const int offset = 0;
 
 public:
     static void checkCollidables(ECollisionType type, Collidable* pFirst, Collidable* pSecond) {
-        for (SDL_Rect firstRect : pFirst->getBoundaries()) {
-            for (SDL_Rect secondRect : pSecond->getBoundaries()) {
-                if (check(firstRect, secondRect)) {
-                    pFirst->onCollide(type, pSecond->getId());
-                    pSecond->onCollide(type, pFirst->getId());
-                }
-            }
+        if (checkFRects(pFirst->getBoundary(), pSecond->getBoundary())) {
+            pFirst->onCollide(type, pSecond->getObjectId());
+            pSecond->onCollide(type, pFirst->getObjectId());
         }
     }
 
-private:
-    static bool check(SDL_Rect& first, SDL_Rect& second) {
+    static bool checkRects(const SDL_Rect& first, const SDL_Rect& second) {
+        return checkFRects(
+            { (float)first.x, (float)first.y, (float)first.w, (float)first.h },
+            { (float)second.x, (float)second.y, (float)second.w, (float)second.h }
+        );
+    }
+
+    static bool checkFRects(const SDL_FRect& first, const SDL_FRect& second) {
         return ((first.x + first.w - offset >= second.x) && (first.x + offset <= second.x + second.w))
             && ((first.y + first.h - offset >= second.y) && (first.y + offset <= second.y + second.h));
     }

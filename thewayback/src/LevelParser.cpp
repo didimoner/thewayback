@@ -10,10 +10,11 @@
 #include "Tileset.h"
 #include "Log.h"
 #include "TileLayer.h"
-#include "CollidableLayer.h"
+#include "ObstacleLayer.h"
 #include "SDLGameObject.h"
 #include "Player.h"
 #include "GameObjectFactory.h"
+#include "Obstacle.h"
 
 Log* LevelParser::Logger = new Log(typeid(LevelParser).name());
 
@@ -142,19 +143,24 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
 }
 
 void LevelParser::parseCollidables(XMLElement* pRoot, Level* pLevel) {
-    CollidableLayer* pCollidableLayer = new CollidableLayer();
-    pCollidableLayer->setId(pRoot->Attribute("name"));
-
+    std::string layerId = pRoot->Attribute("name");
+    ObstacleLayer* pCollidableLayer = new ObstacleLayer(
+        layerId, 
+        pLevel->m_width * pLevel->m_tileWidth, 
+        pLevel->m_height * pLevel->m_tileHeight,
+        2 // TODO: Replace with value from the map file
+    );
+    
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        SDL_Rect boundary;
-        boundary.x = o->IntAttribute("x");
-        boundary.y = o->IntAttribute("y");
-        boundary.w = o->IntAttribute("width");
-        boundary.h = o->IntAttribute("height");
-        pCollidableLayer->getCollidables()->push_back(boundary);
+        Obstacle* pObstacle = new Obstacle(
+            (float) o->IntAttribute("x"), (float) o->IntAttribute("y"),
+            o->IntAttribute("width"), o->IntAttribute("height")
+        );
+
+        pCollidableLayer->addObstacle(pObstacle);
     }
 
-    pLevel->getCollidableLayers()->push_back(pCollidableLayer);
+    pLevel->getObstacleLayers()->push_back(pCollidableLayer);
 }
 
 void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
