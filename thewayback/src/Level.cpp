@@ -30,7 +30,7 @@ void Level::update() {
 
     Vector2f playetPosition = m_pPlayer->getPosition();
     for (ObstacleLayer* pObstacleLayer : m_obstacleLayers) {
-        std::vector<Obstacle*> obstacles = pObstacleLayer->getObstacles(playetPosition.getX(), playetPosition.getY());
+        std::set<Obstacle*> obstacles = pObstacleLayer->getObstacles(m_pPlayer->getBoundary());
         for (Obstacle* pObstacle : obstacles) {
             Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pObstacle);
         }

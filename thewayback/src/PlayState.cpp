@@ -20,7 +20,7 @@ void PlayState::draw() {
 void PlayState::onActivate() {
     Logger->debug("Play activated");
 
-    m_camera.setPosition(13 * 32, 3 * 32);
+    m_camera.setPosition(-1 * 32, -1 * 32);
 
     StateParser stateParser;
     std::vector<GameObject*> gameObjects;

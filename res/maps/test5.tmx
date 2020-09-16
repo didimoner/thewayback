@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="28">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="120">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -17,37 +17,43 @@
    eJztw0ENAAAMA6FzUf9O52IvSFg1VVXVhwfuj0fh
   </data>
  </layer>
- <layer id="2" name="objects" width="40" height="20" locked="1">
+ <layer id="2" name="objects" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJztzrsJACAQBNG1CwsQa7A87dzA5BI/nHCi7oPJxwHIaAqI6HZeNBJEVjx0f1aP2j8rq2+3iqcHJvi359e/tJj86EX0igrmfgez
+   eJxjYBgF9AQdQPybBNxBZ/f9BOKrJOBfA+Q+QuHYMcDu+0lA3S+GUfeBAK54Q3ffMhIwNQGudD9Y3EdsuTFQ7iMWDCX3vQTiV1D2ayB+M8jc9xGIP0HZn4H4yyBz32CP31H3DT/3jYLBCQDeOYnZ
   </data>
  </layer>
- <layer id="3" name="other" width="40" height="20" locked="1">
+ <layer id="3" name="other" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFtADZQJxDA3NroJhSUAzEJVQwhxCghltJAaFIeCBAMAF5aruvBYoHK+hgoK37qqGYXDDYw28gQTkaHmygAg1TExDKx8QAarqPkHsygTiLRDNpGX7ooBCIi3DIheEQp6f7yAENaHiwgcEefoPdffVomFaAGmXNUAUA0kIdsw==
+   eJzbysDAsHWQ48EKyHHfNDIwvd1HS/XIgBL3ERtuA+m+eXjwYHAfDEzEgpHVYZOnlvuIiTdi7SNVPSXly2BxHzHlxkC6D18eGAzuo6Z9pKofdR9l6kfdR5l6arqPVExP980kA9PTfbQCA91uJwYDAAQ5lcc=
   </data>
  </layer>
  <objectgroup id="4" name="collidables">
   <properties>
-   <property name="type" value="collidables"/>
+   <property name="grid_cols" type="int" value="2"/>
+   <property name="grid_rows" type="int" value="4"/>
+   <property name="type" value="obstacles"/>
   </properties>
-  <object id="1" x="481" y="189" width="93" height="96"/>
-  <object id="2" x="128" y="185.25" width="129" height="127"/>
-  <object id="4" x="193" y="64" width="63" height="64"/>
-  <object id="20" x="641.852" y="323.909" width="31.5" height="189.5"/>
-  <object id="21" x="445.636" y="479.682" width="191.5" height="32"/>
-  <object id="22" x="575.682" y="385.045" width="61.5" height="62.5"/>
-  <object id="23" x="448" y="352.5" width="31.5" height="29.5"/>
-  <object id="24" x="575" y="224" width="31.5" height="30.5"/>
-  <object id="25" x="768" y="223" width="63.5" height="30.5"/>
-  <object id="26" x="642.25" y="128.25" width="95.5" height="63"/>
-  <object id="27" x="800" y="416" width="30.5" height="31"/>
+  <object id="102" x="672" y="352" width="64" height="64"/>
+  <object id="103" x="768" y="352" width="64" height="64"/>
+  <object id="104" x="256" y="224" width="160" height="32"/>
+  <object id="105" x="384" y="64" width="32" height="160"/>
+  <object id="107" x="256" y="288" width="224" height="48"/>
+  <object id="108" x="448" y="128" width="32" height="160"/>
+  <object id="109" x="480" y="128" width="256" height="49"/>
+  <object id="110" x="704" y="160" width="32" height="64"/>
+  <object id="111" x="768" y="64" width="32" height="160"/>
+  <object id="112" x="416" y="64" width="352" height="32"/>
+  <object id="115" x="544" y="192" width="32" height="370"/>
+  <object id="116" x="576" y="512" width="384" height="51"/>
+  <object id="117" x="928" y="192" width="32" height="320"/>
+  <object id="118" x="800" y="192" width="128" height="32"/>
+  <object id="119" x="576" y="192" width="128" height="32"/>
  </objectgroup>
  <objectgroup id="5" name="game_objects">
   <properties>
    <property name="type" value="game_objects"/>
   </properties>
-  <object id="19" name="player" type="player" x="622.5" y="223.5" width="32" height="32">
+  <object id="19" name="player" type="player" x="381.708" y="555.438" width="32" height="32">
    <properties>
     <property name="frames" value="3"/>
     <property name="textureId" value="player"/>

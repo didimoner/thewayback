@@ -133,8 +133,8 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
         }
 
         std::string layerType = getStringProperty(e, "type");
-        if (layerType == "collidables") {
-            parseCollidables(e, pLevel);
+        if (layerType == "obstacles") {
+            parseObstacles(e, pLevel);
         } else if (layerType == "game_objects") {
             parseGameObjects(e, pLevel);
         }
@@ -142,13 +142,15 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
 
 }
 
-void LevelParser::parseCollidables(XMLElement* pRoot, Level* pLevel) {
+void LevelParser::parseObstacles(XMLElement* pRoot, Level* pLevel) {
     std::string layerId = pRoot->Attribute("name");
+    Uint8 gridCols = getIntProperty(pRoot, "grid_cols");
+    Uint8 gridRows = getIntProperty(pRoot, "grid_rows");
     ObstacleLayer* pCollidableLayer = new ObstacleLayer(
         layerId, 
         pLevel->m_width * pLevel->m_tileWidth, 
         pLevel->m_height * pLevel->m_tileHeight,
-        2 // TODO: Replace with value from the map file
+        gridCols, gridRows
     );
     
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {

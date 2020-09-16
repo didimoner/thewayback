@@ -42,10 +42,10 @@ void TileLayer::draw() {
                 cameraPos.getY() + Game::instance()->getWindowHeight());
             int safeOffset = 1;
 
-            bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight 
-                || column + safeOffset < cameraPos.getX() / tileset.tileWidth;
-            bool botPosCheck = row - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
-                || column - safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
+            bool topPosCheck = row - safeOffset < cameraPos.getY() / tileset.tileHeight 
+                || column - safeOffset < cameraPos.getX() / tileset.tileWidth;
+            bool botPosCheck = row + safeOffset > bottomCameraPos.getY() / tileset.tileWidth
+                || column + safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
 
             if (topPosCheck || botPosCheck) {
                 continue;
