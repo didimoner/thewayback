@@ -101,11 +101,14 @@
     <ClCompile Include="src\StateParser.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\SDLGameObject.cpp">
-      <Filter>Game\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="src\ObstacleLayer.cpp">
       <Filter>Game\Map\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Drawable.cpp">
+      <Filter>Engine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation.cpp">
+      <Filter>Engine\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,9 +197,6 @@
     <ClInclude Include="src\StateParser.h">
       <Filter>Game\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\SDLGameObject.h">
-      <Filter>Game\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="src\Bootstrap.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -208,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="src\Obstacle.h">
       <Filter>Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Drawable.h">
+      <Filter>Engine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation.h">
+      <Filter>Engine\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

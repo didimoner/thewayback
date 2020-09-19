@@ -5,9 +5,12 @@
 class GameObject {
 
 protected:
-	Vector2f m_position;
 	int m_width = 0;
 	int m_height = 0;
+
+	Vector2f m_position;
+	Vector2f m_velocity;
+	Vector2f m_acceleration;
 
 public:
 	GameObject() {}
@@ -18,9 +21,15 @@ public:
 		m_width = w;
 		m_height = h;
 	}
-	virtual void update() = 0;
+	virtual void update() {
+		m_velocity += m_acceleration;
+		m_position += m_velocity;
+	}
 	virtual void draw() = 0;
 	virtual void clean() = 0;
 
+	Vector2f getPosition() const {
+		return m_position;
+	}
 };
 

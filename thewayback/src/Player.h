@@ -1,10 +1,11 @@
 #pragma once
-#include "SDLGameObject.h"
+#include "Drawable.h"
+#include "Collidable.h"
 #include "GameObjectCreator.h"
 
 class Log;
 
-class Player : public SDLGameObject {
+class Player : public Drawable, public Collidable {
 
 private:
 	enum class EPlayerState {
@@ -19,7 +20,7 @@ private:
 	static Log* Logger;
 
 public:
-	Player() : SDLGameObject() {
+	Player() : Drawable() {
 		m_objectId = "Player";
 	}
 	~Player() {}
@@ -29,6 +30,7 @@ public:
 	void clean();
 
 	void onCollide(ECollisionType type, std::string objectId);
+	SDL_FRect getBoundary() const;
 
 private:
 	void handleKeyboardInput();

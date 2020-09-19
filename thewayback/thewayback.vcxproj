@@ -163,7 +163,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Drawable.cpp" />
     <ClCompile Include="src\FontManager.cpp" />
     <ClCompile Include="src\LevelParser.cpp" />
     <ClCompile Include="src\ObstacleLayer.cpp" />
@@ -187,7 +189,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\SDLGameObject.cpp" />
     <ClCompile Include="src\SplashState.cpp" />
     <ClCompile Include="src\StateParser.cpp" />
     <ClCompile Include="src\SystemUtils.cpp" />
@@ -199,11 +200,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\base64.h" />
     <ClInclude Include="src\Bootstrap.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Collidable.h" />
     <ClInclude Include="src\Collision.h" />
+    <ClInclude Include="src\Drawable.h" />
     <ClInclude Include="src\ECollisionType.h" />
     <ClInclude Include="src\FontManager.h" />
     <ClInclude Include="src\GameObjectFactory.h" />
@@ -224,7 +227,6 @@
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\PlayState.h" />
-    <ClInclude Include="src\SDLGameObject.h" />
     <ClInclude Include="src\SplashState.h" />
     <ClInclude Include="src\StateParser.h" />
     <ClInclude Include="src\SystemUtils.h" />

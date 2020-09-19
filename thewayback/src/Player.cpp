@@ -10,15 +10,15 @@ void Player::update() {
 	handleKeyboardInput();
 	updatePlayerState();
 	
-	SDLGameObject::update();
+	Drawable::update();
 }
 
 void Player::draw() {
-	SDLGameObject::draw();
+	Drawable::draw();
 }
 
 void Player::clean() {
-	SDLGameObject::clean();
+	Drawable::clean();
 }
 
 void Player::onCollide(ECollisionType type, std::string objectId) {
@@ -28,6 +28,10 @@ void Player::onCollide(ECollisionType type, std::string objectId) {
 			m_position -= m_velocity;
 		}
 	}
+}
+
+SDL_FRect Player::getBoundary() const {
+	return { m_position.getX(), m_position.getY(), (float)m_width, (float)m_height };
 }
 
 void Player::handleKeyboardInput() {
@@ -50,19 +54,19 @@ void Player::updatePlayerState() {
 	switch (m_playerState) {
 		case EPlayerState::MOVING_UP:
 			m_velocity.setY(-1.f);
-			m_currentRow = 3;
+			m_row = 3;
 			break;
 		case EPlayerState::MOVING_RIGHT:
 			m_velocity.setX(1.f);
-			m_currentRow = 2;
+			m_row = 2;
 			break;
 		case EPlayerState::MOVING_DOWN:
 			m_velocity.setY(1.f);
-			m_currentRow = 0;
+			m_row = 0;
 			break;
 		case EPlayerState::MOVING_LEFT:
 			m_velocity.setX(-1.f);
-			m_currentRow = 1;
+			m_row = 1;
 			break;
 		case EPlayerState::IDLE:
 			m_velocity.set(0, 0);
@@ -70,8 +74,8 @@ void Player::updatePlayerState() {
 	}
 
 	if (m_playerState != EPlayerState::IDLE) {
-		m_currentFrame = (SDL_GetTicks() / (100 * 2)) % m_frames;
+		m_frame = (SDL_GetTicks() / (100 * 2)) % 3;
 	} else {
-		m_currentFrame = 1;
+		m_frame = 1;
 	}
 }
