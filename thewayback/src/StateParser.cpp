@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "GameObjectFactory.h"
 #include "Log.h"
-#include "Drawable.h"
+#include "Animation.h"
 
 Log* StateParser::Logger = new Log(typeid(StateParser).name());
 
@@ -70,10 +70,14 @@ void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*
         int y = e->IntAttribute("y");
         int width = e->IntAttribute("width");
         int height = e->IntAttribute("height");
-        int frames = e->IntAttribute("frames");
+        uint8_t frames = e->IntAttribute("frames");
 
-        Drawable *drawable = static_cast<Drawable*>(GameObjectFactory::instance()->create(type));
-        drawable->init((float) x, (float) y, width, height, textureId);
+        Animation*drawable = static_cast<Animation*>(GameObjectFactory::instance()->create(type));
+        Animation::InitParams animationInitParams;
+        animationInitParams.frames = frames;
+        animationInitParams.speed = 4;
+        animationInitParams.type = Animation::EType::BOUNCE;
+        drawable->init((float)x, (float)y, width, height, textureId, animationInitParams);
 
         gameObjects.push_back(drawable);
     }

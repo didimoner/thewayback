@@ -1,11 +1,11 @@
 #pragma once
-#include "Drawable.h"
+#include "Animation.h"
 #include "Collidable.h"
 #include "GameObjectCreator.h"
 
 class Log;
 
-class Player : public Drawable, public Collidable {
+class Player : public Animation, public Collidable {
 
 private:
 	enum class EPlayerState {
@@ -20,7 +20,7 @@ private:
 	static Log* Logger;
 
 public:
-	Player() : Drawable() {
+	Player() : Animation() {
 		m_objectId = "Player";
 	}
 	~Player() {}

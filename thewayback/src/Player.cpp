@@ -10,7 +10,7 @@ void Player::update() {
 	handleKeyboardInput();
 	updatePlayerState();
 	
-	Drawable::update();
+	Animation::update();
 }
 
 void Player::draw() {
@@ -74,8 +74,8 @@ void Player::updatePlayerState() {
 	}
 
 	if (m_playerState != EPlayerState::IDLE) {
-		m_frame = (SDL_GetTicks() / (100 * 2)) % 3;
+		Animation::playAnimation();
 	} else {
-		m_frame = 1;
+		Animation::stopAnimation();
 	}
 }
