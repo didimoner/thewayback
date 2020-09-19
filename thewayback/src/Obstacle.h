@@ -11,7 +11,7 @@ private:
     int m_height = 0;
 
 public:
-    Obstacle(float x, float y, Uint32 width, Uint32 height) 
+    Obstacle(float x, float y, uint32_t width, uint32_t height) 
         : m_position(x, y), m_width(width), m_height(height) { }
 
     void onCollide(ECollisionType type, std::string objectId) { }

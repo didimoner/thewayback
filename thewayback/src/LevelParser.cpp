@@ -144,8 +144,8 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
 
 void LevelParser::parseObstacles(XMLElement* pRoot, Level* pLevel) {
     std::string layerId = pRoot->Attribute("name");
-    Uint8 gridCols = getIntProperty(pRoot, "grid_cols");
-    Uint8 gridRows = getIntProperty(pRoot, "grid_rows");
+    uint8_t gridCols = getIntProperty(pRoot, "grid_cols");
+    uint8_t gridRows = getIntProperty(pRoot, "grid_rows");
     ObstacleLayer* pCollidableLayer = new ObstacleLayer(
         layerId, 
         pLevel->m_width * pLevel->m_tileWidth, 
@@ -176,10 +176,10 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         uint8_t frames = getIntProperty(o, "frames");
 
         Animation* drawable = static_cast<Animation*>(GameObjectFactory::instance()->create(type));
-        Animation::InitParams animationInitParams;
+        AnimationInitParams animationInitParams;
         animationInitParams.frames = frames;
         animationInitParams.speed = 4; // TODO: move outside
-        animationInitParams.type = Animation::EType::BOUNCE;
+        animationInitParams.type = EAnimationType::BOUNCE;
         animationInitParams.defaltFrame = 1; // TODO: move outside
         drawable->init((float)x, (float)y, width, height, textureId, animationInitParams);
 

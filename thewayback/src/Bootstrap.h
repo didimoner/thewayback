@@ -30,7 +30,7 @@ public:
 			return;
 		}
 
-		Uint32 frameStart, frameTime;
+		uint32_t frameStart, frameTime;
 		while (pGame->isRunning()) {
 			frameStart = SDL_GetTicks();
 

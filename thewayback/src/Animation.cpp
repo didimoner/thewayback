@@ -4,7 +4,7 @@
 #include <SDL_timer.h>
 #include "Log.h"
 
-void Animation::init(float x, float y, int w, int h, std::string textureId, InitParams params) {
+void Animation::init(float x, float y, int w, int h, std::string textureId, AnimationInitParams params) {
     Drawable::init(x, y, w, h, textureId);
     m_speed = params.speed;
     m_looped = params.looped;
@@ -14,7 +14,7 @@ void Animation::init(float x, float y, int w, int h, std::string textureId, Init
         m_frames.push_back(i);
     }
 
-    if (params.type == Animation::EType::BOUNCE) {
+    if (params.type == EAnimationType::BOUNCE) {
         for (int i = params.frames - 2; i > 0; i--) {
             m_frames.push_back(i);
         }

@@ -3,7 +3,7 @@
 
 class Log {
 
-public:
+private:
     enum class ELevel {
         ERROR = 0, WARNING, INFO, DEBUG, TRACE
     };

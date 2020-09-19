@@ -14,7 +14,7 @@ private:
 
 	bool m_mouseButtonStates[3];
 	Vector2f* m_pMousePosition;
-	const Uint8* m_keystates;
+	const uint8_t* m_keystates;
 
 	static InputHandler* s_pInstance;
 

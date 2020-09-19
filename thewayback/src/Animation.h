@@ -1,20 +1,19 @@
 #pragma once
 #include "Drawable.h"
 
+enum class EAnimationType {
+	NORMAL, BOUNCE
+};
+
+struct AnimationInitParams {
+	uint8_t frames = 0;
+	uint8_t defaltFrame = 0;
+	uint16_t speed = 0;
+	EAnimationType type = EAnimationType::NORMAL;
+	bool looped = false;
+};
+
 class Animation : public Drawable {
-
-public:
-	enum class EType {
-		NORMAL, BOUNCE
-	};
-
-	struct InitParams {
-		uint8_t frames = 0;
-		uint8_t defaltFrame = 0;
-		uint16_t speed = 0;
-		EType type = EType::NORMAL;
-		bool looped = false;
-	};
 
 private:
 	enum class EState {
@@ -35,7 +34,7 @@ public:
 	Animation() : Drawable() {}
 	virtual ~Animation() {}
 
-	virtual void init(float x, float y, int w, int h, std::string textureId, InitParams params);
+	virtual void init(float x, float y, int w, int h, std::string textureId, AnimationInitParams params);
 	virtual void update();
 	virtual void draw();
 	virtual void clean() {}

@@ -73,10 +73,10 @@ void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*
         uint8_t frames = e->IntAttribute("frames");
 
         Animation*drawable = static_cast<Animation*>(GameObjectFactory::instance()->create(type));
-        Animation::InitParams animationInitParams;
+        AnimationInitParams animationInitParams;
         animationInitParams.frames = frames;
         animationInitParams.speed = 4;
-        animationInitParams.type = Animation::EType::BOUNCE;
+        animationInitParams.type = EAnimationType::BOUNCE;
         drawable->init((float)x, (float)y, width, height, textureId, animationInitParams);
 
         gameObjects.push_back(drawable);
