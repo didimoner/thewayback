@@ -172,16 +172,26 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         int width = o->IntAttribute("width");
         int height = o->IntAttribute("height");
         std::string type = o->Attribute("type");
+        bool animated = getBoolProperty(o, "animated");
         std::string textureId = getStringProperty(o, "textureId");
-        uint8_t frames = getIntProperty(o, "frames");
 
-        Animation* drawable = static_cast<Animation*>(GameObjectFactory::instance()->create(type));
-        AnimationInitParams animationInitParams;
-        animationInitParams.frames = frames;
-        animationInitParams.speed = 4; // TODO: move outside
-        animationInitParams.type = EAnimationType::BOUNCE;
-        animationInitParams.defaltFrame = 1; // TODO: move outside
-        drawable->init((float)x, (float)y, width, height, textureId, animationInitParams);
+        Drawable* drawable = static_cast<Drawable*>(GameObjectFactory::instance()->create(type));
+
+        if (animated) {
+            AnimationInitParams animationInitParams;
+            animationInitParams.speed = getIntProperty(o, "animationSpeed");
+            animationInitParams.totalFrames = getIntProperty(o, "animationTotalFrames");
+            animationInitParams.defaultFrame = getIntProperty(o, "animationDefaultframe");
+            if (getStringProperty(o, "animationType") == "BOUNCE") {
+                animationInitParams.type = EAnimationType::BOUNCE;
+            } else {
+                animationInitParams.type = EAnimationType::NORMAL;
+            }
+
+            static_cast<Animation*>(drawable)->init((float)x, (float)y, width, height, textureId, animationInitParams);
+        } else {
+            drawable->init((float)x, (float)y, width, height, textureId);
+        }
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
             pLevel->m_pPlayer = static_cast<Player*>(drawable);
@@ -199,7 +209,7 @@ std::string LevelParser::getStringProperty(XMLElement* pElementRoot, std::string
         }
     }
 
-    Logger->warn("There is no property with name " + name);
+    Logger->warn("There is no string property of name " + name);
     return "";
 }
 
@@ -211,6 +221,18 @@ int LevelParser::getIntProperty(XMLElement* pElementRoot, std::string name) cons
         }
     }
 
-    Logger->warn("There is no property with name " + name);
+    Logger->warn("There is no int property of name " + name);
     return 0;
+}
+
+bool LevelParser::getBoolProperty(XMLElement* pElementRoot, std::string name) const {
+    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
+    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
+        if (p->Attribute("name") == name) {
+            return p->BoolAttribute("value");
+        }
+    }
+
+    Logger->warn("There is no bool property of name " + name);
+    return false;
 }

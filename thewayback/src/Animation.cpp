@@ -8,15 +8,15 @@ void Animation::init(float x, float y, int w, int h, std::string textureId, Anim
     Drawable::init(x, y, w, h, textureId);
     m_speed = params.speed;
     m_looped = params.looped;
-    m_defaultFrame = params.defaltFrame;
+    m_defaultFrame = params.defaultFrame;
 
-    for (int i = 0; i < params.frames; i++) {
-        m_frames.push_back(i);
+    for (int i = 0; i < params.totalFrames; i++) {
+        m_totalFrames.push_back(i);
     }
 
     if (params.type == EAnimationType::BOUNCE) {
-        for (int i = params.frames - 2; i > 0; i--) {
-            m_frames.push_back(i);
+        for (int i = params.totalFrames - 2; i > 0; i--) {
+            m_totalFrames.push_back(i);
         }
     }
 }
@@ -45,7 +45,7 @@ void Animation::pauseAnimation() {
 void Animation::stopAnimation() {
     m_state = Animation::EState::STOP;
     m_frameIndex = m_defaultFrame;
-    m_frame = m_frames[m_frameIndex];
+    m_frame = m_totalFrames[m_frameIndex];
     m_previousTick = 0;
 }
 
@@ -58,10 +58,10 @@ void Animation::updateState() {
     uint32_t elapsedTime = now - m_previousTick;
 
     if (elapsedTime >= 1000u / m_speed) {
-        if (m_frameIndex >= m_frames.size()) {
+        if (m_frameIndex >= m_totalFrames.size()) {
             m_frameIndex = 0;
         }
-        m_frame = m_frames[m_frameIndex++];
+        m_frame = m_totalFrames[m_frameIndex++];
         m_previousTick = now;
     }
 }

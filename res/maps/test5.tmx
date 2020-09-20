@@ -55,7 +55,11 @@
   </properties>
   <object id="19" name="player" type="player" x="324.708" y="411.438" width="32" height="32">
    <properties>
-    <property name="frames" value="3"/>
+    <property name="animated" type="bool" value="true"/>
+    <property name="animationDefaultFrame" type="int" value="1"/>
+    <property name="animationSpeed" type="int" value="4"/>
+    <property name="animationTotalFrames" type="int" value="3"/>
+    <property name="animationType" value="BOUNCE"/>
     <property name="textureId" value="player"/>
    </properties>
   </object>

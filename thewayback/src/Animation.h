@@ -6,8 +6,8 @@ enum class EAnimationType {
 };
 
 struct AnimationInitParams {
-	uint8_t frames = 0;
-	uint8_t defaltFrame = 0;
+	uint8_t totalFrames = 0;
+	uint8_t defaultFrame = 0;
 	uint16_t speed = 0;
 	EAnimationType type = EAnimationType::NORMAL;
 	bool looped = false;
@@ -21,12 +21,12 @@ private:
 	};
 
 private:
-	uint16_t m_speed = 1;
+	uint16_t m_speed = 0;
 	uint8_t m_defaultFrame = 0;
 	bool m_looped = false;
 
 	EState m_state = EState::STOP;
-	std::vector<uint8_t> m_frames;
+	std::vector<uint8_t> m_totalFrames;
 	uint32_t m_previousTick = 0;
 	size_t m_frameIndex = 0;
 

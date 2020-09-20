@@ -1,9 +1,9 @@
 #pragma once
 #include "tinyxml2.h"
+#include "Log.h"
 
 class Level;
 struct Tileset;
-class Log;
 
 using namespace tinyxml2;
 
@@ -22,7 +22,10 @@ private:
     void parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel);
     void parseObstacles(XMLElement* pRoot, Level* pLevel);
     void parseGameObjects(XMLElement* pRoot, Level* pLevel);
-
+        
     std::string getStringProperty(XMLElement* pElementRoot, std::string name) const;
     int getIntProperty(XMLElement* pElementRoot, std::string name) const;
+    bool getBoolProperty(XMLElement* pElementRoot, std::string name) const;
+
 };
+

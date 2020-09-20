@@ -61,6 +61,7 @@ void StateParser::parseTextures(XMLElement* pTexturesRoot) {
     }
 }
 
+// TODO: refactor
 void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*> &gameObjects) {
     for (XMLElement* e = pObjectsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         std::string type = e->Attribute("type");
@@ -74,7 +75,7 @@ void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*
 
         Animation*drawable = static_cast<Animation*>(GameObjectFactory::instance()->create(type));
         AnimationInitParams animationInitParams;
-        animationInitParams.frames = frames;
+        animationInitParams.totalFrames = frames;
         animationInitParams.speed = 4;
         animationInitParams.type = EAnimationType::BOUNCE;
         drawable->init((float)x, (float)y, width, height, textureId, animationInitParams);
