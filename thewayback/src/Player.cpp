@@ -3,6 +3,9 @@
 #include "InputHandler.h"
 #include "ECollisionType.h"
 #include "Log.h"
+#include "Game.h"
+#include "GameState.h"
+#include "Camera.h"
 
 Log* Player::Logger = new Log(typeid(Player).name());
 
@@ -22,10 +25,14 @@ void Player::clean() {
 }
 
 void Player::onCollide(ECollisionType type, std::string objectId) {
+	Camera* pCamera = Game::instance()->getCurrentState()->getCamera();
+
 	switch (type) {
 		case ECollisionType::PLAYER_OBSTACLE: {
 			m_acceleration.set(0, 0);
 			m_position -= m_velocity;
+
+			pCamera->setPosition(pCamera->getPosition() - pCamera->getVelocity());
 		}
 	}
 }
@@ -51,25 +58,31 @@ void Player::handleKeyboardInput() {
 }
 
 void Player::updatePlayerState() {
+	Camera* pCamera = Game::instance()->getCurrentState()->getCamera();
 	switch (m_playerState) {
 		case EPlayerState::MOVING_UP:
 			m_velocity.setY(-1.f);
+			pCamera->setVelocity(0, -1.f);
 			m_row = 3;
 			break;
 		case EPlayerState::MOVING_RIGHT:
 			m_velocity.setX(1.f);
+			pCamera->setVelocity(1.f, 0);
 			m_row = 2;
 			break;
 		case EPlayerState::MOVING_DOWN:
 			m_velocity.setY(1.f);
+			pCamera->setVelocity(0, 1.f);
 			m_row = 0;
 			break;
 		case EPlayerState::MOVING_LEFT:
 			m_velocity.setX(-1.f);
+			pCamera->setVelocity(-1.f, 0);
 			m_row = 1;
 			break;
 		case EPlayerState::IDLE:
 			m_velocity.set(0, 0);
+			pCamera->setVelocity(0, 0);
 			break;
 	}
 

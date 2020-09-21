@@ -46,6 +46,6 @@ public:
 	int getWindowHeight() const;
 
 	SDL_Renderer* getRenderer() const;
-	const GameState* const getCurrentState() const;
+	GameState* const getCurrentState() const;
 
 };

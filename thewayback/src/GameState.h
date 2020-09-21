@@ -11,7 +11,7 @@ protected:
     Camera m_camera;
 
 public:
-    Vector2f getCameraPosition() const { return m_camera.getPosition(); }
+    Camera* getCamera() { return &m_camera; }
 
     virtual void update() = 0;
     virtual void draw() = 0;

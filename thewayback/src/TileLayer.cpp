@@ -19,33 +19,30 @@ void TileLayer::draw() {
         Logger->warn("Tile data is empty, nothing to draw. Layer: " + m_name);
         return;
     }
-    
-    unsigned rows = m_tileIds.size();
-    unsigned cols = m_tileIds.back().size();
 
-    for (unsigned row = 0; row < m_tileIds.size(); row++) {
-        for (unsigned column = 0; column < m_tileIds[row].size(); column++) {
+    for (uint32_t row = 0; row < m_tileIds.size(); row++) {
+        for (uint32_t column = 0; column < m_tileIds[row].size(); column++) {
             unsigned tileId = m_tileIds[row][column];
             if (tileId == 0) {
                 continue;
             }
 
-            unsigned tilesetIndex = findTilesetIndex(tileId);
+            int tilesetIndex = findTilesetIndex(tileId);
             if (tilesetIndex == -1) {
                 Logger->warn("Tile ID out of tilesets' bounds: " + tileId);
                 continue;
             }
 
             Tileset tileset = m_tilesets[tilesetIndex];
-            Vector2f cameraPos = Game::instance()->getCurrentState()->getCameraPosition();
+            Vector2f cameraPos = Game::instance()->getCurrentState()->getCamera()->getPosition();
             Vector2f bottomCameraPos(cameraPos.getX() + Game::instance()->getWindowWidth(), 
                 cameraPos.getY() + Game::instance()->getWindowHeight());
-            int safeOffset = 1;
+            int safeOffset = 2;
 
-            bool topPosCheck = row - safeOffset < cameraPos.getY() / tileset.tileHeight 
-                || column - safeOffset < cameraPos.getX() / tileset.tileWidth;
-            bool botPosCheck = row + safeOffset > bottomCameraPos.getY() / tileset.tileWidth
-                || column + safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
+            bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight 
+                || column + safeOffset < cameraPos.getX() / tileset.tileWidth;
+            bool botPosCheck = (int)row - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
+                || (int)column - safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
 
             if (topPosCheck || botPosCheck) {
                 continue;
@@ -63,7 +60,7 @@ void TileLayer::draw() {
     }
 }
 
-unsigned TileLayer::findTilesetIndex(unsigned tileId) const {
+int TileLayer::findTilesetIndex(unsigned tileId) const {
     for (unsigned i = 0; i < m_tilesets.size(); i++) {
         if (tileId < m_tilesets[i].firstGlobalId + m_tilesets[i].tileCount) {
             return i;

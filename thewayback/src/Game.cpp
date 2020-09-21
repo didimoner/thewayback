@@ -80,6 +80,6 @@ SDL_Renderer* Game::getRenderer() const {
 	return m_pRenderer;
 }
 
-const GameState* const Game::getCurrentState() const {
+GameState* const Game::getCurrentState() const {
 	return m_pGameStateMachine->getCurrentState();
 }

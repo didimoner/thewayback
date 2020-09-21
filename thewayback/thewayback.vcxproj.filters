@@ -89,9 +89,6 @@
     <ClCompile Include="src\LevelParser.cpp">
       <Filter>Game\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\FontManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>

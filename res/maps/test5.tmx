@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="120">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="121">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -53,7 +53,7 @@
   <properties>
    <property name="type" value="game_objects"/>
   </properties>
-  <object id="19" name="player" type="player" x="324.708" y="411.438" width="32" height="32">
+  <object id="19" name="player" type="player" x="191.708" y="255.438" width="32" height="32">
    <properties>
     <property name="animated" type="bool" value="true"/>
     <property name="animationDefaultFrame" type="int" value="1"/>

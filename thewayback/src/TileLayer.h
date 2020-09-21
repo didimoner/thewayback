@@ -31,7 +31,7 @@ public:
     }
 
 private:
-    unsigned findTilesetIndex(unsigned tileId) const;
+    int findTilesetIndex(unsigned tileId) const;
 
 };
 

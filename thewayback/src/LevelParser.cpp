@@ -181,7 +181,7 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
             AnimationInitParams animationInitParams;
             animationInitParams.speed = getIntProperty(o, "animationSpeed");
             animationInitParams.totalFrames = getIntProperty(o, "animationTotalFrames");
-            animationInitParams.defaultFrame = getIntProperty(o, "animationDefaultframe");
+            animationInitParams.defaultFrame = getIntProperty(o, "animationDefaultFrame");
             if (getStringProperty(o, "animationType") == "BOUNCE") {
                 animationInitParams.type = EAnimationType::BOUNCE;
             } else {
