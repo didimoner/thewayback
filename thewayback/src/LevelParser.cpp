@@ -6,6 +6,7 @@
 #include "SystemUtils.h"
 #include "TextureManager.h"
 #include "Game.h"
+#include "GameState.h"
 #include "Level.h"
 #include "Tileset.h"
 #include "Log.h"
@@ -195,6 +196,7 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
             pLevel->m_pPlayer = static_cast<Player*>(drawable);
+            Game::instance()->getCurrentState()->getCamera()->setGameObject(pLevel->m_pPlayer);
         }
 
         // todo: other game object types

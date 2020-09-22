@@ -31,5 +31,13 @@ public:
 	Vector2f getPosition() const {
 		return m_position;
 	}
+
+	int getWidth() const {
+		return m_width;
+	}
+	int getHeight() const {
+		return m_height;
+	}
+
 };
 

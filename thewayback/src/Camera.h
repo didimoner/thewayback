@@ -1,33 +1,34 @@
 #pragma once
 #include "pch.h"
 #include "Vector2f.h"
+#include "GameObject.h"
+#include "Game.h"
 
 class Camera {
 
 private:
     Vector2f m_position;
-    Vector2f m_velocity;
+    const GameObject* m_pGameObject;
 
 public:
     Vector2f getPosition() const {
         return m_position;
     }
-    void setPosition(Vector2f position) {
-        m_position = position;
-    }
-    void setPosition(float x, float y) {
-        m_position.set(x, y);
-    }
-
-    Vector2f getVelocity() const {
-        return m_velocity;
-    }
-    void setVelocity(float x, float y) {
-        m_velocity.set(x, y);
+    
+    void setGameObject(const GameObject* pGameObject) {
+        m_pGameObject = pGameObject;
     }
 
     void update() {
-        m_position += m_velocity;
+        if (m_pGameObject != nullptr) {
+            float x = m_pGameObject->getPosition().getX() 
+                - (float)(Game::instance()->getWindowWidth() - m_pGameObject->getWidth()) / 2;
+            float y = m_pGameObject->getPosition().getY() 
+                - (float)(Game::instance()->getWindowHeight() - m_pGameObject->getHeight()) / 2;
+
+            m_position.set(x, y);
+        }
     }
+
 };
 

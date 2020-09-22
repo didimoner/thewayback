@@ -9,8 +9,8 @@ Log* PlayState::Logger = new Log(typeid(PlayState).name());
 const std::string PlayState::s_stateId = "PLAY_STATE";
 
 void PlayState::update() {
-    m_camera.update();
     m_pLevel->update();
+    m_camera.update();
 }
 
 void PlayState::draw() {
@@ -19,8 +19,6 @@ void PlayState::draw() {
 
 void PlayState::onActivate() {
     Logger->debug("Play activated");
-
-    m_camera.setPosition(0, 0);
 
     StateParser stateParser;
     std::vector<GameObject*> gameObjects;
