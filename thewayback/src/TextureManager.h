@@ -34,7 +34,7 @@ public:
 		SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	void drawFrame(std::string textureId, float x, float y, int width, int height,
-		unsigned currentRow, unsigned currentFrame,
+		uint32_t currentRow, uint32_t currentFrame,
 		SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 };

@@ -35,7 +35,7 @@ public:
     void createTexture(std::string fontId, std::string textureId, 
         std::string text, SDL_Color color, SDL_Renderer* pRenderer);
     void createMultilineTexture(std::string fontId, std::string textureId,
-        std::string text, unsigned lineWidth, SDL_Color color, SDL_Renderer* pRenderer);
+        std::string text, uint32_t lineWidth, SDL_Color color, SDL_Renderer* pRenderer);
 
     void removeTexture(std::string textureId);
 

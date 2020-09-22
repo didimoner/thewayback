@@ -6,7 +6,6 @@
 #include "SystemUtils.h"
 #include "TextureManager.h"
 #include "Game.h"
-#include "GameState.h"
 #include "Level.h"
 #include "Tileset.h"
 #include "Log.h"
@@ -99,7 +98,7 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
 
         std::string decodedData = base64_decode(textData);
         uLongf allTilesSize = pLevel->m_width * pLevel->m_height * sizeof(int);
-        std::vector<unsigned> uncompressedTileIds(allTilesSize);
+        std::vector<uint32_t> uncompressedTileIds(allTilesSize);
 
         int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize, 
             (const Bytef*)decodedData.c_str(), decodedData.size());
@@ -107,13 +106,13 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
             Logger->warn("Something wrong with zlib uncpompression. Code: " + uncompressStatus);
         }
 
-        std::vector<std::vector<unsigned>> tileIds;
-        for (unsigned i = 0; i < pLevel->m_height; i++) {
-            tileIds.push_back(std::vector<unsigned>(pLevel->m_width));
+        std::vector<std::vector<uint32_t>> tileIds;
+        for (uint32_t i = 0; i < pLevel->m_height; i++) {
+            tileIds.push_back(std::vector<uint32_t>(pLevel->m_width));
         }
 
-        for (unsigned row = 0; row < pLevel->m_height; row++) {
-            for (unsigned column = 0; column < pLevel->m_width; column++) {
+        for (uint32_t row = 0; row < pLevel->m_height; row++) {
+            for (uint32_t column = 0; column < pLevel->m_width; column++) {
                 tileIds[row][column] = uncompressedTileIds[row * pLevel->m_width + column];
             }
         }
@@ -196,7 +195,6 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
             pLevel->m_pPlayer = static_cast<Player*>(drawable);
-            Game::instance()->getCurrentState()->getCamera()->setGameObject(pLevel->m_pPlayer);
         }
 
         // todo: other game object types

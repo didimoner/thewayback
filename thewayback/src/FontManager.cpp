@@ -58,7 +58,7 @@ void FontManager::createTexture(std::string fontId, std::string textureId,
 }
 
 void FontManager::createMultilineTexture(std::string fontId, std::string textureId,
-    std::string text, unsigned lineWidth, SDL_Color color, SDL_Renderer* pRenderer) {
+    std::string text, uint32_t lineWidth, SDL_Color color, SDL_Renderer* pRenderer) {
     Logger->debug("Creating multiline texture " + textureId + " from font " + fontId 
         + " with line width " +std::to_string(lineWidth));
     TTF_Font* pFont = m_fonts[fontId];

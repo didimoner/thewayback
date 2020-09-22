@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Drawable.cpp" />
     <ClCompile Include="src\FontManager.cpp" />

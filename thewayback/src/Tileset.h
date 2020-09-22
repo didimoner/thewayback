@@ -2,10 +2,10 @@
 #include "pch.h"
 
 struct Tileset {
-    unsigned int tileCount;
-    unsigned int columns;
-    unsigned short firstGlobalId;
-    unsigned short tileWidth;
-    unsigned short tileHeight;
+    uint32_t tileCount;
+    uint32_t columns;
+    uint16_t firstGlobalId;
+    uint16_t tileWidth;
+    uint16_t tileHeight;
     std::string name;
 };

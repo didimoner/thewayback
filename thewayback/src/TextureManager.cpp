@@ -72,7 +72,7 @@ void TextureManager::draw(std::string textureId, float x, float y, int width, in
 }
 
 void TextureManager::drawFrame(std::string textureId, float x, float y, int width, int height,
-        unsigned currentRow, unsigned currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
+    uint32_t currentRow, uint32_t currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger->warn("Texture not found in the map: " + textureId);

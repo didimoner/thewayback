@@ -12,10 +12,10 @@ private:
     friend class LevelParser;
     Level() {}
 
-    unsigned int m_width = 0;
-    unsigned int m_height = 0;
-    unsigned short m_tileWidth= 0;
-    unsigned short m_tileHeight = 0;
+    uint32_t m_width = 0;
+    uint32_t m_height = 0;
+    uint16_t m_tileWidth = 0;
+    uint16_t m_tileHeight = 0;
 
     Player* m_pPlayer = nullptr;
 
@@ -34,6 +34,16 @@ public:
     }
     std::vector<ObstacleLayer*>* const getObstacleLayers() {
         return &m_obstacleLayers;
+    }
+
+    uint32_t getWidthPx() {
+        return m_width * m_tileWidth;
+    }
+    uint32_t getHeightPx() {
+        return m_height * m_tileHeight;
+    }
+    const Player* getPlayer() const {
+        return m_pPlayer;
     }
 
     void update();

@@ -68,11 +68,11 @@ bool Game::isRunning() const {
 	return m_running;
 }
 
-int Game::getWindowWidth() const {
+uint16_t Game::getWindowWidth() const {
 	return m_windowWidth;
 }
 
-int Game::getWindowHeight() const {
+uint16_t Game::getWindowHeight() const {
 	return m_windowHeight;
 }
 

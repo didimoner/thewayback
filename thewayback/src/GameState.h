@@ -8,10 +8,10 @@ class Vector2f;
 class GameState {
 
 protected:
-    Camera m_camera;
+    Camera* m_pCamera = nullptr;
 
 public:
-    Camera* getCamera() { return &m_camera; }
+    Camera* getCamera() { return m_pCamera; }
 
     virtual void update() = 0;
     virtual void draw() = 0;

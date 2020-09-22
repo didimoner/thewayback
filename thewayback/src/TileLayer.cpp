@@ -22,7 +22,7 @@ void TileLayer::draw() {
 
     for (uint32_t row = 0; row < m_tileIds.size(); row++) {
         for (uint32_t column = 0; column < m_tileIds[row].size(); column++) {
-            unsigned tileId = m_tileIds[row][column];
+            uint32_t tileId = m_tileIds[row][column];
             if (tileId == 0) {
                 continue;
             }
@@ -48,11 +48,11 @@ void TileLayer::draw() {
                 continue;
             }
 
-            unsigned localTileId = tileId - tileset.firstGlobalId;
+            uint32_t localTileId = tileId - tileset.firstGlobalId;
             float x = (float) (column * tileset.tileWidth);
             float y = (float) (row * tileset.tileHeight);
-            unsigned tilesetRow = localTileId / tileset.columns;
-            unsigned tilesetColumn = localTileId % tileset.columns;
+            uint32_t tilesetRow = localTileId / tileset.columns;
+            uint32_t tilesetColumn = localTileId % tileset.columns;
 
             TextureManager::instance()->drawFrame(tileset.name, x - cameraPos.getX(), y - cameraPos.getY(), 
                 tileset.tileWidth, tileset.tileHeight, tilesetRow, tilesetColumn, Game::instance()->getRenderer());
@@ -60,8 +60,8 @@ void TileLayer::draw() {
     }
 }
 
-int TileLayer::findTilesetIndex(unsigned tileId) const {
-    for (unsigned i = 0; i < m_tilesets.size(); i++) {
+int TileLayer::findTilesetIndex(uint32_t tileId) const {
+    for (uint32_t i = 0; i < m_tilesets.size(); i++) {
         if (tileId < m_tilesets[i].firstGlobalId + m_tilesets[i].tileCount) {
             return i;
         }

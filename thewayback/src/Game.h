@@ -17,8 +17,8 @@ private:
 	GameStateMachine* m_pGameStateMachine = nullptr;
 
 	bool m_running = false;
-	int m_windowWidth = 0;
-	int m_windowHeight = 0;
+	uint16_t m_windowWidth = 0;
+	uint16_t m_windowHeight = 0;
 
 public:
 	Game(const Game&) = delete;
@@ -42,8 +42,8 @@ public:
 	void quit();
 
 	bool isRunning() const;
-	int getWindowWidth() const;
-	int getWindowHeight() const;
+	uint16_t getWindowWidth() const;
+	uint16_t getWindowHeight() const;
 
 	SDL_Renderer* getRenderer() const;
 	GameState* const getCurrentState() const;

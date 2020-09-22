@@ -53,7 +53,7 @@
   <properties>
    <property name="type" value="game_objects"/>
   </properties>
-  <object id="19" name="player" type="player" x="191.708" y="255.438" width="32" height="32">
+  <object id="19" name="player" type="player" x="1170.71" y="541.438" width="32" height="32">
    <properties>
     <property name="animated" type="bool" value="true"/>
     <property name="animationDefaultFrame" type="int" value="1"/>
