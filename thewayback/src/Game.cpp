@@ -27,11 +27,12 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
 		return false;
 	}
 
-	m_pGameStateMachine = pGameStateMachine;
-	m_pGameStateMachine->pushState(pInitialState);
 	m_running = true;
 	m_windowWidth = width;
 	m_windowHeight = height;
+
+	m_pGameStateMachine = pGameStateMachine;
+	m_pGameStateMachine->pushState(pInitialState);
 	return true;
 }
 

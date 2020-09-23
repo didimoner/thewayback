@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "Camera.h"
 
-Camera::Camera(const GameObject* pTrackedObject, uint32_t levelWidth, uint32_t levelHeight) {
+Camera::Camera(const GameObject* pTrackedObject, uint16_t width, uint16_t height,
+        uint32_t levelWidth, uint32_t levelHeight) {
     m_pTrackedObject = pTrackedObject;
+    m_width = width;
+    m_height = height;
     m_levelWidth = levelWidth;
     m_levelHeight = levelHeight;
 }
@@ -12,21 +15,18 @@ void Camera::update() {
         return;
     }
 
-    uint16_t windowWidth = Game::instance()->getWindowWidth();
-    uint16_t windowHeight = Game::instance()->getWindowHeight();
-
-    float x = m_pTrackedObject->getPosition().getX() - (float)(windowWidth - m_pTrackedObject->getWidth()) / 2;
+    float x = m_pTrackedObject->getPosition().getX() - (float)(m_width - m_pTrackedObject->getWidth()) / 2;
     if (x < 0) {
         x = 0;
-    } else if (x + windowWidth > m_levelWidth) {
-        x = (float)m_levelWidth - windowWidth;
+    } else if (x + m_width > m_levelWidth) {
+        x = (float)m_levelWidth - m_width;
     }
 
-    float y = m_pTrackedObject->getPosition().getY() - (float)(windowHeight - m_pTrackedObject->getHeight()) / 2;
+    float y = m_pTrackedObject->getPosition().getY() - (float)(m_height - m_pTrackedObject->getHeight()) / 2;
     if (y < 0) {
         y = 0;
-    } else if (y + windowHeight > m_levelHeight) {
-        y = (float)m_levelHeight - windowHeight;
+    } else if (y + m_height > m_levelHeight) {
+        y = (float)m_levelHeight - m_height;
     }
 
     m_position.set(x, y);

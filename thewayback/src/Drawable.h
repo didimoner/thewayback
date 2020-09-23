@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
+// TODO: Sprite
 class Drawable : public GameObject {
 
 protected:

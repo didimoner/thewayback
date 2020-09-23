@@ -55,21 +55,23 @@ void Player::handleKeyboardInput() {
 }
 
 void Player::updatePlayerState() {
+	float speed = 3.f;
+
 	switch (m_playerState) {
 		case EPlayerState::MOVING_UP:
-			m_velocity.setY(-1.f);
+			m_velocity.setY(-1 * speed);
 			m_row = 3;
 			break;
 		case EPlayerState::MOVING_RIGHT:
-			m_velocity.setX(1.f);
+			m_velocity.setX(speed);
 			m_row = 2;
 			break;
 		case EPlayerState::MOVING_DOWN:
-			m_velocity.setY(1.f);
+			m_velocity.setY(speed);
 			m_row = 0;
 			break;
 		case EPlayerState::MOVING_LEFT:
-			m_velocity.setX(-1.f);
+			m_velocity.setX(-1 * speed);
 			m_row = 1;
 			break;
 		case EPlayerState::IDLE:
