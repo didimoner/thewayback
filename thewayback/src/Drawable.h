@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 // TODO: Sprite
-class Drawable : public GameObject {
+class Sprite : public GameObject {
 
 protected:
 	uint8_t m_row = 0;
@@ -10,8 +10,8 @@ protected:
 	std::string m_textureId;
 
 public:
-	Drawable() : GameObject() {}
-	virtual ~Drawable() {}
+	Sprite() : GameObject() {}
+	virtual ~Sprite() {}
 
 	virtual void init(float x, float y, int w, int h, std::string textureId);
 	virtual void update();

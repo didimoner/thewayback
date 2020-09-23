@@ -16,11 +16,11 @@ void Player::update() {
 }
 
 void Player::draw() {
-	Drawable::draw();
+	Sprite::draw();
 }
 
 void Player::clean() {
-	Drawable::clean();
+	Sprite::clean();
 }
 
 void Player::onCollide(ECollisionType type, std::string objectId) {

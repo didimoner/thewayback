@@ -5,7 +5,7 @@
 #include "Log.h"
 
 void Animation::init(float x, float y, int w, int h, std::string textureId, AnimationInitParams params) {
-    Drawable::init(x, y, w, h, textureId);
+    Sprite::init(x, y, w, h, textureId);
     m_speed = params.speed;
     m_looped = params.looped;
     m_defaultFrame = params.defaultFrame;
@@ -22,7 +22,7 @@ void Animation::init(float x, float y, int w, int h, std::string textureId, Anim
 }
 
 void Animation::update() {
-    Drawable::update();
+    Sprite::update();
 
     if (m_state == Animation::EState::PLAY) {
         updateState();
@@ -30,7 +30,7 @@ void Animation::update() {
 }
 
 void Animation::draw() {
-    Drawable::draw();
+    Sprite::draw();
 }
 
 void Animation::playAnimation() {

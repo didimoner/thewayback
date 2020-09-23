@@ -175,7 +175,7 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         bool animated = getBoolProperty(o, "animated");
         std::string textureId = getStringProperty(o, "textureId");
 
-        Drawable* drawable = static_cast<Drawable*>(GameObjectFactory::instance()->create(type));
+        Sprite* sprite = static_cast<Sprite*>(GameObjectFactory::instance()->create(type));
 
         if (animated) {
             AnimationInitParams animationInitParams;
@@ -188,13 +188,13 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
                 animationInitParams.type = EAnimationType::NORMAL;
             }
 
-            static_cast<Animation*>(drawable)->init((float)x, (float)y, width, height, textureId, animationInitParams);
+            static_cast<Animation*>(sprite)->init((float)x, (float)y, width, height, textureId, animationInitParams);
         } else {
-            drawable->init((float)x, (float)y, width, height, textureId);
+            sprite->init((float)x, (float)y, width, height, textureId);
         }
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
-            pLevel->m_pPlayer = static_cast<Player*>(drawable);
+            pLevel->m_pPlayer = static_cast<Player*>(sprite);
         }
 
         // todo: other game object types

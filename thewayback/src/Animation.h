@@ -13,7 +13,7 @@ struct AnimationInitParams {
 	bool looped = false;
 };
 
-class Animation : public Drawable {
+class Animation : public Sprite {
 
 private:
 	enum class EState {
@@ -31,7 +31,7 @@ private:
 	size_t m_frameIndex = 0;
 
 public:
-	Animation() : Drawable() {}
+	Animation() : Sprite() {}
 	virtual ~Animation() {}
 
 	virtual void init(float x, float y, int w, int h, std::string textureId, AnimationInitParams params);

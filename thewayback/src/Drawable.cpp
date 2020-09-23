@@ -5,16 +5,16 @@
 #include "TextureManager.h"
 #include "GameState.h"
 
-void Drawable::init(float x, float y, int w, int h, std::string textureId) {
+void Sprite::init(float x, float y, int w, int h, std::string textureId) {
 	GameObject::init(x, y, w, h);
 	m_textureId = textureId;
 }
 
-void Drawable::update() {
+void Sprite::update() {
 	GameObject::update();
 }
 
-void Drawable::draw() {
+void Sprite::draw() {
 	Vector2f cameraPos = Game::instance()->getCurrentState()->getCamera()->getPosition();
 	TextureManager::instance()->drawFrame(m_textureId,
 		m_position.getX() - cameraPos.getX(), m_position.getY() - cameraPos.getY(),
