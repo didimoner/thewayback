@@ -1,7 +1,7 @@
 #pragma once
-#include "Animation.h"
 #include "Collidable.h"
 #include "GameObjectCreator.h"
+#include "Animation.h"
 
 class Log;
 
@@ -20,9 +20,7 @@ private:
 	static Log* Logger;
 
 public:
-	Player() : Animation() {
-		m_objectId = "Player";
-	}
+	Player();
 	~Player() {}
 
 	void update();

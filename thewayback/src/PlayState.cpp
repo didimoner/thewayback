@@ -42,3 +42,7 @@ bool PlayState::onDeactivate() {
     Logger->debug("Play deactivated");
     return false;
 }
+
+std::string PlayState::getStateId() const {
+    return s_stateId;
+}

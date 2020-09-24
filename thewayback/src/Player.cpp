@@ -8,6 +8,10 @@
 
 Log* Player::Logger = new Log(typeid(Player).name());
 
+Player::Player() : Animation() {
+	m_objectId = "Player";
+}
+
 void Player::update() {
 	handleKeyboardInput();
 	updatePlayerState();

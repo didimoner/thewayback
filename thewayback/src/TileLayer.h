@@ -20,15 +20,9 @@ public:
     void update();
     void draw();
 
-    void setId(uint16_t id) {
-        this->m_id = id;
-    }
-    void setName(std::string name) {
-        this->m_name = name;
-    }
-    void setTileIds(const std::vector<std::vector<uint32_t>>& data) {
-        m_tileIds = data;
-    }
+    void setId(uint16_t id);
+    void setName(std::string name);
+    void setTileIds(const std::vector<std::vector<uint32_t>>& data);
 
 private:
     int findTilesetIndex(uint32_t tileId) const;

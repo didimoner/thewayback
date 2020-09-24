@@ -26,3 +26,7 @@ bool SplashState::onDeactivate() {
     Logger->debug("Splash deactivated");
     return false;
 }
+
+std::string SplashState::getStateId() const {
+    return s_stateId;
+}

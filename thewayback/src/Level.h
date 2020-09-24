@@ -26,25 +26,13 @@ private:
 public:
     ~Level();
 
-    std::vector<Tileset>* const getTilesets() {
-        return &m_tilesets;
-    }
-    std::vector<TileLayer*>* const getTileLayers() {
-        return &m_tileLayers;
-    }
-    std::vector<ObstacleLayer*>* const getObstacleLayers() {
-        return &m_obstacleLayers;
-    }
+    std::vector<Tileset>* const getTilesets();
+    std::vector<TileLayer*>* const getTileLayers();
+    std::vector<ObstacleLayer*>* const getObstacleLayers();
 
-    uint32_t getWidthPx() {
-        return m_width * m_tileWidth;
-    }
-    uint32_t getHeightPx() {
-        return m_height * m_tileHeight;
-    }
-    const Player* getPlayer() const {
-        return m_pPlayer;
-    }
+    uint32_t getWidthPx() const;
+    uint32_t getHeightPx() const;
+    const Player* getPlayer() const;
 
     void update();
     void draw();

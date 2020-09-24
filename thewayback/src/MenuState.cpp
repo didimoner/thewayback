@@ -39,3 +39,7 @@ bool MenuState::onDeactivate() {
     Logger->debug("Menu deactivated");
     return true;
 }
+
+std::string MenuState::getStateId() const {
+    return s_stateId;
+}

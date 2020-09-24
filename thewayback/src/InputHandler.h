@@ -35,8 +35,8 @@ public:
 	void clean();
 
 	bool isKeyPressed(SDL_Scancode key) const;
-	bool isMouseButtonPressed(MouseButton button) const { return m_mouseButtonStates[button]; }
-	const Vector2f* const getMousePosition() const { return m_pMousePosition; }
+	bool isMouseButtonPressed(MouseButton button) const;
+	const Vector2f* const getMousePosition() const;
 
 private:
 	void onMouseMove(SDL_Event& event);

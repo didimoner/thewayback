@@ -19,9 +19,7 @@ public:
     virtual void onActivate();
     virtual bool onDeactivate();
 
-    virtual std::string getStateId() const {
-        return s_stateId;
-    }
+    virtual std::string getStateId() const;
 
 };
 

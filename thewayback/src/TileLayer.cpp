@@ -71,6 +71,18 @@ void TileLayer::draw() {
     }
 }
 
+void TileLayer::setId(uint16_t id) {
+    this->m_id = id;
+}
+
+void TileLayer::setName(std::string name) {
+    this->m_name = name;
+}
+
+void TileLayer::setTileIds(const std::vector<std::vector<uint32_t>>& data) {
+    m_tileIds = data;
+}
+
 int TileLayer::findTilesetIndex(uint32_t tileId) const {
     for (uint32_t i = 0; i < m_tilesets.size(); i++) {
         if (tileId < m_tilesets[i].firstGlobalId + m_tilesets[i].tileCount) {

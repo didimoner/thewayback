@@ -19,9 +19,7 @@ public:
     void onActivate();
     bool onDeactivate();
 
-    std::string getStateId() const {
-        return s_stateId;
-    }
+    std::string getStateId() const;
 
 };
 

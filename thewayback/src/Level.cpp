@@ -21,6 +21,30 @@ Level::~Level() {
     m_obstacleLayers.clear();
 }
 
+std::vector<Tileset>* const Level::getTilesets() {
+    return &m_tilesets;
+}
+
+std::vector<TileLayer*>* const Level::getTileLayers() {
+    return &m_tileLayers;
+}
+
+std::vector<ObstacleLayer*>* const Level::getObstacleLayers() {
+    return &m_obstacleLayers;
+}
+
+uint32_t Level::getWidthPx() const {
+    return m_width * m_tileWidth;
+}
+
+uint32_t Level::getHeightPx() const {
+    return m_height * m_tileHeight;
+}
+
+const Player* Level::getPlayer() const {
+    return m_pPlayer;
+}
+
 void Level::update() {
     for (TileLayer* pLayer : m_tileLayers) {
         pLayer->update();

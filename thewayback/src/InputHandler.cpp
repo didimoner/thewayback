@@ -89,6 +89,10 @@ bool InputHandler::isKeyPressed(SDL_Scancode key) const {
 	return m_keystates[key] == 1;
 }
 
+bool InputHandler::isMouseButtonPressed(MouseButton button) const { return m_mouseButtonStates[button]; }
+
+const Vector2f* const InputHandler::getMousePosition() const { return m_pMousePosition; }
+
 void InputHandler::clean() {
 
 }
