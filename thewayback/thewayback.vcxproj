@@ -165,7 +165,7 @@
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Animation.cpp" />
-    <ClCompile Include="src\Drawable.cpp" />
+    <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\FontManager.cpp" />
     <ClCompile Include="src\LevelParser.cpp" />
     <ClCompile Include="src\ObstacleLayer.cpp" />
@@ -206,7 +206,7 @@
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Collidable.h" />
     <ClInclude Include="src\Collision.h" />
-    <ClInclude Include="src\Drawable.h" />
+    <ClInclude Include="src\Sprite.h" />
     <ClInclude Include="src\ECollisionType.h" />
     <ClInclude Include="src\FontManager.h" />
     <ClInclude Include="src\GameObjectFactory.h" />

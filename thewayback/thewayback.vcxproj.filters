@@ -101,14 +101,14 @@
     <ClCompile Include="src\ObstacleLayer.cpp">
       <Filter>Game\Map\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="src\Drawable.cpp">
-      <Filter>Engine\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="src\Animation.cpp">
       <Filter>Engine\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite.cpp">
+      <Filter>Engine\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,10 +209,10 @@
     <ClInclude Include="src\Obstacle.h">
       <Filter>Game\Map</Filter>
     </ClInclude>
-    <ClInclude Include="src\Drawable.h">
+    <ClInclude Include="src\Animation.h">
       <Filter>Engine\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="src\Animation.h">
+    <ClInclude Include="src\Sprite.h">
       <Filter>Engine\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

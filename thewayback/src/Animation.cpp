@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Animation.h"
-#include "Drawable.h"
+#include "Sprite.h"
 #include <SDL_timer.h>
 #include "Log.h"
 

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Drawable.h"
+#include "Sprite.h"
 #include "GameObject.h"
 #include "Game.h"
 #include "TextureManager.h"

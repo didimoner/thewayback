@@ -1,5 +1,5 @@
 #pragma once
-#include "Drawable.h"
+#include "Sprite.h"
 
 enum class EAnimationType {
 	NORMAL, BOUNCE
