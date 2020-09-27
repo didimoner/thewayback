@@ -6,7 +6,7 @@
 #include "GameState.h"
 #include "Tileset.h"
 
-Log* TileLayer::Logger = new Log(typeid(TileLayer).name());
+std::unique_ptr<Log> TileLayer::Logger = std::make_unique<Log>(typeid(TileLayer).name());
 
 TileLayer::TileLayer(const std::vector<Tileset>& tilesets) : m_tilesets(tilesets) {
 }
@@ -34,7 +34,7 @@ void TileLayer::draw() {
             }
 
             Tileset tileset = m_tilesets[tilesetIndex];
-            const Camera* pCamera = Game::instance()->getCurrentState()->getCamera();
+            const Camera* pCamera = Game::instance().getCurrentState()->getCamera();
             Vector2f cameraPos = pCamera->getPosition();
             Vector2f bottomCameraPos(
                 cameraPos.getX() + pCamera->getWidth(), 
@@ -57,7 +57,7 @@ void TileLayer::draw() {
             uint32_t tilesetRow = localTileId / tileset.columns;
             uint32_t tilesetColumn = localTileId % tileset.columns;
 
-            TextureManager::instance()->drawFrame(
+            TextureManager::instance().drawFrame(
                 tileset.name, 
                 x - cameraPos.getX(), 
                 y - cameraPos.getY(), 
@@ -65,7 +65,7 @@ void TileLayer::draw() {
                 tileset.tileHeight, 
                 tilesetRow, 
                 tilesetColumn, 
-                Game::instance()->getRenderer()
+                Game::instance().getRenderer()
             );
         }
     }

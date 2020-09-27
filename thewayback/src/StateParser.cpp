@@ -7,7 +7,7 @@
 #include "Log.h"
 #include "Animation.h"
 
-Log* StateParser::Logger = new Log(typeid(StateParser).name());
+std::unique_ptr<Log> StateParser::Logger = std::make_unique<Log>(typeid(StateParser).name());
 
 bool StateParser::parse(std::string filename, std::string stateId, std::vector<GameObject*>& gameObjects) {
     Logger->debug("Loading state " + stateId + " from " + filename);
@@ -57,7 +57,7 @@ void StateParser::parseTextures(XMLElement* pTexturesRoot) {
         std::string filename = e->Attribute("filename");
         std::string id = e->Attribute("id");
 
-        TextureManager::instance()->load(filename, id, Game::instance()->getRenderer());
+        TextureManager::instance().load(filename, id, Game::instance().getRenderer());
     }
 }
 
@@ -73,7 +73,7 @@ void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*
         int height = e->IntAttribute("height");
         uint8_t frames = e->IntAttribute("frames");
 
-        Animation*drawable = static_cast<Animation*>(GameObjectFactory::instance()->create(type));
+        Animation*drawable = static_cast<Animation*>(GameObjectFactory::instance().create(type));
         AnimationInitParams animationInitParams;
         animationInitParams.totalFrames = frames;
         animationInitParams.speed = 4;

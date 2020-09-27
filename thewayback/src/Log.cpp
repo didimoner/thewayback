@@ -5,15 +5,15 @@
 #include <iomanip>
 #include "SystemUtils.h"
 
-INIReader* Log::s_pConfigReader = nullptr;
-Log* Log::s_pLogger = new Log("RootLogger");
+std::unique_ptr<INIReader> Log::s_pConfigReader;
+std::unique_ptr<Log> Log::s_pLogger = std::make_unique<Log>();
 
 Log::Log(std::string loggerName) {
     m_name = loggerName;
 
-    if (s_pConfigReader == nullptr) {
+    if (!s_pConfigReader) {
         std::string configsDirPath = getResourcePath("configs");
-        s_pConfigReader = new INIReader(configsDirPath + "log_config.ini");
+        Log::s_pConfigReader = std::make_unique<INIReader>(configsDirPath + "log_config.ini");
 
         if (s_pConfigReader->ParseError() != 0) {
             std::cout << "Error while initialising Logger config." << std::endl;
@@ -23,15 +23,14 @@ Log::Log(std::string loggerName) {
     m_logLevel = static_cast<ELevel>(s_pConfigReader->GetInteger("Log", "level", 2));
 }
 
-const Log* Log::getLogger() {
-    return s_pLogger;
+const Log& Log::getLogger() {
+    return *s_pLogger;
 }
 
 void Log::trace(const std::string& msg) const {
     if (m_logLevel < ELevel::TRACE) {
         return;
     }
-
     this->print("TRACE", msg);
 }
 

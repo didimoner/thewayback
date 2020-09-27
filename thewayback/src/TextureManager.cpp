@@ -4,8 +4,8 @@
 #include "SystemUtils.h"
 #include "Log.h"
 
-TextureManager* TextureManager::s_pInstance = nullptr;
-Log* TextureManager::Logger = new Log(typeid(TextureManager).name());
+std::unique_ptr<TextureManager> TextureManager::s_pInstance;
+std::unique_ptr<Log> TextureManager::Logger = std::make_unique<Log>(typeid(TextureManager).name());
 
 TextureManager::TextureManager() {
     int initFlags = IMG_INIT_PNG | IMG_INIT_JPG;

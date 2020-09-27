@@ -6,7 +6,7 @@
 #include "StateParser.h"
 #include "Player.h"
 
-Log* PlayState::Logger = new Log(typeid(PlayState).name());
+std::unique_ptr<Log> PlayState::Logger = std::make_unique<Log>(typeid(PlayState).name());
 const std::string PlayState::s_stateId = "PLAY_STATE";
 
 void PlayState::update() {
@@ -31,8 +31,8 @@ void PlayState::onActivate() {
 
     m_pCamera = new Camera(
         m_pLevel->getPlayer(), 
-        Game::instance()->getWindowWidth(), 
-        Game::instance()->getWindowHeight(), 
+        Game::instance().getWindowWidth(), 
+        Game::instance().getWindowHeight(), 
         m_pLevel->getWidthPx(), 
         m_pLevel->getHeightPx()
     );

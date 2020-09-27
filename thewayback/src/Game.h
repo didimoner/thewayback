@@ -9,8 +9,8 @@ class Game {
 
 private:
 	Game() {}
-	static Game* s_pInstance;
-	static Log* Logger;
+	static std::unique_ptr<Game> s_pInstance;
+	static std::unique_ptr<Log> Logger;
 
 	SDL_Window* m_pWindow = nullptr;
 	SDL_Renderer* m_pRenderer = nullptr;
@@ -21,14 +21,15 @@ private:
 	uint16_t m_windowHeight = 0;
 
 public:
+	~Game();
 	Game(const Game&) = delete;
 	Game& operator=(const Game&) = delete;
 
-	static Game* instance() {
-		if (s_pInstance == nullptr) {
-			s_pInstance = new Game();
+	static Game& instance() {
+		if (!s_pInstance) {
+			s_pInstance.reset(new Game());
 		}
-		return s_pInstance;
+		return *s_pInstance;
 	}
 
 	// --------------------

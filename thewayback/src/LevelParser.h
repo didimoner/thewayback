@@ -10,7 +10,7 @@ using namespace tinyxml2;
 class LevelParser {
 
 private:
-    static Log* Logger;
+    static std::unique_ptr<Log> Logger;;
 
 public:
     Level* parse(std::string filename);

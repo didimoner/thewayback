@@ -3,8 +3,8 @@
 #include "Log.h"
 #include "SystemUtils.h"
 
-FontManager* FontManager::s_pInstance = nullptr;
-Log* FontManager::Logger = new Log(typeid(FontManager).name());
+std::unique_ptr<FontManager> FontManager::s_pInstance;
+std::unique_ptr<Log> FontManager::Logger = std::make_unique<Log>(typeid(FontManager).name());
 
 FontManager::FontManager() {
     if (TTF_Init() != 0) {

@@ -21,22 +21,23 @@ public:
 		loadConfigs();
 		registerTypes();
 
-		Game* pGame = Game::instance();
-		bool initialized = pGame->init(title, x, y, width, height, flags, 
+		bool initialized = Game::instance().init(title, x, y, width, height, flags,
 			new GameStateMachine(), new PlayState());
 
+		//delete &Game::instance();
+
 		if (!initialized) {
-			Log::getLogger()->error("Game initialisation failed");
+			Log::getLogger().error("Game initialisation failed");
 			return;
 		}
 
 		uint32_t frameStart, frameTime;
-		while (pGame->isRunning()) {
+		while (Game::instance().isRunning()) {
 			frameStart = SDL_GetTicks();
 
-			pGame->handleEvents();
-			pGame->update();
-			pGame->render();
+			Game::instance().handleEvents();
+			Game::instance().update();
+			Game::instance().render();
 
 			frameTime = SDL_GetTicks() - frameStart;
 			if (frameTime < DELAY_TIME) {
@@ -44,16 +45,16 @@ public:
 			}
 		}
 
-		pGame->clean();
+		Game::instance().clean();
     }
 
 private:
 	static void loadConfigs() {
-		Config::instance()->load("system.ini", "system");
+		Config::instance().load("system.ini", "system");
 	}
 
 	static void registerTypes() {
-		GameObjectFactory::instance()->registerType("player", new PlayerCreator());
+		GameObjectFactory::instance().registerType("player", new PlayerCreator());
 	}
 
 };

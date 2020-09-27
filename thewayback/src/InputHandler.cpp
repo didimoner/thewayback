@@ -3,17 +3,14 @@
 #include <SDL.h>
 #include "Game.h"
 
-InputHandler* InputHandler::s_pInstance = nullptr;
+std::unique_ptr<InputHandler> InputHandler::s_pInstance;
 
 
 InputHandler::InputHandler() {
 	m_mouseButtonStates[MouseButton::LEFT] = false;
 	m_mouseButtonStates[MouseButton::MIDDLE] = false;
 	m_mouseButtonStates[MouseButton::RIGHT] = false;
-
-	m_pMousePosition = new Vector2f();
 	m_mouseButtonStates[1] = false;
-	m_keystates = nullptr;
 }
 
 void InputHandler::update() {
@@ -22,7 +19,7 @@ void InputHandler::update() {
 	if (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_QUIT:
-				Game::instance()->quit();
+				Game::instance().quit();
 				break;
 
 			case SDL_MOUSEMOTION:
@@ -49,8 +46,7 @@ void InputHandler::update() {
 }
 
 void InputHandler::onMouseMove(SDL_Event& event) {
-	m_pMousePosition->setX((float) event.motion.x);
-	m_pMousePosition->setY((float) event.motion.y);
+	m_mousePosition.set((float)event.motion.x, (float)event.motion.y);
 }
 
 void InputHandler::onMouseButtonDown(SDL_Event& event) {
@@ -91,13 +87,4 @@ bool InputHandler::isKeyPressed(SDL_Scancode key) const {
 
 bool InputHandler::isMouseButtonPressed(MouseButton button) const { return m_mouseButtonStates[button]; }
 
-const Vector2f* const InputHandler::getMousePosition() const { return m_pMousePosition; }
-
-void InputHandler::clean() {
-
-}
-
-InputHandler::~InputHandler() {
-	delete m_keystates;
-	delete m_pMousePosition;
-}
+Vector2f InputHandler::getMousePosition() const { return m_mousePosition; }

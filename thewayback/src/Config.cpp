@@ -3,8 +3,8 @@
 #include "Log.h"
 #include "SystemUtils.h"
 
-Config* Config::s_pInstance = nullptr;
-Log* Config::Logger = new Log(typeid(Config).name());
+std::unique_ptr<Config> Config::s_pInstance;
+std::unique_ptr<Log> Config::Logger = std::make_unique<Log>(typeid(Config).name());
 
 bool Config::load(std::string filename, std::string id) { 
     std::string configsDirPath = getResourcePath("configs");

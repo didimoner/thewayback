@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "GameState.h"
 
-Log* Player::Logger = new Log(typeid(Player).name());
+std::unique_ptr<Log> Player::Logger = std::make_unique<Log>(typeid(Player).name());
 
 Player::Player() : Animation() {
 	m_objectId = "Player";
@@ -28,7 +28,7 @@ void Player::clean() {
 }
 
 void Player::onCollide(ECollisionType type, std::string objectId) {
-	Camera* pCamera = Game::instance()->getCurrentState()->getCamera();
+	Camera* pCamera = Game::instance().getCurrentState()->getCamera();
 
 	switch (type) {
 		case ECollisionType::PLAYER_OBSTACLE: {
@@ -51,21 +51,21 @@ void Player::setRunningSpeed(float runningSpeed) {
 }
 
 void Player::handleKeyboardInput() {
-	InputHandler* pInputHandler = InputHandler::instance();
+	InputHandler& inputHandler = InputHandler::instance();
 
-	if (pInputHandler->isKeyPressed(SDL_SCANCODE_UP) && m_velocity.getX() == 0 && m_velocity.getY() != 1) {
+	if (inputHandler.isKeyPressed(SDL_SCANCODE_UP) && m_velocity.getX() == 0 && m_velocity.getY() != 1) {
 		m_playerState = EPlayerState::MOVING_UP;
-	} else if (pInputHandler->isKeyPressed(SDL_SCANCODE_DOWN) && m_velocity.getX() == 0 && m_velocity.getY() != -1) {
+	} else if (inputHandler.isKeyPressed(SDL_SCANCODE_DOWN) && m_velocity.getX() == 0 && m_velocity.getY() != -1) {
 		m_playerState = EPlayerState::MOVING_DOWN;
-	} else if (pInputHandler->isKeyPressed(SDL_SCANCODE_LEFT) && m_velocity.getY() == 0 && m_velocity.getX() != 1) {
+	} else if (inputHandler.isKeyPressed(SDL_SCANCODE_LEFT) && m_velocity.getY() == 0 && m_velocity.getX() != 1) {
 		m_playerState = EPlayerState::MOVING_LEFT;
-	} else if (pInputHandler->isKeyPressed(SDL_SCANCODE_RIGHT) && m_velocity.getY() == 0 && m_velocity.getX() != -1) {
+	} else if (inputHandler.isKeyPressed(SDL_SCANCODE_RIGHT) && m_velocity.getY() == 0 && m_velocity.getX() != -1) {
 		m_playerState = EPlayerState::MOVING_RIGHT;
 	} else {
 		m_playerState = EPlayerState::IDLE;
 	}
 
-	m_isRunning = pInputHandler->isKeyPressed(SDL_SCANCODE_LSHIFT);
+	m_isRunning = inputHandler.isKeyPressed(SDL_SCANCODE_LSHIFT);
 }
 
 void Player::updatePlayerState() {

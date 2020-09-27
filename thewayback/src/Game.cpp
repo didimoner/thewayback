@@ -5,10 +5,14 @@
 #include "GameState.h"
 #include "Log.h"
 
-Game* Game::s_pInstance = nullptr;
-Log* Game::Logger = new Log(typeid(Game).name());
+std::unique_ptr<Game> Game::s_pInstance;
+std::unique_ptr<Log> Game::Logger = std::make_unique<Log>(typeid(Game).name());
 
-bool Game::init(const char* title, int x, int y, int width, int height, int flags, 
+Game::~Game() {
+	clean();
+}
+
+bool Game::init(const char* title, int x, int y, int width, int height, int flags,
 		GameStateMachine* pGameStateMachine, GameState* pInitialState) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		Logger->error("SDL_Init Error: " + std::string(SDL_GetError()));
@@ -50,7 +54,7 @@ void Game::render() {
 }
 
 void Game::handleEvents() {
-	InputHandler::instance()->update();
+	InputHandler::instance().update();
 }
 
 void Game::quit() {
@@ -58,8 +62,6 @@ void Game::quit() {
 }
 
 void Game::clean() {
-	InputHandler::instance()->clean();
-
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();

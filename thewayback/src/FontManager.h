@@ -8,24 +8,24 @@ class FontManager {
 
 private:
     FontManager();
-    ~FontManager();
 
-    static FontManager* s_pInstance;
-    static Log* Logger;
+    static std::unique_ptr<FontManager> s_pInstance;
+    static std::unique_ptr<Log> Logger;;
 
     std::map<std::string, TTF_Font*> m_fonts;
     std::map<std::string, SDL_Texture*> m_textures;
 
 public:
+    ~FontManager();
     FontManager(const FontManager&) = delete;
     FontManager& operator=(const FontManager&) = delete;
 
-    static FontManager* instance() {
-        if (s_pInstance == nullptr) {
-            s_pInstance = new FontManager();
+    static FontManager& instance() {
+        if (!s_pInstance) {
+            s_pInstance.reset(new FontManager());
         }
 
-        return s_pInstance;
+        return *s_pInstance;
     }
 
     // ---------------------

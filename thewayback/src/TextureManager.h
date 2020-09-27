@@ -7,23 +7,23 @@ class TextureManager {
 
 private:
 	TextureManager();
-	~TextureManager();
 
-	static TextureManager* s_pInstance;
-	static Log* Logger;
+	static std::unique_ptr<TextureManager> s_pInstance;
+	static std::unique_ptr<Log> Logger;;
 
 	std::map<std::string, SDL_Texture*> m_textures;
 
 public:
+	~TextureManager();
 	TextureManager(const TextureManager&) = delete;
 	TextureManager& operator=(const TextureManager&) = delete;
 
-	static TextureManager* instance() {
-		if (s_pInstance == nullptr) {
-			s_pInstance = new TextureManager();
+	static TextureManager& instance() {
+		if (!s_pInstance) {
+			s_pInstance.reset(new TextureManager());
 		}
 
-		return s_pInstance;
+		return *s_pInstance;
 	}
 
 	// ---------------------

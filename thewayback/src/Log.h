@@ -12,14 +12,14 @@ private:
     std::string m_name;
     ELevel m_logLevel;
 
-    static Log* s_pLogger;
-    static INIReader* s_pConfigReader;
+    static std::unique_ptr<Log> s_pLogger;
+    static std::unique_ptr<INIReader> s_pConfigReader;
 
 public:
     Log() : Log("root") {};
     Log(std::string loggerName);
 
-    static const Log* getLogger();
+    static const Log& getLogger();
 
     void trace(const std::string& msg) const;
     void debug(const std::string& msg) const;

@@ -6,7 +6,7 @@
 #include "Log.h"
 #include "GameObject.h"
 
-Log* MenuState::Logger = new Log(typeid(MenuState).name());
+std::unique_ptr<Log> MenuState::Logger = std::make_unique<Log>(typeid(MenuState).name());
 const std::string MenuState::s_stateId = "MENU_STATE";
 
 void MenuState::update() {

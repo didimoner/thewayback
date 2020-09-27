@@ -16,7 +16,7 @@
 #include "GameObjectFactory.h"
 #include "Obstacle.h"
 
-Log* LevelParser::Logger = new Log(typeid(LevelParser).name());
+std::unique_ptr<Log> LevelParser::Logger = std::make_unique<Log>(typeid(LevelParser).name());
 
 Level* LevelParser::parse(std::string filename) {
     Logger->debug("Loading level from " + filename);
@@ -58,7 +58,7 @@ void LevelParser::parseMapProps(XMLElement* pPropsRoot) {
         std::string textureId = p->Attribute("name");
         std::string filename = p->Attribute("value");
 
-        TextureManager::instance()->load(filename, textureId, Game::instance()->getRenderer());
+        TextureManager::instance().load(filename, textureId, Game::instance().getRenderer());
     }
 }
 
@@ -79,7 +79,7 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>*
 
         XMLElement* pImageElement = e->FirstChildElement("image");
         std::string filename = splitString(pImageElement->Attribute("source"), '/').back();
-        TextureManager::instance()->load(filename, tileset.name, Game::instance()->getRenderer());
+        TextureManager::instance().load(filename, tileset.name, Game::instance().getRenderer());
     }
 }
 
@@ -175,7 +175,7 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         bool animated = getBoolProperty(o, "animated");
         std::string textureId = getStringProperty(o, "textureId");
 
-        Sprite* sprite = static_cast<Sprite*>(GameObjectFactory::instance()->create(type));
+        Sprite* sprite = static_cast<Sprite*>(GameObjectFactory::instance().create(type));
         sprite->setPriority(pRoot->IntAttribute("id"));
 
         if (animated) {

@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "FontManager.h"
 
-Log* SplashState::Logger = new Log(typeid(SplashState).name());
+std::unique_ptr<Log> SplashState::Logger = std::make_unique<Log>(typeid(SplashState).name());
 const std::string SplashState::s_stateId = "SPLASH_STATE";
 
 void SplashState::update() {
@@ -11,15 +11,15 @@ void SplashState::update() {
 }
 
 void SplashState::draw() {
-    FontManager::instance()->draw("hello_text", 25, 32, Game::instance()->getRenderer());
+    FontManager::instance().draw("hello_text", 25, 32, Game::instance().getRenderer());
 }
 
 void SplashState::onActivate() {
     Logger->debug("Splash activated");
 
-    FontManager::instance()->loadFont("segoeui.ttf", "segoeui", 16);
-    FontManager::instance()->createMultilineTexture("segoeui", "hello_text", "Hello my dear friend!\nHow are you doing?", 320,
-        { 255,255,255 }, Game::instance()->getRenderer());
+    FontManager::instance().loadFont("segoeui.ttf", "segoeui", 16);
+    FontManager::instance().createMultilineTexture("segoeui", "hello_text", "Hello my dear friend!\nHow are you doing?", 320,
+        { 255,255,255 }, Game::instance().getRenderer());
 }
 
 bool SplashState::onDeactivate() {
