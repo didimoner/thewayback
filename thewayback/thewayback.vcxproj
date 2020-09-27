@@ -200,6 +200,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Drawable.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\base64.h" />
     <ClInclude Include="src\Bootstrap.h" />

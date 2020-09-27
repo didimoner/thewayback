@@ -1,12 +1,13 @@
 #pragma once
 #include "Tileset.h"
 #include <SDL_rect.h>
+#include "Drawable.h"
 
 class TileLayer;
 class ObstacleLayer;
 class Player;
 
-class Level {
+class Level : Drawable {
 
 private:
     friend class LevelParser;
@@ -19,15 +20,15 @@ private:
 
     Player* m_pPlayer = nullptr;
 
+    std::multiset<Drawable*, Drawable::Comparator> m_drawables;
     std::vector<Tileset> m_tilesets;
-    std::vector<TileLayer*> m_tileLayers;
     std::vector<ObstacleLayer*> m_obstacleLayers;
 
 public:
     ~Level();
 
     std::vector<Tileset>* const getTilesets();
-    std::vector<TileLayer*>* const getTileLayers();
+    std::multiset<Drawable*, Drawable::Comparator>* const getDrawables();
     std::vector<ObstacleLayer*>* const getObstacleLayers();
 
     uint32_t getWidthPx() const;

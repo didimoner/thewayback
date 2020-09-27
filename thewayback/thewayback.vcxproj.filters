@@ -215,5 +215,8 @@
     <ClInclude Include="src\Sprite.h">
       <Filter>Engine\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="src\Drawable.h">
+      <Filter>Engine\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,6 +11,9 @@
     </MENU_STATE>
 
     <PLAY_STATE>
+		<LEVELS>
+			<level filename="test5.tmx"/>
+		</LEVELS>
 	</PLAY_STATE>
 	
     <SPLASH_STATE>

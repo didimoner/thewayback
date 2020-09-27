@@ -1,8 +1,9 @@
 #pragma once
 #include "pch.h"
 #include "Vector2f.h"
+#include "Drawable.h"
 
-class GameObject {
+class GameObject : public Drawable {
 
 protected:
 	int m_width = 0;
@@ -25,7 +26,6 @@ public:
 		m_velocity += m_acceleration;
 		m_position += m_velocity;
 	}
-	virtual void draw() = 0;
 	virtual void clean() = 0;
 
 	Vector2f getPosition() const {

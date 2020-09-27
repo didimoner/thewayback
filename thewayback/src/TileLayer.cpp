@@ -71,10 +71,6 @@ void TileLayer::draw() {
     }
 }
 
-void TileLayer::setId(uint16_t id) {
-    this->m_id = id;
-}
-
 void TileLayer::setName(std::string name) {
     this->m_name = name;
 }

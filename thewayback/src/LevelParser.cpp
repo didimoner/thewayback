@@ -118,11 +118,11 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
         }
 
         TileLayer* pTileLayer = new TileLayer(*pLevel->getTilesets());
-        pTileLayer->setId(e->IntAttribute("id"));
+        pTileLayer->setPriority(e->IntAttribute("id"));
         pTileLayer->setName(e->Attribute("name"));
         pTileLayer->setTileIds(tileIds);
 
-        pLevel->getTileLayers()->push_back(pTileLayer);
+        pLevel->getDrawables()->insert(pTileLayer);
     }
 }
 
@@ -176,6 +176,7 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         std::string textureId = getStringProperty(o, "textureId");
 
         Sprite* sprite = static_cast<Sprite*>(GameObjectFactory::instance()->create(type));
+        sprite->setPriority(pRoot->IntAttribute("id"));
 
         if (animated) {
             AnimationInitParams animationInitParams;
@@ -195,6 +196,7 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
             pLevel->m_pPlayer = static_cast<Player*>(sprite);
+            pLevel->getDrawables()->insert(pLevel->m_pPlayer);
         }
 
         // todo: other game object types

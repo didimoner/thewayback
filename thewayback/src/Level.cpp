@@ -10,10 +10,10 @@
 Level::~Level() {
     delete m_pPlayer;
 
-    for (TileLayer* pTileLayer : m_tileLayers) {
-        delete pTileLayer;
+    for (Drawable* pDrawable: m_drawables) {
+        delete pDrawable;
     }
-    m_tileLayers.clear();
+    m_drawables.clear();
 
     for (ObstacleLayer* pCollidableLayer : m_obstacleLayers) {
         delete pCollidableLayer;
@@ -21,12 +21,32 @@ Level::~Level() {
     m_obstacleLayers.clear();
 }
 
+void Level::update() {
+    for (Drawable* pDrawable : m_drawables) {
+        pDrawable->update();
+    }
+
+    Vector2f playetPosition = m_pPlayer->getPosition();
+    for (ObstacleLayer* pObstacleLayer : m_obstacleLayers) {
+        std::set<Obstacle*> obstacles = pObstacleLayer->getObstacles(m_pPlayer->getBoundary());
+        for (Obstacle* pObstacle : obstacles) {
+            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pObstacle);
+        }
+    }
+}
+
+void Level::draw() {
+    for (Drawable* pDrawable: m_drawables) {
+        pDrawable->draw();
+    }
+}
+
 std::vector<Tileset>* const Level::getTilesets() {
     return &m_tilesets;
 }
 
-std::vector<TileLayer*>* const Level::getTileLayers() {
-    return &m_tileLayers;
+std::multiset<Drawable*, Drawable::Comparator>* const Level::getDrawables() {
+    return &m_drawables;
 }
 
 std::vector<ObstacleLayer*>* const Level::getObstacleLayers() {
@@ -43,28 +63,4 @@ uint32_t Level::getHeightPx() const {
 
 const Player* Level::getPlayer() const {
     return m_pPlayer;
-}
-
-void Level::update() {
-    for (TileLayer* pLayer : m_tileLayers) {
-        pLayer->update();
-    }
-    
-    m_pPlayer->update();
-
-    Vector2f playetPosition = m_pPlayer->getPosition();
-    for (ObstacleLayer* pObstacleLayer : m_obstacleLayers) {
-        std::set<Obstacle*> obstacles = pObstacleLayer->getObstacles(m_pPlayer->getBoundary());
-        for (Obstacle* pObstacle : obstacles) {
-            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pObstacle);
-        }
-    }
-}
-
-void Level::draw() {
-    for (TileLayer* pLayer : m_tileLayers) {
-        pLayer->draw();
-    }
-
-    m_pPlayer->draw();
 }
