@@ -5,6 +5,10 @@ enum class EAnimationType {
 	NORMAL, BOUNCE
 };
 
+enum class EAnimationSpeed {
+	SLOW, NORMAL, FAST
+};
+
 struct AnimationInitParams {
 	uint8_t totalFrames = 0;
 	uint8_t defaultFrame = 0;
@@ -26,6 +30,7 @@ private:
 	bool m_looped = false;
 
 	EState m_state = EState::STOP;
+	EAnimationSpeed m_animationSpeed = EAnimationSpeed::NORMAL;
 	std::vector<uint8_t> m_totalFrames;
 	uint32_t m_previousTick = 0;
 	size_t m_frameIndex = 0;
@@ -42,6 +47,8 @@ public:
 	void playAnimation();
 	void pauseAnimation();
 	void stopAnimation();
+
+	void setAnimationSpeed(EAnimationSpeed animationSpeed);
 
 private:
 	void updateState();

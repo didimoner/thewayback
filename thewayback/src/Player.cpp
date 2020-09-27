@@ -56,11 +56,18 @@ void Player::handleKeyboardInput() {
 	} else {
 		m_playerState = EPlayerState::IDLE;
 	}
+
+	m_isRunning = pInputHandler->isKeyPressed(SDL_SCANCODE_LSHIFT);
 }
 
 void Player::updatePlayerState() {
-	float speed = 3.f;
+	if (m_isRunning) {
+		setAnimationSpeed(EAnimationSpeed::FAST);
+	} else {
+		setAnimationSpeed(EAnimationSpeed::NORMAL);
+	}
 
+	float speed = m_isRunning ? m_runSpeed : m_walkSpeed;
 	switch (m_playerState) {
 		case EPlayerState::MOVING_UP:
 			m_velocity.setY(-1 * speed);

@@ -49,15 +49,29 @@ void Animation::stopAnimation() {
     m_previousTick = 0;
 }
 
+void Animation::setAnimationSpeed(EAnimationSpeed animationSpeed) {
+    m_animationSpeed = animationSpeed;
+}
+
 void Animation::updateState() {
     if (m_speed < 1) {
         return;
     }
 
+    float speedMultiplier = 1;
+    switch (m_animationSpeed) {
+        case EAnimationSpeed::SLOW:
+            speedMultiplier = 0.5;
+            break;
+        case EAnimationSpeed::FAST:
+            speedMultiplier = 2;
+            break;
+    }
+        
     uint32_t now = SDL_GetTicks();
     uint32_t elapsedTime = now - m_previousTick;
 
-    if (elapsedTime >= 1000u / m_speed) {
+    if (elapsedTime >= 1000u / (m_speed * speedMultiplier)) {
         if (m_frameIndex >= m_totalFrames.size()) {
             m_frameIndex = 0;
         }

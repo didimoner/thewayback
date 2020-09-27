@@ -16,7 +16,11 @@ private:
 		MOVING_LEFT
 	};
 
+private:
+	float m_walkSpeed = 1;
+	float m_runSpeed = 3;
 	EPlayerState m_playerState = EPlayerState::IDLE;
+	bool m_isRunning= false;
 	static Log* Logger;
 
 public:
