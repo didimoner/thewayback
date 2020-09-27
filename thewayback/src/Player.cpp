@@ -42,6 +42,14 @@ SDL_FRect Player::getBoundary() const {
 	return { m_position.getX(), m_position.getY(), (float)m_width, (float)m_height };
 }
 
+void Player::setWalkingSpeed(float walkingSpeed) {
+	m_walkingSpeed = walkingSpeed;
+}
+
+void Player::setRunningSpeed(float runningSpeed) {
+	m_runningSpeed = runningSpeed;
+}
+
 void Player::handleKeyboardInput() {
 	InputHandler* pInputHandler = InputHandler::instance();
 
@@ -67,7 +75,7 @@ void Player::updatePlayerState() {
 		setAnimationSpeed(EAnimationSpeed::NORMAL);
 	}
 
-	float speed = m_isRunning ? m_runSpeed : m_walkSpeed;
+	float speed = m_isRunning ? m_runningSpeed : m_walkingSpeed;
 	switch (m_playerState) {
 		case EPlayerState::MOVING_UP:
 			m_velocity.setY(-1 * speed);

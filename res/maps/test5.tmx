@@ -17,7 +17,12 @@
    eJztw0ENAAAMA6FzUf9O52IvSFg1VVXVhwfuj0fh
   </data>
  </layer>
- <objectgroup id="2" name="game_objects">
+ <layer id="2" name="objects" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowAVXCUBD5T7qKmO2mDUfZQBbPYuIwFT2y3EpPuBch+xYNR91HPfSyB+BWW/BuI3g8x9H4H4E5T9GYi/DDL3Dfb4HXXf8HPfKBicAADvHV2R
+  </data>
+ </layer>
+ <objectgroup id="3" name="game_objects">
   <properties>
    <property name="type" value="game_objects"/>
   </properties>
@@ -28,15 +33,12 @@
     <property name="animationSpeed" type="int" value="4"/>
     <property name="animationTotalFrames" type="int" value="3"/>
     <property name="animationType" value="BOUNCE"/>
+    <property name="runningSpeed" type="float" value="3"/>
     <property name="textureId" value="player"/>
+    <property name="walkingSpeed" type="float" value="1"/>
    </properties>
   </object>
  </objectgroup>
- <layer id="3" name="objects" width="40" height="20">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFowAVXCUBD5T7qKmO2mDUfZQBbPYuIwFT2y3EpPuBch+xYNR91HPfSyB+BWW/BuI3g8x9H4H4E5T9GYi/DDL3Dfb4HXXf8HPfKBicAADvHV2R
-  </data>
- </layer>
  <layer id="4" name="other" width="40" height="20">
   <data encoding="base64" compression="zlib">
    eJzbysDAsHWQ48EKyHHfNDIwvd1HS/XIgBL3ERtuA+m+eXjwYHAfDEzEgpHVYZOnlvuIiTdi7SNVPSXly2BxHzHlxkC6D18eGAzuo6Z9pKofdR9l6kfdR5l6arqPVExP980kA9PTfbQCA91uJwYDAAQ5lcc=

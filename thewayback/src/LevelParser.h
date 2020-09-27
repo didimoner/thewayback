@@ -25,6 +25,7 @@ private:
         
     std::string getStringProperty(XMLElement* pElementRoot, std::string name) const;
     int getIntProperty(XMLElement* pElementRoot, std::string name) const;
+    float getFloatProperty(XMLElement* pElementRoot, std::string name) const;
     bool getBoolProperty(XMLElement* pElementRoot, std::string name) const;
 
 };

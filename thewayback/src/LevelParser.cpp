@@ -195,8 +195,12 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         }
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
-            pLevel->m_pPlayer = static_cast<Player*>(sprite);
-            pLevel->getDrawables()->insert(pLevel->m_pPlayer);
+            Player* pPlayer = static_cast<Player*>(sprite);
+            pPlayer->setWalkingSpeed(getFloatProperty(o, "walkingSpeed"));
+            pPlayer->setRunningSpeed(getFloatProperty(o, "runningSpeed"));
+
+            pLevel->m_pPlayer = pPlayer;
+            pLevel->getDrawables()->insert(pPlayer);
         }
 
         // todo: other game object types
@@ -224,6 +228,18 @@ int LevelParser::getIntProperty(XMLElement* pElementRoot, std::string name) cons
     }
 
     Logger->warn("There is no int property of name " + name);
+    return 0;
+}
+
+float LevelParser::getFloatProperty(XMLElement* pElementRoot, std::string name) const {
+    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
+    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
+        if (p->Attribute("name") == name) {
+            return p->FloatAttribute("value");
+        }
+    }
+
+    Logger->warn("There is no float property of name " + name);
     return 0;
 }
 
