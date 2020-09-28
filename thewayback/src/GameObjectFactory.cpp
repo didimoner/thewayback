@@ -3,29 +3,29 @@
 #include "Log.h"
 #include "GameObjectCreator.h"
 
-std::unique_ptr<GameObjectFactory> GameObjectFactory::s_pInstance;
-std::unique_ptr<Log> GameObjectFactory::Logger = std::make_unique<Log>(typeid(GameObjectFactory).name());
+ GameObjectFactory GameObjectFactory::s_instance;
+Log GameObjectFactory::Logger(typeid(GameObjectFactory).name());
+
+GameObjectFactory::~GameObjectFactory() {
+    m_creators.clear();
+}
 
 void GameObjectFactory::registerType(std::string type, GameObjectCreator* pCreator) {
-    Logger->debug("Registering object type " + type);
-
-    auto it = m_creators.find(type);
-    if (it != m_creators.end()) {
+    Logger.debug("Registering object type " + type);
+    if (m_creators.find(type) != m_creators.end()) {
         delete pCreator;
         return;
     }
 
-    m_creators[type] = pCreator;
+    m_creators[type] = std::unique_ptr<GameObjectCreator>(pCreator);
 }
 
 GameObject* GameObjectFactory::create(std::string type) {
-    Logger->debug("Creating game object of type " + type);
-
-    GameObjectCreator* pCreator = m_creators[type];
-    if (pCreator == nullptr) {
-        Logger->warn("Object creator for type " + type + " doesn't exist.");
+    Logger.debug("Creating game object of type " + type);
+    if (m_creators.find(type) == m_creators.end()) {
+        Logger.warn("Object creator for type " + type + " doesn't exist.");
         return nullptr;
     }
 
-    return pCreator->create();
+    return m_creators[type]->create();
 }

@@ -1,7 +1,7 @@
 #pragma once
+#include "GameObjectCreator.h"
 
 class GameObject;
-class GameObjectCreator;
 class Log;
 
 class GameObjectFactory {
@@ -9,21 +9,18 @@ class GameObjectFactory {
 private:
 	GameObjectFactory() {}
 
-	static std::unique_ptr<GameObjectFactory> s_pInstance;
-	static std::unique_ptr<Log> Logger;;
+	static GameObjectFactory s_instance;
+	static Log Logger;
 
-    std::map<std::string, GameObjectCreator*> m_creators;
+    std::map<std::string, std::unique_ptr<GameObjectCreator>> m_creators;
 	
 public:
-	~GameObjectFactory() {}
+	~GameObjectFactory();
 	GameObjectFactory(const GameObjectFactory&) = delete;
 	GameObjectFactory& operator=(const GameObjectFactory&) = delete;
 
 	static GameObjectFactory& instance() {
-		if (!s_pInstance) {
-			s_pInstance.reset(new GameObjectFactory());
-		}
-		return *s_pInstance;
+		return s_instance;
 	}
 
 	// ----------------------------------

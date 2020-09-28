@@ -46,8 +46,6 @@ private:
 class PlayerCreator : public GameObjectCreator {
 
 public:
-	~PlayerCreator() {}
-
 	GameObject* create() const {
 		return new Player();
 	}
