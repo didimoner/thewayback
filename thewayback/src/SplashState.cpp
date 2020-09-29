@@ -2,6 +2,7 @@
 #include "SplashState.h"
 #include "Log.h"
 #include "FontManager.h"
+#include "Game.h"
 
 Log SplashState::Logger(typeid(SplashState).name());
 const std::string SplashState::s_stateId = "SPLASH_STATE";

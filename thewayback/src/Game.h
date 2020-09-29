@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL.h>
+#include "GameStateMachine.h"
 
-class GameStateMachine;
 class GameState;
 class Log;
 
@@ -14,7 +14,7 @@ private:
 
 	SDL_Window* m_pWindow = nullptr;
 	SDL_Renderer* m_pRenderer = nullptr;
-	GameStateMachine* m_pGameStateMachine = nullptr;
+	std::unique_ptr<GameStateMachine> m_pGameStateMachine;
 
 	bool m_running = false;
 	uint16_t m_windowWidth = 0;
@@ -35,7 +35,7 @@ public:
 	// --------------------
 	
 	bool init(const char* title, int x, int y, int width, int height, int flags, 
-		GameStateMachine* pGameStateMachine, GameState* pInitialState);
+		GameStateMachine* pGameStateMachine, std::unique_ptr<GameState>& pInitialState);
 	void update();
 	void render();
 	void handleEvents();
@@ -47,6 +47,6 @@ public:
 	uint16_t getWindowHeight() const;
 
 	SDL_Renderer* getRenderer() const;
-	GameState* const getCurrentState() const;
+	GameState& getCurrentState() const;
 
 };

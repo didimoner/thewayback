@@ -1,8 +1,7 @@
 #pragma once
 #include "pch.h"
-#include "Camera.h"
-#include "Game.h"
 
+class Camera;
 class Vector2f;
 
 class GameState {

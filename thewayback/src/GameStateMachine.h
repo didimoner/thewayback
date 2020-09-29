@@ -1,20 +1,19 @@
 #pragma once
-
-class GameState;
+#include "GameState.h"
 
 class GameStateMachine {
 
 private:
-    std::vector<GameState*> m_gameStates;
+    std::vector<std::unique_ptr<GameState>> m_gameStates;
 
 public:
-    void pushState(GameState* pState);
+    void pushState(std::unique_ptr<GameState>& pState);
     void popState();
-    void changeState(GameState* pState);
+    void changeState(std::unique_ptr<GameState>& pState);
 
     void update();
     void draw();
 
-    GameState* const getCurrentState() const;
+    GameState& getCurrentState() const;
 
 };

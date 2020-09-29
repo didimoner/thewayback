@@ -11,7 +11,7 @@
 #include "Log.h"
 
 const int FPS = 60;
-const int DELAY_TIME = (int)(1000.0f / FPS);
+const int DELAY_TIME = static_cast<int>(1000.0f / FPS);
 
 
 class Bootstrap {
@@ -21,8 +21,9 @@ public:
 		loadConfigs();
 		registerTypes();
 
+		auto pInitialState = std::unique_ptr<GameState>(new PlayState);
 		bool initialized = Game::instance().init(title, x, y, width, height, flags,
-			new GameStateMachine(), new PlayState());
+			new GameStateMachine(), pInitialState);
 
 		if (!initialized) {
 			Log::getLogger().error("Game initialisation failed");
@@ -39,7 +40,7 @@ public:
 
 			frameTime = SDL_GetTicks() - frameStart;
 			if (frameTime < DELAY_TIME) {
-				SDL_Delay((int)(DELAY_TIME - frameTime));
+				SDL_Delay(static_cast<int>(DELAY_TIME - frameTime));
 			}
 		}
 

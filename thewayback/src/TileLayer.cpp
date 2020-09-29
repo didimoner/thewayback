@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "GameState.h"
 #include "Tileset.h"
+#include "Camera.h"
 
 Log TileLayer::Logger(typeid(TileLayer).name());
 
@@ -34,7 +35,7 @@ void TileLayer::draw() {
             }
 
             Tileset tileset = m_tilesets[tilesetIndex];
-            const Camera* pCamera = Game::instance().getCurrentState()->getCamera();
+            const Camera* pCamera = Game::instance().getCurrentState().getCamera();
             Vector2f cameraPos = pCamera->getPosition();
             Vector2f bottomCameraPos(
                 cameraPos.getX() + pCamera->getWidth(), 

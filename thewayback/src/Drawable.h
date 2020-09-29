@@ -10,7 +10,7 @@ public:
     struct Comparator {
         bool operator()(const Drawable* first, const Drawable* second) const {
             return first->getPriority() < second->getPriority();
-        };
+        }
     };
 
 public:

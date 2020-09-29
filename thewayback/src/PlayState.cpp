@@ -5,6 +5,7 @@
 #include "Level.h"
 #include "StateParser.h"
 #include "Player.h"
+#include "Camera.h"
 
 Log PlayState::Logger(typeid(PlayState).name());
 const std::string PlayState::s_stateId = "PLAY_STATE";

@@ -2,9 +2,9 @@
 #include "GameState.h"
 #include "GameStateMachine.h"
 
-void GameStateMachine::pushState(GameState* pState) {
-    m_gameStates.push_back(pState);
-    pState->onActivate();
+void GameStateMachine::pushState(std::unique_ptr<GameState>& pState) {
+    m_gameStates.push_back(std::move(pState));
+    m_gameStates.back()->onActivate();
 }
 
 void GameStateMachine::popState() {
@@ -12,30 +12,19 @@ void GameStateMachine::popState() {
         return;
     }
 
-    GameState* pCurrentState = m_gameStates.back();
-    if (pCurrentState->onDeactivate()) {
-        delete pCurrentState;
+    if (m_gameStates.back()->onDeactivate()) {
         m_gameStates.pop_back();
     }
 }
 
-void GameStateMachine::changeState(GameState* pState) {
-    if (m_gameStates.empty()) {
+void GameStateMachine::changeState(std::unique_ptr<GameState>& pState) {
+    if (m_gameStates.empty()
+        || m_gameStates.back()->getStateId() == pState->getStateId()) {
         return;
     }
 
-    GameState* pCurrentState = m_gameStates.back();
-    if (pCurrentState->getStateId() == pState->getStateId()) {
-        return;
-    }
-
-    if (pCurrentState->onDeactivate()) {
-        delete pCurrentState;
-        m_gameStates.pop_back();
-    }
-
-    m_gameStates.push_back(pState);
-    pState->onActivate();
+    popState();
+    pushState(pState);
 }
 
 void GameStateMachine::update() {
@@ -54,6 +43,6 @@ void GameStateMachine::draw() {
     m_gameStates.back()->draw();
 }
 
-GameState* const GameStateMachine::getCurrentState() const {
-    return m_gameStates.back();
+GameState& GameStateMachine::getCurrentState() const {
+    return *m_gameStates.back();
 }
