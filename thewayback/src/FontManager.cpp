@@ -4,11 +4,11 @@
 #include "SystemUtils.h"
 
 std::unique_ptr<FontManager> FontManager::s_pInstance;
-std::unique_ptr<Log> FontManager::Logger = std::make_unique<Log>(typeid(FontManager).name());
+Log FontManager::Logger(typeid(FontManager).name());
 
 FontManager::FontManager() {
     if (TTF_Init() != 0) {
-        Logger->error("SDL_ttf initialisation error: " + std::string(TTF_GetError()));
+        Logger.error("SDL_ttf initialisation error: " + std::string(TTF_GetError()));
     }
 }
 
@@ -26,14 +26,14 @@ FontManager::~FontManager() {
 }
 
 bool FontManager::loadFont(std::string filename, std::string id, int size) {
-    Logger->debug("Loading font: " + filename);
+    Logger.debug("Loading font: " + filename);
 
     std::string resourcesPath = getResourcePath("fonts");
     std::string filepath = resourcesPath + filename;
     TTF_Font* pFont = TTF_OpenFont(filepath.c_str(), size);
 
     if (pFont == nullptr) {
-        Logger->error("Cannot load surface from image: " + filepath);
+        Logger.error("Cannot load surface from image: " + filepath);
         return false;
     }
 
@@ -43,10 +43,10 @@ bool FontManager::loadFont(std::string filename, std::string id, int size) {
 
 void FontManager::createTexture(std::string fontId, std::string textureId, 
         std::string text, SDL_Color color, SDL_Renderer* pRenderer) {
-    Logger->debug("Creating texture " + textureId + " from font " + fontId);
+    Logger.debug("Creating texture " + textureId + " from font " + fontId);
     TTF_Font* pFont = m_fonts[fontId];
     if (pFont == nullptr) {
-        Logger->warn("Font not found in the map: " + fontId);
+        Logger.warn("Font not found in the map: " + fontId);
         return;
     }
 
@@ -59,11 +59,11 @@ void FontManager::createTexture(std::string fontId, std::string textureId,
 
 void FontManager::createMultilineTexture(std::string fontId, std::string textureId,
     std::string text, uint32_t lineWidth, SDL_Color color, SDL_Renderer* pRenderer) {
-    Logger->debug("Creating multiline texture " + textureId + " from font " + fontId 
+    Logger.debug("Creating multiline texture " + textureId + " from font " + fontId 
         + " with line width " +std::to_string(lineWidth));
     TTF_Font* pFont = m_fonts[fontId];
     if (pFont == nullptr) {
-        Logger->warn("Font not found in the map: " + fontId);
+        Logger.warn("Font not found in the map: " + fontId);
         return;
     }
 
@@ -77,7 +77,7 @@ void FontManager::createMultilineTexture(std::string fontId, std::string texture
 void FontManager::removeTexture(std::string textureId) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
-        Logger->warn("Texture to remove not found in the map: " + textureId);
+        Logger.warn("Texture to remove not found in the map: " + textureId);
         return;
     }
 
@@ -89,7 +89,7 @@ void FontManager::draw(std::string textureId, float x, float y,
         SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
-        Logger->warn("Texture not found in the map: " + textureId);
+        Logger.warn("Texture not found in the map: " + textureId);
         return;
     }
 
@@ -104,7 +104,7 @@ void FontManager::draw(std::string textureId, float x, float y, int width, int h
         SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
-        Logger->warn("Texture not found in the map: " + textureId);
+        Logger.warn("Texture not found in the map: " + textureId);
         return;
     }
 

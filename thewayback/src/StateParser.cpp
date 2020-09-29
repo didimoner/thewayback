@@ -7,10 +7,10 @@
 #include "Log.h"
 #include "Animation.h"
 
-std::unique_ptr<Log> StateParser::Logger = std::make_unique<Log>(typeid(StateParser).name());
+Log StateParser::Logger(typeid(StateParser).name());
 
 bool StateParser::parse(std::string filename, std::string stateId, std::vector<GameObject*>& gameObjects) {
-    Logger->debug("Loading state " + stateId + " from " + filename);
+    Logger.debug("Loading state " + stateId + " from " + filename);
 
     std::string resourcesPath = getResourcePath("data");
     std::string filepath = resourcesPath + filename;
@@ -19,32 +19,32 @@ bool StateParser::parse(std::string filename, std::string stateId, std::vector<G
 
     XMLError loadResult = xmlDoc.LoadFile(filepath.c_str());
     if (loadResult != XML_SUCCESS) {
-        Logger->error("Cannot load " + filename);
+        Logger.error("Cannot load " + filename);
         return false ;
     }
 
     XMLNode* pRoot = xmlDoc.FirstChildElement();
     if (pRoot == nullptr) {
-        Logger->warn("No root element found in " + filename);
+        Logger.warn("No root element found in " + filename);
         return false;
     }
 
     XMLElement* pStateElement = pRoot->FirstChildElement(stateId.c_str());
     if (pStateElement == nullptr) {
-        Logger->warn("No " + stateId + " element found in " + filename);
+        Logger.warn("No " + stateId + " element found in " + filename);
         return false;
     }
 
     XMLElement* pTexturesElement = pStateElement->FirstChildElement("TEXTURES");
     if (pTexturesElement == nullptr) {
-        Logger->warn("No TEXTURES element found in " + stateId + " in " + filename);
+        Logger.warn("No TEXTURES element found in " + stateId + " in " + filename);
         return false;
     }
     parseTextures(pTexturesElement);
 
     XMLElement* pObjectsElement = pStateElement->FirstChildElement("OBJECTS");
     if (pObjectsElement == nullptr) {
-        Logger->warn("No OBJECTS element found in " + stateId + " in " + filename);
+        Logger.warn("No OBJECTS element found in " + stateId + " in " + filename);
         return false;
     }
     parseObjects(pObjectsElement, gameObjects);

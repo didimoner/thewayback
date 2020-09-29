@@ -25,7 +25,7 @@ public:
 
 	// ----------------------------------
 
-    void registerType(std::string type, GameObjectCreator* pCreator);
+    void registerType(std::string type, std::unique_ptr<GameObjectCreator>&& pCreator);
     GameObject* create(std::string type);
 
 };

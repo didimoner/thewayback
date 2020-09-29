@@ -21,7 +21,8 @@ private:
 	float m_runningSpeed = 1;
 	EPlayerState m_playerState = EPlayerState::IDLE;
 	bool m_isRunning= false;
-	static std::unique_ptr<Log> Logger;;
+
+	static Log Logger;
 
 public:
 	Player();

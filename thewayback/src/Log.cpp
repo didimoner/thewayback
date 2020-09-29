@@ -6,7 +6,7 @@
 #include "SystemUtils.h"
 
 std::unique_ptr<INIReader> Log::s_pConfigReader;
-std::unique_ptr<Log> Log::s_pLogger = std::make_unique<Log>();
+Log Log::Logger;
 
 Log::Log(std::string loggerName) {
     m_name = loggerName;
@@ -24,7 +24,7 @@ Log::Log(std::string loggerName) {
 }
 
 const Log& Log::getLogger() {
-    return *s_pLogger;
+    return Logger;
 }
 
 void Log::trace(const std::string& msg) const {

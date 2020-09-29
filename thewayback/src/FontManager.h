@@ -10,7 +10,7 @@ private:
     FontManager();
 
     static std::unique_ptr<FontManager> s_pInstance;
-    static std::unique_ptr<Log> Logger;;
+    static Log Logger;
 
     std::map<std::string, TTF_Font*> m_fonts;
     std::map<std::string, SDL_Texture*> m_textures;

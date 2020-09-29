@@ -5,13 +5,13 @@
 #include "Log.h"
 
 std::unique_ptr<TextureManager> TextureManager::s_pInstance;
-std::unique_ptr<Log> TextureManager::Logger = std::make_unique<Log>(typeid(TextureManager).name());
+Log TextureManager::Logger(typeid(TextureManager).name());
 
 TextureManager::TextureManager() {
     int initFlags = IMG_INIT_PNG | IMG_INIT_JPG;
 
     if ((IMG_Init(initFlags) & initFlags) != initFlags) {
-        Logger->error("SDL_Image initialisation error: " + std::string(IMG_GetError()));
+        Logger.error("SDL_Image initialisation error: " + std::string(IMG_GetError()));
     }
 }
 
@@ -24,14 +24,14 @@ TextureManager::~TextureManager() {
 }
 
 bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pRenderer) {
-    Logger->debug("Loading texture: " + filename);
+    Logger.debug("Loading texture: " + filename);
 
     std::string resourcesPath = getResourcePath("images");
     std::string filepath = resourcesPath + filename;
     SDL_Surface* pSurface = IMG_Load(filepath.c_str());
 
     if (pSurface == 0) {
-        Logger->error("Cannot load surface from image: " + filepath);
+        Logger.error("Cannot load surface from image: " + filepath);
         return false;
     }
 
@@ -40,7 +40,7 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
     SDL_FreeSurface(pSurface);
 
     if (pTexture == 0) {
-        Logger->error("Cannot load texture from surface: " + filepath);
+        Logger.error("Cannot load texture from surface: " + filepath);
         return false;
     }
 
@@ -52,7 +52,7 @@ void TextureManager::draw(std::string textureId, float x, float y, int width, in
         SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
-        Logger->warn("Texture not found in the map: " + textureId);
+        Logger.warn("Texture not found in the map: " + textureId);
         return;
     }
 
@@ -75,7 +75,7 @@ void TextureManager::drawFrame(std::string textureId, float x, float y, int widt
     uint32_t currentRow, uint32_t currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
-        Logger->warn("Texture not found in the map: " + textureId);
+        Logger.warn("Texture not found in the map: " + textureId);
         return;
     }
 

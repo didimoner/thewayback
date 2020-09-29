@@ -9,7 +9,7 @@ private:
 	TextureManager();
 
 	static std::unique_ptr<TextureManager> s_pInstance;
-	static std::unique_ptr<Log> Logger;;
+	static Log Logger;
 
 	std::map<std::string, SDL_Texture*> m_textures;
 

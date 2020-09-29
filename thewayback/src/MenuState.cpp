@@ -6,7 +6,7 @@
 #include "Log.h"
 #include "GameObject.h"
 
-std::unique_ptr<Log> MenuState::Logger = std::make_unique<Log>(typeid(MenuState).name());
+Log MenuState::Logger(typeid(MenuState).name());
 const std::string MenuState::s_stateId = "MENU_STATE";
 
 void MenuState::update() {
@@ -25,7 +25,7 @@ void MenuState::onActivate() {
     StateParser stateParser;
     stateParser.parse("states.xml", getStateId(), m_gameObjects);
 
-    Logger->debug("Menu activated");
+    Logger.debug("Menu activated");
 }
 
 bool MenuState::onDeactivate() {
@@ -36,7 +36,7 @@ bool MenuState::onDeactivate() {
 
     m_gameObjects.clear();
 
-    Logger->debug("Menu deactivated");
+    Logger.debug("Menu deactivated");
     return true;
 }
 

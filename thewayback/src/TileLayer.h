@@ -11,7 +11,7 @@ private:
     const std::vector<Tileset> &m_tilesets;
     std::vector<std::vector<uint32_t>> m_tileIds;
 
-    static std::unique_ptr<Log> Logger;;
+    static Log Logger;
     
 public:
     TileLayer(const std::vector<Tileset>& tilesets);

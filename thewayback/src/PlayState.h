@@ -8,7 +8,7 @@ class PlayState : public GameState {
 
 private:
     static const std::string s_stateId;
-    static std::unique_ptr<Log> Logger;;
+    static Log Logger;
 
     Level* m_pLevel;
 

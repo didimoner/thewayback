@@ -6,7 +6,7 @@
 #include "StateParser.h"
 #include "Player.h"
 
-std::unique_ptr<Log> PlayState::Logger = std::make_unique<Log>(typeid(PlayState).name());
+Log PlayState::Logger(typeid(PlayState).name());
 const std::string PlayState::s_stateId = "PLAY_STATE";
 
 void PlayState::update() {
@@ -19,7 +19,7 @@ void PlayState::draw() {
 }
 
 void PlayState::onActivate() {
-    Logger->debug("Play activated");
+    Logger.debug("Play activated");
 
     StateParser stateParser;
     std::vector<GameObject*> gameObjects;
@@ -39,7 +39,7 @@ void PlayState::onActivate() {
 }
 
 bool PlayState::onDeactivate() {
-    Logger->debug("Play deactivated");
+    Logger.debug("Play deactivated");
     return false;
 }
 

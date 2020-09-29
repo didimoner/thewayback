@@ -16,10 +16,10 @@
 #include "GameObjectFactory.h"
 #include "Obstacle.h"
 
-std::unique_ptr<Log> LevelParser::Logger = std::make_unique<Log>(typeid(LevelParser).name());
+Log LevelParser::Logger(typeid(LevelParser).name());
 
 Level* LevelParser::parse(std::string filename) {
-    Logger->debug("Loading level from " + filename);
+    Logger.debug("Loading level from " + filename);
     
     std::string resourcesPath = getResourcePath("maps");
     std::string filepath = resourcesPath + filename;
@@ -28,13 +28,13 @@ Level* LevelParser::parse(std::string filename) {
 
     XMLError loadResult = xmlDoc.LoadFile(filepath.c_str());
     if (loadResult != XML_SUCCESS) {
-        Logger->error("Cannot load " + filename);
+        Logger.error("Cannot load " + filename);
         return nullptr;
     }
 
     XMLElement* pRoot = xmlDoc.FirstChildElement();
     if (pRoot == nullptr) {
-        Logger->warn("No root element found in " + filename);
+        Logger.warn("No root element found in " + filename);
         return nullptr;
     }
 
@@ -103,7 +103,7 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
         int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize, 
             (const Bytef*)decodedData.c_str(), decodedData.size());
         if (uncompressStatus != Z_OK) {
-            Logger->warn("Something wrong with zlib uncpompression. Code: " + uncompressStatus);
+            Logger.warn("Something wrong with zlib uncpompression. Code: " + uncompressStatus);
         }
 
         std::vector<std::vector<uint32_t>> tileIds;
@@ -215,7 +215,7 @@ std::string LevelParser::getStringProperty(XMLElement* pElementRoot, std::string
         }
     }
 
-    Logger->warn("There is no string property of name " + name);
+    Logger.warn("There is no string property of name " + name);
     return "";
 }
 
@@ -227,7 +227,7 @@ int LevelParser::getIntProperty(XMLElement* pElementRoot, std::string name) cons
         }
     }
 
-    Logger->warn("There is no int property of name " + name);
+    Logger.warn("There is no int property of name " + name);
     return 0;
 }
 
@@ -239,7 +239,7 @@ float LevelParser::getFloatProperty(XMLElement* pElementRoot, std::string name) 
         }
     }
 
-    Logger->warn("There is no float property of name " + name);
+    Logger.warn("There is no float property of name " + name);
     return 0;
 }
 
@@ -251,6 +251,6 @@ bool LevelParser::getBoolProperty(XMLElement* pElementRoot, std::string name) co
         }
     }
 
-    Logger->warn("There is no bool property of name " + name);
+    Logger.warn("There is no bool property of name " + name);
     return false;
 }

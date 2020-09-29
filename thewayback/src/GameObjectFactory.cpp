@@ -10,14 +10,13 @@ GameObjectFactory::~GameObjectFactory() {
     m_creators.clear();
 }
 
-void GameObjectFactory::registerType(std::string type, GameObjectCreator* pCreator) {
+void GameObjectFactory::registerType(std::string type, std::unique_ptr<GameObjectCreator>&& pCreator) {
     Logger.debug("Registering object type " + type);
     if (m_creators.find(type) != m_creators.end()) {
-        delete pCreator;
         return;
     }
 
-    m_creators[type] = std::unique_ptr<GameObjectCreator>(pCreator);
+    m_creators[type] = std::move(pCreator);
 }
 
 GameObject* GameObjectFactory::create(std::string type) {

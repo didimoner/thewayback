@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "GameState.h"
 
-std::unique_ptr<Log> Player::Logger = std::make_unique<Log>(typeid(Player).name());
+Log Player::Logger(typeid(Player).name());
 
 Player::Player() : Animation() {
 	m_objectId = "Player";

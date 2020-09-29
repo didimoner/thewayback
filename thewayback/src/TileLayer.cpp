@@ -6,7 +6,7 @@
 #include "GameState.h"
 #include "Tileset.h"
 
-std::unique_ptr<Log> TileLayer::Logger = std::make_unique<Log>(typeid(TileLayer).name());
+Log TileLayer::Logger(typeid(TileLayer).name());
 
 TileLayer::TileLayer(const std::vector<Tileset>& tilesets) : m_tilesets(tilesets) {
 }
@@ -16,7 +16,7 @@ void TileLayer::update() {
 
 void TileLayer::draw() {
     if (m_tileIds.empty()) {
-        Logger->warn("Tile data is empty, nothing to draw. Layer: " + m_name);
+        Logger.warn("Tile data is empty, nothing to draw. Layer: " + m_name);
         return;
     }
 
@@ -29,7 +29,7 @@ void TileLayer::draw() {
 
             int tilesetIndex = findTilesetIndex(tileId);
             if (tilesetIndex == -1) {
-                Logger->warn("Tile ID out of tilesets' bounds: " + tileId);
+                Logger.warn("Tile ID out of tilesets' bounds: " + tileId);
                 continue;
             }
 

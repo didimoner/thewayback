@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "FontManager.h"
 
-std::unique_ptr<Log> SplashState::Logger = std::make_unique<Log>(typeid(SplashState).name());
+Log SplashState::Logger(typeid(SplashState).name());
 const std::string SplashState::s_stateId = "SPLASH_STATE";
 
 void SplashState::update() {
@@ -15,7 +15,7 @@ void SplashState::draw() {
 }
 
 void SplashState::onActivate() {
-    Logger->debug("Splash activated");
+    Logger.debug("Splash activated");
 
     FontManager::instance().loadFont("segoeui.ttf", "segoeui", 16);
     FontManager::instance().createMultilineTexture("segoeui", "hello_text", "Hello my dear friend!\nHow are you doing?", 320,
@@ -23,7 +23,7 @@ void SplashState::onActivate() {
 }
 
 bool SplashState::onDeactivate() {
-    Logger->debug("Splash deactivated");
+    Logger.debug("Splash deactivated");
     return false;
 }
 

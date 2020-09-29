@@ -8,7 +8,7 @@ class MenuState : public GameState {
 
 private:
     static const std::string s_stateId;
-    static std::unique_ptr<Log> Logger;;
+    static Log Logger;
 
     std::vector<GameObject*> m_gameObjects;
 

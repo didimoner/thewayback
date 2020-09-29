@@ -4,7 +4,7 @@
 #include "SystemUtils.h"
 
 std::unique_ptr<Config> Config::s_pInstance;
-std::unique_ptr<Log> Config::Logger = std::make_unique<Log>(typeid(Config).name());
+Log Config::Logger(typeid(Config).name());
 
 bool Config::load(std::string filename, std::string id) { 
     std::string configsDirPath = getResourcePath("configs");
@@ -12,7 +12,7 @@ bool Config::load(std::string filename, std::string id) {
 
     INIReader* pReader = new INIReader(filepath);
     if (pReader->ParseError() != 0) {
-        Logger->error("Cannot load config from a file " + filepath);
+        Logger.error("Cannot load config from a file " + filepath);
         return false;
     }
 
@@ -23,7 +23,7 @@ bool Config::load(std::string filename, std::string id) {
 INIReader* Config::get(std::string key) {
     INIReader* pReader = m_readers[key];
     if (pReader == nullptr) {
-        Logger->warn("Requested config not found: " + key);
+        Logger.warn("Requested config not found: " + key);
     }
 
     return pReader;

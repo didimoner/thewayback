@@ -12,7 +12,7 @@ private:
     std::map<std::string, INIReader*> m_readers;
 
     static std::unique_ptr<Config> s_pInstance;
-    static std::unique_ptr<Log> Logger;
+    static Log Logger;
 
 public:
     ~Config();

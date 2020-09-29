@@ -6,7 +6,7 @@
 #include "Log.h"
 
 std::unique_ptr<Game> Game::s_pInstance;
-std::unique_ptr<Log> Game::Logger = std::make_unique<Log>(typeid(Game).name());
+Log Game::Logger(typeid(Game).name());
 
 Game::~Game() {
 	clean();
@@ -15,19 +15,19 @@ Game::~Game() {
 bool Game::init(const char* title, int x, int y, int width, int height, int flags,
 		GameStateMachine* pGameStateMachine, GameState* pInitialState) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		Logger->error("SDL_Init Error: " + std::string(SDL_GetError()));
+		Logger.error("SDL_Init Error: " + std::string(SDL_GetError()));
 		return false;
 	}
 
 	m_pWindow = SDL_CreateWindow(title, x, y, width, height, flags);
 	if (m_pWindow == 0) {
-		Logger->error("Cannot initialise windows.");
+		Logger.error("Cannot initialise windows.");
 		return false;
 	}
 
 	m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (m_pRenderer == 0) {
-		Logger->error("Cannot create renderer.");
+		Logger.error("Cannot create renderer.");
 		return false;
 	}
 

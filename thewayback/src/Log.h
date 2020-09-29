@@ -12,7 +12,7 @@ private:
     std::string m_name;
     ELevel m_logLevel;
 
-    static std::unique_ptr<Log> s_pLogger;
+    static Log Logger;
     static std::unique_ptr<INIReader> s_pConfigReader;
 
 public:

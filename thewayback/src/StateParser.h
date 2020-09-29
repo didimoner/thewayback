@@ -9,7 +9,7 @@ using namespace tinyxml2;
 class StateParser {
 
 private:
-    static std::unique_ptr<Log> Logger;;
+    static Log Logger;
 
 public:
     bool parse(std::string filename, std::string stateId, std::vector<GameObject*> &gameObjects);

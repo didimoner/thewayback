@@ -24,8 +24,6 @@ public:
 		bool initialized = Game::instance().init(title, x, y, width, height, flags,
 			new GameStateMachine(), new PlayState());
 
-		//delete &Game::instance();
-
 		if (!initialized) {
 			Log::getLogger().error("Game initialisation failed");
 			return;
@@ -54,7 +52,8 @@ private:
 	}
 
 	static void registerTypes() {
-		GameObjectFactory::instance().registerType("player", new PlayerCreator());
+		GameObjectFactory::instance()
+			.registerType("player", std::unique_ptr<PlayerCreator>(new PlayerCreator));
 	}
 
 };

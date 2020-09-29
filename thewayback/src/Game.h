@@ -10,7 +10,7 @@ class Game {
 private:
 	Game() {}
 	static std::unique_ptr<Game> s_pInstance;
-	static std::unique_ptr<Log> Logger;
+	static Log Logger;
 
 	SDL_Window* m_pWindow = nullptr;
 	SDL_Renderer* m_pRenderer = nullptr;
