@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "GameObjectCreator.h"
 
- GameObjectFactory GameObjectFactory::s_instance;
+std::unique_ptr<GameObjectFactory> GameObjectFactory::s_pInstance;
 Log GameObjectFactory::Logger(typeid(GameObjectFactory).name());
 
 GameObjectFactory::~GameObjectFactory() {

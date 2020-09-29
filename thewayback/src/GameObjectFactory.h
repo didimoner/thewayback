@@ -9,7 +9,7 @@ class GameObjectFactory {
 private:
 	GameObjectFactory() {}
 
-	static GameObjectFactory s_instance;
+	static std::unique_ptr<GameObjectFactory> s_pInstance;
 	static Log Logger;
 
     std::map<std::string, std::unique_ptr<GameObjectCreator>> m_creators;
@@ -20,7 +20,11 @@ public:
 	GameObjectFactory& operator=(const GameObjectFactory&) = delete;
 
 	static GameObjectFactory& instance() {
-		return s_instance;
+		if (!s_pInstance) {
+			s_pInstance.reset(new GameObjectFactory);
+		}
+
+		return *s_pInstance;
 	}
 
 	// ----------------------------------
