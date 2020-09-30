@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "TileLayer.h"
+
+#include <utility>
 #include "Log.h"
 #include "TextureManager.h"
 #include "Game.h"
@@ -9,7 +11,7 @@
 
 Log TileLayer::Logger(typeid(TileLayer).name());
 
-TileLayer::TileLayer(const std::vector<Tileset>& tilesets) : m_tilesets(tilesets) {
+TileLayer::TileLayer(std::vector<Tileset> tilesets) : m_tilesets(std::move(tilesets)) {
 }
 
 void TileLayer::update() {
@@ -23,40 +25,40 @@ void TileLayer::draw() {
 
     for (uint32_t row = 0; row < m_tileIds.size(); row++) {
         for (uint32_t column = 0; column < m_tileIds[row].size(); column++) {
-            uint32_t tileId = m_tileIds[row][column];
+            const uint32_t tileId = m_tileIds[row][column];
             if (tileId == 0) {
                 continue;
             }
 
-            int tilesetIndex = findTilesetIndex(tileId);
+            const int tilesetIndex = findTilesetIndex(tileId);
             if (tilesetIndex == -1) {
                 Logger.warn("Tile ID out of tilesets' bounds: " + tileId);
                 continue;
             }
 
-            Tileset tileset = m_tilesets[tilesetIndex];
+            const Tileset tileset = m_tilesets[tilesetIndex];
             const Camera* pCamera = Game::instance().getCurrentState().getCamera();
             Vector2f cameraPos = pCamera->getPosition();
             Vector2f bottomCameraPos(
                 cameraPos.getX() + pCamera->getWidth(),
                 cameraPos.getY() + pCamera->getHeight()
             );
-            int safeOffset = 2;
+            const int safeOffset = 2;
 
-            bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight
+            const bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight
                 || column + safeOffset < cameraPos.getX() / tileset.tileWidth;
-            bool botPosCheck = static_cast<int>(row) - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
+            const bool botPosCheck = static_cast<int>(row) - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
                 || static_cast<int>(column) - safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
 
             if (topPosCheck || botPosCheck) {
                 continue;
             }
 
-            uint32_t localTileId = tileId - tileset.firstGlobalId;
-            float x = static_cast<float>(column * tileset.tileWidth);
-            float y = static_cast<float>(row * tileset.tileHeight);
-            uint32_t tilesetRow = localTileId / tileset.columns;
-            uint32_t tilesetColumn = localTileId % tileset.columns;
+            const uint32_t localTileId = tileId - tileset.firstGlobalId;
+            const float x = static_cast<float>(column * tileset.tileWidth);
+            const float y = static_cast<float>(row * tileset.tileHeight);
+            const uint32_t tilesetRow = localTileId / tileset.columns;
+            const uint32_t tilesetColumn = localTileId % tileset.columns;
 
             TextureManager::instance().drawFrame(
                 tileset.name,
@@ -73,7 +75,7 @@ void TileLayer::draw() {
 }
 
 void TileLayer::setName(std::string name) {
-    this->m_name = name;
+    this->m_name = std::move(name);
 }
 
 void TileLayer::setTileIds(const std::vector<std::vector<uint32_t>>& data) {

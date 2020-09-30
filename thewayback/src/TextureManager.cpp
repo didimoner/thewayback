@@ -11,7 +11,7 @@ TextureManager::TextureManager() {
     int initFlags = IMG_INIT_PNG | IMG_INIT_JPG;
 
     if ((IMG_Init(initFlags) & initFlags) != initFlags) {
-        Logger.error("SDL_Image initialisation error: " + std::string(IMG_GetError()));
+        Logger.error("SDL_Image initialization error: " + std::string(IMG_GetError()));
     }
 }
 

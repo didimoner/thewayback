@@ -7,6 +7,8 @@ private:
     uint16_t m_priority = 0;
 
 public:
+    virtual ~Drawable() = default;
+
     struct Comparator {
         bool operator()(const Drawable* first, const Drawable* second) const {
             return first->getPriority() < second->getPriority();

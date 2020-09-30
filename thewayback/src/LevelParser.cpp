@@ -1,6 +1,5 @@
 #include "pch.h"
 #include <zlib.h>
-#include <SDL_rect.h>
 #include "vendor/base64.h"
 #include "LevelParser.h"
 #include "SystemUtils.h"
@@ -16,9 +15,11 @@
 #include "GameObjectFactory.h"
 #include "Obstacle.h"
 
+using namespace tinyxml2;
+
 Log LevelParser::Logger(typeid(LevelParser).name());
 
-Level* LevelParser::parse(std::string filename) {
+Level* LevelParser::parse(const std::string& filename) {
     Logger.debug("Loading level from " + filename);
 
     std::string resourcesPath = getResourcePath("maps");
@@ -55,8 +56,8 @@ Level* LevelParser::parse(std::string filename) {
 void LevelParser::parseMapProps(XMLElement* pPropsRoot) {
     XMLElement* pPropsElement = pPropsRoot->FirstChildElement("properties");
     for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
-        std::string textureId = p->Attribute("name");
-        std::string filename = p->Attribute("value");
+        const std::string textureId = p->Attribute("name");
+        const std::string filename = p->Attribute("value");
 
         TextureManager::instance().load(filename, textureId, Game::instance().getRenderer());
     }
@@ -78,7 +79,7 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>*
         pTilesets->push_back(tileset);
 
         XMLElement* pImageElement = e->FirstChildElement("image");
-        std::string filename = splitString(pImageElement->Attribute("source"), '/').back();
+        const std::string filename = splitString(pImageElement->Attribute("source"), '/').back();
         TextureManager::instance().load(filename, tileset.name, Game::instance().getRenderer());
     }
 }
@@ -100,15 +101,15 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
         uLongf allTilesSize = pLevel->m_width * pLevel->m_height * sizeof(int);
         std::vector<uint32_t> uncompressedTileIds(allTilesSize);
 
-        int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize,
-                                          (const Bytef*)decodedData.c_str(), decodedData.size());
+        const int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize,
+                                                (const Bytef*)decodedData.c_str(), decodedData.size());
         if (uncompressStatus != Z_OK) {
             Logger.warn("Something wrong with zlib uncpompression. Code: " + uncompressStatus);
         }
 
         std::vector<std::vector<uint32_t>> tileIds;
         for (uint32_t i = 0; i < pLevel->m_height; i++) {
-            tileIds.push_back(std::vector<uint32_t>(pLevel->m_width));
+            tileIds.emplace_back(pLevel->m_width);
         }
 
         for (uint32_t row = 0; row < pLevel->m_height; row++) {
@@ -143,7 +144,7 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
 }
 
 void LevelParser::parseObstacles(XMLElement* pRoot, Level* pLevel) {
-    std::string layerId = pRoot->Attribute("name");
+    const std::string layerId = pRoot->Attribute("name");
     uint8_t gridCols = getIntProperty(pRoot, "grid_cols");
     uint8_t gridRows = getIntProperty(pRoot, "grid_rows");
     ObstacleLayer* pCollidableLayer = new ObstacleLayer(
@@ -167,15 +168,15 @@ void LevelParser::parseObstacles(XMLElement* pRoot, Level* pLevel) {
 
 void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        int x = o->IntAttribute("x");
-        int y = o->IntAttribute("y");
-        int width = o->IntAttribute("width");
-        int height = o->IntAttribute("height");
+        const int x = o->IntAttribute("x");
+        const int y = o->IntAttribute("y");
+        const int width = o->IntAttribute("width");
+        const int height = o->IntAttribute("height");
         std::string type = o->Attribute("type");
-        bool animated = getBoolProperty(o, "animated");
-        std::string textureId = getStringProperty(o, "textureId");
+        const bool animated = getBoolProperty(o, "animated");
+        const std::string textureId = getStringProperty(o, "textureId");
 
-        Sprite* sprite = static_cast<Sprite*>(GameObjectFactory::instance().create(type));
+        Sprite* sprite = dynamic_cast<Sprite*>(GameObjectFactory::instance().create(type));
         sprite->setPriority(pRoot->IntAttribute("id"));
 
         if (animated) {
@@ -189,14 +190,14 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
                 animationInitParams.type = EAnimationType::NORMAL;
             }
 
-            static_cast<Animation*>(sprite)->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId,
-                                                  animationInitParams);
+            dynamic_cast<Animation*>(sprite)->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId,
+                                                   animationInitParams);
         } else {
             sprite->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId);
         }
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
-            Player* pPlayer = static_cast<Player*>(sprite);
+            Player* pPlayer = dynamic_cast<Player*>(sprite);
             pPlayer->setWalkingSpeed(getFloatProperty(o, "walkingSpeed"));
             pPlayer->setRunningSpeed(getFloatProperty(o, "runningSpeed"));
 
@@ -208,7 +209,7 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
     }
 }
 
-std::string LevelParser::getStringProperty(XMLElement* pElementRoot, std::string name) const {
+std::string LevelParser::getStringProperty(XMLElement* pElementRoot, const std::string& name) {
     XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
     for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
         if (p->Attribute("name") == name) {
@@ -220,7 +221,7 @@ std::string LevelParser::getStringProperty(XMLElement* pElementRoot, std::string
     return "";
 }
 
-int LevelParser::getIntProperty(XMLElement* pElementRoot, std::string name) const {
+int LevelParser::getIntProperty(XMLElement* pElementRoot, const std::string& name) {
     XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
     for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
         if (p->Attribute("name") == name) {
@@ -232,7 +233,7 @@ int LevelParser::getIntProperty(XMLElement* pElementRoot, std::string name) cons
     return 0;
 }
 
-float LevelParser::getFloatProperty(XMLElement* pElementRoot, std::string name) const {
+auto LevelParser::getFloatProperty(XMLElement* pElementRoot, const std::string& name) -> float {
     XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
     for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
         if (p->Attribute("name") == name) {
@@ -244,7 +245,7 @@ float LevelParser::getFloatProperty(XMLElement* pElementRoot, std::string name) 
     return 0;
 }
 
-bool LevelParser::getBoolProperty(XMLElement* pElementRoot, std::string name) const {
+auto LevelParser::getBoolProperty(XMLElement* pElementRoot, std::string name) -> bool {
     XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
     for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
         if (p->Attribute("name") == name) {

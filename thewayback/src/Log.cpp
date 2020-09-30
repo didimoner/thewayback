@@ -16,7 +16,7 @@ Log::Log(std::string loggerName) {
         s_pConfigReader = std::make_unique<INIReader>(configsDirPath + "log_config.ini");
 
         if (s_pConfigReader->ParseError() != 0) {
-            std::cout << "Error while initialising Logger config." << std::endl;
+            std::cout << "Error while initializing Logger config." << std::endl;
         }
     }
 

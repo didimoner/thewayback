@@ -7,10 +7,10 @@ class Level;
 class PlayState : public GameState {
 
 private:
-    static const std::string s_stateId;
+    static const std::string STATE_ID;
     static Log Logger;
 
-    Level* m_pLevel;
+    Level* m_pLevel = nullptr;
 
 public:
     void update() override;

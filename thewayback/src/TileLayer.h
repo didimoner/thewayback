@@ -14,10 +14,7 @@ private:
     static Log Logger;
 
 public:
-    TileLayer(const std::vector<Tileset>& tilesets);
-
-    ~TileLayer() {
-    }
+    TileLayer(std::vector<Tileset> tilesets);
 
     void update() override;
     void draw() override;

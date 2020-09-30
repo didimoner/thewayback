@@ -5,7 +5,7 @@
 #include "Game.h"
 
 Log SplashState::Logger(typeid(SplashState).name());
-const std::string SplashState::s_stateId = "SPLASH_STATE";
+const std::string SplashState::STATE_ID = "SPLASH_STATE";
 
 void SplashState::update() {
 
@@ -29,5 +29,5 @@ bool SplashState::onDeactivate() {
 }
 
 std::string SplashState::getStateId() const {
-    return s_stateId;
+    return STATE_ID;
 }

@@ -3,7 +3,6 @@
 #include "GameStateMachine.h"
 #include "MenuState.h"
 #include "PlayState.h"
-#include "SplashState.h"
 #include "GameObjectFactory.h"
 #include "Player.h"
 #include "Config.h"
@@ -22,23 +21,21 @@ public:
         registerTypes();
 
         auto pInitialState = std::unique_ptr<GameState>(new PlayState);
-        bool initialized = Game::instance().init(title, x, y, width, height, flags,
-                                                 new GameStateMachine(), pInitialState);
-
+        const bool initialized = Game::instance().init(title, x, y, width, height, flags,
+                                                       new GameStateMachine(), pInitialState);
         if (!initialized) {
-            Log::getLogger().error("Game initialisation failed");
+            Log::getLogger().error("Game initialization failed");
             return;
         }
 
-        uint32_t frameStart, frameTime;
         while (Game::instance().isRunning()) {
-            frameStart = SDL_GetTicks();
+            const uint32_t frameStart = SDL_GetTicks();
 
             Game::instance().handleEvents();
             Game::instance().update();
             Game::instance().render();
 
-            frameTime = SDL_GetTicks() - frameStart;
+            const uint32_t frameTime = SDL_GetTicks() - frameStart;
             if (frameTime < DELAY_TIME) {
                 SDL_Delay(static_cast<int>(DELAY_TIME - frameTime));
             }

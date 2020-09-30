@@ -1,11 +1,9 @@
 #pragma once
 #include "vendor/tinyxml2.h"
-#include "Log.h"
 
+class Log;
 class Level;
 struct Tileset;
-
-using namespace tinyxml2;
 
 class LevelParser {
 
@@ -13,19 +11,19 @@ private:
     static Log Logger;
 
 public:
-    Level* parse(std::string filename);
+    static Level* parse(const std::string& filename);
 
 private:
-    void parseMapProps(XMLElement* pPropsRoot);
-    void parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>* pTilesets);
-    void parseTileLayers(XMLElement* pLayerRoot, Level* pLevel);
-    void parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel);
-    void parseObstacles(XMLElement* pRoot, Level* pLevel);
-    void parseGameObjects(XMLElement* pRoot, Level* pLevel);
+    static void parseMapProps(tinyxml2::XMLElement* pPropsRoot);
+    static void parseTilesets(tinyxml2::XMLElement* pTilesetsRoot, std::vector<Tileset>* pTilesets);
+    static void parseTileLayers(tinyxml2::XMLElement* pLayerRoot, Level* pLevel);
+    static void parseObjectLayers(tinyxml2::XMLElement* pObjectsRoot, Level* pLevel);
+    static void parseObstacles(tinyxml2::XMLElement* pRoot, Level* pLevel);
+    static void parseGameObjects(tinyxml2::XMLElement* pRoot, Level* pLevel);
 
-    std::string getStringProperty(XMLElement* pElementRoot, std::string name) const;
-    int getIntProperty(XMLElement* pElementRoot, std::string name) const;
-    float getFloatProperty(XMLElement* pElementRoot, std::string name) const;
-    bool getBoolProperty(XMLElement* pElementRoot, std::string name) const;
+    static std::string getStringProperty(tinyxml2::XMLElement* pElementRoot, const std::string& name);
+    static int getIntProperty(tinyxml2::XMLElement* pElementRoot, const std::string& name);
+    static float getFloatProperty(tinyxml2::XMLElement* pElementRoot, const std::string& name);
+    static bool getBoolProperty(tinyxml2::XMLElement* pElementRoot, std::string name);
 
 };

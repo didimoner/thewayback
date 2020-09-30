@@ -5,5 +5,5 @@ enum class EGameState {
     MENU,
     PLAY,
     PAUSE,
-    GAMEOVER
+    GAME_OVER
 };

@@ -15,7 +15,7 @@ private:
 
     bool m_mouseButtonStates[3];
     Vector2f m_mousePosition;
-    const uint8_t* m_keystates = nullptr;
+    const uint8_t* m_keyStates = nullptr;
 
     static std::unique_ptr<InputHandler> s_pInstance;
 

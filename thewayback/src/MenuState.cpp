@@ -1,13 +1,11 @@
 #include "pch.h"
 #include "MenuState.h"
-#include "Game.h"
 #include "StateParser.h"
-#include "LevelParser.h"
 #include "Log.h"
 #include "GameObject.h"
 
 Log MenuState::Logger(typeid(MenuState).name());
-const std::string MenuState::s_stateId = "MENU_STATE";
+const std::string MenuState::STATE_ID = "MENU_STATE";
 
 void MenuState::update() {
     for (GameObject* pObject : m_gameObjects) {
@@ -41,5 +39,5 @@ bool MenuState::onDeactivate() {
 }
 
 std::string MenuState::getStateId() const {
-    return s_stateId;
+    return STATE_ID;
 }

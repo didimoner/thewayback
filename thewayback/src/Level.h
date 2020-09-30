@@ -1,6 +1,5 @@
 #pragma once
 #include "Tileset.h"
-#include <SDL_rect.h>
 #include "Drawable.h"
 
 class TileLayer;
@@ -11,9 +10,7 @@ class Level : Drawable {
 
 private:
     friend class LevelParser;
-
-    Level() {
-    }
+    Level() = default;
 
     uint32_t m_width = 0;
     uint32_t m_height = 0;
@@ -29,9 +26,9 @@ private:
 public:
     ~Level();
 
-    std::vector<Tileset>* const getTilesets();
-    std::multiset<Drawable*, Drawable::Comparator>* const getDrawables();
-    std::vector<ObstacleLayer*>* const getObstacleLayers();
+    std::vector<Tileset>* getTilesets();
+    std::multiset<Drawable*, Drawable::Comparator>* getDrawables();
+    std::vector<ObstacleLayer*>* getObstacleLayers();
 
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;

@@ -7,6 +7,8 @@
 #include "Log.h"
 #include "Animation.h"
 
+using namespace tinyxml2;
+
 Log StateParser::Logger(typeid(StateParser).name());
 
 bool StateParser::parse(std::string filename, std::string stateId, std::vector<GameObject*>& gameObjects) {
@@ -64,16 +66,16 @@ void StateParser::parseTextures(XMLElement* pTexturesRoot) {
 // TODO: refactor
 void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*>& gameObjects) {
     for (XMLElement* e = pObjectsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
-        std::string type = e->Attribute("type");
-        std::string textureId = e->Attribute("textureId");
+        const std::string type = e->Attribute("type");
+        const std::string textureId = e->Attribute("textureId");
 
-        int x = e->IntAttribute("x");
-        int y = e->IntAttribute("y");
-        int width = e->IntAttribute("width");
-        int height = e->IntAttribute("height");
-        uint8_t frames = e->IntAttribute("frames");
+        const int x = e->IntAttribute("x");
+        const int y = e->IntAttribute("y");
+        const int width = e->IntAttribute("width");
+        const int height = e->IntAttribute("height");
+        const uint8_t frames = e->IntAttribute("frames");
 
-        Animation* drawable = static_cast<Animation*>(GameObjectFactory::instance().create(type));
+        Animation* drawable = dynamic_cast<Animation*>(GameObjectFactory::instance().create(type));
         AnimationInitParams animationInitParams;
         animationInitParams.totalFrames = frames;
         animationInitParams.speed = 4;

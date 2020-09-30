@@ -8,7 +8,7 @@ Log FontManager::Logger(typeid(FontManager).name());
 
 FontManager::FontManager() {
     if (TTF_Init() != 0) {
-        Logger.error("SDL_ttf initialisation error: " + std::string(TTF_GetError()));
+        Logger.error("SDL_ttf initialization error: " + std::string(TTF_GetError()));
     }
 }
 

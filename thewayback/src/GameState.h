@@ -10,6 +10,7 @@ protected:
     Camera* m_pCamera = nullptr;
 
 public:
+    virtual ~GameState() = default;
     Camera* getCamera() { return m_pCamera; }
 
     virtual void update() = 0;

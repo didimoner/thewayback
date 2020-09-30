@@ -4,8 +4,6 @@
 class Log;
 class GameObject;
 
-using namespace tinyxml2;
-
 class StateParser {
 
 private:
@@ -15,7 +13,7 @@ public:
     bool parse(std::string filename, std::string stateId, std::vector<GameObject*>& gameObjects);
 
 private:
-    void parseTextures(XMLElement* pTexturesRoot);
-    void parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*>& gameObjects);
+    static void parseTextures(tinyxml2::XMLElement* pTexturesRoot);
+    static void parseObjects(tinyxml2::XMLElement* pObjectsRoot, std::vector<GameObject*>& gameObjects);
 
 };

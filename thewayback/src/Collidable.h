@@ -10,6 +10,8 @@ protected:
     std::string m_objectId;
 
 public:
+    virtual ~Collidable() = default;
+
     std::string getObjectId() const {
         return m_objectId;
     }

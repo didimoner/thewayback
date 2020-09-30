@@ -74,15 +74,15 @@ void InputHandler::onMouseButtonUp(SDL_Event& event) {
 }
 
 void InputHandler::onKeyboardUpdate() {
-    m_keystates = SDL_GetKeyboardState(nullptr);
+    m_keyStates = SDL_GetKeyboardState(nullptr);
 }
 
 bool InputHandler::isKeyPressed(SDL_Scancode key) const {
-    if (m_keystates == nullptr) {
+    if (m_keyStates == nullptr) {
         return false;
     }
 
-    return m_keystates[key] == 1;
+    return m_keyStates[key] == 1;
 }
 
 bool InputHandler::isMouseButtonPressed(MouseButton button) const { return m_mouseButtonStates[button]; }

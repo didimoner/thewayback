@@ -6,7 +6,7 @@ class Log;
 class SplashState : public GameState {
 
 private:
-    static const std::string s_stateId;
+    static const std::string STATE_ID;
     static Log Logger;
 
 public:

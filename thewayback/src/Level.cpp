@@ -10,12 +10,12 @@
 Level::~Level() {
     delete m_pPlayer;
 
-    for (Drawable* pDrawable : m_drawables) {
+    for (auto* pDrawable : m_drawables) {
         delete pDrawable;
     }
     m_drawables.clear();
 
-    for (ObstacleLayer* pCollidableLayer : m_obstacleLayers) {
+    for (auto* pCollidableLayer : m_obstacleLayers) {
         delete pCollidableLayer;
     }
     m_obstacleLayers.clear();
@@ -26,7 +26,6 @@ void Level::update() {
         pDrawable->update();
     }
 
-    Vector2f playetPosition = m_pPlayer->getPosition();
     for (ObstacleLayer* pObstacleLayer : m_obstacleLayers) {
         std::set<Obstacle*> obstacles = pObstacleLayer->getObstacles(m_pPlayer->getBoundary());
         for (Obstacle* pObstacle : obstacles) {
@@ -41,15 +40,15 @@ void Level::draw() {
     }
 }
 
-std::vector<Tileset>* const Level::getTilesets() {
+std::vector<Tileset>* Level::getTilesets() {
     return &m_tilesets;
 }
 
-std::multiset<Drawable*, Drawable::Comparator>* const Level::getDrawables() {
+std::multiset<Drawable*, Drawable::Comparator>* Level::getDrawables() {
     return &m_drawables;
 }
 
-std::vector<ObstacleLayer*>* const Level::getObstacleLayers() {
+std::vector<ObstacleLayer*>* Level::getObstacleLayers() {
     return &m_obstacleLayers;
 }
 

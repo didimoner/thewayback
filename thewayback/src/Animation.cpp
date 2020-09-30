@@ -10,12 +10,12 @@ void Animation::init(float x, float y, int w, int h, std::string textureId, Anim
     m_looped = params.looped;
     m_defaultFrame = params.defaultFrame;
 
-    for (int i = 0; i < params.totalFrames; i++) {
+    for (uint8_t i = 0; i < params.totalFrames; i++) {
         m_totalFrames.push_back(i);
     }
 
     if (params.type == EAnimationType::BOUNCE) {
-        for (int i = params.totalFrames - 2; i > 0; i--) {
+        for (uint8_t i = params.totalFrames - 2; i > 0; i--) {
             m_totalFrames.push_back(i);
         }
     }
@@ -60,16 +60,16 @@ void Animation::updateState() {
 
     float speedMultiplier = 1;
     switch (m_animationSpeed) {
-    case EAnimationSpeed::SLOW:
-        speedMultiplier = 0.5;
-        break;
-    case EAnimationSpeed::FAST:
-        speedMultiplier = 2;
-        break;
+        case EAnimationSpeed::SLOW:
+            speedMultiplier = 0.5;
+            break;
+        case EAnimationSpeed::FAST:
+            speedMultiplier = 2;
+            break;
     }
 
-    uint32_t now = SDL_GetTicks();
-    uint32_t elapsedTime = now - m_previousTick;
+    const uint32_t now = SDL_GetTicks();
+    const uint32_t elapsedTime = now - m_previousTick;
 
     if (elapsedTime >= 1000u / (m_speed * speedMultiplier)) {
         if (m_frameIndex >= m_totalFrames.size()) {

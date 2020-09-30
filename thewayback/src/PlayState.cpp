@@ -8,7 +8,7 @@
 #include "Camera.h"
 
 Log PlayState::Logger(typeid(PlayState).name());
-const std::string PlayState::s_stateId = "PLAY_STATE";
+const std::string PlayState::STATE_ID = "PLAY_STATE";
 
 void PlayState::update() {
     m_pLevel->update();
@@ -45,5 +45,5 @@ bool PlayState::onDeactivate() {
 }
 
 std::string PlayState::getStateId() const {
-    return s_stateId;
+    return STATE_ID;
 }

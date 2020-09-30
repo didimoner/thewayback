@@ -11,7 +11,7 @@ ObstacleLayer::ObstacleLayer(std::string id, uint32_t width, uint32_t height, ui
     m_gridRows = gridRows;
 
     for (uint16_t i = 0; i < gridCols * gridRows; i++) {
-        m_obstacles.push_back(std::vector<Obstacle*>());
+        m_obstacles.emplace_back();
     }
 }
 
@@ -34,7 +34,7 @@ void ObstacleLayer::addObstacle(Obstacle* pObstacle) {
             mapRect.y = mapRect.h * column;
 
             if (Collision::checkRects(pObstacle->getBoundary(), mapRect)) {
-                int index = row + m_gridRows * column;
+                const int index = row + m_gridRows * column;
                 m_obstacles[index].push_back(pObstacle);
             }
         }
@@ -50,7 +50,7 @@ std::set<Obstacle*> ObstacleLayer::getObstacles(SDL_FRect boundary) const {
 
     std::set<Obstacle*> result;
     for (uint32_t index : indices) {
-        if (index < 0 || index > m_obstacles.size()) {
+        if (index > m_obstacles.size()) {
             continue;
         }
 
@@ -62,7 +62,7 @@ std::set<Obstacle*> ObstacleLayer::getObstacles(SDL_FRect boundary) const {
 }
 
 uint32_t ObstacleLayer::calculateIndex(float x, float y) const {
-    int row = static_cast<int>(x / (static_cast<float>(m_width) / m_gridRows));
-    int column = static_cast<int>(y / (static_cast<float>(m_height) / m_gridCols));
+    const int row = static_cast<int>(x / (static_cast<float>(m_width) / m_gridRows));
+    const int column = static_cast<int>(y / (static_cast<float>(m_height) / m_gridCols));
     return row + m_gridRows * column;
 }
