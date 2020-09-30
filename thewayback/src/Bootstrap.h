@@ -18,43 +18,43 @@ class Bootstrap {
 
 public:
     static void startGame(const char* title, int x, int y, int width, int height, int flags) {
-		loadConfigs();
-		registerTypes();
+        loadConfigs();
+        registerTypes();
 
-		auto pInitialState = std::unique_ptr<GameState>(new PlayState);
-		bool initialized = Game::instance().init(title, x, y, width, height, flags,
-			new GameStateMachine(), pInitialState);
+        auto pInitialState = std::unique_ptr<GameState>(new PlayState);
+        bool initialized = Game::instance().init(title, x, y, width, height, flags,
+                                                 new GameStateMachine(), pInitialState);
 
-		if (!initialized) {
-			Log::getLogger().error("Game initialisation failed");
-			return;
-		}
+        if (!initialized) {
+            Log::getLogger().error("Game initialisation failed");
+            return;
+        }
 
-		uint32_t frameStart, frameTime;
-		while (Game::instance().isRunning()) {
-			frameStart = SDL_GetTicks();
+        uint32_t frameStart, frameTime;
+        while (Game::instance().isRunning()) {
+            frameStart = SDL_GetTicks();
 
-			Game::instance().handleEvents();
-			Game::instance().update();
-			Game::instance().render();
+            Game::instance().handleEvents();
+            Game::instance().update();
+            Game::instance().render();
 
-			frameTime = SDL_GetTicks() - frameStart;
-			if (frameTime < DELAY_TIME) {
-				SDL_Delay(static_cast<int>(DELAY_TIME - frameTime));
-			}
-		}
+            frameTime = SDL_GetTicks() - frameStart;
+            if (frameTime < DELAY_TIME) {
+                SDL_Delay(static_cast<int>(DELAY_TIME - frameTime));
+            }
+        }
 
-		Game::instance().clean();
+        Game::instance().clean();
     }
 
 private:
-	static void loadConfigs() {
-		Config::instance().load("system.ini", "system");
-	}
+    static void loadConfigs() {
+        Config::instance().load("system.ini", "system");
+    }
 
-	static void registerTypes() {
-		GameObjectFactory::instance()
-			.registerType("player", std::unique_ptr<PlayerCreator>(new PlayerCreator));
-	}
+    static void registerTypes() {
+        GameObjectFactory::instance()
+            .registerType("player", std::unique_ptr<PlayerCreator>(new PlayerCreator));
+    }
 
 };

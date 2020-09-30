@@ -7,8 +7,9 @@ class Log;
 class Config {
 
 private:
-    Config() {}
-    
+    Config() {
+    }
+
     std::map<std::string, INIReader*> m_readers;
 
     static std::unique_ptr<Config> s_pInstance;

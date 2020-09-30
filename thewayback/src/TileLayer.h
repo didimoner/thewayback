@@ -12,10 +12,12 @@ private:
     std::vector<std::vector<uint32_t>> m_tileIds;
 
     static Log Logger;
-    
+
 public:
     TileLayer(const std::vector<Tileset>& tilesets);
-    ~TileLayer() {}
+
+    ~TileLayer() {
+    }
 
     void update();
     void draw();
@@ -27,4 +29,3 @@ private:
     int findTilesetIndex(uint32_t tileId) const;
 
 };
-

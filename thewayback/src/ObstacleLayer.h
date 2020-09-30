@@ -23,4 +23,3 @@ public:
 private:
     uint32_t calculateIndex(float x, float y) const;
 };
-

@@ -15,7 +15,7 @@ private:
 
 public:
     Camera(const GameObject* pTrackedObject, uint16_t width, uint16_t height,
-        uint32_t levelWidth, uint32_t levelHeight);
+           uint32_t levelWidth, uint32_t levelHeight);
 
     void update();
 
@@ -26,9 +26,9 @@ public:
     uint16_t getWidth() const {
         return m_width;
     }
+
     uint16_t getHeight() const {
         return m_height;
     }
 
 };
-

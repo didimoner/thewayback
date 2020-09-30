@@ -38,12 +38,12 @@ void TileLayer::draw() {
             const Camera* pCamera = Game::instance().getCurrentState().getCamera();
             Vector2f cameraPos = pCamera->getPosition();
             Vector2f bottomCameraPos(
-                cameraPos.getX() + pCamera->getWidth(), 
+                cameraPos.getX() + pCamera->getWidth(),
                 cameraPos.getY() + pCamera->getHeight()
             );
             int safeOffset = 2;
 
-            bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight 
+            bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight
                 || column + safeOffset < cameraPos.getX() / tileset.tileWidth;
             bool botPosCheck = (int)row - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
                 || (int)column - safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
@@ -53,19 +53,19 @@ void TileLayer::draw() {
             }
 
             uint32_t localTileId = tileId - tileset.firstGlobalId;
-            float x = (float) (column * tileset.tileWidth);
-            float y = (float) (row * tileset.tileHeight);
+            float x = (float)(column * tileset.tileWidth);
+            float y = (float)(row * tileset.tileHeight);
             uint32_t tilesetRow = localTileId / tileset.columns;
             uint32_t tilesetColumn = localTileId % tileset.columns;
 
             TextureManager::instance().drawFrame(
-                tileset.name, 
-                x - cameraPos.getX(), 
-                y - cameraPos.getY(), 
-                tileset.tileWidth, 
-                tileset.tileHeight, 
-                tilesetRow, 
-                tilesetColumn, 
+                tileset.name,
+                x - cameraPos.getX(),
+                y - cameraPos.getY(),
+                tileset.tileWidth,
+                tileset.tileHeight,
+                tilesetRow,
+                tilesetColumn,
                 Game::instance().getRenderer()
             );
         }

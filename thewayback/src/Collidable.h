@@ -8,11 +8,12 @@ class Collidable {
 
 protected:
     std::string m_objectId;
-    
+
 public:
     std::string getObjectId() const {
         return m_objectId;
     }
+
     void setObjectId(std::string id) {
         m_objectId = id;
     }

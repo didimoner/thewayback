@@ -20,7 +20,7 @@ void SplashState::onActivate() {
 
     FontManager::instance().loadFont("segoeui.ttf", "segoeui", 16);
     FontManager::instance().createMultilineTexture("segoeui", "hello_text", "Hello my dear friend!\nHow are you doing?", 320,
-        { 255,255,255 }, Game::instance().getRenderer());
+                                                   {255, 255, 255}, Game::instance().getRenderer());
 }
 
 bool SplashState::onDeactivate() {

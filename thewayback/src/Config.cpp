@@ -6,7 +6,7 @@
 std::unique_ptr<Config> Config::s_pInstance;
 Log Config::Logger(typeid(Config).name());
 
-bool Config::load(std::string filename, std::string id) { 
+bool Config::load(std::string filename, std::string id) {
     std::string configsDirPath = getResourcePath("configs");
     std::string filepath = configsDirPath + filename;
 

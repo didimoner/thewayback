@@ -2,7 +2,7 @@
 #include "pch.h"
 
 class Drawable {
-    
+
 private:
     uint16_t m_priority = 0;
 
@@ -20,6 +20,7 @@ public:
     uint16_t getPriority() const {
         return m_priority;
     }
+
     void setPriority(uint16_t priority) {
         m_priority = priority;
     }

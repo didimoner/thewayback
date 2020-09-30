@@ -62,7 +62,7 @@ void Log::error(const std::string& msg) const {
     if (m_logLevel < ELevel::ERROR) {
         return;
     }
-    
+
     this->print("ERROR", msg);
 }
 

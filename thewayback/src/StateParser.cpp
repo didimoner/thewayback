@@ -20,7 +20,7 @@ bool StateParser::parse(std::string filename, std::string stateId, std::vector<G
     XMLError loadResult = xmlDoc.LoadFile(filepath.c_str());
     if (loadResult != XML_SUCCESS) {
         Logger.error("Cannot load " + filename);
-        return false ;
+        return false;
     }
 
     XMLNode* pRoot = xmlDoc.FirstChildElement();
@@ -62,7 +62,7 @@ void StateParser::parseTextures(XMLElement* pTexturesRoot) {
 }
 
 // TODO: refactor
-void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*> &gameObjects) {
+void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*>& gameObjects) {
     for (XMLElement* e = pObjectsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         std::string type = e->Attribute("type");
         std::string textureId = e->Attribute("textureId");
@@ -73,7 +73,7 @@ void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*
         int height = e->IntAttribute("height");
         uint8_t frames = e->IntAttribute("frames");
 
-        Animation*drawable = static_cast<Animation*>(GameObjectFactory::instance().create(type));
+        Animation* drawable = static_cast<Animation*>(GameObjectFactory::instance().create(type));
         AnimationInitParams animationInitParams;
         animationInitParams.totalFrames = frames;
         animationInitParams.speed = 4;

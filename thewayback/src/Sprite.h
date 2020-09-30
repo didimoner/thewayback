@@ -4,17 +4,22 @@
 class Sprite : public GameObject {
 
 protected:
-	uint8_t m_row = 0;
-	uint8_t m_frame = 0;
-	std::string m_textureId;
+    uint8_t m_row = 0;
+    uint8_t m_frame = 0;
+    std::string m_textureId;
 
 public:
-	Sprite() : GameObject() {}
-	virtual ~Sprite() {}
+    Sprite() : GameObject() {
+    }
 
-	virtual void init(float x, float y, int w, int h, std::string textureId);
-	virtual void update();
-	virtual void draw();
-	virtual void clean() {}
+    virtual ~Sprite() {
+    }
+
+    virtual void init(float x, float y, int w, int h, std::string textureId);
+    virtual void update();
+    virtual void draw();
+
+    virtual void clean() {
+    }
 
 };

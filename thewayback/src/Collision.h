@@ -19,8 +19,8 @@ public:
     }
 
     static bool checkRects(const SDL_Rect& first, const SDL_Rect& second, int offset = 0) {
-        SDL_FRect firstFRect = { (float)first.x, (float)first.y, (float)first.w, (float)first.h };
-        SDL_FRect secondFRect = { (float)second.x, (float)second.y, (float)second.w, (float)second.h };
+        SDL_FRect firstFRect = {(float)first.x, (float)first.y, (float)first.w, (float)first.h};
+        SDL_FRect secondFRect = {(float)second.x, (float)second.y, (float)second.w, (float)second.h};
         return checkRects(firstFRect, secondFRect);
     }
 
@@ -30,4 +30,3 @@ public:
     }
 
 };
-

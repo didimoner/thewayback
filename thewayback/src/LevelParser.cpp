@@ -20,7 +20,7 @@ Log LevelParser::Logger(typeid(LevelParser).name());
 
 Level* LevelParser::parse(std::string filename) {
     Logger.debug("Loading level from " + filename);
-    
+
     std::string resourcesPath = getResourcePath("maps");
     std::string filepath = resourcesPath + filename;
 
@@ -100,8 +100,8 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
         uLongf allTilesSize = pLevel->m_width * pLevel->m_height * sizeof(int);
         std::vector<uint32_t> uncompressedTileIds(allTilesSize);
 
-        int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize, 
-            (const Bytef*)decodedData.c_str(), decodedData.size());
+        int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize,
+                                          (const Bytef*)decodedData.c_str(), decodedData.size());
         if (uncompressStatus != Z_OK) {
             Logger.warn("Something wrong with zlib uncpompression. Code: " + uncompressStatus);
         }
@@ -147,15 +147,15 @@ void LevelParser::parseObstacles(XMLElement* pRoot, Level* pLevel) {
     uint8_t gridCols = getIntProperty(pRoot, "grid_cols");
     uint8_t gridRows = getIntProperty(pRoot, "grid_rows");
     ObstacleLayer* pCollidableLayer = new ObstacleLayer(
-        layerId, 
-        pLevel->m_width * pLevel->m_tileWidth, 
+        layerId,
+        pLevel->m_width * pLevel->m_tileWidth,
         pLevel->m_height * pLevel->m_tileHeight,
         gridCols, gridRows
     );
-    
+
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
         Obstacle* pObstacle = new Obstacle(
-            (float) o->IntAttribute("x"), (float) o->IntAttribute("y"),
+            (float)o->IntAttribute("x"), (float)o->IntAttribute("y"),
             o->IntAttribute("width"), o->IntAttribute("height")
         );
 

@@ -36,7 +36,7 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
     }
 
     SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
-    
+
     SDL_FreeSurface(pSurface);
 
     if (pTexture == 0) {
@@ -49,7 +49,7 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
 }
 
 void TextureManager::draw(std::string textureId, float x, float y, int width, int height,
-        SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
+                          SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger.warn("Texture not found in the map: " + textureId);
@@ -63,8 +63,8 @@ void TextureManager::draw(std::string textureId, float x, float y, int width, in
     sourceRect.h = height;
 
     SDL_Rect destRect;
-    destRect.x = (int) x;
-    destRect.y = (int) y;
+    destRect.x = (int)x;
+    destRect.y = (int)y;
     destRect.w = width;
     destRect.h = height;
 
@@ -72,7 +72,7 @@ void TextureManager::draw(std::string textureId, float x, float y, int width, in
 }
 
 void TextureManager::drawFrame(std::string textureId, float x, float y, int width, int height,
-    uint32_t currentRow, uint32_t currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
+                               uint32_t currentRow, uint32_t currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger.warn("Texture not found in the map: " + textureId);
@@ -86,8 +86,8 @@ void TextureManager::drawFrame(std::string textureId, float x, float y, int widt
     sourceRect.h = height;
 
     SDL_Rect destRect;
-    destRect.x = (int) x;
-    destRect.y = (int) y;
+    destRect.x = (int)x;
+    destRect.y = (int)y;
     destRect.w = width;
     destRect.h = height;
 

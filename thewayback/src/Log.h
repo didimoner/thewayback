@@ -5,7 +5,11 @@ class Log {
 
 private:
     enum class ELevel {
-        ERROR = 0, WARNING, INFO, DEBUG, TRACE
+        ERROR = 0,
+        WARNING,
+        INFO,
+        DEBUG,
+        TRACE
     };
 
 private:
@@ -16,7 +20,8 @@ private:
     static std::unique_ptr<INIReader> s_pConfigReader;
 
 public:
-    Log() : Log("root") {};
+    Log() : Log("root") {
+    };
     Log(std::string loggerName);
 
     static const Log& getLogger();

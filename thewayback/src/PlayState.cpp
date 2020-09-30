@@ -31,10 +31,10 @@ void PlayState::onActivate() {
     m_pLevel = levelParser.parse("test5.tmx");
 
     m_pCamera = new Camera(
-        m_pLevel->getPlayer(), 
-        Game::instance().getWindowWidth(), 
-        Game::instance().getWindowHeight(), 
-        m_pLevel->getWidthPx(), 
+        m_pLevel->getPlayer(),
+        Game::instance().getWindowWidth(),
+        Game::instance().getWindowHeight(),
+        m_pLevel->getWidthPx(),
         m_pLevel->getHeightPx()
     );
 }

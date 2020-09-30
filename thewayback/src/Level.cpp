@@ -10,7 +10,7 @@
 Level::~Level() {
     delete m_pPlayer;
 
-    for (Drawable* pDrawable: m_drawables) {
+    for (Drawable* pDrawable : m_drawables) {
         delete pDrawable;
     }
     m_drawables.clear();
@@ -36,7 +36,7 @@ void Level::update() {
 }
 
 void Level::draw() {
-    for (Drawable* pDrawable: m_drawables) {
+    for (Drawable* pDrawable : m_drawables) {
         pDrawable->draw();
     }
 }

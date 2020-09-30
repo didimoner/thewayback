@@ -19,4 +19,3 @@ public:
     virtual std::string getStateId() const;
 
 };
-

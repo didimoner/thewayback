@@ -19,5 +19,5 @@ public:
     virtual bool onDeactivate() = 0;
 
     virtual std::string getStateId() const = 0;
-    
+
 };

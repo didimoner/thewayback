@@ -12,10 +12,10 @@ private:
     static Log Logger;
 
 public:
-    bool parse(std::string filename, std::string stateId, std::vector<GameObject*> &gameObjects);
+    bool parse(std::string filename, std::string stateId, std::vector<GameObject*>& gameObjects);
 
 private:
     void parseTextures(XMLElement* pTexturesRoot);
-    void parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*> &gameObjects);
+    void parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*>& gameObjects);
 
 };

@@ -12,14 +12,14 @@ ObstacleLayer::ObstacleLayer(std::string id, uint32_t width, uint32_t height, ui
 
     for (uint16_t i = 0; i < gridCols * gridRows; i++) {
         m_obstacles.push_back(std::vector<Obstacle*>());
-    }   
+    }
 }
 
 ObstacleLayer::~ObstacleLayer() {
     for (std::vector<Obstacle*> list : m_obstacles) {
         for (Obstacle* pObstacle : list) {
             delete pObstacle;
-        }  
+        }
     }
     m_obstacles.clear();
 }
@@ -47,7 +47,7 @@ std::set<Obstacle*> ObstacleLayer::getObstacles(SDL_FRect boundary) const {
     indices.insert(calculateIndex(boundary.x + boundary.w, boundary.y));
     indices.insert(calculateIndex(boundary.x + boundary.w, boundary.y + boundary.h));
     indices.insert(calculateIndex(boundary.x, boundary.y + boundary.h));
-    
+
     std::set<Obstacle*> result;
     for (uint32_t index : indices) {
         if (index < 0 || index > m_obstacles.size()) {
@@ -66,5 +66,3 @@ uint32_t ObstacleLayer::calculateIndex(float x, float y) const {
     int column = (int)(y / ((float)m_height / m_gridCols));
     return row + m_gridRows * column;
 }
-
- 

@@ -60,14 +60,14 @@ void Animation::updateState() {
 
     float speedMultiplier = 1;
     switch (m_animationSpeed) {
-        case EAnimationSpeed::SLOW:
-            speedMultiplier = 0.5;
-            break;
-        case EAnimationSpeed::FAST:
-            speedMultiplier = 2;
-            break;
+    case EAnimationSpeed::SLOW:
+        speedMultiplier = 0.5;
+        break;
+    case EAnimationSpeed::FAST:
+        speedMultiplier = 2;
+        break;
     }
-        
+
     uint32_t now = SDL_GetTicks();
     uint32_t elapsedTime = now - m_previousTick;
 
@@ -79,4 +79,3 @@ void Animation::updateState() {
         m_previousTick = now;
     }
 }
-
