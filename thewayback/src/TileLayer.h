@@ -8,7 +8,7 @@ class TileLayer : public Drawable {
 
 private:
     std::string m_name;
-    const std::vector<Tileset> &m_tilesets;
+    const std::vector<Tileset> m_tilesets;
     std::vector<std::vector<uint32_t>> m_tileIds;
 
     static Log Logger;

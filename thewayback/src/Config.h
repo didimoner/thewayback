@@ -1,6 +1,6 @@
 #pragma once
 
-#include "INIReader.h"
+#include "vendor/INIReader.h"
 
 class Log;
 

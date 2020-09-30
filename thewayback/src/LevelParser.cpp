@@ -1,7 +1,7 @@
 #include "pch.h"
 #include <zlib.h>
 #include <SDL_rect.h>
-#include "base64.h"
+#include "vendor/base64.h"
 #include "LevelParser.h"
 #include "SystemUtils.h"
 #include "TextureManager.h"

@@ -71,14 +71,8 @@
     <ClCompile Include="src\InputHandler.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\tinyxml2.cpp">
-      <Filter>Engine\Vendor</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\base64.cpp">
-      <Filter>Engine\Vendor</Filter>
     </ClCompile>
     <ClCompile Include="src\Level.cpp">
       <Filter>Game\Map</Filter>
@@ -109,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="src\Sprite.cpp">
       <Filter>Engine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\base64.cpp">
+      <Filter>Engine\Vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\tinyxml2.cpp">
+      <Filter>Engine\Vendor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,17 +155,8 @@
     <ClInclude Include="src\InputHandler.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\tinyxml2.h">
-      <Filter>Engine\Vendor</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game.h">
       <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\INIReader.h">
-      <Filter>Engine\Vendor</Filter>
-    </ClInclude>
-    <ClInclude Include="src\base64.h">
-      <Filter>Engine\Vendor</Filter>
     </ClInclude>
     <ClInclude Include="src\Level.h">
       <Filter>Game\Map</Filter>
@@ -217,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="src\Drawable.h">
       <Filter>Engine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\base64.h">
+      <Filter>Engine\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\INIReader.h">
+      <Filter>Engine\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\tinyxml2.h">
+      <Filter>Engine\Vendor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
