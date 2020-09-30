@@ -21,8 +21,9 @@ private:
 
 public:
     Log() : Log("root") {
-    };
-    Log(std::string loggerName);
+    }
+
+    explicit Log(std::string loggerName);
 
     static const Log& getLogger();
 
@@ -33,7 +34,7 @@ public:
     void error(const std::string& msg) const;
 
 private:
-    void print(std::string level, std::string msg) const;
+    void print(const std::string& level, const std::string& msg) const;
     static std::string getNow();
 
 };

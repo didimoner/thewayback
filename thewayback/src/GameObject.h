@@ -14,13 +14,9 @@ protected:
     Vector2f m_acceleration;
 
 public:
-    GameObject() {
-    }
+    GameObject() = default;
 
-    virtual ~GameObject() {
-    }
-
-    virtual void init(float x, float y, int w, int h) {
+    void init(float x, float y, int w, int h) {
         m_position = {x, y};
         m_width = w;
         m_height = h;

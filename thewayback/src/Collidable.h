@@ -2,6 +2,8 @@
 #include "pch.h"
 #include <SDL_rect.h>
 
+#include <utility>
+
 enum class ECollisionType;
 
 class Collidable {
@@ -17,10 +19,10 @@ public:
     }
 
     void setObjectId(std::string id) {
-        m_objectId = id;
+        m_objectId = std::move(id);
     }
 
-    virtual SDL_FRect getBoundary() const = 0;
+    virtual SDL_FRect getCollider() const = 0;
     virtual void onCollide(ECollisionType type, std::string objectId) = 0;
 
 };

@@ -25,11 +25,11 @@ FontManager::~FontManager() {
     m_textures.clear();
 }
 
-bool FontManager::loadFont(std::string filename, std::string id, int size) {
+bool FontManager::loadFont(const std::string& filename, std::string id, int size) {
     Logger.debug("Loading font: " + filename);
 
-    std::string resourcesPath = getResourcePath("fonts");
-    std::string filepath = resourcesPath + filename;
+    const std::string resourcesPath = getResourcePath("fonts");
+    const std::string filepath = resourcesPath + filename;
     TTF_Font* pFont = TTF_OpenFont(filepath.c_str(), size);
 
     if (pFont == nullptr) {
@@ -41,8 +41,8 @@ bool FontManager::loadFont(std::string filename, std::string id, int size) {
     return true;
 }
 
-void FontManager::createTexture(std::string fontId, std::string textureId,
-                                std::string text, SDL_Color color, SDL_Renderer* pRenderer) {
+void FontManager::createTexture(const std::string& fontId, const std::string& textureId,
+                                const std::string& text, SDL_Color color, SDL_Renderer* pRenderer) {
     Logger.debug("Creating texture " + textureId + " from font " + fontId);
     TTF_Font* pFont = m_fonts[fontId];
     if (pFont == nullptr) {
@@ -57,8 +57,8 @@ void FontManager::createTexture(std::string fontId, std::string textureId,
     m_textures[textureId] = pTexture;
 }
 
-void FontManager::createMultilineTexture(std::string fontId, std::string textureId,
-                                         std::string text, uint32_t lineWidth, SDL_Color color, SDL_Renderer* pRenderer) {
+void FontManager::createMultilineTexture(const std::string& fontId, const std::string& textureId,
+                                         const std::string& text, uint32_t lineWidth, SDL_Color color, SDL_Renderer* pRenderer) {
     Logger.debug("Creating multiline texture " + textureId + " from font " + fontId
         + " with line width " + std::to_string(lineWidth));
     TTF_Font* pFont = m_fonts[fontId];
@@ -74,7 +74,7 @@ void FontManager::createMultilineTexture(std::string fontId, std::string texture
     m_textures[textureId] = pTexture;
 }
 
-void FontManager::removeTexture(std::string textureId) {
+void FontManager::removeTexture(const std::string& textureId) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger.warn("Texture to remove not found in the map: " + textureId);
@@ -85,7 +85,7 @@ void FontManager::removeTexture(std::string textureId) {
     m_textures.erase(textureId);
 }
 
-void FontManager::draw(std::string textureId, float x, float y,
+void FontManager::draw(const std::string& textureId, float x, float y,
                        SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
@@ -100,7 +100,7 @@ void FontManager::draw(std::string textureId, float x, float y,
     draw(textureId, x, y, width, height, pRenderer, flip);
 }
 
-void FontManager::draw(std::string textureId, float x, float y, int width, int height,
+void FontManager::draw(const std::string& textureId, float x, float y, int width, int height,
                        SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {

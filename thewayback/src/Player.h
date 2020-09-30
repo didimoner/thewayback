@@ -32,7 +32,7 @@ public:
     void clean() override;
 
     void onCollide(ECollisionType type, std::string objectId) override;
-    SDL_FRect getBoundary() const override;
+    SDL_FRect getCollider() const override;
 
     void setWalkingSpeed(float walkingSpeed);
     void setRunningSpeed(float runningSpeed);

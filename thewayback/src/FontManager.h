@@ -30,18 +30,19 @@ public:
 
     // ---------------------
 
-    bool loadFont(std::string filename, std::string id, int size);
+    bool loadFont(const std::string& filename, std::string id, int size);
 
-    void createTexture(std::string fontId, std::string textureId,
-                       std::string text, SDL_Color color, SDL_Renderer* pRenderer);
-    void createMultilineTexture(std::string fontId, std::string textureId,
-                                std::string text, uint32_t lineWidth, SDL_Color color, SDL_Renderer* pRenderer);
+    void createTexture(const std::string& fontId, const std::string& textureId,
+                       const std::string& text, SDL_Color color, SDL_Renderer* pRenderer);
+    void createMultilineTexture(const std::string& fontId, const std::string& textureId,
+                                const std::string& text, uint32_t lineWidth, SDL_Color color, 
+                                SDL_Renderer* pRenderer);
 
-    void removeTexture(std::string textureId);
+    void removeTexture(const std::string& textureId);
 
-    void draw(std::string textureId, float x, float y,
+    void draw(const std::string& textureId, float x, float y,
               SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void draw(std::string textureId, float x, float y, int width, int height,
+    void draw(const std::string& textureId, float x, float y, int width, int height,
               SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 };

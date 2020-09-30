@@ -20,25 +20,25 @@ void Player::update() {
 }
 
 void Player::draw() {
-    Sprite::draw();
+    Animation::draw();
 }
 
 void Player::clean() {
-    Sprite::clean();
+    Animation::clean();
 }
 
 void Player::onCollide(ECollisionType type, std::string objectId) {
     Camera* pCamera = Game::instance().getCurrentState().getCamera();
 
     switch (type) {
-    case ECollisionType::PLAYER_OBSTACLE: {
-        m_acceleration.set(0, 0);
-        m_position -= m_velocity;
-    }
+        case ECollisionType::PLAYER_OBSTACLE: {
+            m_acceleration.set(0, 0);
+            m_position -= m_velocity;
+        }
     }
 }
 
-SDL_FRect Player::getBoundary() const {
+SDL_FRect Player::getCollider() const {
     return {m_position.getX(), m_position.getY(), static_cast<float>(m_width), static_cast<float>(m_height)};
 }
 
@@ -75,7 +75,7 @@ void Player::updatePlayerState() {
         setAnimationSpeed(EAnimationSpeed::NORMAL);
     }
 
-    float speed = m_isRunning ? m_runningSpeed : m_walkingSpeed;
+    const float speed = m_isRunning ? m_runningSpeed : m_walkingSpeed;
     switch (m_playerState) {
     case EPlayerState::MOVING_UP:
         m_velocity.setY(-1 * speed);

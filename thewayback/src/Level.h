@@ -19,7 +19,7 @@ private:
 
     Player* m_pPlayer = nullptr;
 
-    std::multiset<Drawable*, Drawable::Comparator> m_drawables;
+    std::multiset<Drawable*, Drawable::DrawableComparator> m_drawables;
     std::vector<Tileset> m_tilesets;
     std::vector<ObstacleLayer*> m_obstacleLayers;
 
@@ -27,7 +27,7 @@ public:
     ~Level();
 
     std::vector<Tileset>* getTilesets();
-    std::multiset<Drawable*, Drawable::Comparator>* getDrawables();
+    std::multiset<Drawable*, Drawable::DrawableComparator>* getDrawables();
     std::vector<ObstacleLayer*>* getObstacleLayers();
 
     uint32_t getWidthPx() const;

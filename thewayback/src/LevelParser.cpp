@@ -79,7 +79,8 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>*
         pTilesets->push_back(tileset);
 
         XMLElement* pImageElement = e->FirstChildElement("image");
-        const std::string filename = splitString(pImageElement->Attribute("source"), '/').back();
+        const std::string source = pImageElement->Attribute("source");
+        const std::string filename = splitString(source, '/').back();
         TextureManager::instance().load(filename, tileset.name, Game::instance().getRenderer());
     }
 }

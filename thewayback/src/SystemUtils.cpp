@@ -30,7 +30,7 @@ std::string getResourcePath(const std::string& subDir) {
     return subDir.empty() ? baseRes : baseRes + subDir + PATH_SEP;
 }
 
-std::vector<std::string> splitString(std::string str, char delimiter) {
+std::vector<std::string> splitString(const std::string& str, char delimiter) {
     std::vector<std::string> result;
 
     std::stringstream ss(str);

@@ -33,7 +33,7 @@ void ObstacleLayer::addObstacle(Obstacle* pObstacle) {
             mapRect.x = mapRect.w * row;
             mapRect.y = mapRect.h * column;
 
-            if (Collision::checkRects(pObstacle->getBoundary(), mapRect)) {
+            if (Collision::checkRects(pObstacle->getCollider(), mapRect)) {
                 const int index = row + m_gridRows * column;
                 m_obstacles[index].push_back(pObstacle);
             }

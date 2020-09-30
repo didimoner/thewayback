@@ -18,7 +18,7 @@ public:
     void onCollide(ECollisionType type, std::string objectId) override {
     }
 
-    SDL_FRect getBoundary() const override {
+    SDL_FRect getCollider() const override {
         return {m_position.getX(), m_position.getY(), static_cast<float>(m_width), static_cast<float>(m_height)};
     }
 

@@ -6,9 +6,9 @@
 std::unique_ptr<Config> Config::s_pInstance;
 Log Config::Logger(typeid(Config).name());
 
-bool Config::load(std::string filename, std::string id) {
-    std::string configsDirPath = getResourcePath("configs");
-    std::string filepath = configsDirPath + filename;
+bool Config::load(const std::string& filename, const std::string& id) {
+    const std::string configsDirPath = getResourcePath("configs");
+    const std::string filepath = configsDirPath + filename;
 
     INIReader* pReader = new INIReader(filepath);
     if (pReader->ParseError() != 0) {
@@ -20,7 +20,7 @@ bool Config::load(std::string filename, std::string id) {
     return true;
 }
 
-INIReader* Config::get(std::string key) {
+INIReader* Config::get(const std::string& key) {
     INIReader* pReader = m_readers[key];
     if (pReader == nullptr) {
         Logger.warn("Requested config not found: " + key);

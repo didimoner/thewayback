@@ -1,9 +1,11 @@
 #pragma once
-
-#include <math.h>
 #include <sstream>
 
 class Vector2f {
+
+private:
+    float m_x;
+    float m_y;
 
 public:
     Vector2f() : m_x(0), m_y(0) {
@@ -28,7 +30,7 @@ public:
     }
 
     Vector2f operator+(const Vector2f& other) const {
-        return Vector2f(m_x + other.m_x, m_y + other.m_y);
+        return {m_x + other.m_x, m_y + other.m_y};
     }
 
     Vector2f& operator+=(const Vector2f other) {
@@ -39,7 +41,7 @@ public:
     }
 
     Vector2f operator*(float scalar) const {
-        return Vector2f(m_x * scalar, m_y * scalar);
+        return {m_x * scalar, m_y * scalar};
     }
 
     Vector2f& operator*=(float scalar) {
@@ -50,7 +52,7 @@ public:
     }
 
     Vector2f operator-(const Vector2f& other) const {
-        return Vector2f(m_x - other.m_x, m_y - other.m_y);
+        return {m_x - other.m_x, m_y - other.m_y};
     }
 
     Vector2f& operator-=(const Vector2f& other) {
@@ -61,7 +63,7 @@ public:
     }
 
     Vector2f operator/(float scalar) const {
-        return Vector2f(m_x / scalar, m_y / scalar);
+        return {m_x / scalar, m_y / scalar};
     }
 
     Vector2f& operator/=(const Vector2f& other) {
@@ -83,9 +85,5 @@ public:
         ss << "(" << m_x << ", " << m_y << ")";
         return ss.str();
     }
-
-private:
-    float m_x;
-    float m_y;
 
 };

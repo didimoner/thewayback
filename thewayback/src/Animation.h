@@ -43,10 +43,9 @@ private:
 public:
     Animation() : Sprite() {
     }
+    ~Animation() override = default;
 
-    virtual ~Animation() = default;
-
-    virtual void init(float x, float y, int w, int h, std::string textureId, AnimationInitParams params);
+    void init(float x, float y, int w, int h, std::string textureId, AnimationInitParams params);
     void update() override;
     void draw() override;
 

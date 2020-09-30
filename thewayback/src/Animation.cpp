@@ -2,10 +2,12 @@
 #include "Animation.h"
 #include "Sprite.h"
 #include <SDL_timer.h>
+
+#include <utility>
 #include "Log.h"
 
 void Animation::init(float x, float y, int w, int h, std::string textureId, AnimationInitParams params) {
-    Sprite::init(x, y, w, h, textureId);
+    Sprite::init(x, y, w, h, std::move(textureId));
     m_speed = params.speed;
     m_looped = params.looped;
     m_defaultFrame = params.defaultFrame;

@@ -7,8 +7,7 @@ class Log;
 class Config {
 
 private:
-    Config() {
-    }
+    Config() = default;
 
     std::map<std::string, INIReader*> m_readers;
 
@@ -30,7 +29,7 @@ public:
 
     // ------------------------------------
 
-    bool load(std::string filename, std::string id);
-    INIReader* get(std::string key);
+    bool load(const std::string& filename, const std::string& id);
+    INIReader* get(const std::string& key);
 
 };

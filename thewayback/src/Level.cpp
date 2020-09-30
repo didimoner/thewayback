@@ -27,7 +27,7 @@ void Level::update() {
     }
 
     for (ObstacleLayer* pObstacleLayer : m_obstacleLayers) {
-        std::set<Obstacle*> obstacles = pObstacleLayer->getObstacles(m_pPlayer->getBoundary());
+        std::set<Obstacle*> obstacles = pObstacleLayer->getObstacles(m_pPlayer->getCollider());
         for (Obstacle* pObstacle : obstacles) {
             Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pObstacle);
         }
@@ -44,7 +44,7 @@ std::vector<Tileset>* Level::getTilesets() {
     return &m_tilesets;
 }
 
-std::multiset<Drawable*, Drawable::Comparator>* Level::getDrawables() {
+std::multiset<Drawable*, Drawable::DrawableComparator>* Level::getDrawables() {
     return &m_drawables;
 }
 

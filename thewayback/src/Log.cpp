@@ -3,16 +3,17 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include <utility>
 #include "SystemUtils.h"
 
 std::unique_ptr<INIReader> Log::s_pConfigReader;
 Log Log::Logger;
 
 Log::Log(std::string loggerName) {
-    m_name = loggerName;
+    m_name = std::move(loggerName);
 
     if (!s_pConfigReader) {
-        std::string configsDirPath = getResourcePath("configs");
+        const std::string configsDirPath = getResourcePath("configs");
         s_pConfigReader = std::make_unique<INIReader>(configsDirPath + "log_config.ini");
 
         if (s_pConfigReader->ParseError() != 0) {
@@ -66,13 +67,13 @@ void Log::error(const std::string& msg) const {
     this->print("ERROR", msg);
 }
 
-void Log::print(std::string levelStr, std::string msg) const {
+void Log::print(const std::string& levelStr, const std::string& msg) const {
     std::cout << getNow() << " [" << levelStr << "] (" << m_name << ") - " << msg << std::endl;
 }
 
 std::string Log::getNow() {
     auto t = std::time(nullptr);
-    struct tm tm;
+    struct tm tm {};
     localtime_s(&tm, &t);
 
     std::stringstream buffer;

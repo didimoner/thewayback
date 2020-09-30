@@ -12,10 +12,7 @@ public:
     Sprite() : GameObject() {
     }
 
-    virtual ~Sprite() {
-    }
-
-    virtual void init(float x, float y, int w, int h, std::string textureId);
+    void init(float x, float y, int w, int h, std::string textureId);
     void update() override;
     void draw() override;
 

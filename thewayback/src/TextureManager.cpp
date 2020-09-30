@@ -8,8 +8,7 @@ std::unique_ptr<TextureManager> TextureManager::s_pInstance;
 Log TextureManager::Logger(typeid(TextureManager).name());
 
 TextureManager::TextureManager() {
-    int initFlags = IMG_INIT_PNG | IMG_INIT_JPG;
-
+    const int initFlags = IMG_INIT_PNG | IMG_INIT_JPG;
     if ((IMG_Init(initFlags) & initFlags) != initFlags) {
         Logger.error("SDL_Image initialization error: " + std::string(IMG_GetError()));
     }
@@ -23,11 +22,11 @@ TextureManager::~TextureManager() {
     m_textures.clear();
 }
 
-bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pRenderer) {
+auto TextureManager::load(const std::string& filename, std::string id, SDL_Renderer* pRenderer) -> bool {
     Logger.debug("Loading texture: " + filename);
 
-    std::string resourcesPath = getResourcePath("images");
-    std::string filepath = resourcesPath + filename;
+    const std::string resourcesPath = getResourcePath("images");
+    const std::string filepath = resourcesPath + filename;
     SDL_Surface* pSurface = IMG_Load(filepath.c_str());
 
     if (pSurface == nullptr) {
@@ -48,7 +47,7 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
     return true;
 }
 
-void TextureManager::draw(std::string textureId, float x, float y, int width, int height,
+void TextureManager::draw(const std::string& textureId, float x, float y, int width, int height,
                           SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
@@ -71,7 +70,7 @@ void TextureManager::draw(std::string textureId, float x, float y, int width, in
     SDL_RenderCopyEx(pRenderer, pTexture, &sourceRect, &destRect, 0, nullptr, flip);
 }
 
-void TextureManager::drawFrame(std::string textureId, float x, float y, int width, int height,
+void TextureManager::drawFrame(const std::string& textureId, float x, float y, int width, int height,
                                uint32_t currentRow, uint32_t currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {

@@ -12,7 +12,7 @@ private:
 
 public:
     static void checkCollidables(ECollisionType type, Collidable* pFirst, Collidable* pSecond) {
-        if (checkRects(pFirst->getBoundary(), pSecond->getBoundary(), DEFAULT_OFFSET)) {
+        if (checkRects(pFirst->getCollider(), pSecond->getCollider(), DEFAULT_OFFSET)) {
             pFirst->onCollide(type, pSecond->getObjectId());
             pSecond->onCollide(type, pFirst->getObjectId());
         }

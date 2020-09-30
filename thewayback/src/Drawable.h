@@ -9,7 +9,7 @@ private:
 public:
     virtual ~Drawable() = default;
 
-    struct Comparator {
+    struct DrawableComparator {
         bool operator()(const Drawable* first, const Drawable* second) const {
             return first->getPriority() < second->getPriority();
         }
