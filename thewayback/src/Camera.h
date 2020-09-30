@@ -1,7 +1,6 @@
 #pragma once
 #include "Vector2f.h"
 #include "GameObject.h"
-#include "Game.h"
 
 class Camera {
 
@@ -18,17 +17,8 @@ public:
            uint32_t levelWidth, uint32_t levelHeight);
 
     void update();
-
-    Vector2f getPosition() const {
-        return m_position;
-    }
-
-    uint16_t getWidth() const {
-        return m_width;
-    }
-
-    uint16_t getHeight() const {
-        return m_height;
-    }
+    Vector2f getPosition() const;
+    uint16_t getWidth() const;
+    uint16_t getHeight() const;
 
 };

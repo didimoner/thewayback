@@ -31,3 +31,15 @@ void Camera::update() {
 
     m_position.set(x, y);
 }
+
+Vector2f Camera::getPosition() const {
+    return m_position;
+}
+
+uint16_t Camera::getWidth() const {
+    return m_width;
+}
+
+uint16_t Camera::getHeight() const {
+    return m_height;
+}
