@@ -28,8 +28,8 @@ void ObstacleLayer::addObstacle(Obstacle* pObstacle) {
     for (uint8_t column = 0; column < m_gridCols; column++) {
         for (uint8_t row = 0; row < m_gridRows; row++) {
             SDL_FRect mapRect;
-            mapRect.w = (float)m_width / m_gridRows;
-            mapRect.h = (float)m_height / m_gridCols;
+            mapRect.w = static_cast<float>(m_width) / m_gridRows;
+            mapRect.h = static_cast<float>(m_height) / m_gridCols;
             mapRect.x = mapRect.w * row;
             mapRect.y = mapRect.h * column;
 
@@ -62,7 +62,7 @@ std::set<Obstacle*> ObstacleLayer::getObstacles(SDL_FRect boundary) const {
 }
 
 uint32_t ObstacleLayer::calculateIndex(float x, float y) const {
-    int row = (int)(x / ((float)m_width / m_gridRows));
-    int column = (int)(y / ((float)m_height / m_gridCols));
+    int row = static_cast<int>(x / (static_cast<float>(m_width) / m_gridRows));
+    int column = static_cast<int>(y / (static_cast<float>(m_height) / m_gridCols));
     return row + m_gridRows * column;
 }

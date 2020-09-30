@@ -16,10 +16,10 @@ public:
     }
 
     virtual void init(float x, float y, int w, int h, std::string textureId);
-    virtual void update();
-    virtual void draw();
+    void update() override;
+    void draw() override;
 
-    virtual void clean() {
+    void clean() override {
     }
 
 };

@@ -13,12 +13,12 @@ private:
     Level* m_pLevel;
 
 public:
-    void update();
-    void draw();
+    void update() override;
+    void draw() override;
 
-    void onActivate();
-    bool onDeactivate();
+    void onActivate() override;
+    bool onDeactivate() override;
 
-    std::string getStateId() const;
+    std::string getStateId() const override;
 
 };

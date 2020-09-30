@@ -13,7 +13,7 @@ Log::Log(std::string loggerName) {
 
     if (!s_pConfigReader) {
         std::string configsDirPath = getResourcePath("configs");
-        Log::s_pConfigReader = std::make_unique<INIReader>(configsDirPath + "log_config.ini");
+        s_pConfigReader = std::make_unique<INIReader>(configsDirPath + "log_config.ini");
 
         if (s_pConfigReader->ParseError() != 0) {
             std::cout << "Error while initialising Logger config." << std::endl;
@@ -67,7 +67,7 @@ void Log::error(const std::string& msg) const {
 }
 
 void Log::print(std::string levelStr, std::string msg) const {
-    std::cout << Log::getNow() << " [" << levelStr << "] (" << m_name << ") - " << msg << std::endl;
+    std::cout << getNow() << " [" << levelStr << "] (" << m_name << ") - " << msg << std::endl;
 }
 
 std::string Log::getNow() {

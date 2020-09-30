@@ -7,9 +7,9 @@ std::unique_ptr<InputHandler> InputHandler::s_pInstance;
 
 
 InputHandler::InputHandler() {
-    m_mouseButtonStates[MouseButton::LEFT] = false;
-    m_mouseButtonStates[MouseButton::MIDDLE] = false;
-    m_mouseButtonStates[MouseButton::RIGHT] = false;
+    m_mouseButtonStates[LEFT] = false;
+    m_mouseButtonStates[MIDDLE] = false;
+    m_mouseButtonStates[RIGHT] = false;
     m_mouseButtonStates[1] = false;
 }
 
@@ -46,7 +46,7 @@ void InputHandler::update() {
 }
 
 void InputHandler::onMouseMove(SDL_Event& event) {
-    m_mousePosition.set((float)event.motion.x, (float)event.motion.y);
+    m_mousePosition.set(static_cast<float>(event.motion.x), static_cast<float>(event.motion.y));
 }
 
 void InputHandler::onMouseButtonDown(SDL_Event& event) {
@@ -74,7 +74,7 @@ void InputHandler::onMouseButtonUp(SDL_Event& event) {
 }
 
 void InputHandler::onKeyboardUpdate() {
-    m_keystates = SDL_GetKeyboardState(NULL);
+    m_keystates = SDL_GetKeyboardState(nullptr);
 }
 
 bool InputHandler::isKeyPressed(SDL_Scancode key) const {

@@ -13,12 +13,12 @@ private:
     std::vector<GameObject*> m_gameObjects;
 
 public:
-    virtual void update();
-    virtual void draw();
+    void update() override;
+    void draw() override;
 
-    virtual void onActivate();
-    virtual bool onDeactivate();
+    void onActivate() override;
+    bool onDeactivate() override;
 
-    virtual std::string getStateId() const;
+    std::string getStateId() const override;
 
 };

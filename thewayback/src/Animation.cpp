@@ -24,7 +24,7 @@ void Animation::init(float x, float y, int w, int h, std::string textureId, Anim
 void Animation::update() {
     Sprite::update();
 
-    if (m_state == Animation::EState::PLAY) {
+    if (m_state == EState::PLAY) {
         updateState();
     }
 }
@@ -34,16 +34,16 @@ void Animation::draw() {
 }
 
 void Animation::playAnimation() {
-    m_state = Animation::EState::PLAY;
+    m_state = EState::PLAY;
 }
 
 void Animation::pauseAnimation() {
-    m_state = Animation::EState::PAUSE;
+    m_state = EState::PAUSE;
     m_previousTick = 0;
 }
 
 void Animation::stopAnimation() {
-    m_state = Animation::EState::STOP;
+    m_state = EState::STOP;
     m_frameIndex = m_defaultFrame;
     m_frame = m_totalFrames[m_frameIndex];
     m_previousTick = 0;

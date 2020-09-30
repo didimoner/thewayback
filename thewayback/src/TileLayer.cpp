@@ -45,16 +45,16 @@ void TileLayer::draw() {
 
             bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight
                 || column + safeOffset < cameraPos.getX() / tileset.tileWidth;
-            bool botPosCheck = (int)row - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
-                || (int)column - safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
+            bool botPosCheck = static_cast<int>(row) - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
+                || static_cast<int>(column) - safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
 
             if (topPosCheck || botPosCheck) {
                 continue;
             }
 
             uint32_t localTileId = tileId - tileset.firstGlobalId;
-            float x = (float)(column * tileset.tileWidth);
-            float y = (float)(row * tileset.tileHeight);
+            float x = static_cast<float>(column * tileset.tileWidth);
+            float y = static_cast<float>(row * tileset.tileHeight);
             uint32_t tilesetRow = localTileId / tileset.columns;
             uint32_t tilesetColumn = localTileId % tileset.columns;
 

@@ -30,12 +30,12 @@ public:
     ~Player() {
     }
 
-    void update();
-    void draw();
-    void clean();
+    void update() override;
+    void draw() override;
+    void clean() override;
 
-    void onCollide(ECollisionType type, std::string objectId);
-    SDL_FRect getBoundary() const;
+    void onCollide(ECollisionType type, std::string objectId) override;
+    SDL_FRect getBoundary() const override;
 
     void setWalkingSpeed(float walkingSpeed);
     void setRunningSpeed(float runningSpeed);
@@ -49,7 +49,7 @@ private:
 class PlayerCreator : public GameObjectCreator {
 
 public:
-    GameObject* create() const {
+    GameObject* create() const override {
         return new Player();
     }
 

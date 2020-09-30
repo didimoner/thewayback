@@ -155,7 +155,7 @@ void LevelParser::parseObstacles(XMLElement* pRoot, Level* pLevel) {
 
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
         Obstacle* pObstacle = new Obstacle(
-            (float)o->IntAttribute("x"), (float)o->IntAttribute("y"),
+            static_cast<float>(o->IntAttribute("x")), static_cast<float>(o->IntAttribute("y")),
             o->IntAttribute("width"), o->IntAttribute("height")
         );
 
@@ -189,9 +189,10 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
                 animationInitParams.type = EAnimationType::NORMAL;
             }
 
-            static_cast<Animation*>(sprite)->init((float)x, (float)y, width, height, textureId, animationInitParams);
+            static_cast<Animation*>(sprite)->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId,
+                                                  animationInitParams);
         } else {
-            sprite->init((float)x, (float)y, width, height, textureId);
+            sprite->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId);
         }
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {

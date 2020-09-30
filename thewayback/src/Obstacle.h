@@ -15,11 +15,11 @@ public:
         : m_position(x, y), m_width(width), m_height(height) {
     }
 
-    void onCollide(ECollisionType type, std::string objectId) {
+    void onCollide(ECollisionType type, std::string objectId) override {
     }
 
-    SDL_FRect getBoundary() const {
-        return {m_position.getX(), m_position.getY(), (float)m_width, (float)m_height};
+    SDL_FRect getBoundary() const override {
+        return {m_position.getX(), m_position.getY(), static_cast<float>(m_width), static_cast<float>(m_height)};
     }
 
 };

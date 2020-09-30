@@ -19,8 +19,8 @@ public:
     ~TileLayer() {
     }
 
-    void update();
-    void draw();
+    void update() override;
+    void draw() override;
 
     void setName(std::string name);
     void setTileIds(const std::vector<std::vector<uint32_t>>& data);

@@ -39,7 +39,7 @@ void Player::onCollide(ECollisionType type, std::string objectId) {
 }
 
 SDL_FRect Player::getBoundary() const {
-    return {m_position.getX(), m_position.getY(), (float)m_width, (float)m_height};
+    return {m_position.getX(), m_position.getY(), static_cast<float>(m_width), static_cast<float>(m_height)};
 }
 
 void Player::setWalkingSpeed(float walkingSpeed) {
@@ -99,8 +99,8 @@ void Player::updatePlayerState() {
     }
 
     if (m_playerState != EPlayerState::IDLE) {
-        Animation::playAnimation();
+        playAnimation();
     } else {
-        Animation::stopAnimation();
+        stopAnimation();
     }
 }

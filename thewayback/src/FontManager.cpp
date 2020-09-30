@@ -95,7 +95,7 @@ void FontManager::draw(std::string textureId, float x, float y,
 
     int width = 0;
     int height = 0;
-    SDL_QueryTexture(pTexture, NULL, NULL, &width, &height);
+    SDL_QueryTexture(pTexture, nullptr, nullptr, &width, &height);
 
     draw(textureId, x, y, width, height, pRenderer, flip);
 }
@@ -109,10 +109,10 @@ void FontManager::draw(std::string textureId, float x, float y, int width, int h
     }
 
     SDL_Rect destRect;
-    destRect.x = (int)x;
-    destRect.y = (int)y;
+    destRect.x = static_cast<int>(x);
+    destRect.y = static_cast<int>(y);
     destRect.w = width;
     destRect.h = height;
 
-    SDL_RenderCopyEx(pRenderer, pTexture, NULL, &destRect, 0, 0, flip);
+    SDL_RenderCopyEx(pRenderer, pTexture, nullptr, &destRect, 0, nullptr, flip);
 }

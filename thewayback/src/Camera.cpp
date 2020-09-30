@@ -15,18 +15,18 @@ void Camera::update() {
         return;
     }
 
-    float x = m_pTrackedObject->getPosition().getX() - (float)(m_width - m_pTrackedObject->getWidth()) / 2;
+    float x = m_pTrackedObject->getPosition().getX() - static_cast<float>(m_width - m_pTrackedObject->getWidth()) / 2;
     if (x < 0) {
         x = 0;
     } else if (x + m_width > m_levelWidth) {
-        x = (float)m_levelWidth - m_width;
+        x = static_cast<float>(m_levelWidth) - m_width;
     }
 
-    float y = m_pTrackedObject->getPosition().getY() - (float)(m_height - m_pTrackedObject->getHeight()) / 2;
+    float y = m_pTrackedObject->getPosition().getY() - static_cast<float>(m_height - m_pTrackedObject->getHeight()) / 2;
     if (y < 0) {
         y = 0;
     } else if (y + m_height > m_levelHeight) {
-        y = (float)m_levelHeight - m_height;
+        y = static_cast<float>(m_levelHeight) - m_height;
     }
 
     m_position.set(x, y);

@@ -26,7 +26,7 @@ public:
         m_height = h;
     }
 
-    virtual void update() {
+    void update() override {
         m_velocity += m_acceleration;
         m_position += m_velocity;
     }

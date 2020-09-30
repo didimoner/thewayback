@@ -20,13 +20,13 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
     }
 
     m_pWindow = SDL_CreateWindow(title, x, y, width, height, flags);
-    if (m_pWindow == 0) {
+    if (m_pWindow == nullptr) {
         Logger.error("Cannot initialise windows.");
         return false;
     }
 
     m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if (m_pRenderer == 0) {
+    if (m_pRenderer == nullptr) {
         Logger.error("Cannot create renderer.");
         return false;
     }

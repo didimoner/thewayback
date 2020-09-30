@@ -30,7 +30,7 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
     std::string filepath = resourcesPath + filename;
     SDL_Surface* pSurface = IMG_Load(filepath.c_str());
 
-    if (pSurface == 0) {
+    if (pSurface == nullptr) {
         Logger.error("Cannot load surface from image: " + filepath);
         return false;
     }
@@ -39,7 +39,7 @@ bool TextureManager::load(std::string filename, std::string id, SDL_Renderer* pR
 
     SDL_FreeSurface(pSurface);
 
-    if (pTexture == 0) {
+    if (pTexture == nullptr) {
         Logger.error("Cannot load texture from surface: " + filepath);
         return false;
     }
@@ -63,12 +63,12 @@ void TextureManager::draw(std::string textureId, float x, float y, int width, in
     sourceRect.h = height;
 
     SDL_Rect destRect;
-    destRect.x = (int)x;
-    destRect.y = (int)y;
+    destRect.x = static_cast<int>(x);
+    destRect.y = static_cast<int>(y);
     destRect.w = width;
     destRect.h = height;
 
-    SDL_RenderCopyEx(pRenderer, pTexture, &sourceRect, &destRect, 0, 0, flip);
+    SDL_RenderCopyEx(pRenderer, pTexture, &sourceRect, &destRect, 0, nullptr, flip);
 }
 
 void TextureManager::drawFrame(std::string textureId, float x, float y, int width, int height,
@@ -86,10 +86,10 @@ void TextureManager::drawFrame(std::string textureId, float x, float y, int widt
     sourceRect.h = height;
 
     SDL_Rect destRect;
-    destRect.x = (int)x;
-    destRect.y = (int)y;
+    destRect.x = static_cast<int>(x);
+    destRect.y = static_cast<int>(y);
     destRect.w = width;
     destRect.h = height;
 
-    SDL_RenderCopyEx(pRenderer, pTexture, &sourceRect, &destRect, 0, 0, flip);
+    SDL_RenderCopyEx(pRenderer, pTexture, &sourceRect, &destRect, 0, nullptr, flip);
 }

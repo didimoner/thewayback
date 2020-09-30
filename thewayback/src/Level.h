@@ -37,7 +37,7 @@ public:
     uint32_t getHeightPx() const;
     const Player* getPlayer() const;
 
-    void update();
-    void draw();
+    void update() override;
+    void draw() override;
 
 };
