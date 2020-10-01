@@ -254,7 +254,5 @@ XMLElement* LevelParser::getCustomProperty(XMLElement* pElementRoot, const std::
             return p;
         }
     }
-
-    Logger.warn("There is no bool property of name " + name);
     return nullptr;
 }
