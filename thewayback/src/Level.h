@@ -22,14 +22,12 @@ private:
 
     std::multiset<std::shared_ptr<Drawable>, Drawable::DrawableComparator> m_drawables;
     std::vector<Tileset> m_tilesets;
-    std::vector<ObstacleLayer*> m_obstacleLayers;
+    std::vector<std::unique_ptr<ObstacleLayer>> m_obstacleLayers;
 
 public:
-    ~Level();
-
-    std::vector<Tileset>* getTilesets();
+    std::vector<Tileset>& getTilesets();
     std::multiset<std::shared_ptr<Drawable>, Drawable::DrawableComparator>& getDrawables();
-    std::vector<ObstacleLayer*>* getObstacleLayers();
+    std::vector<std::unique_ptr<ObstacleLayer>>& getObstacleLayers();
 
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;

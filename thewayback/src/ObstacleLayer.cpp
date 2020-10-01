@@ -4,7 +4,7 @@
 #include "Collision.h"
 
 ObstacleLayer::ObstacleLayer(std::string id, uint32_t width, uint32_t height, uint8_t gridCols, uint8_t gridRows) {
-    m_layerId = id;
+    m_layerId = std::move(id);
     m_width = width;
     m_height = height;
     m_gridCols = gridCols;
@@ -15,16 +15,7 @@ ObstacleLayer::ObstacleLayer(std::string id, uint32_t width, uint32_t height, ui
     }
 }
 
-ObstacleLayer::~ObstacleLayer() {
-    for (std::vector<Obstacle*> list : m_obstacles) {
-        for (Obstacle* pObstacle : list) {
-            delete pObstacle;
-        }
-    }
-    m_obstacles.clear();
-}
-
-void ObstacleLayer::addObstacle(Obstacle* pObstacle) {
+void ObstacleLayer::addObstacle(const std::shared_ptr<Obstacle>& pObstacle) {
     for (uint8_t column = 0; column < m_gridCols; column++) {
         for (uint8_t row = 0; row < m_gridRows; row++) {
             SDL_FRect mapRect;
@@ -41,20 +32,20 @@ void ObstacleLayer::addObstacle(Obstacle* pObstacle) {
     }
 }
 
-std::set<Obstacle*> ObstacleLayer::getObstacles(SDL_FRect boundary) const {
+std::set<std::shared_ptr<Obstacle>> ObstacleLayer::getObstacles(SDL_FRect boundary) const {
     std::set<uint32_t> indices;
     indices.insert(calculateIndex(boundary.x, boundary.y));
     indices.insert(calculateIndex(boundary.x + boundary.w, boundary.y));
     indices.insert(calculateIndex(boundary.x + boundary.w, boundary.y + boundary.h));
     indices.insert(calculateIndex(boundary.x, boundary.y + boundary.h));
 
-    std::set<Obstacle*> result;
+    std::set<std::shared_ptr<Obstacle>> result;
     for (uint32_t index : indices) {
         if (index > m_obstacles.size()) {
             continue;
         }
 
-        std::vector<Obstacle*> obstacles = m_obstacles[index];
+        auto obstacles = m_obstacles[index];
         result.insert(obstacles.begin(), obstacles.end());
     }
 

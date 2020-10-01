@@ -19,11 +19,11 @@ using namespace tinyxml2;
 
 Log LevelParser::Logger(typeid(LevelParser).name());
 
-Level* LevelParser::parse(const std::string& filename) {
+std::unique_ptr<Level> LevelParser::parse(const std::string& filename) {
     Logger.debug("Loading level from " + filename);
 
-    std::string resourcesPath = getResourcePath("maps");
-    std::string filepath = resourcesPath + filename;
+    const std::string resourcesPath = getResourcePath("maps");
+    const std::string filepath = resourcesPath + filename;
 
     XMLDocument xmlDoc(true, COLLAPSE_WHITESPACE);
 
@@ -39,16 +39,16 @@ Level* LevelParser::parse(const std::string& filename) {
         return nullptr;
     }
 
-    Level* pLevel = new Level();
+    std::unique_ptr<Level> pLevel = std::unique_ptr<Level>(new Level);
     pLevel->m_width = pRoot->IntAttribute("width");
     pLevel->m_height = pRoot->IntAttribute("height");
     pLevel->m_tileWidth = pRoot->IntAttribute("tilewidth");
     pLevel->m_tileHeight = pRoot->IntAttribute("tileheight");
 
     parseMapProps(pRoot);
-    parseTilesets(pRoot, pLevel->getTilesets());
-    parseTileLayers(pRoot, pLevel);
-    parseObjectLayers(pRoot, pLevel);
+    parseTilesets(pRoot, *pLevel);
+    parseTileLayers(pRoot, *pLevel);
+    parseObjectLayers(pRoot, *pLevel);
 
     return pLevel;
 }
@@ -63,7 +63,7 @@ void LevelParser::parseMapProps(XMLElement* pPropsRoot) {
     }
 }
 
-void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>* pTilesets) {
+void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, Level& level) {
     for (XMLElement* e = pTilesetsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("tileset")) {
             continue;
@@ -76,16 +76,16 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, std::vector<Tileset>*
         tileset.tileCount = e->IntAttribute("tilecount");
         tileset.columns = e->IntAttribute("columns");
         tileset.name = e->Attribute("name");
-        pTilesets->push_back(tileset);
+        level.getTilesets().push_back(std::move(tileset));
 
         XMLElement* pImageElement = e->FirstChildElement("image");
         const std::string source = pImageElement->Attribute("source");
         const std::string filename = splitString(source, '/').back();
-        TextureManager::instance().load(filename, tileset.name, Game::instance().getRenderer());
+        TextureManager::instance().load(filename, e->Attribute("name"), Game::instance().getRenderer());
     }
 }
 
-void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
+void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level& level) {
     for (XMLElement* e = pLayerRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("layer")) {
             continue;
@@ -96,11 +96,10 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
             continue;
         }
 
-        std::string textData = pDataElement->GetText();
-
-        std::string decodedData = base64_decode(textData);
-        uLongf allTilesSize = pLevel->m_width * pLevel->m_height * sizeof(int);
-        std::vector<uint32_t> uncompressedTileIds(allTilesSize);
+        const std::string textData = pDataElement->GetText();
+        const std::string decodedData = base64_decode(textData);
+        uLongf allTilesSize = level.m_width * level.m_height * sizeof(int);
+        const std::vector<uint32_t> uncompressedTileIds(allTilesSize);
 
         const int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize,
                                                 (const Bytef*)decodedData.c_str(), decodedData.size());
@@ -109,25 +108,25 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
         }
 
         std::vector<std::vector<uint32_t>> tileIds;
-        for (uint32_t i = 0; i < pLevel->m_height; i++) {
-            tileIds.emplace_back(pLevel->m_width);
+        for (uint32_t i = 0; i < level.m_height; i++) {
+            tileIds.emplace_back(level.m_width);
         }
 
-        for (uint32_t row = 0; row < pLevel->m_height; row++) {
-            for (uint32_t column = 0; column < pLevel->m_width; column++) {
-                tileIds[row][column] = uncompressedTileIds[row * pLevel->m_width + column];
+        for (uint32_t row = 0; row < level.m_height; row++) {
+            for (uint32_t column = 0; column < level.m_width; column++) {
+                tileIds[row][column] = uncompressedTileIds[row * level.m_width + column];
             }
         }
 
-        std::shared_ptr<TileLayer> pTileLayer = std::make_shared<TileLayer>(*pLevel->getTilesets());
+        std::shared_ptr<TileLayer> pTileLayer = std::make_shared<TileLayer>(level.getTilesets());
         pTileLayer->setPriority(e->IntAttribute("id"));
         pTileLayer->setName(e->Attribute("name"));
         pTileLayer->setTileIds(tileIds);
-        pLevel->getDrawables().insert(pTileLayer);
+        level.getDrawables().insert(pTileLayer);
     }
 }
 
-void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
+void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level& level) {
     for (XMLElement* e = pObjectsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("objectgroup")) {
             continue;
@@ -135,38 +134,37 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level* pLevel) {
 
         std::string layerType = getStringProperty(e, "type");
         if (layerType == "obstacles") {
-            parseObstacles(e, pLevel);
+            parseObstacles(e, level);
         } else if (layerType == "game_objects") {
-            parseGameObjects(e, pLevel);
+            parseGameObjects(e, level);
         }
     }
-
 }
 
-void LevelParser::parseObstacles(XMLElement* pRoot, Level* pLevel) {
+void LevelParser::parseObstacles(XMLElement* pRoot, Level& level) {
     const std::string layerId = pRoot->Attribute("name");
-    uint8_t gridCols = getIntProperty(pRoot, "grid_cols");
-    uint8_t gridRows = getIntProperty(pRoot, "grid_rows");
-    ObstacleLayer* pCollidableLayer = new ObstacleLayer(
+    const uint8_t gridCols = getIntProperty(pRoot, "grid_cols");
+    const uint8_t gridRows = getIntProperty(pRoot, "grid_rows");
+
+    std::unique_ptr<ObstacleLayer> pObstacleLayer = std::make_unique<ObstacleLayer>(
         layerId,
-        pLevel->m_width * pLevel->m_tileWidth,
-        pLevel->m_height * pLevel->m_tileHeight,
+        level.m_width * level.m_tileWidth,
+        level.m_height * level.m_tileHeight,
         gridCols, gridRows
     );
 
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        Obstacle* pObstacle = new Obstacle(
+        std::shared_ptr<Obstacle> pObstacle = std::make_shared<Obstacle>(
             static_cast<float>(o->IntAttribute("x")), static_cast<float>(o->IntAttribute("y")),
             o->IntAttribute("width"), o->IntAttribute("height")
         );
-
-        pCollidableLayer->addObstacle(pObstacle);
+        pObstacleLayer->addObstacle(pObstacle);
     }
 
-    pLevel->getObstacleLayers()->push_back(pCollidableLayer);
+    level.getObstacleLayers().push_back(std::move(pObstacleLayer));
 }
 
-void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
+void LevelParser::parseGameObjects(XMLElement* pRoot, Level& level) {
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
         const int x = o->IntAttribute("x");
         const int y = o->IntAttribute("y");
@@ -196,13 +194,13 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
             pSprite->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId);
         }
 
-        if (type == "player" && pLevel->m_pPlayer == nullptr) {
+        if (type == "player" && !level.m_pPlayer) {
             std::shared_ptr<Player> pPlayer = std::dynamic_pointer_cast<Player>(pSprite);
             pPlayer->setWalkingSpeed(getFloatProperty(o, "walkingSpeed"));
             pPlayer->setRunningSpeed(getFloatProperty(o, "runningSpeed"));
 
-            pLevel->m_pPlayer = pPlayer;
-            pLevel->getDrawables().insert(pPlayer);
+            level.m_pPlayer = pPlayer;
+            level.getDrawables().insert(pPlayer);
         }
 
         // todo: other game object types

@@ -1,8 +1,8 @@
 #pragma once
 #include "GameState.h"
+#include "Level.h"
 
 class Log;
-class Level;
 
 class PlayState : public GameState {
 
@@ -10,7 +10,7 @@ private:
     static const std::string STATE_ID;
     static Log Logger;
 
-    Level* m_pLevel = nullptr;
+    std::unique_ptr<Level> m_pLevel;
 
 public:
     void update() override;

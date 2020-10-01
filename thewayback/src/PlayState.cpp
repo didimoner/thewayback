@@ -2,7 +2,6 @@
 #include "PlayState.h"
 #include "Log.h"
 #include "LevelParser.h"
-#include "Level.h"
 #include "StateParser.h"
 #include "Player.h"
 #include "Camera.h"
