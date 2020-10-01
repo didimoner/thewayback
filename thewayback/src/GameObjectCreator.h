@@ -6,6 +6,6 @@ class GameObjectCreator {
 
 public:
     virtual ~GameObjectCreator() = default;
-    virtual GameObject* create() const = 0;
+    virtual std::shared_ptr<GameObject> create() const = 0;
 
 };

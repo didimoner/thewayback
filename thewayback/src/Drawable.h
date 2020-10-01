@@ -10,7 +10,7 @@ public:
     virtual ~Drawable() = default;
 
     struct DrawableComparator {
-        bool operator()(const Drawable* first, const Drawable* second) const {
+        bool operator()(const std::shared_ptr<Drawable>& first, const std::shared_ptr<Drawable>& second) const {
             return first->getPriority() < second->getPriority();
         }
     };

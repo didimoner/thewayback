@@ -119,12 +119,11 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level* pLevel) {
             }
         }
 
-        TileLayer* pTileLayer = new TileLayer(*pLevel->getTilesets());
+        std::shared_ptr<TileLayer> pTileLayer = std::make_shared<TileLayer>(*pLevel->getTilesets());
         pTileLayer->setPriority(e->IntAttribute("id"));
         pTileLayer->setName(e->Attribute("name"));
         pTileLayer->setTileIds(tileIds);
-
-        pLevel->getDrawables()->insert(pTileLayer);
+        pLevel->getDrawables().insert(pTileLayer);
     }
 }
 
@@ -177,8 +176,8 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
         const bool animated = getBoolProperty(o, "animated");
         const std::string textureId = getStringProperty(o, "textureId");
 
-        Sprite* sprite = dynamic_cast<Sprite*>(GameObjectFactory::instance().create(type));
-        sprite->setPriority(pRoot->IntAttribute("id"));
+        std::shared_ptr<Sprite> pSprite = std::dynamic_pointer_cast<Sprite>(GameObjectFactory::instance().create(type));
+        pSprite->setPriority(pRoot->IntAttribute("id"));
 
         if (animated) {
             AnimationInitParams animationInitParams;
@@ -191,19 +190,19 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level* pLevel) {
                 animationInitParams.type = EAnimationType::NORMAL;
             }
 
-            dynamic_cast<Animation*>(sprite)->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId,
-                                                   animationInitParams);
+            std::dynamic_pointer_cast<Animation>(pSprite)->init(static_cast<float>(x), static_cast<float>(y),
+                width, height, textureId, animationInitParams);
         } else {
-            sprite->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId);
+            pSprite->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId);
         }
 
         if (type == "player" && pLevel->m_pPlayer == nullptr) {
-            Player* pPlayer = dynamic_cast<Player*>(sprite);
+            std::shared_ptr<Player> pPlayer = std::dynamic_pointer_cast<Player>(pSprite);
             pPlayer->setWalkingSpeed(getFloatProperty(o, "walkingSpeed"));
             pPlayer->setRunningSpeed(getFloatProperty(o, "runningSpeed"));
 
             pLevel->m_pPlayer = pPlayer;
-            pLevel->getDrawables()->insert(pPlayer);
+            pLevel->getDrawables().insert(pPlayer);
         }
 
         // todo: other game object types

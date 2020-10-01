@@ -23,6 +23,6 @@ public:
     }
 
     virtual SDL_FRect getCollider() const = 0;
-    virtual void onCollide(ECollisionType type, std::string objectId) = 0;
+    virtual void onCollide(ECollisionType type, const std::string& objectId) = 0;
 
 };

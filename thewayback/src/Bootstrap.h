@@ -51,7 +51,7 @@ private:
 
     static void registerTypes() {
         GameObjectFactory::instance()
-            .registerType("player", std::unique_ptr<PlayerCreator>(new PlayerCreator));
+            .registerType("player", std::make_unique<PlayerCreator>());
     }
 
 };

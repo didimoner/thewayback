@@ -30,7 +30,7 @@ public:
 
     // ----------------------------------
 
-    void registerType(std::string type, std::unique_ptr<GameObjectCreator>&& pCreator);
-    GameObject* create(std::string type);
+    void registerType(const std::string& type, std::unique_ptr<GameObjectCreator> pCreator);
+    std::shared_ptr<GameObject> create(const std::string& type);
 
 };

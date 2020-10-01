@@ -17,9 +17,10 @@ private:
     uint16_t m_tileWidth = 0;
     uint16_t m_tileHeight = 0;
 
-    Player* m_pPlayer = nullptr;
+    // TODO: move to an upper level
+    std::shared_ptr<Player> m_pPlayer;
 
-    std::multiset<Drawable*, Drawable::DrawableComparator> m_drawables;
+    std::multiset<std::shared_ptr<Drawable>, Drawable::DrawableComparator> m_drawables;
     std::vector<Tileset> m_tilesets;
     std::vector<ObstacleLayer*> m_obstacleLayers;
 
@@ -27,12 +28,12 @@ public:
     ~Level();
 
     std::vector<Tileset>* getTilesets();
-    std::multiset<Drawable*, Drawable::DrawableComparator>* getDrawables();
+    std::multiset<std::shared_ptr<Drawable>, Drawable::DrawableComparator>& getDrawables();
     std::vector<ObstacleLayer*>* getObstacleLayers();
 
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;
-    const Player* getPlayer() const;
+    const std::shared_ptr<Player>& getPlayer() const;
 
     void update() override;
     void draw() override;

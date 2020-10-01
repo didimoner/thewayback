@@ -8,11 +8,6 @@
 #include "Obstacle.h"
 
 Level::~Level() {
-    delete m_pPlayer;
-
-    for (auto* pDrawable : m_drawables) {
-        delete pDrawable;
-    }
     m_drawables.clear();
 
     for (auto* pCollidableLayer : m_obstacleLayers) {
@@ -22,20 +17,20 @@ Level::~Level() {
 }
 
 void Level::update() {
-    for (Drawable* pDrawable : m_drawables) {
+    for (auto pDrawable : m_drawables) {
         pDrawable->update();
     }
 
     for (ObstacleLayer* pObstacleLayer : m_obstacleLayers) {
         std::set<Obstacle*> obstacles = pObstacleLayer->getObstacles(m_pPlayer->getCollider());
         for (Obstacle* pObstacle : obstacles) {
-            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pObstacle);
+            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, *m_pPlayer, *pObstacle);
         }
     }
 }
 
 void Level::draw() {
-    for (Drawable* pDrawable : m_drawables) {
+    for (auto pDrawable : m_drawables) {
         pDrawable->draw();
     }
 }
@@ -44,8 +39,8 @@ std::vector<Tileset>* Level::getTilesets() {
     return &m_tilesets;
 }
 
-std::multiset<Drawable*, Drawable::DrawableComparator>* Level::getDrawables() {
-    return &m_drawables;
+std::multiset<std::shared_ptr<Drawable>, Drawable::DrawableComparator>& Level::getDrawables() {
+    return m_drawables;
 }
 
 std::vector<ObstacleLayer*>* Level::getObstacleLayers() {
@@ -60,6 +55,6 @@ uint32_t Level::getHeightPx() const {
     return m_height * m_tileHeight;
 }
 
-const Player* Level::getPlayer() const {
+const std::shared_ptr<Player>& Level::getPlayer() const {
     return m_pPlayer;
 }

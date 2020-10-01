@@ -6,6 +6,7 @@
 #include "StateParser.h"
 #include "Player.h"
 #include "Camera.h"
+#include "Game.h"
 
 Log PlayState::Logger(typeid(PlayState).name());
 const std::string PlayState::STATE_ID = "PLAY_STATE";
@@ -27,8 +28,7 @@ void PlayState::onActivate() {
     stateParser.parse("states.xml", getStateId(), gameObjects);
 
     // TODO: move to state parser
-    LevelParser levelParser;
-    m_pLevel = levelParser.parse("test5.tmx");
+    m_pLevel = LevelParser::parse("test5.tmx");
 
     m_pCamera = new Camera(
         m_pLevel->getPlayer(),

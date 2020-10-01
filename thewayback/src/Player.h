@@ -31,7 +31,7 @@ public:
     void draw() override;
     void clean() override;
 
-    void onCollide(ECollisionType type, std::string objectId) override;
+    void onCollide(ECollisionType type, const std::string& objectId) override;
     SDL_FRect getCollider() const override;
 
     void setWalkingSpeed(float walkingSpeed);
@@ -46,8 +46,8 @@ private:
 class PlayerCreator : public GameObjectCreator {
 
 public:
-    GameObject* create() const override {
-        return new Player();
+    std::shared_ptr<GameObject> create() const override {
+        return std::make_shared<Player>();
     }
 
 };

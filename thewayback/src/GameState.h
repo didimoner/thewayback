@@ -11,7 +11,7 @@ protected:
 
 public:
     virtual ~GameState() = default;
-    Camera* getCamera() { return m_pCamera; }
+    Camera* getCamera() const { return m_pCamera; }
 
     virtual void update() = 0;
     virtual void draw() = 0;

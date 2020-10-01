@@ -49,7 +49,7 @@ bool StateParser::parse(std::string filename, std::string stateId, std::vector<G
         Logger.warn("No OBJECTS element found in " + stateId + " in " + filename);
         return false;
     }
-    parseObjects(pObjectsElement, gameObjects);
+    // parseObjects(pObjectsElement, gameObjects);
 
     return true;
 }
@@ -65,23 +65,23 @@ void StateParser::parseTextures(XMLElement* pTexturesRoot) {
 
 // TODO: refactor
 void StateParser::parseObjects(XMLElement* pObjectsRoot, std::vector<GameObject*>& gameObjects) {
-    for (XMLElement* e = pObjectsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
-        const std::string type = e->Attribute("type");
-        const std::string textureId = e->Attribute("textureId");
+    //for (XMLElement* e = pObjectsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+    //    const std::string type = e->Attribute("type");
+    //    const std::string textureId = e->Attribute("textureId");
 
-        const int x = e->IntAttribute("x");
-        const int y = e->IntAttribute("y");
-        const int width = e->IntAttribute("width");
-        const int height = e->IntAttribute("height");
-        const uint8_t frames = e->IntAttribute("frames");
+    //    const int x = e->IntAttribute("x");
+    //    const int y = e->IntAttribute("y");
+    //    const int width = e->IntAttribute("width");
+    //    const int height = e->IntAttribute("height");
+    //    const uint8_t frames = e->IntAttribute("frames");
 
-        Animation* drawable = dynamic_cast<Animation*>(GameObjectFactory::instance().create(type));
-        AnimationInitParams animationInitParams;
-        animationInitParams.totalFrames = frames;
-        animationInitParams.speed = 4;
-        animationInitParams.type = EAnimationType::BOUNCE;
-        drawable->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId, animationInitParams);
+    //    Animation* drawable = dynamic_cast<Animation*>(GameObjectFactory::instance().create(type));
+    //    AnimationInitParams animationInitParams;
+    //    animationInitParams.totalFrames = frames;
+    //    animationInitParams.speed = 4;
+    //    animationInitParams.type = EAnimationType::BOUNCE;
+    //    drawable->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId, animationInitParams);
 
-        gameObjects.push_back(drawable);
-    }
+    //    gameObjects.push_back(drawable);
+    //}
 }

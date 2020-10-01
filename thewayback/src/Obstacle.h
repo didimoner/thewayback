@@ -15,7 +15,7 @@ public:
         : m_position(x, y), m_width(width), m_height(height) {
     }
 
-    void onCollide(ECollisionType type, std::string objectId) override {
+    void onCollide(ECollisionType type, const std::string& objectId) override {
     }
 
     SDL_FRect getCollider() const override {

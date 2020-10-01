@@ -27,7 +27,7 @@ void Player::clean() {
     Animation::clean();
 }
 
-void Player::onCollide(ECollisionType type, std::string objectId) {
+void Player::onCollide(ECollisionType type, const std::string& objectId) {
     Camera* pCamera = Game::instance().getCurrentState().getCamera();
 
     switch (type) {
