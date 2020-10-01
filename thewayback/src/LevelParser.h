@@ -24,6 +24,7 @@ private:
     static std::string getStringProperty(tinyxml2::XMLElement* pElementRoot, const std::string& name);
     static int getIntProperty(tinyxml2::XMLElement* pElementRoot, const std::string& name);
     static float getFloatProperty(tinyxml2::XMLElement* pElementRoot, const std::string& name);
-    static bool getBoolProperty(tinyxml2::XMLElement* pElementRoot, std::string name);
+    static bool getBoolProperty(tinyxml2::XMLElement* pElementRoot, const std::string& name);
 
+    static tinyxml2::XMLElement* getCustomProperty(tinyxml2::XMLElement* pElementRoot, const std::string& name);
 };

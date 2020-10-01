@@ -208,11 +208,9 @@ void LevelParser::parseGameObjects(XMLElement* pRoot, Level& level) {
 }
 
 std::string LevelParser::getStringProperty(XMLElement* pElementRoot, const std::string& name) {
-    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
-    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
-        if (p->Attribute("name") == name) {
-            return p->Attribute("value");
-        }
+    XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
+    if (pPropertyElement != nullptr) {
+        return pPropertyElement->Attribute("value");
     }
 
     Logger.warn("There is no string property of name " + name);
@@ -220,37 +218,43 @@ std::string LevelParser::getStringProperty(XMLElement* pElementRoot, const std::
 }
 
 int LevelParser::getIntProperty(XMLElement* pElementRoot, const std::string& name) {
-    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
-    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
-        if (p->Attribute("name") == name) {
-            return p->IntAttribute("value");
-        }
+    XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
+    if (pPropertyElement != nullptr) {
+        return pPropertyElement->IntAttribute("value");
     }
 
     Logger.warn("There is no int property of name " + name);
     return 0;
 }
 
-auto LevelParser::getFloatProperty(XMLElement* pElementRoot, const std::string& name) -> float {
-    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
-    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
-        if (p->Attribute("name") == name) {
-            return p->FloatAttribute("value");
-        }
+float LevelParser::getFloatProperty(XMLElement* pElementRoot, const std::string& name) {
+    XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
+    if (pPropertyElement != nullptr) {
+        return pPropertyElement->FloatAttribute("value");
     }
 
     Logger.warn("There is no float property of name " + name);
     return 0;
 }
 
-auto LevelParser::getBoolProperty(XMLElement* pElementRoot, std::string name) -> bool {
-    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
-    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
-        if (p->Attribute("name") == name) {
-            return p->BoolAttribute("value");
-        }
+bool LevelParser::getBoolProperty(XMLElement* pElementRoot, const std::string& name) {
+    XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
+    if (pPropertyElement != nullptr) {
+        return pPropertyElement->BoolAttribute("value");
     }
 
     Logger.warn("There is no bool property of name " + name);
     return false;
+}
+
+XMLElement* LevelParser::getCustomProperty(XMLElement* pElementRoot, const std::string& name) {
+    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
+    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
+        if (p->Attribute("name") == name) {
+            return p;
+        }
+    }
+
+    Logger.warn("There is no bool property of name " + name);
+    return nullptr;
 }
