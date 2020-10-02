@@ -10,7 +10,7 @@ private:
     static const std::string STATE_ID;
     static Log Logger;
 
-    std::unique_ptr<Level> m_pLevel;
+    std::shared_ptr<Level> m_pLevel;
 
 public:
     void update() override;

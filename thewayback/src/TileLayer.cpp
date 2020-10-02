@@ -1,42 +1,42 @@
 #include "pch.h"
 #include "TileLayer.h"
-
-#include <utility>
 #include "Log.h"
 #include "TextureManager.h"
 #include "Game.h"
 #include "GameState.h"
 #include "Tileset.h"
 #include "Camera.h"
+#include "Level.h"
 
 Log TileLayer::Logger(typeid(TileLayer).name());
 
-TileLayer::TileLayer(std::vector<Tileset> tilesets) : m_tilesets(std::move(tilesets)) {
+
+TileLayer::TileLayer(const std::shared_ptr<Level>& pLevel) {
+    m_pLevel = pLevel;
 }
 
 void TileLayer::update() {
 }
 
 void TileLayer::draw() {
-    if (m_tileIds.empty()) {
+    if (m_globalTileIds.empty()) {
         Logger.warn("Tile data is empty, nothing to draw. Layer: " + m_name);
         return;
     }
 
-    for (uint32_t row = 0; row < m_tileIds.size(); row++) {
-        for (uint32_t column = 0; column < m_tileIds[row].size(); column++) {
-            const uint32_t tileId = m_tileIds[row][column];
-            if (tileId == 0) {
+    for (uint32_t row = 0; row < m_globalTileIds.size(); row++) {
+        for (uint32_t column = 0; column < m_globalTileIds[row].size(); column++) {
+            const uint32_t globalTileId = m_globalTileIds[row][column];
+            if (globalTileId == 0) {
                 continue;
             }
 
-            const int tilesetIndex = findTilesetIndex(tileId);
-            if (tilesetIndex == -1) {
-                Logger.warn("Tile ID out of tilesets' bounds: " + tileId);
+            const auto* pTileset = m_pLevel.lock()->getTilesetByGlobalTileId(globalTileId);
+            if (pTileset == nullptr) {
+                Logger.warn("There is no tileset for global tile id " + std::to_string(globalTileId));
                 continue;
             }
 
-            const Tileset tileset = m_tilesets[tilesetIndex];
             const Camera* pCamera = Game::instance().getCurrentState().getCamera();
             Vector2f cameraPos = pCamera->getPosition();
             Vector2f bottomCameraPos(
@@ -45,27 +45,27 @@ void TileLayer::draw() {
             );
             const int safeOffset = 2;
 
-            const bool topPosCheck = row + safeOffset < cameraPos.getY() / tileset.tileHeight
-                || column + safeOffset < cameraPos.getX() / tileset.tileWidth;
-            const bool botPosCheck = static_cast<int>(row) - safeOffset > bottomCameraPos.getY() / tileset.tileWidth
-                || static_cast<int>(column) - safeOffset > bottomCameraPos.getX() / tileset.tileHeight;
+            const bool topPosCheck = row + safeOffset < cameraPos.getY() / pTileset->tileHeight
+                || column + safeOffset < cameraPos.getX() / pTileset->tileWidth;
+            const bool botPosCheck = static_cast<int>(row) - safeOffset > bottomCameraPos.getY() / pTileset->tileWidth
+                || static_cast<int>(column) - safeOffset > bottomCameraPos.getX() / pTileset->tileHeight;
 
             if (topPosCheck || botPosCheck) {
                 continue;
             }
 
-            const uint32_t localTileId = tileId - tileset.firstGlobalId;
-            const float x = static_cast<float>(column * tileset.tileWidth);
-            const float y = static_cast<float>(row * tileset.tileHeight);
-            const uint32_t tilesetRow = localTileId / tileset.columns;
-            const uint32_t tilesetColumn = localTileId % tileset.columns;
+            const uint32_t localTileId = globalTileId - pTileset->firstGlobalId;
+            const float x = static_cast<float>(column * pTileset->tileWidth);
+            const float y = static_cast<float>(row * pTileset->tileHeight);
+            const uint32_t tilesetRow = localTileId / pTileset->columns;
+            const uint32_t tilesetColumn = localTileId % pTileset->columns;
 
             TextureManager::instance().drawFrame(
-                tileset.name,
+                pTileset->name,
                 x - cameraPos.getX(),
                 y - cameraPos.getY(),
-                tileset.tileWidth,
-                tileset.tileHeight,
+                pTileset->tileWidth,
+                pTileset->tileHeight,
                 tilesetRow,
                 tilesetColumn,
                 Game::instance().getRenderer()
@@ -79,15 +79,5 @@ void TileLayer::setName(std::string name) {
 }
 
 void TileLayer::setTileIds(const std::vector<std::vector<uint32_t>>& data) {
-    m_tileIds = data;
-}
-
-int TileLayer::findTilesetIndex(uint32_t tileId) const {
-    for (uint32_t i = 0; i < m_tilesets.size(); i++) {
-        if (tileId < m_tilesets[i].firstGlobalId + m_tilesets[i].tileCount) {
-            return i;
-        }
-    }
-
-    return -1;
+    m_globalTileIds = data;
 }

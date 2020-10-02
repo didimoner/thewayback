@@ -31,7 +31,8 @@ public:
 
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;
-    const std::shared_ptr<Player>& getPlayer() const;
+    std::shared_ptr<Player>& getPlayer();
+    const Tileset* getTilesetByGlobalTileId(uint32_t globalTileId);
 
     void update() override;
     void draw() override;

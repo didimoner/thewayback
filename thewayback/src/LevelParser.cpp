@@ -19,7 +19,7 @@ using namespace tinyxml2;
 
 Log LevelParser::Logger(typeid(LevelParser).name());
 
-std::unique_ptr<Level> LevelParser::parse(const std::string& filename) {
+std::shared_ptr<Level> LevelParser::parse(const std::string& filename) {
     Logger.debug("Loading level from " + filename);
 
     const std::string resourcesPath = getResourcePath("maps");
@@ -39,7 +39,7 @@ std::unique_ptr<Level> LevelParser::parse(const std::string& filename) {
         return nullptr;
     }
 
-    std::unique_ptr<Level> pLevel = std::unique_ptr<Level>(new Level);
+    std::shared_ptr<Level> pLevel = std::shared_ptr<Level>(new Level);
     pLevel->m_width = pRoot->IntAttribute("width");
     pLevel->m_height = pRoot->IntAttribute("height");
     pLevel->m_tileWidth = pRoot->IntAttribute("tilewidth");
@@ -47,7 +47,7 @@ std::unique_ptr<Level> LevelParser::parse(const std::string& filename) {
 
     parseMapProps(pRoot);
     parseTilesets(pRoot, *pLevel);
-    parseTileLayers(pRoot, *pLevel);
+    parseTileLayers(pRoot, pLevel);
     parseObjectLayers(pRoot, *pLevel);
 
     return pLevel;
@@ -85,7 +85,7 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, Level& level) {
     }
 }
 
-void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level& level) {
+void LevelParser::parseTileLayers(XMLElement* pLayerRoot, std::shared_ptr<Level>& pLevel) {
     for (XMLElement* e = pLayerRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("layer")) {
             continue;
@@ -98,7 +98,7 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level& level) {
 
         const std::string textData = pDataElement->GetText();
         const std::string decodedData = base64_decode(textData);
-        uLongf allTilesSize = level.m_width * level.m_height * sizeof(int);
+        uLongf allTilesSize = pLevel->m_width * pLevel->m_height * sizeof(int);
         const std::vector<uint32_t> uncompressedTileIds(allTilesSize);
 
         const int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize,
@@ -108,21 +108,21 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, Level& level) {
         }
 
         std::vector<std::vector<uint32_t>> tileIds;
-        for (uint32_t i = 0; i < level.m_height; i++) {
-            tileIds.emplace_back(level.m_width);
+        for (uint32_t i = 0; i < pLevel->m_height; i++) {
+            tileIds.emplace_back(pLevel->m_width);
         }
 
-        for (uint32_t row = 0; row < level.m_height; row++) {
-            for (uint32_t column = 0; column < level.m_width; column++) {
-                tileIds[row][column] = uncompressedTileIds[row * level.m_width + column];
+        for (uint32_t row = 0; row < pLevel->m_height; row++) {
+            for (uint32_t column = 0; column < pLevel->m_width; column++) {
+                tileIds[row][column] = uncompressedTileIds[row * pLevel->m_width + column];
             }
         }
 
-        std::shared_ptr<TileLayer> pTileLayer = std::make_shared<TileLayer>(level.getTilesets());
+        std::shared_ptr<TileLayer> pTileLayer = std::make_shared<TileLayer>(pLevel);
         pTileLayer->setPriority(e->IntAttribute("id"));
         pTileLayer->setName(e->Attribute("name"));
         pTileLayer->setTileIds(tileIds);
-        level.getDrawables().insert(pTileLayer);
+        pLevel->getDrawables().insert(pTileLayer);
     }
 }
 

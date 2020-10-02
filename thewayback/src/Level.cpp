@@ -46,6 +46,16 @@ uint32_t Level::getHeightPx() const {
     return m_height * m_tileHeight;
 }
 
-const std::shared_ptr<Player>& Level::getPlayer() const {
+std::shared_ptr<Player>& Level::getPlayer() {
     return m_pPlayer;
+}
+
+const Tileset* Level::getTilesetByGlobalTileId(uint32_t globalTileId) {
+    for (auto& tileset : m_tilesets) {
+        if (globalTileId < tileset.firstGlobalId + tileset.tileCount) {
+            return &tileset;
+        }
+    }
+
+    return nullptr;
 }
