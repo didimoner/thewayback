@@ -9,7 +9,7 @@ class Config {
 private:
     Config() = default;
 
-    std::map<std::string, INIReader*> m_readers;
+    std::unordered_map<std::string, INIReader*> m_readers;
 
     static std::unique_ptr<Config> s_pInstance;
     static Log Logger;

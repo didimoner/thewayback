@@ -1,7 +1,6 @@
 #pragma once
 #include <SDL.h>
 #include "GameStateMachine.h"
-#include "MenuState.h"
 #include "PlayState.h"
 #include "GameObjectFactory.h"
 #include "Player.h"
@@ -20,9 +19,10 @@ public:
         loadConfigs();
         registerTypes();
 
-        auto pInitialState = std::unique_ptr<GameState>(new PlayState);
-        const bool initialized = Game::instance().init(title, x, y, width, height, flags,
-                                                       new GameStateMachine(), pInitialState);
+        std::unique_ptr<GameState> pInitialState = std::make_unique<PlayState>();
+        auto pGameStateMachine = std::make_unique<GameStateMachine>();
+        const bool initialized = Game::instance().init(title, x, y, width, height, flags, 
+            std::move(pGameStateMachine), pInitialState);
         if (!initialized) {
             Log::getLogger().error("Game initialization failed");
             return;
@@ -50,8 +50,7 @@ private:
     }
 
     static void registerTypes() {
-        GameObjectFactory::instance()
-            .registerType("player", std::make_unique<PlayerCreator>());
+        GameObjectFactory::instance().registerType("player", std::make_unique<PlayerCreator>());
     }
 
 };

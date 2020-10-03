@@ -1,17 +1,17 @@
 #pragma once
 #include "pch.h"
+#include "Camera.h"
 
-class Camera;
 class Vector2f;
 
 class GameState {
 
 protected:
-    Camera* m_pCamera = nullptr;
+    std::unique_ptr<Camera> m_pCamera;
 
 public:
     virtual ~GameState() = default;
-    Camera* getCamera() const { return m_pCamera; }
+    const Camera& getCamera() const { return *m_pCamera; }
 
     virtual void update() = 0;
     virtual void draw() = 0;

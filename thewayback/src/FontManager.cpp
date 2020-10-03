@@ -2,6 +2,7 @@
 #include "FontManager.h"
 #include "Log.h"
 #include "SystemUtils.h"
+#include "Game.h"
 
 std::unique_ptr<FontManager> FontManager::s_pInstance;
 Log FontManager::Logger(typeid(FontManager).name());
@@ -41,8 +42,8 @@ bool FontManager::loadFont(const std::string& filename, std::string id, int size
     return true;
 }
 
-void FontManager::createTexture(const std::string& fontId, const std::string& textureId,
-                                const std::string& text, SDL_Color color, SDL_Renderer* pRenderer) {
+void FontManager::createTexture(const std::string& fontId, const std::string& textureId, 
+        const std::string& text, SDL_Color color) {
     Logger.debug("Creating texture " + textureId + " from font " + fontId);
     TTF_Font* pFont = m_fonts[fontId];
     if (pFont == nullptr) {
@@ -51,14 +52,14 @@ void FontManager::createTexture(const std::string& fontId, const std::string& te
     }
 
     SDL_Surface* pSurface = TTF_RenderText_Blended(pFont, text.c_str(), color);
-    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
+    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(Game::instance().getRenderer(), pSurface);
     SDL_FreeSurface(pSurface);
 
     m_textures[textureId] = pTexture;
 }
 
 void FontManager::createMultilineTexture(const std::string& fontId, const std::string& textureId,
-                                         const std::string& text, uint32_t lineWidth, SDL_Color color, SDL_Renderer* pRenderer) {
+        const std::string& text, uint32_t lineWidth, SDL_Color color) {
     Logger.debug("Creating multiline texture " + textureId + " from font " + fontId
         + " with line width " + std::to_string(lineWidth));
     TTF_Font* pFont = m_fonts[fontId];
@@ -68,7 +69,7 @@ void FontManager::createMultilineTexture(const std::string& fontId, const std::s
     }
 
     SDL_Surface* pSurface = TTF_RenderText_Blended_Wrapped(pFont, text.c_str(), color, lineWidth);
-    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);
+    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(Game::instance().getRenderer(), pSurface);
     SDL_FreeSurface(pSurface);
 
     m_textures[textureId] = pTexture;
@@ -85,8 +86,7 @@ void FontManager::removeTexture(const std::string& textureId) {
     m_textures.erase(textureId);
 }
 
-void FontManager::draw(const std::string& textureId, float x, float y,
-                       SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
+void FontManager::draw(const std::string& textureId, float x, float y, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger.warn("Texture not found in the map: " + textureId);
@@ -97,11 +97,10 @@ void FontManager::draw(const std::string& textureId, float x, float y,
     int height = 0;
     SDL_QueryTexture(pTexture, nullptr, nullptr, &width, &height);
 
-    draw(textureId, x, y, width, height, pRenderer, flip);
+    draw(textureId, x, y, width, height, flip);
 }
 
-void FontManager::draw(const std::string& textureId, float x, float y, int width, int height,
-                       SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
+void FontManager::draw(const std::string& textureId, float x, float y, int width, int height, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger.warn("Texture not found in the map: " + textureId);
@@ -114,5 +113,5 @@ void FontManager::draw(const std::string& textureId, float x, float y, int width
     destRect.w = width;
     destRect.h = height;
 
-    SDL_RenderCopyEx(pRenderer, pTexture, nullptr, &destRect, 0, nullptr, flip);
+    SDL_RenderCopyEx(Game::instance().getRenderer(), pTexture, nullptr, &destRect, 0, nullptr, flip);
 }

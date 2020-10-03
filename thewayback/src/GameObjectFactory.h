@@ -13,7 +13,7 @@ private:
     static std::unique_ptr<GameObjectFactory> s_pInstance;
     static Log Logger;
 
-    std::map<std::string, std::unique_ptr<GameObjectCreator>> m_creators;
+    std::unordered_map<std::string, std::unique_ptr<GameObjectCreator>> m_creators;
 
 public:
     ~GameObjectFactory();

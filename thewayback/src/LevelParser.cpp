@@ -59,7 +59,7 @@ void LevelParser::parseMapProps(XMLElement* pPropsRoot) {
         const std::string textureId = p->Attribute("name");
         const std::string filename = p->Attribute("value");
 
-        TextureManager::instance().load(filename, textureId, Game::instance().getRenderer());
+        TextureManager::instance().load(filename, textureId);
     }
 }
 
@@ -81,7 +81,7 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, Level& level) {
         XMLElement* pImageElement = e->FirstChildElement("image");
         const std::string source = pImageElement->Attribute("source");
         const std::string filename = splitString(source, '/').back();
-        TextureManager::instance().load(filename, e->Attribute("name"), Game::instance().getRenderer());
+        TextureManager::instance().load(filename, e->Attribute("name"));
     }
 }
 

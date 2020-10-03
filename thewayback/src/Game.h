@@ -37,7 +37,8 @@ public:
     // --------------------
 
     bool init(const char* title, int x, int y, int width, int height, int flags,
-              GameStateMachine* pGameStateMachine, std::unique_ptr<GameState>& pInitialState);
+        std::unique_ptr<GameStateMachine> pGameStateMachine, 
+        std::unique_ptr<GameState>& pInitialState);
     void update();
     void render();
     void handleEvents();

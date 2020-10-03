@@ -11,18 +11,19 @@ Camera::Camera(const std::shared_ptr<GameObject>& pTrackedObject, uint16_t width
 }
 
 void Camera::update() {
-    if (m_pTrackedObject == nullptr) {
+    const auto pTrackedObject = m_pTrackedObject.lock();
+    if (!pTrackedObject) {
         return;
     }
 
-    float x = m_pTrackedObject->getPosition().getX() - static_cast<float>(m_width - m_pTrackedObject->getWidth()) / 2;
+    float x = pTrackedObject->getPosition().getX() - static_cast<float>(m_width - pTrackedObject->getWidth()) / 2;
     if (x < 0) {
         x = 0;
     } else if (x + m_width > m_levelWidth) {
         x = static_cast<float>(m_levelWidth) - m_width;
     }
 
-    float y = m_pTrackedObject->getPosition().getY() - static_cast<float>(m_height - m_pTrackedObject->getHeight()) / 2;
+    float y = pTrackedObject->getPosition().getY() - static_cast<float>(m_height - pTrackedObject->getHeight()) / 2;
     if (y < 0) {
         y = 0;
     } else if (y + m_height > m_levelHeight) {

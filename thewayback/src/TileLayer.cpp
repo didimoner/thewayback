@@ -37,11 +37,11 @@ void TileLayer::draw() {
                 continue;
             }
 
-            const Camera* pCamera = Game::instance().getCurrentState().getCamera();
-            Vector2f cameraPos = pCamera->getPosition();
+            const auto camera = Game::instance().getCurrentState().getCamera();
+            Vector2f cameraPos = camera.getPosition();
             Vector2f bottomCameraPos(
-                cameraPos.getX() + pCamera->getWidth(),
-                cameraPos.getY() + pCamera->getHeight()
+                cameraPos.getX() + camera.getWidth(),
+                cameraPos.getY() + camera.getHeight()
             );
             const int safeOffset = 2;
 
@@ -67,8 +67,7 @@ void TileLayer::draw() {
                 pTileset->tileWidth,
                 pTileset->tileHeight,
                 tilesetRow,
-                tilesetColumn,
-                Game::instance().getRenderer()
+                tilesetColumn
             );
         }
     }

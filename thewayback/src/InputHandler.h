@@ -39,9 +39,9 @@ public:
     Vector2f getMousePosition() const;
 
 private:
-    void onMouseMove(SDL_Event& event);
-    void onMouseButtonDown(SDL_Event& event);
-    void onMouseButtonUp(SDL_Event& event);
+    void onMouseMove(const SDL_Event& event);
+    void onMouseButtonDown(const SDL_Event& event);
+    void onMouseButtonUp(const SDL_Event& event);
     void onKeyboardUpdate();
 
 };

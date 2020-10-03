@@ -10,7 +10,7 @@ private:
     uint16_t m_height = 0;
     uint32_t m_levelWidth = 0;
     uint32_t m_levelHeight = 0;
-    std::shared_ptr<GameObject> m_pTrackedObject;
+    std::weak_ptr<GameObject> m_pTrackedObject;
 
 public:
     Camera(const std::shared_ptr<GameObject>& pTrackedObject, uint16_t width, uint16_t height,

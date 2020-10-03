@@ -28,8 +28,7 @@ void PlayState::onActivate() {
 
     // TODO: move to state parser
     m_pLevel = LevelParser::parse("test5.tmx");
-
-    m_pCamera = new Camera(
+    m_pCamera = std::make_unique<Camera>(
         m_pLevel->getPlayer(),
         Game::instance().getWindowWidth(),
         Game::instance().getWindowHeight(),

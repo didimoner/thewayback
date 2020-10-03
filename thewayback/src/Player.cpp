@@ -28,8 +28,6 @@ void Player::clean() {
 }
 
 void Player::onCollide(ECollisionType type, const std::string& objectId) {
-    Camera* pCamera = Game::instance().getCurrentState().getCamera();
-
     switch (type) {
         case ECollisionType::PLAYER_OBSTACLE: {
             m_acceleration.set(0, 0);

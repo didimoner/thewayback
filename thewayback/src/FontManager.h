@@ -12,8 +12,8 @@ private:
     static std::unique_ptr<FontManager> s_pInstance;
     static Log Logger;
 
-    std::map<std::string, TTF_Font*> m_fonts;
-    std::map<std::string, SDL_Texture*> m_textures;
+    std::unordered_map<std::string, TTF_Font*> m_fonts;
+    std::unordered_map<std::string, SDL_Texture*> m_textures;
 
 public:
     ~FontManager();
@@ -33,16 +33,15 @@ public:
     bool loadFont(const std::string& filename, std::string id, int size);
 
     void createTexture(const std::string& fontId, const std::string& textureId,
-                       const std::string& text, SDL_Color color, SDL_Renderer* pRenderer);
+                       const std::string& text, SDL_Color color);
     void createMultilineTexture(const std::string& fontId, const std::string& textureId,
-                                const std::string& text, uint32_t lineWidth, SDL_Color color, 
-                                SDL_Renderer* pRenderer);
+                                const std::string& text, uint32_t lineWidth, SDL_Color color);
 
     void removeTexture(const std::string& textureId);
 
-    void draw(const std::string& textureId, float x, float y,
-              SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void draw(const std::string& textureId, float x, float y, int width, int height,
-              SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void draw(const std::string& textureId, float x, float y, 
+        SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void draw(const std::string& textureId, float x, float y, 
+        int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 };

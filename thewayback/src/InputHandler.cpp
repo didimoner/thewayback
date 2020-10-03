@@ -45,11 +45,11 @@ void InputHandler::update() {
     }
 }
 
-void InputHandler::onMouseMove(SDL_Event& event) {
+void InputHandler::onMouseMove(const SDL_Event& event) {
     m_mousePosition.set(static_cast<float>(event.motion.x), static_cast<float>(event.motion.y));
 }
 
-void InputHandler::onMouseButtonDown(SDL_Event& event) {
+void InputHandler::onMouseButtonDown(const SDL_Event& event) {
     if (event.button.button == SDL_BUTTON_LEFT) {
         m_mouseButtonStates[LEFT] = true;
     }
@@ -61,7 +61,7 @@ void InputHandler::onMouseButtonDown(SDL_Event& event) {
     }
 }
 
-void InputHandler::onMouseButtonUp(SDL_Event& event) {
+void InputHandler::onMouseButtonUp(const SDL_Event& event) {
     if (event.button.button == SDL_BUTTON_LEFT) {
         m_mouseButtonStates[LEFT] = false;
     }

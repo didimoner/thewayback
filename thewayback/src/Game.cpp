@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "Game.h"
-#include "Config.h"
 #include "InputHandler.h"
 #include "GameState.h"
 #include "Log.h"
@@ -13,7 +12,8 @@ Game::~Game() {
 }
 
 bool Game::init(const char* title, int x, int y, int width, int height, int flags,
-                GameStateMachine* pGameStateMachine, std::unique_ptr<GameState>& pInitialState) {
+        std::unique_ptr<GameStateMachine> pGameStateMachine, 
+        std::unique_ptr<GameState>& pInitialState) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         Logger.error("SDL_Init Error: " + std::string(SDL_GetError()));
         return false;
@@ -35,7 +35,7 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
     m_windowWidth = width;
     m_windowHeight = height;
 
-    m_pGameStateMachine = std::unique_ptr<GameStateMachine>(pGameStateMachine);
+    m_pGameStateMachine = std::move(pGameStateMachine);
     m_pGameStateMachine->pushState(pInitialState);
     return true;
 }
