@@ -3,10 +3,12 @@
 #include "GameStateMachine.h"
 #include "PlayState.h"
 #include "GameObjectFactory.h"
+#include "GameStateFactory.h"
 #include "Player.h"
 #include "Config.h"
 #include "Game.h"
 #include "Log.h"
+#include "GameStateParser.h"
 
 const int FPS = 60;
 const int DELAY_TIME = static_cast<int>(1000.0f / FPS);
@@ -19,10 +21,13 @@ public:
         loadConfigs();
         registerTypes();
 
-        std::unique_ptr<GameState> pInitialState = std::make_unique<PlayState>();
+        const auto config = Config::instance().get("system");
+        const std::string stateFilename = config.Get("Initialization", "state", "play_state.xml");
+        auto pInitialState = GameStateParser::parse(stateFilename);
         auto pGameStateMachine = std::make_unique<GameStateMachine>();
         const bool initialized = Game::instance().init(title, x, y, width, height, flags, 
-            std::move(pGameStateMachine), pInitialState);
+            std::move(pGameStateMachine), std::move(pInitialState));
+
         if (!initialized) {
             Log::getLogger().error("Game initialization failed");
             return;
@@ -50,6 +55,10 @@ private:
     }
 
     static void registerTypes() {
+        // game state types
+        GameStateFactory::instance().registerType("play", std::make_unique<PlayStateCreator>());
+
+        // game object types
         GameObjectFactory::instance().registerType("player", std::make_unique<PlayerCreator>());
     }
 

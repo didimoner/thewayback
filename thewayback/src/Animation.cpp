@@ -3,21 +3,18 @@
 #include "Sprite.h"
 #include <SDL_timer.h>
 
-#include <utility>
-#include "Log.h"
+void Animation::init(const InitParams& initParams) {
+    Sprite::init(initParams.spriteInitParams);
+    m_speed = initParams.speed;
+    m_looped = initParams.looped;
+    m_defaultFrame = initParams.defaultFrame;
 
-void Animation::init(float x, float y, int w, int h, std::string textureId, AnimationInitParams params) {
-    Sprite::init(x, y, w, h, std::move(textureId));
-    m_speed = params.speed;
-    m_looped = params.looped;
-    m_defaultFrame = params.defaultFrame;
-
-    for (uint8_t i = 0; i < params.totalFrames; i++) {
+    for (uint8_t i = 0; i < initParams.totalFrames; i++) {
         m_totalFrames.push_back(i);
     }
 
-    if (params.type == EAnimationType::BOUNCE) {
-        for (uint8_t i = params.totalFrames - 2; i > 0; i--) {
+    if (initParams.type == EAnimationType::BOUNCE) {
+        for (uint8_t i = initParams.totalFrames - 2; i > 0; i--) {
             m_totalFrames.push_back(i);
         }
     }

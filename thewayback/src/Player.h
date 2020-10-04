@@ -7,6 +7,13 @@ class Log;
 
 class Player : public Animation, public Collidable {
 
+public:
+    struct InitParams {
+        Animation::InitParams animationInitParams;
+        float walkingSpeed = 0;
+        float runningSpeed = 0;
+    };
+
 private:
     enum class EPlayerState {
         IDLE,
@@ -17,6 +24,9 @@ private:
     };
 
 private:
+    friend class PlayerCreator;
+    Player();
+
     float m_walkingSpeed = 1;
     float m_runningSpeed = 1;
     EPlayerState m_playerState = EPlayerState::IDLE;
@@ -25,8 +35,7 @@ private:
     static Log Logger;
 
 public:
-    Player();
-
+    void init(const InitParams& initParams);
     void update() override;
     void draw() override;
     void clean() override;
@@ -34,20 +43,17 @@ public:
     void onCollide(ECollisionType type, const std::string& objectId) override;
     SDL_FRect getCollider() const override;
 
-    void setWalkingSpeed(float walkingSpeed);
-    void setRunningSpeed(float runningSpeed);
-
 private:
     void handleKeyboardInput();
     void updatePlayerState();
 
 };
 
-class PlayerCreator : public GameObjectCreator {
+class PlayerCreator final : public GameObjectCreator {
 
 public:
     std::shared_ptr<GameObject> create() const override {
-        return std::make_shared<Player>();
+        return std::shared_ptr<Player>(new Player);
     }
 
 };

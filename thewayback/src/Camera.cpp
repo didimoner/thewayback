@@ -1,13 +1,15 @@
 #include "pch.h"
 #include "Camera.h"
 
-Camera::Camera(const std::shared_ptr<GameObject>& pTrackedObject, uint16_t width, uint16_t height,
-               uint32_t levelWidth, uint32_t levelHeight) {
-    m_pTrackedObject = pTrackedObject;
+Camera::Camera(uint16_t width, uint16_t height, uint32_t levelWidth, uint32_t levelHeight, 
+        const std::shared_ptr<GameObject>& pTrackedObject) {
     m_width = width;
     m_height = height;
     m_levelWidth = levelWidth;
     m_levelHeight = levelHeight;
+    if (pTrackedObject) {
+        m_pTrackedObject = pTrackedObject;
+    }
 }
 
 void Camera::update() {

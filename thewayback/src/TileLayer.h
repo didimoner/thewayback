@@ -1,10 +1,10 @@
 #pragma once
-#include "Drawable.h"
+#include "DrawableLayer.h"
 
 class Log;
 class Level;
 
-class TileLayer : public Drawable {
+class TileLayer : public DrawableLayer {
 
 private:
     std::string m_name;

@@ -5,21 +5,26 @@
 
 class GameObject : public Drawable {
 
-protected:
-    int m_width = 0;
-    int m_height = 0;
+public:
+    struct InitParams {
+        float x = 0;
+        float y = 0;
+        uint32_t width = 0;
+        uint32_t height = 0;
+    };
 
+protected:
+    uint32_t m_width = 0;
+    uint32_t m_height = 0;
     Vector2f m_position;
     Vector2f m_velocity;
     Vector2f m_acceleration;
 
 public:
-    GameObject() = default;
-
-    void init(float x, float y, int w, int h) {
-        m_position = {x, y};
-        m_width = w;
-        m_height = h;
+    void init(const InitParams& initParams) {
+        m_position = { initParams.x, initParams.y };
+        m_width = initParams.width;
+        m_height = initParams.height;
     }
 
     void update() override {

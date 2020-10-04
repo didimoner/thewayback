@@ -4,12 +4,17 @@
 #include "ECollisionType.h"
 #include "Log.h"
 #include "Game.h"
-#include "GameState.h"
 
 Log Player::Logger(typeid(Player).name());
 
 Player::Player() : Animation() {
     m_objectId = "Player";
+}
+
+void Player::init(const InitParams& initParams) {
+    Animation::init(initParams.animationInitParams);
+    m_walkingSpeed = initParams.walkingSpeed;
+    m_runningSpeed= initParams.runningSpeed;
 }
 
 void Player::update() {
@@ -24,7 +29,6 @@ void Player::draw() {
 }
 
 void Player::clean() {
-    Animation::clean();
 }
 
 void Player::onCollide(ECollisionType type, const std::string& objectId) {
@@ -38,14 +42,6 @@ void Player::onCollide(ECollisionType type, const std::string& objectId) {
 
 SDL_FRect Player::getCollider() const {
     return {m_position.getX(), m_position.getY(), static_cast<float>(m_width), static_cast<float>(m_height)};
-}
-
-void Player::setWalkingSpeed(float walkingSpeed) {
-    m_walkingSpeed = walkingSpeed;
-}
-
-void Player::setRunningSpeed(float runningSpeed) {
-    m_runningSpeed = runningSpeed;
 }
 
 void Player::handleKeyboardInput() {

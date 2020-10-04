@@ -13,8 +13,8 @@ private:
     std::weak_ptr<GameObject> m_pTrackedObject;
 
 public:
-    Camera(const std::shared_ptr<GameObject>& pTrackedObject, uint16_t width, uint16_t height,
-           uint32_t levelWidth, uint32_t levelHeight);
+    Camera(uint16_t width, uint16_t height, uint32_t levelWidth, uint32_t levelHeight, 
+        const std::shared_ptr<GameObject>& pTrackedObject = std::shared_ptr<GameObject>());
 
     void update();
     Vector2f getPosition() const;

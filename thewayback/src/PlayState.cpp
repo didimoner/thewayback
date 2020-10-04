@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "PlayState.h"
 #include "Log.h"
-#include "LevelParser.h"
-#include "StateParser.h"
-#include "Player.h"
 #include "Camera.h"
 #include "Game.h"
 
@@ -22,18 +19,15 @@ void PlayState::draw() {
 void PlayState::onActivate() {
     Logger.debug("Play activated");
 
-    StateParser stateParser;
-    std::vector<GameObject*> gameObjects;
-    stateParser.parse("states.xml", getStateId(), gameObjects);
-
-    // TODO: move to state parser
-    m_pLevel = LevelParser::parse("test5.tmx");
+    // TODO: level is not set because of GameState base class
+    // TODO: set player properly
+    // m_pLevel->setPlayer(m_pPlayer);
     m_pCamera = std::make_unique<Camera>(
-        m_pLevel->getPlayer(),
         Game::instance().getWindowWidth(),
         Game::instance().getWindowHeight(),
         m_pLevel->getWidthPx(),
-        m_pLevel->getHeightPx()
+        m_pLevel->getHeightPx(),
+        m_pPlayer
     );
 }
 

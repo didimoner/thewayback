@@ -3,28 +3,11 @@
 
 class Drawable {
 
-private:
-    uint16_t m_priority = 0;
-
 public:
     virtual ~Drawable() = default;
-
-    struct DrawableComparator {
-        bool operator()(const std::shared_ptr<Drawable>& first, const std::shared_ptr<Drawable>& second) const {
-            return first->getPriority() < second->getPriority();
-        }
-    };
 
 public:
     virtual void update() = 0;
     virtual void draw() = 0;
-
-    uint16_t getPriority() const {
-        return m_priority;
-    }
-
-    void setPriority(uint16_t priority) {
-        m_priority = priority;
-    }
 
 };

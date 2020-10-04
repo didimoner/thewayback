@@ -9,13 +9,11 @@ class Config {
 private:
     Config() = default;
 
-    std::unordered_map<std::string, INIReader*> m_readers;
-
+    std::unordered_map<std::string, std::unique_ptr<INIReader>> m_readers;
     static std::unique_ptr<Config> s_pInstance;
     static Log Logger;
 
 public:
-    ~Config();
     Config(const Config&) = delete;
     Config& operator=(Config&) = delete;
 
@@ -30,6 +28,6 @@ public:
     // ------------------------------------
 
     bool load(const std::string& filename, const std::string& id);
-    INIReader* get(const std::string& key);
+    const INIReader& get(const std::string& key);
 
 };

@@ -2,8 +2,8 @@
 #include "GameState.h"
 #include "GameStateMachine.h"
 
-void GameStateMachine::pushState(std::unique_ptr<GameState>& pState) {
-    m_gameStates.push_back(std::move(pState));
+void GameStateMachine::pushState(std::unique_ptr<GameState> pState) {
+    m_gameStates.emplace_back(std::move(pState));
     m_gameStates.back()->onActivate();
 }
 
@@ -17,14 +17,14 @@ void GameStateMachine::popState() {
     }
 }
 
-void GameStateMachine::changeState(std::unique_ptr<GameState>& pState) {
+void GameStateMachine::changeState(std::unique_ptr<GameState> pState) {
     if (m_gameStates.empty()
         || m_gameStates.back()->getStateId() == pState->getStateId()) {
         return;
     }
 
     popState();
-    pushState(pState);
+    pushState(std::move(pState));
 }
 
 void GameStateMachine::update() {

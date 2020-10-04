@@ -24,6 +24,10 @@ TextureManager::~TextureManager() {
 }
 
 bool TextureManager::load(const std::string& filename, std::string id) {
+    if (m_textures.find(id) != m_textures.end()) {
+        return true;
+    }
+
     Logger.debug("Loading texture: " + filename);
 
     const std::string resourcesPath = getResourcePath("images");

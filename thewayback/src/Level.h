@@ -2,11 +2,12 @@
 #include "Tileset.h"
 #include "Drawable.h"
 
+class DrawableLayer;
 class TileLayer;
 class ObstacleLayer;
 class Player;
 
-class Level : Drawable {
+class Level : public Drawable {
 
 private:
     friend class LevelParser;
@@ -16,22 +17,17 @@ private:
     uint32_t m_height = 0;
     uint16_t m_tileWidth = 0;
     uint16_t m_tileHeight = 0;
+    std::weak_ptr<Player> m_pPlayer;
 
-    // TODO: move to an upper level
-    std::shared_ptr<Player> m_pPlayer;
-
-    std::multiset<std::shared_ptr<Drawable>, Drawable::DrawableComparator> m_drawables;
     std::vector<Tileset> m_tilesets;
+    std::map<int16_t, std::shared_ptr<DrawableLayer>> m_drawableLayers;
     std::vector<std::unique_ptr<ObstacleLayer>> m_obstacleLayers;
 
 public:
-    std::vector<Tileset>& getTilesets();
-    std::multiset<std::shared_ptr<Drawable>, Drawable::DrawableComparator>& getDrawables();
-    std::vector<std::unique_ptr<ObstacleLayer>>& getObstacleLayers();
+    void setPlayer(const std::shared_ptr<Player>& pPlayer);
 
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;
-    std::shared_ptr<Player>& getPlayer();
     const Tileset* getTilesetByGlobalTileId(uint32_t globalTileId);
 
     void update() override;

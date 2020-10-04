@@ -10,29 +10,20 @@ bool Config::load(const std::string& filename, const std::string& id) {
     const std::string configsDirPath = getResourcePath("configs");
     const std::string filepath = configsDirPath + filename;
 
-    INIReader* pReader = new INIReader(filepath);
+    auto pReader = std::make_unique<INIReader>(filepath);
     if (pReader->ParseError() != 0) {
         Logger.error("Cannot load config from a file " + filepath);
         return false;
     }
 
-    m_readers[id] = pReader;
+    m_readers[id] = std::move(pReader);
     return true;
 }
 
-INIReader* Config::get(const std::string& key) {
-    INIReader* pReader = m_readers[key];
-    if (pReader == nullptr) {
+const INIReader& Config::get(const std::string& key) {
+    if (m_readers.find(key) == m_readers.end()) {
         Logger.warn("Requested config not found: " + key);
     }
 
-    return pReader;
-}
-
-Config::~Config() {
-    for (std::pair<std::string, INIReader*> item : m_readers) {
-        delete item.second;
-    }
-
-    m_readers.clear();
+    return *m_readers[key];
 }

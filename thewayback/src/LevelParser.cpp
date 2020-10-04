@@ -10,10 +10,8 @@
 #include "Log.h"
 #include "TileLayer.h"
 #include "ObstacleLayer.h"
-#include "Animation.h"
-#include "Player.h"
-#include "GameObjectFactory.h"
 #include "Obstacle.h"
+#include "XmlHelper.h"
 
 using namespace tinyxml2;
 
@@ -39,28 +37,17 @@ std::shared_ptr<Level> LevelParser::parse(const std::string& filename) {
         return nullptr;
     }
 
-    std::shared_ptr<Level> pLevel = std::shared_ptr<Level>(new Level);
-    pLevel->m_width = pRoot->IntAttribute("width");
-    pLevel->m_height = pRoot->IntAttribute("height");
-    pLevel->m_tileWidth = pRoot->IntAttribute("tilewidth");
-    pLevel->m_tileHeight = pRoot->IntAttribute("tileheight");
+    auto pLevel = std::shared_ptr<Level>(new Level);
+    pLevel->m_width = pRoot->UnsignedAttribute("width");
+    pLevel->m_height = pRoot->UnsignedAttribute("height");
+    pLevel->m_tileWidth = pRoot->UnsignedAttribute("tilewidth");
+    pLevel->m_tileHeight = pRoot->UnsignedAttribute("tileheight");
 
-    parseMapProps(pRoot);
     parseTilesets(pRoot, *pLevel);
     parseTileLayers(pRoot, pLevel);
     parseObjectLayers(pRoot, *pLevel);
 
     return pLevel;
-}
-
-void LevelParser::parseMapProps(XMLElement* pPropsRoot) {
-    XMLElement* pPropsElement = pPropsRoot->FirstChildElement("properties");
-    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
-        const std::string textureId = p->Attribute("name");
-        const std::string filename = p->Attribute("value");
-
-        TextureManager::instance().load(filename, textureId);
-    }
 }
 
 void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, Level& level) {
@@ -70,13 +57,13 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, Level& level) {
         }
 
         Tileset tileset;
-        tileset.firstGlobalId = e->IntAttribute("firstgid");
-        tileset.tileWidth = e->IntAttribute("tilewidth");
-        tileset.tileHeight = e->IntAttribute("tileheight");
-        tileset.tileCount = e->IntAttribute("tilecount");
-        tileset.columns = e->IntAttribute("columns");
+        tileset.firstGlobalId = e->UnsignedAttribute("firstgid");
+        tileset.tileWidth = e->UnsignedAttribute("tilewidth");
+        tileset.tileHeight = e->UnsignedAttribute("tileheight");
+        tileset.tileCount = e->UnsignedAttribute("tilecount");
+        tileset.columns = e->UnsignedAttribute("columns");
         tileset.name = e->Attribute("name");
-        level.getTilesets().push_back(std::move(tileset));
+        level.m_tilesets.push_back(std::move(tileset));
 
         XMLElement* pImageElement = e->FirstChildElement("image");
         const std::string source = pImageElement->Attribute("source");
@@ -85,7 +72,7 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, Level& level) {
     }
 }
 
-void LevelParser::parseTileLayers(XMLElement* pLayerRoot, std::shared_ptr<Level>& pLevel) {
+void LevelParser::parseTileLayers(XMLElement* pLayerRoot, const std::shared_ptr<Level>& pLevel) {
     for (XMLElement* e = pLayerRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("layer")) {
             continue;
@@ -119,10 +106,10 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, std::shared_ptr<Level>
         }
 
         std::shared_ptr<TileLayer> pTileLayer = std::make_shared<TileLayer>(pLevel);
-        pTileLayer->setPriority(e->IntAttribute("id"));
+        pTileLayer->setPriority(e->UnsignedAttribute("id"));
         pTileLayer->setName(e->Attribute("name"));
         pTileLayer->setTileIds(tileIds);
-        pLevel->getDrawables().insert(pTileLayer);
+        pLevel->m_drawableLayers.emplace(std::make_pair(pTileLayer->getPriority(), pTileLayer));
     }
 }
 
@@ -132,7 +119,7 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level& level) {
             continue;
         }
 
-        std::string layerType = getStringProperty(e, "type");
+        std::string layerType = XmlHelper::getStringProperty(e, "type");
         if (layerType == "obstacles") {
             parseObstacles(e, level);
         } else if (layerType == "game_objects") {
@@ -143,8 +130,8 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level& level) {
 
 void LevelParser::parseObstacles(XMLElement* pRoot, Level& level) {
     const std::string layerId = pRoot->Attribute("name");
-    const uint8_t gridCols = getIntProperty(pRoot, "grid_cols");
-    const uint8_t gridRows = getIntProperty(pRoot, "grid_rows");
+    const uint8_t gridCols = XmlHelper::getUnsignedProperty(pRoot, "grid_cols");
+    const uint8_t gridRows = XmlHelper::getUnsignedProperty(pRoot, "grid_rows");
 
     std::unique_ptr<ObstacleLayer> pObstacleLayer = std::make_unique<ObstacleLayer>(
         layerId,
@@ -161,98 +148,13 @@ void LevelParser::parseObstacles(XMLElement* pRoot, Level& level) {
         pObstacleLayer->addObstacle(pObstacle);
     }
 
-    level.getObstacleLayers().push_back(std::move(pObstacleLayer));
+    level.m_obstacleLayers.push_back(std::move(pObstacleLayer));
 }
 
 void LevelParser::parseGameObjects(XMLElement* pRoot, Level& level) {
     for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        const int x = o->IntAttribute("x");
-        const int y = o->IntAttribute("y");
-        const int width = o->IntAttribute("width");
-        const int height = o->IntAttribute("height");
-        std::string type = o->Attribute("type");
-        const bool animated = getBoolProperty(o, "animated");
-        const std::string textureId = getStringProperty(o, "textureId");
-
-        std::shared_ptr<Sprite> pSprite = std::dynamic_pointer_cast<Sprite>(GameObjectFactory::instance().create(type));
-        pSprite->setPriority(pRoot->IntAttribute("id"));
-
-        if (animated) {
-            AnimationInitParams animationInitParams;
-            animationInitParams.speed = getIntProperty(o, "animationSpeed");
-            animationInitParams.totalFrames = getIntProperty(o, "animationTotalFrames");
-            animationInitParams.defaultFrame = getIntProperty(o, "animationDefaultFrame");
-            if (getStringProperty(o, "animationType") == "BOUNCE") {
-                animationInitParams.type = EAnimationType::BOUNCE;
-            } else {
-                animationInitParams.type = EAnimationType::NORMAL;
-            }
-
-            std::dynamic_pointer_cast<Animation>(pSprite)->init(static_cast<float>(x), static_cast<float>(y),
-                width, height, textureId, animationInitParams);
-        } else {
-            pSprite->init(static_cast<float>(x), static_cast<float>(y), width, height, textureId);
-        }
-
-        if (type == "player" && !level.m_pPlayer) {
-            std::shared_ptr<Player> pPlayer = std::dynamic_pointer_cast<Player>(pSprite);
-            pPlayer->setWalkingSpeed(getFloatProperty(o, "walkingSpeed"));
-            pPlayer->setRunningSpeed(getFloatProperty(o, "runningSpeed"));
-
-            level.m_pPlayer = pPlayer;
-            level.getDrawables().insert(pPlayer);
-        }
-
-        // todo: other game object types
+        auto pGameObject = XmlHelper::parseGameObject(o);
+        // todo: create layer of game objects
+        // .insert(pGameObject);
     }
-}
-
-std::string LevelParser::getStringProperty(XMLElement* pElementRoot, const std::string& name) {
-    XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
-    if (pPropertyElement != nullptr) {
-        return pPropertyElement->Attribute("value");
-    }
-
-    Logger.warn("There is no string property of name " + name);
-    return "";
-}
-
-int LevelParser::getIntProperty(XMLElement* pElementRoot, const std::string& name) {
-    XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
-    if (pPropertyElement != nullptr) {
-        return pPropertyElement->IntAttribute("value");
-    }
-
-    Logger.warn("There is no int property of name " + name);
-    return 0;
-}
-
-float LevelParser::getFloatProperty(XMLElement* pElementRoot, const std::string& name) {
-    XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
-    if (pPropertyElement != nullptr) {
-        return pPropertyElement->FloatAttribute("value");
-    }
-
-    Logger.warn("There is no float property of name " + name);
-    return 0;
-}
-
-bool LevelParser::getBoolProperty(XMLElement* pElementRoot, const std::string& name) {
-    XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
-    if (pPropertyElement != nullptr) {
-        return pPropertyElement->BoolAttribute("value");
-    }
-
-    Logger.warn("There is no bool property of name " + name);
-    return false;
-}
-
-XMLElement* LevelParser::getCustomProperty(XMLElement* pElementRoot, const std::string& name) {
-    XMLElement* pPropsElement = pElementRoot->FirstChildElement("properties");
-    for (XMLElement* p = pPropsElement->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
-        if (p->Attribute("name") == name) {
-            return p;
-        }
-    }
-    return nullptr;
 }

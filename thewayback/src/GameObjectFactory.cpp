@@ -6,9 +6,6 @@
 std::unique_ptr<GameObjectFactory> GameObjectFactory::s_pInstance;
 Log GameObjectFactory::Logger(typeid(GameObjectFactory).name());
 
-GameObjectFactory::~GameObjectFactory() {
-    m_creators.clear();
-}
 
 void GameObjectFactory::registerType(const std::string& type, std::unique_ptr<GameObjectCreator> pCreator) {
     Logger.debug("Registering object type " + type);

@@ -34,6 +34,12 @@
     <Filter Include="Game\Map\Layers">
       <UniqueIdentifier>{a2147a33-8002-4714-aae1-b55232d600a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Utils">
+      <UniqueIdentifier>{6af6d13a-f319-4cb8-957c-223ba6af2a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Factories">
+      <UniqueIdentifier>{1ca58d3c-2ae6-4c29-99c0-b4145d933049}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -62,9 +68,6 @@
     <ClCompile Include="src\PlayState.cpp">
       <Filter>Game\States</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjectFactory.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameStateMachine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -89,9 +92,6 @@
     <ClCompile Include="src\SystemUtils.cpp">
       <Filter>Engine\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\StateParser.cpp">
-      <Filter>Game\States</Filter>
-    </ClCompile>
     <ClCompile Include="src\ObstacleLayer.cpp">
       <Filter>Game\Map\Layers</Filter>
     </ClCompile>
@@ -109,6 +109,18 @@
     </ClCompile>
     <ClCompile Include="src\vendor\tinyxml2.cpp">
       <Filter>Engine\Vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\XmlHelper.cpp">
+      <Filter>Game\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameStateParser.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectFactory.cpp">
+      <Filter>Engine\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameStateFactory.cpp">
+      <Filter>Engine\Factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,12 +154,6 @@
     </ClInclude>
     <ClInclude Include="src\PlayState.h">
       <Filter>Game\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjectCreator.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjectFactory.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\GameStateMachine.h">
       <Filter>Engine</Filter>
@@ -185,9 +191,6 @@
     <ClInclude Include="src\Collidable.h">
       <Filter>Engine\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="src\StateParser.h">
-      <Filter>Game\States</Filter>
-    </ClInclude>
     <ClInclude Include="src\Bootstrap.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -217,6 +220,27 @@
     </ClInclude>
     <ClInclude Include="src\vendor\tinyxml2.h">
       <Filter>Engine\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XmlHelper.h">
+      <Filter>Game\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DrawableLayer.h">
+      <Filter>Game\Map\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStateParser.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectCreator.h">
+      <Filter>Engine\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectFactory.h">
+      <Filter>Engine\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStateCreator.h">
+      <Filter>Engine\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStateFactory.h">
+      <Filter>Engine\Factories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

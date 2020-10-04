@@ -1,14 +1,14 @@
 #pragma once
-#include "GameObjectCreator.h"
+
 
 class GameObject;
+class GameObjectCreator;
 class Log;
 
 class GameObjectFactory {
 
 private:
-    GameObjectFactory() {
-    }
+    GameObjectFactory() = default;
 
     static std::unique_ptr<GameObjectFactory> s_pInstance;
     static Log Logger;
@@ -16,7 +16,6 @@ private:
     std::unordered_map<std::string, std::unique_ptr<GameObjectCreator>> m_creators;
 
 public:
-    ~GameObjectFactory();
     GameObjectFactory(const GameObjectFactory&) = delete;
     GameObjectFactory& operator=(const GameObjectFactory&) = delete;
 

@@ -1,15 +1,16 @@
 #include "pch.h"
 #include "Sprite.h"
-#include <utility>
 #include "GameObject.h"
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameState.h"
 #include "Camera.h"
 
-void Sprite::init(float x, float y, int w, int h, std::string textureId) {
-    GameObject::init(x, y, w, h);
-    m_textureId = std::move(textureId);
+void Sprite::init(const InitParams& initParams) {
+    GameObject::init(initParams.gameObjectInitParams);
+    m_row = initParams.row;
+    m_frame = initParams.frame;
+    m_textureId = initParams.textureId;
 }
 
 void Sprite::update() {

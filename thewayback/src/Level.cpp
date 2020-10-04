@@ -1,41 +1,39 @@
 #include "pch.h"
 #include "Level.h"
-#include "TileLayer.h"
 #include "Player.h"
 #include "ObstacleLayer.h"
 #include "Collision.h"
 #include "ECollisionType.h"
 #include "Obstacle.h"
+#include "DrawableLayer.h"
 
 void Level::update() {
-    for (const auto& pDrawable : m_drawables) {
-        pDrawable->update();
+    for (const auto& entry : m_drawableLayers) {
+        entry.second->update();
+    }
+
+    // todo: think about moving this part
+    const auto pPlayer = m_pPlayer.lock();
+    if (!pPlayer) {
+        return;
     }
 
     for (const auto& pObstacleLayer : m_obstacleLayers) {
-        auto obstacles = pObstacleLayer->getObstacles(m_pPlayer->getCollider());
+        auto obstacles = pObstacleLayer->getObstacles(pPlayer->getCollider());
         for (const auto& pObstacle : obstacles) {
-            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, *m_pPlayer, *pObstacle);
+            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, *pPlayer, *pObstacle);
         }
     }
 }
 
 void Level::draw() {
-    for (const auto& pDrawable : m_drawables) {
-        pDrawable->draw();
+    for (const auto& entry : m_drawableLayers) {
+        entry.second->draw();
     }
 }
 
-std::vector<Tileset>& Level::getTilesets() {
-    return m_tilesets;
-}
-
-std::multiset<std::shared_ptr<Drawable>, Drawable::DrawableComparator>& Level::getDrawables() {
-    return m_drawables;
-}
-
-std::vector<std::unique_ptr<ObstacleLayer>>& Level::getObstacleLayers() {
-    return m_obstacleLayers;
+void Level::setPlayer(const std::shared_ptr<Player>& pPlayer) {
+    m_pPlayer = pPlayer;
 }
 
 uint32_t Level::getWidthPx() const {
@@ -44,10 +42,6 @@ uint32_t Level::getWidthPx() const {
 
 uint32_t Level::getHeightPx() const {
     return m_height * m_tileHeight;
-}
-
-std::shared_ptr<Player>& Level::getPlayer() {
-    return m_pPlayer;
 }
 
 const Tileset* Level::getTilesetByGlobalTileId(uint32_t globalTileId) {

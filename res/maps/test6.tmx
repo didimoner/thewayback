@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="20">
+ <tileset firstgid="1" name="tilea5" tilewidth="32" tileheight="32" tilecount="128" columns="8">
+  <image source="../images/tilea5.png" width="256" height="512"/>
+ </tileset>
+ <layer id="1" name="background" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyTYGBgkBjFwxqHQzE1zUI3E5sYOeYRi6ltHi4zcakj1j3Eht9giNtRPIpJxQAsYjKM
+  </data>
+ </layer>
+ <layer id="2" name="terrain" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DggCAaRhbHBTJJMA+fOTBQCMRFRKgbBaNgFKACALSKAfc=
+  </data>
+ </layer>
+ <objectgroup id="7" name="game_objects"/>
+ <layer id="3" name="upper_terrain" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApIBwAGQAAB
+  </data>
+ </layer>
+ <objectgroup id="5" name="collidables">
+  <properties>
+   <property name="grid_cols" type="int" value="2"/>
+   <property name="grid_rows" type="int" value="2"/>
+   <property name="type" value="obstacles"/>
+  </properties>
+  <object id="1" x="416" y="256" width="64" height="64"/>
+  <object id="2" x="60.8" y="228" height="0.8"/>
+  <object id="3" x="0" y="160" width="32" height="64"/>
+  <object id="4" x="32" y="160" width="64" height="32"/>
+  <object id="5" x="96" y="192" width="32" height="32"/>
+  <object id="6" x="128" y="224" width="64" height="32"/>
+  <object id="7" x="192" y="192" width="96" height="32"/>
+  <object id="8" x="288" y="224" width="128" height="32"/>
+  <object id="9" x="320" y="320" width="96" height="32"/>
+  <object id="10" x="192" y="352" width="128" height="32"/>
+  <object id="11" x="160" y="320" width="32" height="32"/>
+  <object id="12" x="128" y="352" width="32" height="32"/>
+  <object id="13" x="64" y="384" width="64" height="32"/>
+  <object id="15" x="0" y="416" width="64" height="32"/>
+ </objectgroup>
+ <objectgroup id="6" name="teleports">
+  <properties>
+   <property name="type" value="teleports"/>
+  </properties>
+  <object id="18" name="to_main_map" type="portal" x="-17.6" y="256.8" width="32.8" height="62.4">
+   <properties>
+    <property name="levelId" value="test5.tmx"/>
+    <property name="playerPosX" type="int" value="23"/>
+    <property name="playerPosY" type="int" value="10"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

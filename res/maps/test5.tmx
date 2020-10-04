@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="121">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="127">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
- <properties>
-  <property name="player" value="newchar02-2.png"/>
- </properties>
  <tileset firstgid="1" name="tilea5" tilewidth="32" tileheight="32" tilecount="128" columns="8">
   <image source="../images/tilea5.png" width="256" height="512"/>
  </tileset>
@@ -26,22 +23,10 @@
   <properties>
    <property name="type" value="game_objects"/>
   </properties>
-  <object id="19" name="player" type="player" x="1170.71" y="541.438" width="32" height="32">
-   <properties>
-    <property name="animated" type="bool" value="true"/>
-    <property name="animationDefaultFrame" type="int" value="1"/>
-    <property name="animationSpeed" type="int" value="4"/>
-    <property name="animationTotalFrames" type="int" value="3"/>
-    <property name="animationType" value="BOUNCE"/>
-    <property name="runningSpeed" type="float" value="2"/>
-    <property name="textureId" value="player"/>
-    <property name="walkingSpeed" type="float" value="1"/>
-   </properties>
-  </object>
  </objectgroup>
  <layer id="4" name="other" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJzbysDAsHWQ48EKyHHfNDIwvd1HS/XIgBL3ERtuA+m+eXjwYHAfDEzEgpHVYZOnlvuIiTdi7SNVPSXly2BxHzHlxkC6D18eGAzuo6Z9pKofdR9l6kfdR5l6arqPVExP980kA9PTfbQCA91uJwYDAAQ5lcc=
+   eJzbysDAsHWQ48EKyHHfNDIwvd1HS/XIgBL3ERtuA+m+eXjwYHAfDEzEgpHVYZOnlvuIiTdi7SNVPSXly2BxHzHlxkC6D18eGAzuo8Q+VhLVo4OR7j5K1Y+6jzL11HQfqZie7ptJBqan+2gFBrrdTgwGADXBldE=
   </data>
  </layer>
  <objectgroup id="5" name="collidables">
@@ -65,5 +50,17 @@
   <object id="117" x="928" y="192" width="32" height="320"/>
   <object id="118" x="800" y="192" width="128" height="32"/>
   <object id="119" x="576" y="192" width="128" height="32"/>
+ </objectgroup>
+ <objectgroup id="8" name="teleports">
+  <properties>
+   <property name="type" value="teleports"/>
+  </properties>
+  <object id="124" name="to_second_level" type="portal" x="736" y="359.25" width="32" height="49">
+   <properties>
+    <property name="levelId" value="test6.tmx"/>
+    <property name="playerPosX" type="int" value="1"/>
+    <property name="playerPosY" type="int" value="8"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

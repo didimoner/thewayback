@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "MenuState.h"
-#include "StateParser.h"
+#include "GameStateParser.h"
 #include "Log.h"
 #include "GameObject.h"
 
@@ -20,9 +20,6 @@ void MenuState::draw() {
 }
 
 void MenuState::onActivate() {
-    StateParser stateParser;
-    stateParser.parse("states.xml", getStateId(), m_gameObjects);
-
     Logger.debug("Menu activated");
 }
 
