@@ -18,6 +18,9 @@ void Level::update() {
         return;
     }
 
+    // TODO: move to special layer
+    pPlayer->update();
+
     for (const auto& pObstacleLayer : m_obstacleLayers) {
         auto obstacles = pObstacleLayer->getObstacles(pPlayer->getCollider());
         for (const auto& pObstacle : obstacles) {
@@ -30,6 +33,9 @@ void Level::draw() {
     for (const auto& entry : m_drawableLayers) {
         entry.second->draw();
     }
+
+    // TODO: move to special layer
+    m_pPlayer.lock()->draw();
 }
 
 void Level::setPlayer(const std::shared_ptr<Player>& pPlayer) {

@@ -1,14 +1,11 @@
 #pragma once
 #include <SDL.h>
-#include "GameSceneManager.h"
-#include "PlayScene.h"
 #include "GameObjectFactory.h"
 #include "GameSceneFactory.h"
-#include "Player.h"
 #include "Config.h"
 #include "Game.h"
 #include "Log.h"
-#include "GameSceneParser.h"
+#include "PlayScene.h"
 
 const int FPS = 60;
 const int DELAY_TIME = static_cast<int>(1000.0f / FPS);
@@ -22,15 +19,8 @@ public:
         registerTypes();
 
         const auto config = Config::instance().get("system");
-        const std::string stateFilename = config.Get("Initialization", "state", "play_state.xml");
-        auto pInitialScene = GameSceneParser::parse(stateFilename);
-        auto pGameSceneManager = std::make_unique<GameSceneManager>();
-
-        // check save file state and create scene from it or use default state
-        // put state into machine here, remove from game.init() args
-
-        const bool initialized = Game::instance().init(title, x, y, width, height, flags, 
-            std::move(pGameSceneManager), std::move(pInitialScene));
+        const std::string initialSceneId = config.Get("Initialization", "state", "play_state.xml");
+        const bool initialized = Game::instance().init(title, x, y, width, height, flags, initialSceneId);
 
         if (!initialized) {
             Log::getLogger().error("Game initialization failed");

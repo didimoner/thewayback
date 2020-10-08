@@ -32,19 +32,21 @@ std::unique_ptr<GameScene> GameSceneParser::parse(const std::string& filename) {
     }
 
     auto pGameScene = GameSceneFactory::instance().create(pRoot->Attribute("type"));
-    XMLElement* pObjectsElement = pRoot->FirstChildElement("gameobjects");
-    parseObjects(pObjectsElement, *pGameScene);
-
-    XMLElement* pLevelElement = pRoot->FirstChildElement("level");
-    auto pLevel = LevelParser::parse(pLevelElement->Attribute("filename"));
-    pGameScene->m_drawables.push_back(pLevel);
+    parseObjects(pRoot, *pGameScene);
 
     return pGameScene;
 }
 
 void GameSceneParser::parseObjects(XMLElement* pObjectsRoot, GameScene& gameScene) {
     for (XMLElement* o = pObjectsRoot->FirstChildElement(); o != nullptr; o = o->NextSiblingElement()) {
-        auto pGameObject = XmlHelper::parseGameObject(o);
-        gameScene.m_drawables.push_back(pGameObject);
+        std::string objectType = o->Attribute("type");
+        std::shared_ptr<Drawable> pGameObject;
+        if (objectType == "level") {
+            pGameObject = LevelParser::parse(o->Attribute("filename"));
+        } else if (objectType == "player") {
+            pGameObject = XmlHelper::parseGameObject(o);
+        }
+
+        gameScene.m_drawables.emplace(objectType, std::move(pGameObject));
     }
 }

@@ -13,6 +13,8 @@ private:
     PlayScene() = default;
 
     static const std::string SCENE_ID;
+    static const std::string PLAYER_TYPE;
+    static const std::string LEVEL_TYPE;
     static Log Logger;
 
     std::shared_ptr<Level> m_pLevel;

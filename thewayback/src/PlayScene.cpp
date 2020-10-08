@@ -6,6 +6,8 @@
 
 Log PlayScene::Logger(typeid(PlayScene).name());
 const std::string PlayScene::SCENE_ID = "PLAY_SCENE";
+const std::string PlayScene::PLAYER_TYPE = "player";
+const std::string PlayScene::LEVEL_TYPE = "level";
 
 void PlayScene::update() {
     m_pLevel->update();
@@ -17,11 +19,19 @@ void PlayScene::draw() {
 }
 
 void PlayScene::onActivate() {
-    Logger.debug("Play activated");
+    if (m_drawables.find(PLAYER_TYPE) == m_drawables.end()) {
+        Logger.error("No player object in scene " + SCENE_ID);
+        return;
+    }
+    if (m_drawables.find(LEVEL_TYPE) == m_drawables.end()) {
+        Logger.error("No level object in scene " + SCENE_ID);
+        return;
+    }
 
-    // TODO: level is not set because of GameScene base class
-    // TODO: set player properly
-    // m_pLevel->setPlayer(m_pPlayer);
+    m_pPlayer = std::dynamic_pointer_cast<Player>(m_drawables[PLAYER_TYPE]);
+    m_pLevel = std::dynamic_pointer_cast<Level>(m_drawables[LEVEL_TYPE]);
+
+    m_pLevel->setPlayer(m_pPlayer);
     m_pCamera = std::make_unique<Camera>(
         Game::instance().getWindowWidth(),
         Game::instance().getWindowHeight(),
@@ -29,6 +39,8 @@ void PlayScene::onActivate() {
         m_pLevel->getHeightPx(),
         m_pPlayer
     );
+
+    Logger.debug("Play activated");
 }
 
 bool PlayScene::onDeactivate() {

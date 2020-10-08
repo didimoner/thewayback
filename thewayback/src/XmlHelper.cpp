@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include "Player.h"
 #include "GameObjectFactory.h"
+#include "TextureManager.h"
 
 using namespace tinyxml2;
 
@@ -24,6 +25,9 @@ std::shared_ptr<GameObject> XmlHelper::parseGameObject(tinyxml2::XMLElement* pOb
     spriteInitParams.row = pObjectElement->UnsignedAttribute("row");
     spriteInitParams.frame = pObjectElement->UnsignedAttribute("frame");
     spriteInitParams.textureId = getStringProperty(pObjectElement, "textureId");
+
+    auto textureFile = getStringProperty(pObjectElement, "textureFile");
+    TextureManager::instance().load(textureFile, spriteInitParams.textureId);
 
     Animation::InitParams animationInitParams;
     if (getBoolProperty(pObjectElement, "animated")) {

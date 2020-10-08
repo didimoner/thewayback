@@ -37,7 +37,7 @@ void TileLayer::draw() {
                 continue;
             }
 
-            const auto camera = Game::instance().getCurrentState().getCamera();
+            const auto camera = Game::instance().getActiveScene().getCamera();
             Vector2f cameraPos = camera.getPosition();
             Vector2f bottomCameraPos(
                 cameraPos.getX() + camera.getWidth(),

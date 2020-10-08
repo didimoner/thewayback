@@ -9,7 +9,7 @@ class GameScene {
 
 protected:
     std::unique_ptr<Camera> m_pCamera;
-    std::vector<std::shared_ptr<Drawable>> m_drawables;
+    std::unordered_map<std::string, std::shared_ptr<Drawable>> m_drawables;
 
 private:
     friend class GameSceneParser;
