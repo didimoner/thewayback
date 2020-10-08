@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "TextureManager.h"
-#include "GameState.h"
+#include "GameScene.h"
 #include "Camera.h"
 
 void Sprite::init(const InitParams& initParams) {

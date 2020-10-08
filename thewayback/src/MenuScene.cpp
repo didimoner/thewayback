@@ -1,29 +1,29 @@
 #include "pch.h"
-#include "MenuState.h"
-#include "GameStateParser.h"
+#include "MenuScene.h"
+#include "GameSceneParser.h"
 #include "Log.h"
 #include "GameObject.h"
 
-Log MenuState::Logger(typeid(MenuState).name());
-const std::string MenuState::STATE_ID = "MENU_STATE";
+Log MenuScene::Logger(typeid(MenuScene).name());
+const std::string MenuScene::SCENE_ID = "MENU_SCENE";
 
-void MenuState::update() {
+void MenuScene::update() {
     for (GameObject* pObject : m_gameObjects) {
         pObject->update();
     }
 }
 
-void MenuState::draw() {
+void MenuScene::draw() {
     for (GameObject* pObject : m_gameObjects) {
         pObject->draw();
     }
 }
 
-void MenuState::onActivate() {
+void MenuScene::onActivate() {
     Logger.debug("Menu activated");
 }
 
-bool MenuState::onDeactivate() {
+bool MenuScene::onDeactivate() {
     for (GameObject* pObject : m_gameObjects) {
         pObject->clean();
         delete pObject;
@@ -35,6 +35,6 @@ bool MenuState::onDeactivate() {
     return true;
 }
 
-std::string MenuState::getStateId() const {
-    return STATE_ID;
+std::string MenuScene::getSceneId() const {
+    return SCENE_ID;
 }

@@ -1,14 +1,14 @@
 #pragma once
 #include <SDL.h>
-#include "GameStateMachine.h"
-#include "PlayState.h"
+#include "GameSceneManager.h"
+#include "PlayScene.h"
 #include "GameObjectFactory.h"
-#include "GameStateFactory.h"
+#include "GameSceneFactory.h"
 #include "Player.h"
 #include "Config.h"
 #include "Game.h"
 #include "Log.h"
-#include "GameStateParser.h"
+#include "GameSceneParser.h"
 
 const int FPS = 60;
 const int DELAY_TIME = static_cast<int>(1000.0f / FPS);
@@ -23,10 +23,14 @@ public:
 
         const auto config = Config::instance().get("system");
         const std::string stateFilename = config.Get("Initialization", "state", "play_state.xml");
-        auto pInitialState = GameStateParser::parse(stateFilename);
-        auto pGameStateMachine = std::make_unique<GameStateMachine>();
+        auto pInitialScene = GameSceneParser::parse(stateFilename);
+        auto pGameSceneManager = std::make_unique<GameSceneManager>();
+
+        // check save file state and create scene from it or use default state
+        // put state into machine here, remove from game.init() args
+
         const bool initialized = Game::instance().init(title, x, y, width, height, flags, 
-            std::move(pGameStateMachine), std::move(pInitialState));
+            std::move(pGameSceneManager), std::move(pInitialScene));
 
         if (!initialized) {
             Log::getLogger().error("Game initialization failed");
@@ -55,8 +59,8 @@ private:
     }
 
     static void registerTypes() {
-        // game state types
-        GameStateFactory::instance().registerType("play", std::make_unique<PlayStateCreator>());
+        // game scene types
+        GameSceneFactory::instance().registerType("play", std::make_unique<PlaySceneCreator>());
 
         // game object types
         GameObjectFactory::instance().registerType("player", std::make_unique<PlayerCreator>());

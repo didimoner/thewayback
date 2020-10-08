@@ -1,21 +1,21 @@
 ﻿#include "pch.h"
-#include "SplashState.h"
+#include "SplashScene.h"
 #include "Log.h"
 #include "FontManager.h"
 #include "Game.h"
 
-Log SplashState::Logger(typeid(SplashState).name());
-const std::string SplashState::STATE_ID = "SPLASH_STATE";
+Log SplashScene::Logger(typeid(SplashScene).name());
+const std::string SplashScene::SCENE_ID = "SPLASH_SCENE";
 
-void SplashState::update() {
+void SplashScene::update() {
 
 }
 
-void SplashState::draw() {
+void SplashScene::draw() {
     FontManager::instance().draw("hello_text", 25, 32);
 }
 
-void SplashState::onActivate() {
+void SplashScene::onActivate() {
     Logger.debug("Splash activated");
 
     FontManager::instance().loadFont("segoeui.ttf", "segoeui", 16);
@@ -23,11 +23,11 @@ void SplashState::onActivate() {
         "Hello my dear friend!\nHow are you doing?", 320, {255, 255, 255});
 }
 
-bool SplashState::onDeactivate() {
+bool SplashScene::onDeactivate() {
     Logger.debug("Splash deactivated");
     return false;
 }
 
-std::string SplashState::getStateId() const {
-    return STATE_ID;
+std::string SplashScene::getSceneId() const {
+    return SCENE_ID;
 }

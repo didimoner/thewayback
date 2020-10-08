@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<state type="play">
+<scene type="play">
     <gameobjects>
 		<object type="player" x="23" y="9" width="32" height="32">
 			<properties>
@@ -20,4 +20,4 @@
 		</object>
 	</gameobjects>
 	<level filename="test5.tmx"/>
-</state>
+</scene>

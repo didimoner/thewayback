@@ -25,9 +25,6 @@
     <Filter Include="Game\Objects">
       <UniqueIdentifier>{d75eacdc-fc13-4dc0-a5ba-4447fefac26f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\States">
-      <UniqueIdentifier>{314e9632-d195-4156-9232-15875e17fccc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Map">
       <UniqueIdentifier>{8ccaf1e0-8ba0-435a-8e46-1311ced5d893}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="Engine\Factories">
       <UniqueIdentifier>{1ca58d3c-2ae6-4c29-99c0-b4145d933049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes">
+      <UniqueIdentifier>{314e9632-d195-4156-9232-15875e17fccc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,21 +55,6 @@
     </ClCompile>
     <ClCompile Include="src\Config.cpp">
       <Filter>Engine\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameState.h">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SplashState.cpp">
-      <Filter>Game\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MenuState.cpp">
-      <Filter>Game\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PlayState.cpp">
-      <Filter>Game\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameStateMachine.cpp">
-      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\InputHandler.cpp">
       <Filter>Engine</Filter>
@@ -113,14 +98,29 @@
     <ClCompile Include="src\XmlHelper.cpp">
       <Filter>Game\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameStateParser.cpp">
-      <Filter>Game\States</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObjectFactory.cpp">
       <Filter>Engine\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameStateFactory.cpp">
+    <ClCompile Include="src\GameScene.h">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameSceneManager.cpp">
+      <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameSceneParser.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameSceneFactory.cpp">
       <Filter>Engine\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MenuScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplashScene.cpp">
+      <Filter>Game\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,21 +142,6 @@
     </ClInclude>
     <ClInclude Include="src\Vector2f.h">
       <Filter>Engine\DataObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EGameState.h">
-      <Filter>Game\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SplashState.h">
-      <Filter>Game\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MenuState.h">
-      <Filter>Game\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PlayState.h">
-      <Filter>Game\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameStateMachine.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\InputHandler.h">
       <Filter>Engine</Filter>
@@ -227,20 +212,35 @@
     <ClInclude Include="src\DrawableLayer.h">
       <Filter>Game\Map\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameStateParser.h">
-      <Filter>Game\States</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObjectCreator.h">
       <Filter>Engine\Factories</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjectFactory.h">
       <Filter>Engine\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameStateCreator.h">
+    <ClInclude Include="src\GameSceneManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EGameScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameSceneParser.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameSceneFactory.h">
       <Filter>Engine\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameStateFactory.h">
+    <ClInclude Include="src\GameSceneCreator.h">
       <Filter>Engine\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MenuScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SplashScene.h">
+      <Filter>Game\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

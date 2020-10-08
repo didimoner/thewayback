@@ -16,7 +16,7 @@ bool Config::load(const std::string& filename, const std::string& id) {
         return false;
     }
 
-    m_readers[id] = std::move(pReader);
+    m_readers.emplace(id, std::move(pReader));
     return true;
 }
 

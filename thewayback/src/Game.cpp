@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Game.h"
 #include "InputHandler.h"
-#include "GameState.h"
+#include "GameScene.h"
 #include "Log.h"
 
 std::unique_ptr<Game> Game::s_pInstance;
@@ -12,8 +12,8 @@ Game::~Game() {
 }
 
 bool Game::init(const char* title, int x, int y, int width, int height, int flags,
-        std::unique_ptr<GameStateMachine> pGameStateMachine, 
-        std::unique_ptr<GameState> pInitialState) {
+        std::unique_ptr<GameSceneManager> pGameStateMachine, 
+        std::unique_ptr<GameScene> pInitialState) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         Logger.error("SDL_Init Error: " + std::string(SDL_GetError()));
         return false;
@@ -36,7 +36,7 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
     m_windowHeight = height;
 
     m_pGameStateMachine = std::move(pGameStateMachine);
-    m_pGameStateMachine->pushState(std::move(pInitialState));
+    m_pGameStateMachine->push(std::move(pInitialState));
     return true;
 }
 
@@ -83,6 +83,6 @@ SDL_Renderer* Game::getRenderer() const {
     return m_pRenderer;
 }
 
-GameState& Game::getCurrentState() const {
-    return m_pGameStateMachine->getCurrentState();
+GameScene& Game::getCurrentState() const {
+    return m_pGameStateMachine->getActiveScene();
 }

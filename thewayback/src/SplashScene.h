@@ -1,12 +1,12 @@
 #pragma once
-#include "GameState.h"
+#include "GameScene.h"
 
 class Log;
 
-class SplashState : public GameState {
+class SplashScene : public GameScene {
 
 private:
-    static const std::string STATE_ID;
+    static const std::string SCENE_ID;
     static Log Logger;
 
 public:
@@ -16,6 +16,6 @@ public:
     void onActivate() override;
     bool onDeactivate() override;
 
-    std::string getStateId() const override;
+    std::string getSceneId() const override;
 
 };

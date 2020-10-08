@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "TextureManager.h"
 #include "Game.h"
-#include "GameState.h"
+#include "GameScene.h"
 #include "Tileset.h"
 #include "Camera.h"
 #include "Level.h"

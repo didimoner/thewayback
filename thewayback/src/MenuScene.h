@@ -1,13 +1,13 @@
 #pragma once
-#include "GameState.h"
+#include "GameScene.h"
 
 class Log;
 class GameObject;
 
-class MenuState : public GameState {
+class MenuScene : public GameScene {
 
 private:
-    static const std::string STATE_ID;
+    static const std::string SCENE_ID;
     static Log Logger;
 
     std::vector<GameObject*> m_gameObjects;
@@ -19,6 +19,6 @@ public:
     void onActivate() override;
     bool onDeactivate() override;
 
-    std::string getStateId() const override;
+    std::string getSceneId() const override;
 
 };
