@@ -41,7 +41,7 @@ std::set<std::shared_ptr<Obstacle>> ObstacleLayer::getObstacles(SDL_FRect bounda
 
     std::set<std::shared_ptr<Obstacle>> result;
     for (uint32_t index : indices) {
-        if (index > m_obstacles.size()) {
+        if (index >= m_obstacles.size()) {
             continue;
         }
 

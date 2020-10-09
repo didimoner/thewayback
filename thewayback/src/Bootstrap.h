@@ -14,13 +14,19 @@ const int DELAY_TIME = static_cast<int>(1000.0f / FPS);
 class Bootstrap {
 
 public:
-    static void startGame(const char* title, int x, int y, int width, int height, int flags) {
+    static void startGame() {
         loadConfigs();
         registerTypes();
 
+        const int flags = SDL_WINDOW_SHOWN;
         const auto config = Config::instance().get("system");
+        const int x = SDL_WINDOWPOS_CENTERED;
+        const int y = SDL_WINDOWPOS_CENTERED;
+        const int width = config.GetInteger("Settings", "width", 640);
+        const int height = config.GetInteger("Settings", "height", 480);
         const std::string initialSceneId = config.Get("Initialization", "state", "play_state.xml");
-        const bool initialized = Game::instance().init(title, x, y, width, height, flags, initialSceneId);
+        const std::string windowTitle = config.Get("Initialization", "windowTitle", "no title");
+        const bool initialized = Game::instance().init(windowTitle.c_str(), x, y, width, height, flags, initialSceneId);
 
         if (!initialized) {
             Log::getLogger().error("Game initialization failed");
