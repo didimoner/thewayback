@@ -9,32 +9,19 @@
 #include "ECollisionType.h"
 #include "Obstacle.h"
 #include "ObstacleLayer.h"
-#include <thread>
 
 Log PlayScene::Logger(typeid(PlayScene).name());
 const std::string PlayScene::SCENE_ID = "PLAY_SCENE";
 const std::string PlayScene::PLAYER_TYPE = "player";
-const std::string PlayScene::LEVEL_TYPE = "level";
 
 void PlayScene::update() {
-    using namespace std::chrono_literals;
-
-    if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_Q)) {
-        changeLevel("test6.tmx");
-        std::this_thread::sleep_for(100ms);
-    }
-    if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_W)) {
-        changeLevel("test5.tmx");
-        std::this_thread::sleep_for(100ms);
-    }
-
     m_pPlayer->update();
     m_pActiveLevel->update();
 
     for (const auto& pObstacleLayer : m_pActiveLevel->getObstacleLayers()) {
         auto obstacles = pObstacleLayer->getObstacles(m_pPlayer->getCollider());
         for (const auto& pObstacle : obstacles) {
-            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, *m_pPlayer, *pObstacle);
+            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pObstacle);
         }
     }
 
@@ -43,6 +30,14 @@ void PlayScene::update() {
 
 void PlayScene::draw() {
     m_pActiveLevel->draw();
+}
+
+void PlayScene::onEvent(uint16_t type, std::string data) {
+    switch (type) {
+        case EventType::CHANGE_LEVEL:
+            changeLevel(data);
+            break;
+    }
 }
 
 void PlayScene::onActivate() {

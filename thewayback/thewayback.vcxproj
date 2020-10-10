@@ -183,7 +183,7 @@
     <ClCompile Include="src\GameScene.h" />
     <ClCompile Include="src\Config.cpp" />
     <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GameSceneManager.cpp" />
+    <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -209,6 +209,7 @@
     <ClInclude Include="src\DrawableLayer.h" />
     <ClInclude Include="src\GameSceneCreator.h" />
     <ClInclude Include="src\GameSceneFactory.h" />
+    <ClInclude Include="src\Portal.h" />
     <ClInclude Include="src\Properties.h" />
     <ClInclude Include="src\vendor\base64.h" />
     <ClInclude Include="src\Bootstrap.h" />
@@ -225,8 +226,7 @@
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\EGameScene.h" />
-    <ClInclude Include="src\GameSceneManager.h" />
+    <ClInclude Include="src\SceneManager.h" />
     <ClInclude Include="src\vendor\INIReader.h" />
     <ClInclude Include="src\InputHandler.h" />
     <ClInclude Include="src\Log.h" />

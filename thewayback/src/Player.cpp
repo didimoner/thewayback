@@ -31,7 +31,7 @@ void Player::draw() {
 void Player::clean() {
 }
 
-void Player::onCollide(ECollisionType type, const std::string& objectId) {
+void Player::onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) {
     switch (type) {
         case ECollisionType::PLAYER_OBSTACLE: {
             m_acceleration.set(0, 0);

@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL.h>
-#include "GameSceneManager.h"
+#include "SceneManager.h"
 
 class GameScene;
 class Log;
@@ -16,7 +16,7 @@ private:
 
     SDL_Window* m_pWindow = nullptr;
     SDL_Renderer* m_pRenderer = nullptr;
-    std::unique_ptr<GameSceneManager> m_pGameSceneMachine;
+    std::unique_ptr<SceneManager> m_pSceneManager;
 
     bool m_running = false;
     uint16_t m_windowWidth = 0;

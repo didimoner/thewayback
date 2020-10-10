@@ -24,7 +24,7 @@ void ObstacleLayer::addObstacle(const std::shared_ptr<Obstacle>& pObstacle) {
             mapRect.x = mapRect.w * row;
             mapRect.y = mapRect.h * column;
 
-            if (Collision::checkRects(pObstacle->getCollider(), mapRect)) {
+            if (Collision::testRects(pObstacle->getCollider(), mapRect)) {
                 const int index = row + m_gridRows * column;
                 m_obstacles[index].push_back(pObstacle);
             }

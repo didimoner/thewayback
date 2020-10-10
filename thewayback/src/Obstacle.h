@@ -1,6 +1,6 @@
 #pragma once
-#include "GameObject.h"
 #include "Collidable.h"
+#include "Vector2f.h"
 #include <SDL_rect.h>
 
 class Obstacle : public Collidable {
@@ -15,7 +15,7 @@ public:
         : m_position(x, y), m_width(width), m_height(height) {
     }
 
-    void onCollide(ECollisionType type, const std::string& objectId) override {
+    void onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) override {
     }
 
     SDL_FRect getCollider() const override {

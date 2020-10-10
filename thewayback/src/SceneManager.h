@@ -1,7 +1,7 @@
 #pragma once
 #include "GameScene.h"
 
-class GameSceneManager {
+class SceneManager {
 
 private:
     std::vector<std::unique_ptr<GameScene>> m_gameScenes;

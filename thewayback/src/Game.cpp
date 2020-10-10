@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "InputHandler.h"
 #include "GameScene.h"
-#include "GameSceneManager.h"
+#include "SceneManager.h"
 #include "GameSceneParser.h"
 #include "Log.h"
 
@@ -29,20 +29,20 @@ bool Game::init(const char* title, int x, int y, int width, int height, int flag
         return false;
     }
 
-    m_pGameSceneMachine = std::make_unique<GameSceneManager>();
-    m_pGameSceneMachine->push(std::move(pInitialScene));
+    m_pSceneManager = std::make_unique<SceneManager>();
+    m_pSceneManager->push(std::move(pInitialScene));
     return true;
 }
 
 void Game::update() {
-    m_pGameSceneMachine->update();
+    m_pSceneManager->update();
 }
 
 void Game::render() {
     SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
     SDL_RenderClear(m_pRenderer);
 
-    m_pGameSceneMachine->draw();
+    m_pSceneManager->draw();
 
     SDL_RenderPresent(m_pRenderer);
 }
@@ -78,7 +78,7 @@ SDL_Renderer* Game::getRenderer() const {
 }
 
 GameScene& Game::getActiveScene() const {
-    return m_pGameSceneMachine->getActiveScene();
+    return m_pSceneManager->getActiveScene();
 }
 
 bool Game::initSDL(const char* title, int x, int y, int width, int height, int flags) {

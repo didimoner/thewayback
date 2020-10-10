@@ -8,13 +8,17 @@ class Log;
 
 class PlayScene : public GameScene {
 
+public:
+    enum EventType : uint16_t {
+        CHANGE_LEVEL = 0
+    };
+
 private:
     friend class PlaySceneCreator;
     PlayScene() = default;
 
     static const std::string SCENE_ID;
     static const std::string PLAYER_TYPE;
-    static const std::string LEVEL_TYPE;
     static Log Logger;
 
     std::unordered_map<std::string, std::shared_ptr<Level>> m_levels;
@@ -25,6 +29,7 @@ public:
     void update() override;
     void draw() override;
 
+    void onEvent(uint16_t type, std::string data) override;
     void onActivate() override;
     bool onDeactivate() override;
 

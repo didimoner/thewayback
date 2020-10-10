@@ -19,6 +19,7 @@ private:
 public:
     virtual ~GameScene() = default;
 
+    virtual void onEvent(uint16_t type, std::string data) = 0;
     virtual void update() = 0;
     virtual void draw() = 0;
     virtual void onActivate() = 0;

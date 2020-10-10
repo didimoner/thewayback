@@ -104,9 +104,6 @@
     <ClCompile Include="src\GameScene.h">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameSceneManager.cpp">
-      <Filter>Engine\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameSceneFactory.cpp">
       <Filter>Engine\Factories</Filter>
     </ClCompile>
@@ -124,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="src\Properties.cpp">
       <Filter>Engine\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneManager.cpp">
+      <Filter>Engine\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,12 +221,6 @@
     <ClInclude Include="src\GameObjectFactory.h">
       <Filter>Engine\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameSceneManager.h">
-      <Filter>Engine\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EGameScene.h">
-      <Filter>Game\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameSceneFactory.h">
       <Filter>Engine\Factories</Filter>
     </ClInclude>
@@ -247,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="src\Properties.h">
       <Filter>Engine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Portal.h">
+      <Filter>Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneManager.h">
+      <Filter>Engine\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

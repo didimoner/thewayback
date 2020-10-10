@@ -37,6 +37,12 @@ public:
     Vector2f getPosition() const {
         return m_position;
     }
+    void setPosition(Vector2f position) {
+        m_position = position;
+    }
+    void setPosition(float x, float y) {
+        m_position.set(x, y);
+    }
 
     int getWidth() const {
         return m_width;

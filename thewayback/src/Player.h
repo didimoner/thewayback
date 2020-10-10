@@ -40,7 +40,7 @@ public:
     void draw() override;
     void clean() override;
 
-    void onCollide(ECollisionType type, const std::string& objectId) override;
+    void onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) override;
     SDL_FRect getCollider() const override;
 
 private:
