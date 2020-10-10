@@ -20,5 +20,5 @@ public:
     Vector2f getPosition() const;
     uint16_t getWidth() const;
     uint16_t getHeight() const;
-
+    void setLevelSize(uint32_t width, uint32_t height);
 };

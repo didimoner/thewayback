@@ -167,6 +167,7 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\GameSceneFactory.cpp" />
+    <ClCompile Include="src\Properties.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\FontManager.cpp" />
     <ClCompile Include="src\LevelParser.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="src\DrawableLayer.h" />
     <ClInclude Include="src\GameSceneCreator.h" />
     <ClInclude Include="src\GameSceneFactory.h" />
+    <ClInclude Include="src\Properties.h" />
     <ClInclude Include="src\vendor\base64.h" />
     <ClInclude Include="src\Bootstrap.h" />
     <ClInclude Include="src\Camera.h" />

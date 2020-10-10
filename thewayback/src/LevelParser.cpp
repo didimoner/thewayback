@@ -38,6 +38,7 @@ std::shared_ptr<Level> LevelParser::parse(const std::string& filename) {
     }
 
     auto pLevel = std::shared_ptr<Level>(new Level);
+    pLevel->m_id = filename;
     pLevel->m_width = pRoot->UnsignedAttribute("width");
     pLevel->m_height = pRoot->UnsignedAttribute("height");
     pLevel->m_tileWidth = pRoot->UnsignedAttribute("tilewidth");

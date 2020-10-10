@@ -32,13 +32,17 @@ std::unique_ptr<GameScene> GameSceneParser::parse(const std::string& filename) {
     }
 
     auto pGameScene = GameSceneFactory::instance().create(pRoot->Attribute("type"));
-    parseObjects(pRoot, *pGameScene);
+    XMLElement* pObjectsRoot = pRoot->FirstChildElement("objects");
+    parseObjects(pObjectsRoot, *pGameScene);
+
+    XMLElement* pPropsRoot = pRoot->FirstChildElement("properties");
+    parseProps(pPropsRoot, *pGameScene);
 
     return pGameScene;
 }
 
 void GameSceneParser::parseObjects(XMLElement* pObjectsRoot, GameScene& gameScene) {
-    for (XMLElement* o = pObjectsRoot->FirstChildElement(); o != nullptr; o = o->NextSiblingElement()) {
+    for (auto o = pObjectsRoot->FirstChildElement(); o != nullptr; o = o->NextSiblingElement()) {
         std::string objectType = o->Attribute("type");
         std::shared_ptr<Drawable> pGameObject;
         if (objectType == "level") {
@@ -47,6 +51,12 @@ void GameSceneParser::parseObjects(XMLElement* pObjectsRoot, GameScene& gameScen
             pGameObject = XmlHelper::parseGameObject(o);
         }
 
-        gameScene.m_drawables.emplace(objectType, std::move(pGameObject));
+        gameScene.m_sceneObjects.emplace(objectType, std::move(pGameObject));
+    }
+}
+
+void GameSceneParser::parseProps(tinyxml2::XMLElement* pRoot, GameScene& gameScene) {
+    for (auto p = pRoot->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
+        gameScene.m_sceneProps.addProperty(p->Attribute("name"), p->Attribute("value"));
     }
 }

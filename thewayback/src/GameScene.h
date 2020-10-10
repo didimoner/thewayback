@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "Camera.h"
+#include "Properties.h"
 
 class Vector2f;
 class Drawable;
@@ -9,7 +10,8 @@ class GameScene {
 
 protected:
     std::unique_ptr<Camera> m_pCamera;
-    std::unordered_map<std::string, std::shared_ptr<Drawable>> m_drawables;
+    std::unordered_map<std::string, std::shared_ptr<Drawable>> m_sceneObjects;
+    Properties m_sceneProps;
 
 private:
     friend class GameSceneParser;
@@ -23,6 +25,8 @@ public:
     virtual bool onDeactivate() = 0;
     virtual std::string getSceneId() const = 0;
 
-    const Camera& getCamera() const { return *m_pCamera; }
+    const Camera& getCamera() const {
+        return *m_pCamera;
+    }
 
 };

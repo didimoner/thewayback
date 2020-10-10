@@ -13,6 +13,7 @@ private:
     friend class LevelParser;
     Level() = default;
 
+    std::string m_id;
     uint32_t m_width = 0;
     uint32_t m_height = 0;
     uint16_t m_tileWidth = 0;
@@ -26,8 +27,10 @@ private:
 public:
     void setPlayer(const std::shared_ptr<Player>& pPlayer);
 
+    std::string getId() const;
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;
+    std::vector<std::unique_ptr<ObstacleLayer>>& getObstacleLayers();
     const Tileset* getTilesetByGlobalTileId(uint32_t globalTileId);
 
     void update() override;

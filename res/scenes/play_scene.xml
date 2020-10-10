@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scene type="play">
-	<object type="player" x="50" y="280" width="32" height="32">
-		<properties>
-			<property name="textureFile" value="newchar02-2.png"/>
-			<property name="row" value="0"/>
-			<property name="frame" value="0"/>
-			<property name="textureId" value="player"/>
-			
-			<property name="animated" value="true"/>
-			<property name="animationDefaultFrame" value="1"/>
-			<property name="animationSpeed" value="4"/>
-			<property name="animationTotalFrames" value="3"/>
-			<property name="animationType" value="BOUNCE"/>
-			
-			<property name="runningSpeed" value="2"/>
-			<property name="walkingSpeed" value="1"/>
-	   </properties>
-	</object>
-	<object type="level" filename="test5.tmx"/>
+	<properties>
+		<property name="defaultLevel" value="test5.tmx" />
+	</properties>
+	<objects>
+		<object type="player" x="50" y="280" width="32" height="32">
+			<properties>
+				<property name="textureFile" value="newchar02-2.png"/>
+				<property name="row" value="0"/>
+				<property name="frame" value="0"/>
+				<property name="textureId" value="player"/>
+				
+				<property name="animated" value="true"/>
+				<property name="animationDefaultFrame" value="1"/>
+				<property name="animationSpeed" value="4"/>
+				<property name="animationTotalFrames" value="3"/>
+				<property name="animationType" value="BOUNCE"/>
+				
+				<property name="runningSpeed" value="2"/>
+				<property name="walkingSpeed" value="1"/>
+			</properties>
+		</object>
+	</objects>
 </scene>

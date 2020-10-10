@@ -17,7 +17,8 @@ private:
     static const std::string LEVEL_TYPE;
     static Log Logger;
 
-    std::shared_ptr<Level> m_pLevel;
+    std::unordered_map<std::string, std::shared_ptr<Level>> m_levels;
+    std::shared_ptr<Level> m_pActiveLevel;
     std::shared_ptr<Player> m_pPlayer;
 
 public:
@@ -28,6 +29,9 @@ public:
     bool onDeactivate() override;
 
     std::string getSceneId() const override;
+
+private:
+    void changeLevel(const std::string& levelId);
 
 };
 

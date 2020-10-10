@@ -57,3 +57,8 @@ uint16_t Camera::getWidth() const {
 uint16_t Camera::getHeight() const {
     return m_height;
 }
+
+void Camera::setLevelSize(uint32_t width, uint32_t height) {
+    m_levelWidth = width;
+    m_levelHeight = height;
+}

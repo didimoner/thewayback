@@ -2,30 +2,12 @@
 #include "Level.h"
 #include "Player.h"
 #include "ObstacleLayer.h"
-#include "Collision.h"
-#include "ECollisionType.h"
 #include "Obstacle.h"
 #include "DrawableLayer.h"
 
 void Level::update() {
     for (const auto& entry : m_drawableLayers) {
         entry.second->update();
-    }
-
-    // todo: think about moving this part
-    const auto pPlayer = m_pPlayer.lock();
-    if (!pPlayer) {
-        return;
-    }
-
-    // TODO: move to special layer
-    pPlayer->update();
-
-    for (const auto& pObstacleLayer : m_obstacleLayers) {
-        auto obstacles = pObstacleLayer->getObstacles(pPlayer->getCollider());
-        for (const auto& pObstacle : obstacles) {
-            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, *pPlayer, *pObstacle);
-        }
     }
 }
 
@@ -42,12 +24,20 @@ void Level::setPlayer(const std::shared_ptr<Player>& pPlayer) {
     m_pPlayer = pPlayer;
 }
 
+std::string Level::getId() const {
+    return m_id;
+}
+
 uint32_t Level::getWidthPx() const {
     return m_width * m_tileWidth;
 }
 
 uint32_t Level::getHeightPx() const {
     return m_height * m_tileHeight;
+}
+
+std::vector<std::unique_ptr<ObstacleLayer>>& Level::getObstacleLayers() {
+    return m_obstacleLayers;
 }
 
 const Tileset* Level::getTilesetByGlobalTileId(uint32_t globalTileId) {
