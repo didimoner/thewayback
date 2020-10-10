@@ -77,9 +77,6 @@
     <ClCompile Include="src\SystemUtils.cpp">
       <Filter>Engine\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\ObstacleLayer.cpp">
-      <Filter>Game\Map\Layers</Filter>
-    </ClCompile>
     <ClCompile Include="src\Animation.cpp">
       <Filter>Engine\GameObjects</Filter>
     </ClCompile>
@@ -124,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="src\SceneManager.cpp">
       <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SolidObjectsGrid.cpp">
+      <Filter>Game\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,12 +185,6 @@
     <ClInclude Include="src\ECollisionType.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\ObstacleLayer.h">
-      <Filter>Game\Map\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Obstacle.h">
-      <Filter>Game\Map</Filter>
-    </ClInclude>
     <ClInclude Include="src\Animation.h">
       <Filter>Engine\GameObjects</Filter>
     </ClInclude>
@@ -247,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="src\SceneManager.h">
       <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SolidObject.h">
+      <Filter>Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SolidObjectsGrid.h">
+      <Filter>Game\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,8 +7,9 @@
 #include "LevelParser.h"
 #include "Collision.h"
 #include "ECollisionType.h"
-#include "Obstacle.h"
-#include "ObstacleLayer.h"
+#include "SolidObject.h"
+#include "Portal.h"
+#include "SolidObjectsGrid.h"
 
 Log PlayScene::Logger(typeid(PlayScene).name());
 const std::string PlayScene::SCENE_ID = "PLAY_SCENE";
@@ -18,11 +19,16 @@ void PlayScene::update() {
     m_pPlayer->update();
     m_pActiveLevel->update();
 
-    for (const auto& pObstacleLayer : m_pActiveLevel->getObstacleLayers()) {
-        auto obstacles = pObstacleLayer->getObstacles(m_pPlayer->getCollider());
-        for (const auto& pObstacle : obstacles) {
-            Collision::checkCollidables(ECollisionType::PLAYER_OBSTACLE, m_pPlayer, pObstacle);
+    auto solidObjects = m_pActiveLevel->getObjectsNearby(m_pPlayer->getCollider());
+    ECollisionType collisionType;
+    for (const auto& pObject : solidObjects) {
+        if (pObject->getType() == "portal") {
+            collisionType = ECollisionType::PLAYER_PORTAL;
+        } else {
+            collisionType = ECollisionType::PLAYER_OBSTACLE;
         }
+
+        Collision::checkCollidables(collisionType, m_pPlayer, pObject);
     }
 
     m_pCamera->update();

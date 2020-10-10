@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="20">
+ <properties>
+  <property name="grid_cols" type="int" value="2"/>
+  <property name="grid_rows" type="int" value="2"/>
+ </properties>
  <tileset firstgid="1" name="tilea5" tilewidth="32" tileheight="32" tilecount="128" columns="8">
   <image source="../images/tilea5.png" width="256" height="512"/>
  </tileset>
@@ -25,8 +29,6 @@
  </layer>
  <objectgroup id="5" name="collidables">
   <properties>
-   <property name="grid_cols" type="int" value="2"/>
-   <property name="grid_rows" type="int" value="2"/>
    <property name="type" value="obstacles"/>
   </properties>
   <object id="1" x="416" y="256" width="64" height="64"/>
@@ -44,15 +46,15 @@
   <object id="13" x="64" y="384" width="64" height="32"/>
   <object id="15" x="0" y="416" width="64" height="32"/>
  </objectgroup>
- <objectgroup id="6" name="teleports">
+ <objectgroup id="6" name="portals">
   <properties>
-   <property name="type" value="teleports"/>
+   <property name="type" value="portals"/>
   </properties>
-  <object id="18" name="to_main_map" type="portal" x="-17.6" y="256.8" width="32.8" height="62.4">
+  <object id="18" name="to_main_map" x="-17.6" y="256.8" width="32.8" height="62.4">
    <properties>
+    <property name="destX" type="int" value="736"/>
+    <property name="destY" type="int" value="320"/>
     <property name="levelId" value="test5.tmx"/>
-    <property name="playerPosX" type="int" value="23"/>
-    <property name="playerPosY" type="int" value="10"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,10 +1,10 @@
 #pragma once
 #include "Tileset.h"
 #include "Drawable.h"
+#include "SolidObjectsGrid.h"
 
 class DrawableLayer;
 class TileLayer;
-class ObstacleLayer;
 class Player;
 
 class Level : public Drawable {
@@ -22,7 +22,7 @@ private:
 
     std::vector<Tileset> m_tilesets;
     std::map<int16_t, std::shared_ptr<DrawableLayer>> m_drawableLayers;
-    std::vector<std::unique_ptr<ObstacleLayer>> m_obstacleLayers;
+    std::unique_ptr<SolidObjectsGrid> m_pSolidObjectsGrid;
 
 public:
     void setPlayer(const std::shared_ptr<Player>& pPlayer);
@@ -30,7 +30,7 @@ public:
     std::string getId() const;
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;
-    std::vector<std::unique_ptr<ObstacleLayer>>& getObstacleLayers();
+    std::set<std::shared_ptr<SolidObject>> getObjectsNearby(const SDL_FRect& collider) const;
     const Tileset* getTilesetByGlobalTileId(uint32_t globalTileId);
 
     void update() override;

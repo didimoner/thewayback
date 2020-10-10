@@ -9,8 +9,9 @@
 #include "Tileset.h"
 #include "Log.h"
 #include "TileLayer.h"
-#include "ObstacleLayer.h"
-#include "Obstacle.h"
+#include "SolidObjectsGrid.h"
+#include "SolidObject.h"
+#include "Portal.h"
 #include "XmlHelper.h"
 
 using namespace tinyxml2;
@@ -51,8 +52,8 @@ std::shared_ptr<Level> LevelParser::parse(const std::string& filename) {
     return pLevel;
 }
 
-void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, Level& level) {
-    for (XMLElement* e = pTilesetsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+void LevelParser::parseTilesets(XMLElement* pRoot, Level& level) {
+    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("tileset")) {
             continue;
         }
@@ -73,8 +74,8 @@ void LevelParser::parseTilesets(XMLElement* pTilesetsRoot, Level& level) {
     }
 }
 
-void LevelParser::parseTileLayers(XMLElement* pLayerRoot, const std::shared_ptr<Level>& pLevel) {
-    for (XMLElement* e = pLayerRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+void LevelParser::parseTileLayers(XMLElement* pRoot, const std::shared_ptr<Level>& pLevel) {
+    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("layer")) {
             continue;
         }
@@ -114,8 +115,16 @@ void LevelParser::parseTileLayers(XMLElement* pLayerRoot, const std::shared_ptr<
     }
 }
 
-void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level& level) {
-    for (XMLElement* e = pObjectsRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+void LevelParser::parseObjectLayers(XMLElement* pRoot, Level& level) {
+    const uint8_t gridCols = XmlHelper::getUnsignedProperty(pRoot, "grid_cols");
+    const uint8_t gridRows = XmlHelper::getUnsignedProperty(pRoot, "grid_rows");
+    level.m_pSolidObjectsGrid = std::make_unique<SolidObjectsGrid>(
+        level.m_width * level.m_tileWidth,
+        level.m_height * level.m_tileHeight,
+        gridCols, gridRows
+    );
+
+    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() != std::string("objectgroup")) {
             continue;
         }
@@ -123,37 +132,40 @@ void LevelParser::parseObjectLayers(XMLElement* pObjectsRoot, Level& level) {
         std::string layerType = XmlHelper::getStringProperty(e, "type");
         if (layerType == "obstacles") {
             parseObstacles(e, level);
+        } else if (layerType == "portals") {
+            parsePortals(e, level);
         } else if (layerType == "game_objects") {
             parseGameObjects(e, level);
         }
     }
 }
 
-void LevelParser::parseObstacles(XMLElement* pRoot, Level& level) {
-    const std::string layerId = pRoot->Attribute("name");
-    const uint8_t gridCols = XmlHelper::getUnsignedProperty(pRoot, "grid_cols");
-    const uint8_t gridRows = XmlHelper::getUnsignedProperty(pRoot, "grid_rows");
-
-    std::unique_ptr<ObstacleLayer> pObstacleLayer = std::make_unique<ObstacleLayer>(
-        layerId,
-        level.m_width * level.m_tileWidth,
-        level.m_height * level.m_tileHeight,
-        gridCols, gridRows
-    );
-
-    for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        std::shared_ptr<Obstacle> pObstacle = std::make_shared<Obstacle>(
-            static_cast<float>(o->IntAttribute("x")), static_cast<float>(o->IntAttribute("y")),
+void LevelParser::parseObstacles(XMLElement* pObstaclesRoot, Level& level) {
+    for (XMLElement* o = pObstaclesRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
+        std::shared_ptr<SolidObject> pObstacle = std::make_shared<SolidObject>(
+            "obstacle",
+            o->FloatAttribute("x"), o->FloatAttribute("y"),
             o->IntAttribute("width"), o->IntAttribute("height")
         );
-        pObstacleLayer->addObstacle(pObstacle);
+        level.m_pSolidObjectsGrid->addObject(pObstacle);
     }
-
-    level.m_obstacleLayers.push_back(std::move(pObstacleLayer));
 }
 
-void LevelParser::parseGameObjects(XMLElement* pRoot, Level& level) {
-    for (XMLElement* o = pRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
+void LevelParser::parsePortals(XMLElement* pPortalsRoot, Level& level) {
+    for (XMLElement* o = pPortalsRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
+        std::shared_ptr<SolidObject> pPortal = std::make_shared<Portal>(
+            "portal",
+            o->FloatAttribute("x"), o->FloatAttribute("y"),
+            o->IntAttribute("width"), o->IntAttribute("height"),
+            XmlHelper::getStringProperty(o, "levelId"),
+            XmlHelper::getFloatProperty(o, "destX"), XmlHelper::getFloatProperty(o, "destY")
+        );
+        level.m_pSolidObjectsGrid->addObject(pPortal);
+    }
+}
+
+void LevelParser::parseGameObjects(XMLElement* pGameObjectsRoot, Level& level) {
+    for (XMLElement* o = pGameObjectsRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
         auto pGameObject = XmlHelper::parseGameObject(o);
         // todo: create layer of game objects
         // .insert(pGameObject);

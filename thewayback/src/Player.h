@@ -25,7 +25,6 @@ private:
 
 private:
     friend class PlayerCreator;
-    Player();
 
     float m_walkingSpeed = 1;
     float m_runningSpeed = 1;

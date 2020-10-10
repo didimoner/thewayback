@@ -7,10 +7,6 @@
 
 Log Player::Logger(typeid(Player).name());
 
-Player::Player() : Animation() {
-    m_objectId = "Player";
-}
-
 void Player::init(const InitParams& initParams) {
     Animation::init(initParams.animationInitParams);
     m_walkingSpeed = initParams.walkingSpeed;

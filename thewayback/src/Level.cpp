@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Level.h"
 #include "Player.h"
-#include "ObstacleLayer.h"
-#include "Obstacle.h"
+#include "SolidObjectsGrid.h"
+#include "SolidObject.h"
 #include "DrawableLayer.h"
 
 void Level::update() {
@@ -36,9 +36,10 @@ uint32_t Level::getHeightPx() const {
     return m_height * m_tileHeight;
 }
 
-std::vector<std::unique_ptr<ObstacleLayer>>& Level::getObstacleLayers() {
-    return m_obstacleLayers;
+std::set<std::shared_ptr<SolidObject>> Level::getObjectsNearby(const SDL_FRect& collider) const {
+    return m_pSolidObjectsGrid->getObjectsNearby(collider);
 }
+
 
 const Tileset* Level::getTilesetByGlobalTileId(uint32_t globalTileId) {
     for (auto& tileset : m_tilesets) {

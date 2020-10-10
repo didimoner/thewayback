@@ -3,6 +3,10 @@
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
+ <properties>
+  <property name="grid_cols" type="int" value="4"/>
+  <property name="grid_rows" type="int" value="2"/>
+ </properties>
  <tileset firstgid="1" name="tilea5" tilewidth="32" tileheight="32" tilecount="128" columns="8">
   <image source="../images/tilea5.png" width="256" height="512"/>
  </tileset>
@@ -31,8 +35,6 @@
  </layer>
  <objectgroup id="5" name="collidables">
   <properties>
-   <property name="grid_cols" type="int" value="2"/>
-   <property name="grid_rows" type="int" value="4"/>
    <property name="type" value="obstacles"/>
   </properties>
   <object id="102" x="672" y="352" width="64" height="64"/>
@@ -51,15 +53,15 @@
   <object id="118" x="800" y="192" width="128" height="32"/>
   <object id="119" x="576" y="192" width="128" height="32"/>
  </objectgroup>
- <objectgroup id="8" name="teleports">
+ <objectgroup id="8" name="portals">
   <properties>
-   <property name="type" value="teleports"/>
+   <property name="type" value="portals"/>
   </properties>
-  <object id="124" name="to_second_level" type="portal" x="736" y="359.25" width="32" height="49">
+  <object id="124" name="to_second_level" x="736" y="359.25" width="32" height="49">
    <properties>
+    <property name="destX" type="int" value="32"/>
+    <property name="destY" type="int" value="256"/>
     <property name="levelId" value="test6.tmx"/>
-    <property name="playerPosX" type="int" value="1"/>
-    <property name="playerPosY" type="int" value="8"/>
    </properties>
   </object>
  </objectgroup>
