@@ -23,7 +23,7 @@ TextureManager::~TextureManager() {
     m_textures.clear();
 }
 
-bool TextureManager::load(const std::string& filename, std::string id) {
+bool TextureManager::load(const std::string& filename, const std::string& id) {
     if (m_textures.find(id) != m_textures.end()) {
         return true;
     }
@@ -51,6 +51,6 @@ bool TextureManager::load(const std::string& filename, std::string id) {
     return true;
 }
 
-SDL_Texture* TextureManager::getTexture(std::string id) {
+SDL_Texture* TextureManager::getTexture(const std::string& id) {
     return m_textures[id];
 }

@@ -6,6 +6,7 @@
 #include "GameSceneParser.h"
 #include "Log.h"
 #include "Renderer.h"
+#include <SDL_mixer.h>
 
 std::unique_ptr<Game> Game::s_pInstance;
 Log Game::Logger(typeid(Game).name());
@@ -91,6 +92,11 @@ bool Game::initSDL(const char* title, int x, int y, int width, int height, int f
     m_pWindow = SDL_CreateWindow(title, x, y, width, height, flags);
     if (m_pWindow == nullptr) {
         Logger.error("Cannot initialise windows.");
+        return false;
+    }
+
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
+        Logger.error("Cannot initialize audio mixer.");
         return false;
     }
 

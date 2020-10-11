@@ -28,7 +28,7 @@ public:
 
     // ---------------------
 
-    bool load(const std::string& filename, std::string id);
-    SDL_Texture* getTexture(std::string id);
+    bool load(const std::string& filename, const std::string& id);
+    SDL_Texture* getTexture(const std::string& id);
 
 };

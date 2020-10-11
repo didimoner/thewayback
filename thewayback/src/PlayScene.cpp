@@ -9,6 +9,7 @@
 #include "ECollisionType.h"
 #include "SolidObject.h"
 #include "Portal.h"
+#include "SoundManager.h"
 
 Log PlayScene::Logger(typeid(PlayScene).name());
 const std::string PlayScene::SCENE_ID = "PLAY_SCENE";
@@ -31,6 +32,16 @@ void PlayScene::update() {
     }
 
     m_pCamera->update();
+
+    if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_P)) {
+        auto* pSound = SoundManager::instance().getSound("ding");
+        Mix_PlayChannel(1, pSound, 0);
+    }
+
+    if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_O)) {
+        auto* pSound = SoundManager::instance().getSound("collect");
+        Mix_PlayChannel(1, pSound, 0);
+    }
 }
 
 void PlayScene::draw() {
@@ -62,6 +73,15 @@ void PlayScene::onActivate() {
 
     m_sceneObjects.clear();
     Logger.debug("Play activated");
+
+
+    SoundManager::instance().loadSound("collect.ogg", "collect");
+    SoundManager::instance().loadSound("ding.ogg", "ding");
+    SoundManager::instance().loadMusic("world1.ogg", "main_theme");
+
+    auto* pMusic = SoundManager::instance().getMusic("main_theme");
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+    Mix_PlayMusic(pMusic, -1);
 }
 
 bool PlayScene::onDeactivate() {
