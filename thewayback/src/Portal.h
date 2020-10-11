@@ -1,13 +1,7 @@
 #pragma once
-#include <utility>
-
-
 #include "SolidObject.h"
 #include "Player.h"
-#include "ECollisionType.h"
 #include "Vector2f.h"
-#include "Game.h"
-#include "PlayScene.h"
 
 class Portal : public SolidObject {
 
@@ -20,13 +14,6 @@ public:
         : SolidObject(std::move(type), x, y, width, height), m_location(std::move(location)), m_destination(destX, destY) {
     }
 
-    void onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) override {
-        if (type == ECollisionType::PLAYER_PORTAL) {
-            const auto pPlayer = std::dynamic_pointer_cast<Player>(pCollidable);
-            pPlayer->setPosition(m_destination);
-
-            Game::instance().getActiveScene().onEvent(PlayScene::EventType::CHANGE_LEVEL, m_location);
-        }
-    }
+    void onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) override;
 
 };

@@ -37,6 +37,7 @@ public:
 
 private:
     void changeLevel(const std::string& levelId);
+    void processCollisions() const;
 
 };
 

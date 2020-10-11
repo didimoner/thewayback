@@ -19,19 +19,7 @@ const std::string PlayScene::PLAYER_TYPE = "player";
 void PlayScene::update() {
     m_pPlayer->update();
     m_pActiveLevel->update();
-
-    auto solidObjects = m_pActiveLevel->getObjectsNearby(m_pPlayer->getCollider());
-    ECollisionType collisionType;
-    for (const auto& pObject : solidObjects) {
-        if (pObject->getType() == "portal") {
-            collisionType = ECollisionType::PLAYER_PORTAL;
-        } else {
-            collisionType = ECollisionType::PLAYER_OBSTACLE;
-        }
-
-        Collision::checkCollidables(collisionType, m_pPlayer, pObject);
-    }
-
+    processCollisions();
     m_pCamera->update();
 
     if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_P)) {
@@ -100,4 +88,18 @@ void PlayScene::changeLevel(const std::string& levelId) {
     m_pCamera->setLevelSize(m_pActiveLevel->getWidthPx(), m_pActiveLevel->getHeightPx());
 
     Logger.debug("Level changed to " + levelId);
+}
+
+void PlayScene::processCollisions() const {
+    auto solidObjects = m_pActiveLevel->getObjectsNearby(m_pPlayer->getCollider());
+    ECollisionType collisionType;
+    for (const auto& pObject : solidObjects) {
+        if (pObject->getType() == "portal") {
+            collisionType = ECollisionType::PLAYER_PORTAL;
+        } else {
+            collisionType = ECollisionType::PLAYER_OBSTACLE;
+        }
+
+        Collision::checkCollidables(collisionType, m_pPlayer, pObject);
+    }
 }
