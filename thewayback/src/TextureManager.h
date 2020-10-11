@@ -29,11 +29,6 @@ public:
     // ---------------------
 
     bool load(const std::string& filename, std::string id);
-
-    void draw(const std::string& textureId, float x, float y, int width, int height, 
-        SDL_RendererFlip flip = SDL_FLIP_NONE);
-
-    void drawFrame(const std::string& textureId, float x, float y, int width, int height,
-        uint32_t currentRow, uint32_t currentFrame, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    SDL_Texture* getTexture(std::string id);
 
 };

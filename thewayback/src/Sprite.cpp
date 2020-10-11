@@ -2,9 +2,9 @@
 #include "Sprite.h"
 #include "GameObject.h"
 #include "Game.h"
-#include "TextureManager.h"
 #include "GameScene.h"
 #include "Camera.h"
+#include "Renderer.h"
 
 void Sprite::init(const InitParams& initParams) {
     GameObject::init(initParams.gameObjectInitParams);
@@ -19,7 +19,7 @@ void Sprite::update() {
 
 void Sprite::draw() {
     const Vector2f cameraPos = Game::instance().getActiveScene().getCamera().getPosition();
-    TextureManager::instance().drawFrame(m_textureId,
+    Renderer::instance().send(m_textureId,
         m_position.getX() - cameraPos.getX(), m_position.getY() - cameraPos.getY(),
-        m_width, m_height, m_row, m_frame);
+        m_width, m_height, m_zIndex, m_row, m_frame);
 }

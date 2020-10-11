@@ -11,6 +11,7 @@ public:
         float y = 0;
         uint32_t width = 0;
         uint32_t height = 0;
+        int zIndex = 1;
     };
 
 protected:
@@ -25,6 +26,7 @@ public:
         m_position = { initParams.x, initParams.y };
         m_width = initParams.width;
         m_height = initParams.height;
+        m_zIndex = initParams.zIndex;
     }
 
     void update() override {

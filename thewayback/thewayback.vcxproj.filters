@@ -125,6 +125,9 @@
     <ClCompile Include="src\SolidObjectsGrid.cpp">
       <Filter>Game\Map</Filter>
     </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SystemUtils.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="src\SolidObjectsGrid.h">
       <Filter>Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

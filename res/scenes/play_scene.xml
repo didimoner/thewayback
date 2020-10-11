@@ -6,6 +6,7 @@
 	<objects>
 		<object type="player" x="740" y="300" width="32" height="32">
 			<properties>
+				<property name="zIndex" value="3"/>
 				<property name="textureFile" value="newchar02-2.png"/>
 				<property name="row" value="0"/>
 				<property name="frame" value="0"/>

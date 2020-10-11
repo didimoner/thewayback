@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "TileLayer.h"
 #include "Log.h"
-#include "TextureManager.h"
+#include "Renderer.h"
 #include "Game.h"
 #include "GameScene.h"
 #include "Tileset.h"
@@ -60,12 +60,13 @@ void TileLayer::draw() {
             const uint32_t tilesetRow = localTileId / pTileset->columns;
             const uint32_t tilesetColumn = localTileId % pTileset->columns;
 
-            TextureManager::instance().drawFrame(
+            Renderer::instance().send(
                 pTileset->name,
                 x - cameraPos.getX(),
                 y - cameraPos.getY(),
                 pTileset->tileWidth,
                 pTileset->tileHeight,
+                m_zIndex,
                 tilesetRow,
                 tilesetColumn
             );

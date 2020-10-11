@@ -108,10 +108,10 @@ void LevelParser::parseTileLayers(XMLElement* pRoot, const std::shared_ptr<Level
         }
 
         std::shared_ptr<TileLayer> pTileLayer = std::make_shared<TileLayer>(pLevel);
-        pTileLayer->setPriority(e->UnsignedAttribute("id"));
+        pTileLayer->setZIndex(XmlHelper::getIntProperty(e, "zIndex"));
         pTileLayer->setName(e->Attribute("name"));
         pTileLayer->setTileIds(tileIds);
-        pLevel->m_drawableLayers.emplace(std::make_pair(pTileLayer->getPriority(), pTileLayer));
+        pLevel->m_drawableLayers.push_back(pTileLayer);
     }
 }
 

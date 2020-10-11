@@ -5,7 +5,6 @@
 
 class DrawableLayer;
 class TileLayer;
-class Player;
 
 class Level : public Drawable {
 
@@ -18,15 +17,12 @@ private:
     uint32_t m_height = 0;
     uint16_t m_tileWidth = 0;
     uint16_t m_tileHeight = 0;
-    std::weak_ptr<Player> m_pPlayer;
 
     std::vector<Tileset> m_tilesets;
-    std::map<int16_t, std::shared_ptr<DrawableLayer>> m_drawableLayers;
+    std::vector<std::shared_ptr<DrawableLayer>> m_drawableLayers;
     std::unique_ptr<SolidObjectsGrid> m_pSolidObjectsGrid;
 
 public:
-    void setPlayer(const std::shared_ptr<Player>& pPlayer);
-
     std::string getId() const;
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;

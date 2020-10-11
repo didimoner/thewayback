@@ -1,27 +1,19 @@
 #include "pch.h"
 #include "Level.h"
-#include "Player.h"
 #include "SolidObjectsGrid.h"
 #include "SolidObject.h"
 #include "DrawableLayer.h"
 
 void Level::update() {
-    for (const auto& entry : m_drawableLayers) {
-        entry.second->update();
+    for (const auto& pLayer : m_drawableLayers) {
+        pLayer->update();
     }
 }
 
 void Level::draw() {
-    for (const auto& entry : m_drawableLayers) {
-        entry.second->draw();
+    for (const auto& pLayer : m_drawableLayers) {
+        pLayer->draw();
     }
-
-    // TODO: move to special layer
-    m_pPlayer.lock()->draw();
-}
-
-void Level::setPlayer(const std::shared_ptr<Player>& pPlayer) {
-    m_pPlayer = pPlayer;
 }
 
 std::string Level::getId() const {

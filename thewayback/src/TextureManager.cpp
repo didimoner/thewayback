@@ -51,48 +51,6 @@ bool TextureManager::load(const std::string& filename, std::string id) {
     return true;
 }
 
-void TextureManager::draw(const std::string& textureId, float x, float y, int width, int height, 
-        SDL_RendererFlip flip) {
-    SDL_Texture* pTexture = m_textures[textureId];
-    if (pTexture == nullptr) {
-        Logger.warn("Texture not found in the map: " + textureId);
-        return;
-    }
-
-    SDL_Rect sourceRect;
-    sourceRect.x = 0;
-    sourceRect.y = 0;
-    sourceRect.w = width;
-    sourceRect.h = height;
-
-    SDL_Rect destRect;
-    destRect.x = static_cast<int>(x);
-    destRect.y = static_cast<int>(y);
-    destRect.w = width;
-    destRect.h = height;
-
-    SDL_RenderCopyEx(Game::instance().getRenderer(), pTexture, &sourceRect, &destRect, 0, nullptr, flip);
-}
-
-void TextureManager::drawFrame(const std::string& textureId, float x, float y, int width, int height,
-        uint32_t currentRow, uint32_t currentFrame, SDL_RendererFlip flip) {
-    SDL_Texture* pTexture = m_textures[textureId];
-    if (pTexture == nullptr) {
-        Logger.warn("Texture not found in the map: " + textureId);
-        return;
-    }
-
-    SDL_Rect sourceRect;
-    sourceRect.x = width * currentFrame;
-    sourceRect.y = height * currentRow;
-    sourceRect.w = width;
-    sourceRect.h = height;
-
-    SDL_Rect destRect;
-    destRect.x = static_cast<int>(x);
-    destRect.y = static_cast<int>(y);
-    destRect.w = width;
-    destRect.h = height;
-
-    SDL_RenderCopyEx(Game::instance().getRenderer(), pTexture, &sourceRect, &destRect, 0, nullptr, flip);
+SDL_Texture* TextureManager::getTexture(std::string id) {
+    return m_textures[id];
 }

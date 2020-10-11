@@ -1,4 +1,7 @@
 #pragma once
+#include <utility>
+
+
 #include "SolidObject.h"
 #include "Player.h"
 #include "ECollisionType.h"
@@ -14,7 +17,7 @@ private:
 
 public:
     Portal(std::string type, float x, float y, uint32_t width, uint32_t height, std::string location, float destX, float destY)
-        : SolidObject(type, x, y, width, height), m_location(std::move(location)), m_destination(destX, destY) {
+        : SolidObject(std::move(type), x, y, width, height), m_location(std::move(location)), m_destination(destX, destY) {
     }
 
     void onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) override {

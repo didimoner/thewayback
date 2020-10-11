@@ -19,6 +19,7 @@ std::shared_ptr<GameObject> XmlHelper::parseGameObject(tinyxml2::XMLElement* pOb
     gameObjectInitParams.y = pObjectElement->FloatAttribute("y");
     gameObjectInitParams.width = pObjectElement->UnsignedAttribute("width");
     gameObjectInitParams.height = pObjectElement->UnsignedAttribute("height");
+    gameObjectInitParams.zIndex = getIntProperty(pObjectElement, "zIndex");
 
     Sprite::InitParams spriteInitParams;
     spriteInitParams.gameObjectInitParams = gameObjectInitParams;

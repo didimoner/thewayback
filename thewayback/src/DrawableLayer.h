@@ -4,16 +4,11 @@
 
 class DrawableLayer : public Drawable {
 
-private:
-    int16_t m_priority = 0;
+protected:
+    int16_t m_zIndex = 0;
 
 public:
-    void setPriority(int16_t priority) {
-        m_priority = priority;
+    void setZIndex(int zIndex) {
+        m_zIndex = zIndex;
     }
-
-    int16_t getPriority() const {
-        return m_priority;
-    }
-
 };

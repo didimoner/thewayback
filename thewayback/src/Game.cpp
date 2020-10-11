@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "GameSceneParser.h"
 #include "Log.h"
+#include "Renderer.h"
 
 std::unique_ptr<Game> Game::s_pInstance;
 Log Game::Logger(typeid(Game).name());
@@ -39,11 +40,11 @@ void Game::update() {
 }
 
 void Game::render() {
-    SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
-    SDL_RenderClear(m_pRenderer);
-
     m_pSceneManager->draw();
 
+    SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
+    SDL_RenderClear(m_pRenderer);
+    Renderer::instance().flush();
     SDL_RenderPresent(m_pRenderer);
 }
 

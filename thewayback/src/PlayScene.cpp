@@ -9,7 +9,6 @@
 #include "ECollisionType.h"
 #include "SolidObject.h"
 #include "Portal.h"
-#include "SolidObjectsGrid.h"
 
 Log PlayScene::Logger(typeid(PlayScene).name());
 const std::string PlayScene::SCENE_ID = "PLAY_SCENE";
@@ -36,6 +35,7 @@ void PlayScene::update() {
 
 void PlayScene::draw() {
     m_pActiveLevel->draw();
+    m_pPlayer->draw();
 }
 
 void PlayScene::onEvent(uint16_t type, std::string data) {
@@ -80,6 +80,7 @@ void PlayScene::changeLevel(const std::string& levelId) {
 
     const auto pLevel = m_levels[levelId];
     m_pActiveLevel = pLevel;
-    m_pActiveLevel->setPlayer(m_pPlayer); // TODO: I don't like this
     m_pCamera->setLevelSize(m_pActiveLevel->getWidthPx(), m_pActiveLevel->getHeightPx());
+
+    Logger.debug("Level changed to " + levelId);
 }

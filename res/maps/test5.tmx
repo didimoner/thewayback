@@ -14,25 +14,35 @@
   <image source="../images/tilea6.png" width="256" height="512"/>
  </tileset>
  <layer id="1" name="grass" width="40" height="20">
+  <properties>
+   <property name="zIndex" type="int" value="1"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJztw0ENAAAMA6FzUf9O52IvSFg1VVXVhwfuj0fh
   </data>
  </layer>
  <layer id="2" name="objects" width="40" height="20">
+  <properties>
+   <property name="zIndex" type="int" value="2"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFowAVXCUBD5T7qKmO2mDUfZQBbPYuIwFT2y3EpPuBch+xYNR91HPfSyB+BWW/BuI3g8x9H4H4E5T9GYi/DDL3Dfb4HXXf8HPfKBicAADvHV2R
+  </data>
+ </layer>
+ <layer id="4" name="other" width="40" height="20">
+  <properties>
+   <property name="zIndex" type="int" value="4"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzbysDAsHWQ48EKyHHfNDIwvd1HS/XIgBL3ERtuA+m+eXjwYHAfDEzEgpHVYZOnlvuIiTdi7SNVPSXly2BxHzHlxkC6D18eGAzuo8Q+VhLVo4OR7j5K1Y+6jzL11HQfqZie7ptJBqan+2gFBrrdTgwGADXBldE=
   </data>
  </layer>
  <objectgroup id="3" name="game_objects">
   <properties>
    <property name="type" value="game_objects"/>
+   <property name="zIndex" type="int" value="3"/>
   </properties>
  </objectgroup>
- <layer id="4" name="other" width="40" height="20">
-  <data encoding="base64" compression="zlib">
-   eJzbysDAsHWQ48EKyHHfNDIwvd1HS/XIgBL3ERtuA+m+eXjwYHAfDEzEgpHVYZOnlvuIiTdi7SNVPSXly2BxHzHlxkC6D18eGAzuo8Q+VhLVo4OR7j5K1Y+6jzL11HQfqZie7ptJBqan+2gFBrrdTgwGADXBldE=
-  </data>
- </layer>
  <objectgroup id="5" name="collidables">
   <properties>
    <property name="type" value="obstacles"/>

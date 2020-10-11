@@ -4,6 +4,5 @@
 
 int main(int, char**) {
     Bootstrap::startGame();
-
     return 0;
 }
