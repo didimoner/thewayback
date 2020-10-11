@@ -6,7 +6,7 @@ class Log;
 class SoundManager {
 
 private:
-    SoundManager() = default;
+    SoundManager();
 
     static std::unique_ptr<SoundManager> s_pInstance;
     static Log Logger;
@@ -29,9 +29,9 @@ public:
 
     // ---------------------
 
-    bool loadMusic(const std::string& filename, const std::string& id);
     bool loadSound(const std::string& filename, const std::string& id);
-    Mix_Music* getMusic(const std::string& id);
+    bool loadMusic(const std::string& filename, const std::string& id);
     Mix_Chunk* getSound(const std::string& id);
+    Mix_Music* getMusic(const std::string& id);
 
 };

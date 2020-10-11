@@ -41,7 +41,6 @@ public:
     void update();
     void render();
     void handleEvents();
-    void clean();
     void quit();
 
     bool isRunning() const;

@@ -10,6 +10,7 @@
 #include "SolidObject.h"
 #include "Portal.h"
 #include "SoundManager.h"
+#include "SoundPlayer.h"
 
 Log PlayScene::Logger(typeid(PlayScene).name());
 const std::string PlayScene::SCENE_ID = "PLAY_SCENE";
@@ -34,13 +35,11 @@ void PlayScene::update() {
     m_pCamera->update();
 
     if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_P)) {
-        auto* pSound = SoundManager::instance().getSound("ding");
-        Mix_PlayChannel(1, pSound, 0);
+        SoundPlayer::playSound("ding");
     }
 
     if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_O)) {
-        auto* pSound = SoundManager::instance().getSound("collect");
-        Mix_PlayChannel(1, pSound, 0);
+        SoundPlayer::playSound("collect");
     }
 }
 
@@ -79,9 +78,7 @@ void PlayScene::onActivate() {
     SoundManager::instance().loadSound("ding.ogg", "ding");
     SoundManager::instance().loadMusic("world1.ogg", "main_theme");
 
-    auto* pMusic = SoundManager::instance().getMusic("main_theme");
-    Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
-    Mix_PlayMusic(pMusic, -1);
+    SoundPlayer::playMusic("main_theme", -1);
 }
 
 bool PlayScene::onDeactivate() {

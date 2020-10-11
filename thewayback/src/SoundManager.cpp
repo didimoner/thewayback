@@ -6,6 +6,13 @@
 std::unique_ptr<SoundManager> SoundManager::s_pInstance;
 Log SoundManager::Logger(typeid(SoundManager).name());
 
+SoundManager::SoundManager() {
+    const int flags = MIX_INIT_OGG;
+    if ((Mix_Init(flags) & flags) != flags) {
+        Logger.error("SDL_Mixer initialization error: " + std::string(Mix_GetError()));
+    }
+}
+
 SoundManager::~SoundManager() {
     for (auto const& entry : m_sounds) {
         Mix_FreeChunk(entry.second);
@@ -16,6 +23,8 @@ SoundManager::~SoundManager() {
         Mix_FreeMusic(entry.second);
     }
     m_music.clear();
+
+    Mix_Quit();
 }
 
 bool SoundManager::loadMusic(const std::string& filename, const std::string& id) {

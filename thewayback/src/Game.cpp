@@ -12,7 +12,9 @@ std::unique_ptr<Game> Game::s_pInstance;
 Log Game::Logger(typeid(Game).name());
 
 Game::~Game() {
-    clean();
+    SDL_DestroyWindow(m_pWindow);
+    SDL_DestroyRenderer(m_pRenderer);
+    SDL_Quit();
 }
 
 bool Game::init(const char* title, int x, int y, int width, int height, int flags,
@@ -57,12 +59,6 @@ void Game::quit() {
     m_running = false;
 }
 
-void Game::clean() {
-    SDL_DestroyWindow(m_pWindow);
-    SDL_DestroyRenderer(m_pRenderer);
-    SDL_Quit();
-}
-
 bool Game::isRunning() const {
     return m_running;
 }
@@ -99,6 +95,7 @@ bool Game::initSDL(const char* title, int x, int y, int width, int height, int f
         Logger.error("Cannot initialize audio mixer.");
         return false;
     }
+    Mix_AllocateChannels(16);
 
     m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (m_pRenderer == nullptr) {

@@ -45,8 +45,6 @@ public:
                 SDL_Delay(static_cast<int>(DELAY_TIME - frameTime));
             }
         }
-
-        Game::instance().clean();
     }
 
 private:
