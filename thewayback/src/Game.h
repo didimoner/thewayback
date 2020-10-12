@@ -36,8 +36,8 @@ public:
 
     // --------------------
 
-    bool init(const char* title, int x, int y, int width, int height, int flags,
-        const std::string& initialSceneId);
+    bool init(const std::string& title, int x, int y, int width, int height, int flags,
+              const std::string& initialSceneId);
     void update();
     void render();
     void handleEvents();
@@ -51,6 +51,6 @@ public:
     GameScene& getActiveScene() const;
 
 private:
-    bool initSDL(const char* title, int x, int y, int width, int height, int flags);
+    bool initSDL(const std::string& title, int x, int y, int width, int height, int flags);
 
 };

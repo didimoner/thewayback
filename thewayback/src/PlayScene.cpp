@@ -61,11 +61,6 @@ void PlayScene::onActivate() {
     m_sceneObjects.clear();
     Logger.debug("Play activated");
 
-
-    SoundManager::instance().loadSound("collect.ogg", "collect");
-    SoundManager::instance().loadSound("ding.ogg", "ding");
-    SoundManager::instance().loadMusic("world1.ogg", "main_theme");
-
     SoundPlayer::playMusic("main_theme", -1);
 }
 

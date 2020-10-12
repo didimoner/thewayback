@@ -1,8 +1,8 @@
 #pragma once
+#include "GameSceneCreator.h"
 
 class Log;
 class GameScene;
-class GameSceneCreator;
 
 class GameSceneFactory {
     

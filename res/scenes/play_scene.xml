@@ -23,4 +23,9 @@
 			</properties>
 		</object>
 	</objects>
+	<sounds>
+		<sound type="effect" id="collect" filename="collect.ogg" />
+		<sound type="effect" id="ding" filename="ding.ogg" />
+		<sound type="music" id="main_theme" filename="world1.ogg" />
+	</sounds>
 </scene>

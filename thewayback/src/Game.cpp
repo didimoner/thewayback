@@ -17,8 +17,8 @@ Game::~Game() {
     SDL_Quit();
 }
 
-bool Game::init(const char* title, int x, int y, int width, int height, int flags,
-        const std::string& initialSceneId) {
+bool Game::init(const std::string& title, int x, int y, int width, int height, int flags,
+                const std::string& initialSceneId) {
     if (!initSDL(title, x, y, width, height, flags)) {
         return false;
     }
@@ -79,13 +79,13 @@ GameScene& Game::getActiveScene() const {
     return m_pSceneManager->getActiveScene();
 }
 
-bool Game::initSDL(const char* title, int x, int y, int width, int height, int flags) {
+bool Game::initSDL(const std::string& title, int x, int y, int width, int height, int flags) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         Logger.error("SDL_Init Error: " + std::string(SDL_GetError()));
         return false;
     }
 
-    m_pWindow = SDL_CreateWindow(title, x, y, width, height, flags);
+    m_pWindow = SDL_CreateWindow(title.c_str(), x, y, width, height, flags);
     if (m_pWindow == nullptr) {
         Logger.error("Cannot initialise windows.");
         return false;

@@ -5,8 +5,8 @@
 #include "XmlHelper.h"
 #include "Log.h"
 #include "GameScene.h"
-#include "PlayScene.h"
 #include "GameSceneFactory.h"
+#include "SoundManager.h"
 
 using namespace tinyxml2;
 
@@ -35,6 +35,9 @@ std::unique_ptr<GameScene> GameSceneParser::parse(const std::string& filename) {
     XMLElement* pObjectsRoot = pRoot->FirstChildElement("objects");
     parseObjects(pObjectsRoot, *pGameScene);
 
+    XMLElement* pSoundsRoot = pRoot->FirstChildElement("sounds");
+    parseSounds(pSoundsRoot, *pGameScene);
+
     XMLElement* pPropsRoot = pRoot->FirstChildElement("properties");
     parseProps(pPropsRoot, *pGameScene);
 
@@ -42,12 +45,10 @@ std::unique_ptr<GameScene> GameSceneParser::parse(const std::string& filename) {
 }
 
 void GameSceneParser::parseObjects(XMLElement* pObjectsRoot, GameScene& gameScene) {
-    for (auto o = pObjectsRoot->FirstChildElement(); o != nullptr; o = o->NextSiblingElement()) {
+    for (auto* o = pObjectsRoot->FirstChildElement(); o != nullptr; o = o->NextSiblingElement()) {
         std::string objectType = o->Attribute("type");
         std::shared_ptr<Drawable> pGameObject;
-        if (objectType == "level") {
-            pGameObject = LevelParser::parse(o->Attribute("filename"));
-        } else if (objectType == "player") {
+        if (objectType == "player") {
             pGameObject = XmlHelper::parseGameObject(o);
         }
 
@@ -55,8 +56,21 @@ void GameSceneParser::parseObjects(XMLElement* pObjectsRoot, GameScene& gameScen
     }
 }
 
-void GameSceneParser::parseProps(tinyxml2::XMLElement* pRoot, GameScene& gameScene) {
-    for (auto p = pRoot->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
+void GameSceneParser::parseSounds(XMLElement* pSoundsRoot, GameScene& gameScene) {
+    for (auto* s = pSoundsRoot->FirstChildElement(); s != nullptr; s = s->NextSiblingElement()) {
+        const std::string id = s->Attribute("id");
+        const std::string filename = s->Attribute("filename");
+        const std::string type = s->Attribute("type");
+        if (type == "effect") {
+            SoundManager::instance().loadSound(filename, id);
+        } else if (type == "music") {
+            SoundManager::instance().loadMusic(filename, id);
+        }
+    }
+}
+
+void GameSceneParser::parseProps(tinyxml2::XMLElement* pPropsRoot, GameScene& gameScene) {
+    for (auto* p = pPropsRoot->FirstChildElement(); p != nullptr; p = p->NextSiblingElement()) {
         gameScene.m_sceneProps.addProperty(p->Attribute("name"), p->Attribute("value"));
     }
 }

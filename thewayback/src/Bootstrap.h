@@ -26,7 +26,7 @@ public:
         const int height = config.GetInteger("Settings", "height", 480);
         const std::string initialSceneId = config.Get("Initialization", "state", "play_state.xml");
         const std::string windowTitle = config.Get("Initialization", "windowTitle", "no title");
-        const bool initialized = Game::instance().init(windowTitle.c_str(), x, y, width, height, flags, initialSceneId);
+        const bool initialized = Game::instance().init(windowTitle, x, y, width, height, flags, initialSceneId);
 
         if (!initialized) {
             Log::getLogger().error("Game initialization failed");
