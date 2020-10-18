@@ -18,28 +18,28 @@ void Camera::update() {
         return;
     }
 
-    float x;
-    float y;
+    float_t x;
+    float_t y;
 
     if (m_levelWidth <= m_width) {
-        x = -1 * static_cast<float>(m_width - m_levelWidth) / 2;
+        x = -1 * static_cast<float_t>(m_width - m_levelWidth) / 2;
     } else {
-        x = pTrackedObject->getPosition().getX() - static_cast<float>(m_width - pTrackedObject->getWidth()) / 2;
+        x = pTrackedObject->getPosition().getX() - static_cast<float_t>(m_width - pTrackedObject->getWidth()) / 2;
         if (x < 0) {
             x = 0;
         } else if (x + m_width > m_levelWidth) {
-            x = static_cast<float>(m_levelWidth - m_width);
+            x = static_cast<float_t>(m_levelWidth - m_width);
         }
     }
 
     if (m_levelHeight <= m_height) {
-        y = -1 * static_cast<float>(m_height - m_levelHeight) / 2;
+        y = -1 * static_cast<float_t>(m_height - m_levelHeight) / 2;
     } else {
-        y = pTrackedObject->getPosition().getY() - static_cast<float>(m_height - pTrackedObject->getHeight()) / 2;
+        y = pTrackedObject->getPosition().getY() - static_cast<float_t>(m_height - pTrackedObject->getHeight()) / 2;
         if (y < 0) {
             y = 0;
         } else if (y + m_height > m_levelHeight) {
-            y = static_cast<float>(m_levelHeight - m_height);
+            y = static_cast<float_t>(m_levelHeight - m_height);
         }
     }
 

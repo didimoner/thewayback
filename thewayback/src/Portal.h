@@ -10,7 +10,7 @@ private:
     Vector2f m_destination;
 
 public:
-    Portal(std::string type, float x, float y, uint32_t width, uint32_t height, std::string location, float destX, float destY)
+    Portal(std::string type, float_t x, float_t y, uint32_t width, uint32_t height, std::string location, float_t destX, float_t destY)
         : SolidObject(std::move(type), x, y, width, height), m_location(std::move(location)), m_destination(destX, destY) {
     }
 

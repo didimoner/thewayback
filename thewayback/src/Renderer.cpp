@@ -8,8 +8,8 @@ std::unique_ptr<Renderer> Renderer::s_pInstance;
 Log Renderer::Logger(typeid(Renderer).name());
 
 
-void Renderer::send(const std::string& textureId, float x, float y, int width, int height, int zIndex,
-        uint32_t row, uint32_t frame, SDL_RendererFlip flip) {
+void Renderer::send(const std::string& textureId, float_t x, float_t y, int32_t width, int32_t height, int32_t zIndex,
+                    uint32_t row, uint32_t frame, SDL_RendererFlip flip) {
     SDL_Rect sourceRect;
     sourceRect.x = width * frame;
     sourceRect.y = height * row;

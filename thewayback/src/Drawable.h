@@ -4,7 +4,7 @@
 class Drawable {
 
 protected:
-    int m_zIndex = 1;
+    int32_t m_zIndex = 1;
 
 public:
     virtual ~Drawable() = default;
@@ -13,7 +13,7 @@ public:
     virtual void update() = 0;
     virtual void draw() = 0;
 
-    void setZIndex(int zIndex) {
+    void setZIndex(int32_t zIndex) {
         m_zIndex = zIndex;
     }
 

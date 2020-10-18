@@ -43,20 +43,20 @@ void TileLayer::draw() {
                 cameraPos.getX() + camera.getWidth(),
                 cameraPos.getY() + camera.getHeight()
             );
-            const int safeOffset = 2;
+            const int32_t safeOffset = 2;
 
             const bool topPosCheck = row + safeOffset < cameraPos.getY() / pTileset->tileHeight
                 || column + safeOffset < cameraPos.getX() / pTileset->tileWidth;
-            const bool botPosCheck = static_cast<int>(row) - safeOffset > bottomCameraPos.getY() / pTileset->tileWidth
-                || static_cast<int>(column) - safeOffset > bottomCameraPos.getX() / pTileset->tileHeight;
+            const bool botPosCheck = static_cast<int32_t>(row) - safeOffset > bottomCameraPos.getY() / pTileset->tileWidth
+                || static_cast<int32_t>(column) - safeOffset > bottomCameraPos.getX() / pTileset->tileHeight;
 
             if (topPosCheck || botPosCheck) {
                 continue;
             }
 
             const uint32_t localTileId = globalTileId - pTileset->firstGlobalId;
-            const float x = static_cast<float>(column * pTileset->tileWidth);
-            const float y = static_cast<float>(row * pTileset->tileHeight);
+            const float_t x = static_cast<float_t>(column * pTileset->tileWidth);
+            const float_t y = static_cast<float_t>(row * pTileset->tileHeight);
             const uint32_t tilesetRow = localTileId / pTileset->columns;
             const uint32_t tilesetColumn = localTileId % pTileset->columns;
 

@@ -20,6 +20,6 @@ void Sprite::update() {
 void Sprite::draw() {
     const Vector2f cameraPos = Game::instance().getActiveScene().getCamera().getPosition();
     Renderer::instance().send(m_textureId,
-        m_position.getX() - cameraPos.getX(), m_position.getY() - cameraPos.getY(),
-        m_width, m_height, m_zIndex, m_row, m_frame);
+                              m_position.getX() - cameraPos.getX(), m_position.getY() - cameraPos.getY(),
+                              m_width, m_height, m_zIndex, m_row, m_frame);
 }

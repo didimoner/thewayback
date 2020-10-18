@@ -7,7 +7,7 @@ std::unique_ptr<SoundManager> SoundManager::s_pInstance;
 Log SoundManager::Logger(typeid(SoundManager).name());
 
 SoundManager::SoundManager() {
-    const int flags = MIX_INIT_OGG;
+    const int32_t flags = MIX_INIT_OGG;
     if ((Mix_Init(flags) & flags) != flags) {
         Logger.error("SDL_Mixer initialization error: " + std::string(Mix_GetError()));
     }

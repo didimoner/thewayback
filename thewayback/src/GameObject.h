@@ -7,11 +7,11 @@ class GameObject : public Drawable {
 
 public:
     struct InitParams {
-        float x = 0;
-        float y = 0;
+        float_t x = 0;
+        float_t y = 0;
         uint32_t width = 0;
         uint32_t height = 0;
-        int zIndex = 1;
+        int32_t zIndex = 1;
     };
 
 protected:
@@ -42,15 +42,15 @@ public:
     void setPosition(Vector2f position) {
         m_position = position;
     }
-    void setPosition(float x, float y) {
+    void setPosition(float_t x, float_t y) {
         m_position.set(x, y);
     }
 
-    int getWidth() const {
+    int32_t getWidth() const {
         return m_width;
     }
 
-    int getHeight() const {
+    int32_t getHeight() const {
         return m_height;
     }
 

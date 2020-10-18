@@ -10,7 +10,7 @@ private:
         std::string textureId;
         SDL_Rect sourceRect;
         SDL_Rect destRect;
-        double angle = 0;
+        double_t angle = 0;
         SDL_Point center;
         SDL_RendererFlip flip;
     };
@@ -21,7 +21,7 @@ private:
     static std::unique_ptr<Renderer> s_pInstance;
     static Log Logger;
 
-    std::multimap<int, DrawingEntity> m_buffer;
+    std::multimap<int32_t, DrawingEntity> m_buffer;
 
 public:
     Renderer(const Renderer&) = delete;
@@ -37,8 +37,8 @@ public:
 
     // ---------------------
 
-    void send(const std::string& textureId, float x, float y, int width, int height, int zIndex,
-        uint32_t row = 0, uint32_t frame = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void send(const std::string& textureId, float_t x, float_t y, int32_t width, int32_t height, int32_t zIndex,
+              uint32_t row = 0, uint32_t frame = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     void flush();
 

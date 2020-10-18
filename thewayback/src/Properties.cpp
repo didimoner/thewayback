@@ -5,17 +5,17 @@ void Properties::addProperty(const std::string& key, const std::string& value) {
     m_data.emplace(key, value);
 }
 
-int Properties::intVal(const std::string& key) const {
+int32_t Properties::intVal(const std::string& key) const {
     if (m_data.find(key) == m_data.end()) {
-        throw std::invalid_argument("No int property for key " + key);
+        throw std::invalid_argument("No int32_t property for key " + key);
     }
 
     return std::stoi(m_data.at(key));
 }
 
-float Properties::floatVal(const std::string& key) const {
+float_t Properties::floatVal(const std::string& key) const {
     if (m_data.find(key) == m_data.end()) {
-        throw std::invalid_argument("No float property for key " + key);
+        throw std::invalid_argument("No float_t property for key " + key);
     }
 
     return std::stof(m_data.at(key));

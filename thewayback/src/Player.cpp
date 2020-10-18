@@ -37,7 +37,7 @@ void Player::onCollide(ECollisionType type, const std::shared_ptr<Collidable>& p
 }
 
 SDL_FRect Player::getCollider() const {
-    return {m_position.getX(), m_position.getY(), static_cast<float>(m_width), static_cast<float>(m_height)};
+    return {m_position.getX(), m_position.getY(), static_cast<float_t>(m_width), static_cast<float_t>(m_height)};
 }
 
 void Player::handleKeyboardInput() {
@@ -65,7 +65,7 @@ void Player::updatePlayerState() {
         setAnimationSpeed(EAnimationSpeed::NORMAL);
     }
 
-    const float speed = m_isRunning ? m_runningSpeed : m_walkingSpeed;
+    const float_t speed = m_isRunning ? m_runningSpeed : m_walkingSpeed;
     switch (m_playerState) {
     case EPlayerState::MOVING_UP:
         m_velocity.setY(-1 * speed);

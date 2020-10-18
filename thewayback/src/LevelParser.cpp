@@ -87,10 +87,10 @@ void LevelParser::parseTileLayers(XMLElement* pRoot, const std::shared_ptr<Level
 
         const std::string textData = pDataElement->GetText();
         const std::string decodedData = base64_decode(textData);
-        uLongf allTilesSize = pLevel->m_width * pLevel->m_height * sizeof(int);
+        uLongf allTilesSize = pLevel->m_width * pLevel->m_height * sizeof(int32_t);
         const std::vector<uint32_t> uncompressedTileIds(allTilesSize);
 
-        const int uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize,
+        const int32_t uncompressStatus = uncompress((Bytef*)&uncompressedTileIds[0], &allTilesSize,
                                                 (const Bytef*)decodedData.c_str(), decodedData.size());
         if (uncompressStatus != Z_OK) {
             Logger.warn("Something wrong with zlib uncpompression. Code: " + uncompressStatus);

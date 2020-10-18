@@ -57,7 +57,7 @@ void Animation::updateState() {
         return;
     }
 
-    float speedMultiplier = 1;
+    float_t speedMultiplier = 1;
     switch (m_animationSpeed) {
         case EAnimationSpeed::SLOW:
             speedMultiplier = 0.5;

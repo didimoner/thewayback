@@ -62,13 +62,13 @@ std::string XmlHelper::getStringProperty(XMLElement* pElementRoot, const std::st
     return "";
 }
 
-int XmlHelper::getIntProperty(XMLElement* pElementRoot, const std::string& name) {
+int32_t XmlHelper::getIntProperty(XMLElement* pElementRoot, const std::string& name) {
     XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
     if (pPropertyElement != nullptr) {
         return pPropertyElement->IntAttribute("value");
     }
 
-    Logger.warn("There is no int property of name " + name);
+    Logger.warn("There is no int32_t property of name " + name);
     return 0;
 }
 
@@ -78,17 +78,17 @@ uint32_t XmlHelper::getUnsignedProperty(XMLElement* pElementRoot, const std::str
         return pPropertyElement->UnsignedAttribute("value");
     }
 
-    Logger.warn("There is no int property of name " + name);
+    Logger.warn("There is no int32_t property of name " + name);
     return 0;
 }
 
-float XmlHelper::getFloatProperty(XMLElement* pElementRoot, const std::string& name) {
+float_t XmlHelper::getFloatProperty(XMLElement* pElementRoot, const std::string& name) {
     XMLElement* pPropertyElement = getCustomProperty(pElementRoot, name);
     if (pPropertyElement != nullptr) {
         return pPropertyElement->FloatAttribute("value");
     }
 
-    Logger.warn("There is no float property of name " + name);
+    Logger.warn("There is no float_t property of name " + name);
     return 0;
 }
 

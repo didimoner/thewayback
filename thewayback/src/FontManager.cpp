@@ -26,7 +26,7 @@ FontManager::~FontManager() {
     m_textures.clear();
 }
 
-bool FontManager::loadFont(const std::string& filename, std::string id, int size) {
+bool FontManager::loadFont(const std::string& filename, std::string id, int32_t size) {
     Logger.debug("Loading font: " + filename);
 
     const std::string resourcesPath = getResourcePath("fonts");
@@ -86,21 +86,21 @@ void FontManager::removeTexture(const std::string& textureId) {
     m_textures.erase(textureId);
 }
 
-void FontManager::draw(const std::string& textureId, float x, float y, SDL_RendererFlip flip) {
+void FontManager::draw(const std::string& textureId, float_t x, float_t y, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger.warn("Texture not found in the map: " + textureId);
         return;
     }
 
-    int width = 0;
-    int height = 0;
+    int32_t width = 0;
+    int32_t height = 0;
     SDL_QueryTexture(pTexture, nullptr, nullptr, &width, &height);
 
     draw(textureId, x, y, width, height, flip);
 }
 
-void FontManager::draw(const std::string& textureId, float x, float y, int width, int height, SDL_RendererFlip flip) {
+void FontManager::draw(const std::string& textureId, float_t x, float_t y, int32_t width, int32_t height, SDL_RendererFlip flip) {
     SDL_Texture* pTexture = m_textures[textureId];
     if (pTexture == nullptr) {
         Logger.warn("Texture not found in the map: " + textureId);
@@ -108,8 +108,8 @@ void FontManager::draw(const std::string& textureId, float x, float y, int width
     }
 
     SDL_Rect destRect;
-    destRect.x = static_cast<int>(x);
-    destRect.y = static_cast<int>(y);
+    destRect.x = static_cast<int32_t>(x);
+    destRect.y = static_cast<int32_t>(y);
     destRect.w = width;
     destRect.h = height;
 

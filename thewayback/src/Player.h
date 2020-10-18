@@ -10,8 +10,8 @@ class Player : public Animation, public Collidable {
 public:
     struct InitParams {
         Animation::InitParams animationInitParams;
-        float walkingSpeed = 0;
-        float runningSpeed = 0;
+        float_t walkingSpeed = 0;
+        float_t runningSpeed = 0;
     };
 
 private:
@@ -26,8 +26,8 @@ private:
 private:
     friend class PlayerCreator;
 
-    float m_walkingSpeed = 1;
-    float m_runningSpeed = 1;
+    float_t m_walkingSpeed = 1;
+    float_t m_runningSpeed = 1;
     EPlayerState m_playerState = EPlayerState::IDLE;
     bool m_isRunning = false;
 

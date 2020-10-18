@@ -2,7 +2,7 @@
 #include "Bootstrap.h"
 
 
-int main(int, char**) {
+int32_t main(int32_t, char**) {
     Bootstrap::startGame();
     return 0;
 }

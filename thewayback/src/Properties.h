@@ -8,8 +8,8 @@ private:
 public:
     void addProperty(const std::string& key, const std::string& value);
 
-    int intVal(const std::string& key) const;
-    float floatVal(const std::string& key) const;
+    int32_t intVal(const std::string& key) const;
+    float_t floatVal(const std::string& key) const;
     bool boolVal(const std::string& key) const;
     std::string stringVal(const std::string& key) const;
 

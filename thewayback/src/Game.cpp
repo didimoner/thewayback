@@ -17,7 +17,7 @@ Game::~Game() {
     SDL_Quit();
 }
 
-bool Game::init(const std::string& title, int x, int y, int width, int height, int flags,
+bool Game::init(const std::string& title, int32_t x, int32_t y, int32_t width, int32_t height, int32_t flags,
                 const std::string& initialSceneId) {
     if (!initSDL(title, x, y, width, height, flags)) {
         return false;
@@ -79,7 +79,7 @@ GameScene& Game::getActiveScene() const {
     return m_pSceneManager->getActiveScene();
 }
 
-bool Game::initSDL(const std::string& title, int x, int y, int width, int height, int flags) {
+bool Game::initSDL(const std::string& title, int32_t x, int32_t y, int32_t width, int32_t height, int32_t flags) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         Logger.error("SDL_Init Error: " + std::string(SDL_GetError()));
         return false;

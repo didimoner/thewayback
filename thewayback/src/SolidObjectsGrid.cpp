@@ -18,13 +18,13 @@ void SolidObjectsGrid::addObject(const std::shared_ptr<SolidObject>& pObject) {
     for (uint8_t column = 0; column < m_gridRows; column++) {
         for (uint8_t row = 0; row < m_gridCols; row++) {
             SDL_FRect mapRect;
-            mapRect.w = static_cast<float>(m_width) / m_gridCols;
-            mapRect.h = static_cast<float>(m_height) / m_gridRows;
+            mapRect.w = static_cast<float_t>(m_width) / m_gridCols;
+            mapRect.h = static_cast<float_t>(m_height) / m_gridRows;
             mapRect.x = mapRect.w * row;
             mapRect.y = mapRect.h * column;
 
             if (Collision::testRects(pObject->getCollider(), mapRect)) {
-                const int index = row + m_gridCols * column;
+                const int32_t index = row + m_gridCols * column;
                 m_objects[index].push_back(pObject);
             }
         }
@@ -51,8 +51,8 @@ std::set<std::shared_ptr<SolidObject>> SolidObjectsGrid::getObjectsNearby(const 
     return result;
 }
 
-uint32_t SolidObjectsGrid::calculateIndex(float x, float y) const {
-    const int row = static_cast<int>(x / (static_cast<float>(m_width) / m_gridCols));
-    const int column = static_cast<int>(y / (static_cast<float>(m_height) / m_gridRows));
+uint32_t SolidObjectsGrid::calculateIndex(float_t x, float_t y) const {
+    const int32_t row = static_cast<int32_t>(x / (static_cast<float_t>(m_width) / m_gridCols));
+    const int32_t column = static_cast<int32_t>(y / (static_cast<float_t>(m_height) / m_gridRows));
     return row + m_gridCols * column;
 }

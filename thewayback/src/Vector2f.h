@@ -4,28 +4,28 @@
 class Vector2f {
 
 private:
-    float m_x;
-    float m_y;
+    float_t m_x;
+    float_t m_y;
 
 public:
     Vector2f() : m_x(0), m_y(0) {
     }
 
-    Vector2f(float x, float y) : m_x(x), m_y(y) {
+    Vector2f(float_t x, float_t y) : m_x(x), m_y(y) {
     }
 
-    float getX() const { return m_x; }
-    void setX(float x) { m_x = x; }
+    float_t getX() const { return m_x; }
+    void setX(float_t x) { m_x = x; }
 
-    float getY() const { return m_y; }
-    void setY(float y) { m_y = y; }
+    float_t getY() const { return m_y; }
+    void setY(float_t y) { m_y = y; }
 
-    void set(float x, float y) {
+    void set(float_t x, float_t y) {
         m_x = x;
         m_y = y;
     }
 
-    float length() const {
+    float_t length() const {
         return sqrt(pow(m_x, 2) + pow(m_y, 2));
     }
 
@@ -40,11 +40,11 @@ public:
         return *this;
     }
 
-    Vector2f operator*(float scalar) const {
+    Vector2f operator*(float_t scalar) const {
         return {m_x * scalar, m_y * scalar};
     }
 
-    Vector2f& operator*=(float scalar) {
+    Vector2f& operator*=(float_t scalar) {
         m_x *= scalar;
         m_y *= scalar;
 
@@ -62,7 +62,7 @@ public:
         return *this;
     }
 
-    Vector2f operator/(float scalar) const {
+    Vector2f operator/(float_t scalar) const {
         return {m_x / scalar, m_y / scalar};
     }
 
@@ -74,7 +74,7 @@ public:
     }
 
     void normalize() {
-        float l = length();
+        float_t l = length();
         if (l > 0) {
             (*this) *= 1 / l;
         }

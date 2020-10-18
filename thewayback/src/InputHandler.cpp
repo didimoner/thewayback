@@ -46,7 +46,7 @@ void InputHandler::update() {
 }
 
 void InputHandler::onMouseMove(const SDL_Event& event) {
-    m_mousePosition.set(static_cast<float>(event.motion.x), static_cast<float>(event.motion.y));
+    m_mousePosition.set(static_cast<float_t>(event.motion.x), static_cast<float_t>(event.motion.y));
 }
 
 void InputHandler::onMouseButtonDown(const SDL_Event& event) {

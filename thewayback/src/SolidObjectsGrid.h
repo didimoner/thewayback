@@ -19,5 +19,5 @@ public:
     std::set<std::shared_ptr<SolidObject>> getObjectsNearby(const SDL_FRect& collider) const;
 
 private:
-    uint32_t calculateIndex(float x, float y) const;
+    uint32_t calculateIndex(float_t x, float_t y) const;
 };
