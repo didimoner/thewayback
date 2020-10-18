@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "PlayScene.h"
 #include "Log.h"
 #include "Camera.h"
@@ -9,8 +9,9 @@
 #include "ECollisionType.h"
 #include "SolidObject.h"
 #include "Portal.h"
-#include "SoundManager.h"
 #include "SoundPlayer.h"
+#include "TextBox.h"
+#include "FontManager.h"
 
 Log PlayScene::Logger(typeid(PlayScene).name());
 const std::string PlayScene::SCENE_ID = "PLAY_SCENE";
@@ -29,11 +30,14 @@ void PlayScene::update() {
     if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_O)) {
         SoundPlayer::playSound("collect");
     }
+
+    m_text->update();
 }
 
 void PlayScene::draw() {
     m_pActiveLevel->draw();
     m_pPlayer->draw();
+    m_text->draw();
 }
 
 void PlayScene::onEvent(uint16_t type, std::string data) {
@@ -59,9 +63,26 @@ void PlayScene::onActivate() {
     changeLevel(m_sceneProps.stringVal("defaultLevel"));
 
     m_sceneObjects.clear();
-    Logger.debug("Play activated");
 
-    SoundPlayer::playMusic("main_theme", -1);
+    //SoundPlayer::playMusic("main_theme", -1);
+
+    std::string fontId = "pixel";
+    int32_t fontSize = 24;
+    FontManager::instance().loadFont("pixel.ttf", fontId, fontSize);
+    m_text = std::make_shared<TextBox>(fontId);
+
+    GameObject::InitParams initParams;
+    initParams.x = 200;
+    initParams.y = 32;
+    initParams.width = 480;
+    initParams.height = fontSize * 2;
+    initParams.zIndex = 200;
+    m_text->init(initParams);
+
+    std::wstring wstring = L"Привет, Мир! Это мое первое сообщение в виде текста для этой игры. Надеюсь, что оно понравится вам!";
+    m_text->setText(wstring);
+
+    Logger.debug("Play activated");
 }
 
 bool PlayScene::onDeactivate() {

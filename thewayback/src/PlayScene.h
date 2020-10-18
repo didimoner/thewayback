@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Player.h"
 #include "GameSceneCreator.h"
+#include "TextBox.h"
 
 class Log;
 
@@ -24,6 +25,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<Level>> m_levels;
     std::shared_ptr<Level> m_pActiveLevel;
     std::shared_ptr<Player> m_pPlayer;
+    std::shared_ptr<TextBox> m_text;
 
 public:
     void update() override;

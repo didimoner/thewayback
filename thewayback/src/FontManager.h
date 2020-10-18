@@ -31,17 +31,6 @@ public:
     // ---------------------
 
     bool loadFont(const std::string& filename, std::string id, int32_t size);
-
-    void createTexture(const std::string& fontId, const std::string& textureId,
-                       const std::string& text, SDL_Color color);
-    void createMultilineTexture(const std::string& fontId, const std::string& textureId,
-                                const std::string& text, uint32_t lineWidth, SDL_Color color);
-
-    void removeTexture(const std::string& textureId);
-
-    void draw(const std::string& textureId, float_t x, float_t y, 
-        SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void draw(const std::string& textureId, float_t x, float_t y, 
-        int32_t width, int32_t height, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    TTF_Font* getFont(const std::string& fontId);
 
 };

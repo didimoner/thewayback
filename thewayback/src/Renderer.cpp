@@ -7,23 +7,22 @@
 std::unique_ptr<Renderer> Renderer::s_pInstance;
 Log Renderer::Logger(typeid(Renderer).name());
 
+// TODO: send full
 
-void Renderer::send(const std::string& textureId, float_t x, float_t y, int32_t width, int32_t height, int32_t zIndex,
-                    uint32_t row, uint32_t frame, SDL_RendererFlip flip) {
-    SDL_Rect sourceRect;
-    sourceRect.x = width * frame;
-    sourceRect.y = height * row;
-    sourceRect.w = width;
-    sourceRect.h = height;
+void Renderer::send(const std::string& textureId, SDL_Rect& sourceRect, SDL_Rect& destRect,
+        int32_t zIndex, SDL_RendererFlip flip) {
+    SDL_Texture* pTexture = TextureManager::instance().getTexture(textureId);
+    if (pTexture == nullptr) {
+        return;
+    }
 
-    SDL_Rect destRect;
-    destRect.x = static_cast<int>(x);
-    destRect.y = static_cast<int>(y);
-    destRect.w = width;
-    destRect.h = height;
+    send(pTexture, sourceRect, destRect, zIndex, flip);
+}
 
+void Renderer::send(SDL_Texture* pTexture, SDL_Rect& sourceRect, SDL_Rect& destRect, 
+        int32_t zIndex, SDL_RendererFlip flip) {
     DrawingEntity entity;
-    entity.textureId = textureId;
+    entity.pTexture = pTexture;
     entity.sourceRect = sourceRect;
     entity.destRect = destRect;
     entity.flip = flip;
@@ -34,14 +33,7 @@ void Renderer::send(const std::string& textureId, float_t x, float_t y, int32_t 
 void Renderer::flush() {
     for (const auto& entry : m_buffer) {
         DrawingEntity e = entry.second;
-
-        SDL_Texture* pTexture = TextureManager::instance().getTexture(e.textureId);
-        if (pTexture == nullptr) {
-            Logger.warn("Texture not found in the map: " + e.textureId);
-            return;
-        }
-
-        SDL_RenderCopyEx(Game::instance().getRenderer(), pTexture, &e.sourceRect, &e.destRect, 0, nullptr, e.flip);
+        SDL_RenderCopyEx(Game::instance().getRenderer(), e.pTexture, &e.sourceRect, &e.destRect, 0, nullptr, e.flip);
     }
 
     m_buffer.clear();

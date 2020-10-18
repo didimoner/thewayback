@@ -52,5 +52,10 @@ bool TextureManager::load(const std::string& filename, const std::string& id) {
 }
 
 SDL_Texture* TextureManager::getTexture(const std::string& id) {
+    if (m_textures.find(id) == m_textures.end()) {
+        Logger.warn("Texture not found in the map: " + id);
+        return nullptr;
+    }
+
     return m_textures[id];
 }

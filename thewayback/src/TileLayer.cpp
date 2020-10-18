@@ -60,16 +60,19 @@ void TileLayer::draw() {
             const uint32_t tilesetRow = localTileId / pTileset->columns;
             const uint32_t tilesetColumn = localTileId % pTileset->columns;
 
-            Renderer::instance().send(
-                pTileset->name,
-                x - cameraPos.getX(),
-                y - cameraPos.getY(),
-                pTileset->tileWidth,
-                pTileset->tileHeight,
-                m_zIndex,
-                tilesetRow,
-                tilesetColumn
-            );
+            SDL_Rect sourceRect;
+            sourceRect.x = pTileset->tileWidth * tilesetColumn;
+            sourceRect.y = pTileset->tileHeight * tilesetRow;
+            sourceRect.w = pTileset->tileWidth;
+            sourceRect.h = pTileset->tileHeight;
+
+            SDL_Rect destRect;
+            destRect.x = static_cast<int>(x - cameraPos.getX());
+            destRect.y = static_cast<int>(y - cameraPos.getY());
+            destRect.w = pTileset->tileWidth;
+            destRect.h = pTileset->tileHeight;
+
+            Renderer::instance().send(pTileset->name, sourceRect, destRect, m_zIndex);
         }
     }
 }

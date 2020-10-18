@@ -43,11 +43,12 @@ void Game::update() {
 }
 
 void Game::render() {
-    m_pSceneManager->draw();
-
     SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
     SDL_RenderClear(m_pRenderer);
+
+    m_pSceneManager->draw();
     Renderer::instance().flush();
+
     SDL_RenderPresent(m_pRenderer);
 }
 

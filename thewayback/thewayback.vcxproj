@@ -176,6 +176,7 @@
     <ClCompile Include="src\FontManager.cpp" />
     <ClCompile Include="src\LevelParser.cpp" />
     <ClCompile Include="src\SolidObjectsGrid.cpp" />
+    <ClCompile Include="src\TextBox.cpp" />
     <ClCompile Include="src\vendor\base64.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -218,6 +219,7 @@
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\SoundManager.h" />
     <ClInclude Include="src\SoundPlayer.h" />
+    <ClInclude Include="src\TextBox.h" />
     <ClInclude Include="src\vendor\base64.h" />
     <ClInclude Include="src\Bootstrap.h" />
     <ClInclude Include="src\Camera.h" />

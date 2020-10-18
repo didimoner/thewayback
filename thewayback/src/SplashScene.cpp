@@ -12,15 +12,10 @@ void SplashScene::update() {
 }
 
 void SplashScene::draw() {
-    FontManager::instance().draw("hello_text", 25, 32);
 }
 
 void SplashScene::onActivate() {
     Logger.debug("Splash activated");
-
-    FontManager::instance().loadFont("segoeui.ttf", "segoeui", 16);
-    FontManager::instance().createMultilineTexture("segoeui", "hello_text", 
-        "Hello my dear friend!\nHow are you doing?", 320, {255, 255, 255});
 }
 
 bool SplashScene::onDeactivate() {

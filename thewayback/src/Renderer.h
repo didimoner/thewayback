@@ -7,7 +7,7 @@ class Renderer {
 
 private:
     struct DrawingEntity {
-        std::string textureId;
+        SDL_Texture* pTexture;
         SDL_Rect sourceRect;
         SDL_Rect destRect;
         double_t angle = 0;
@@ -37,8 +37,11 @@ public:
 
     // ---------------------
 
-    void send(const std::string& textureId, float_t x, float_t y, int32_t width, int32_t height, int32_t zIndex,
-              uint32_t row = 0, uint32_t frame = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void send(const std::string& textureId, SDL_Rect& sourceRect, SDL_Rect& destRect, 
+        int32_t zIndex, SDL_RendererFlip flip = SDL_FLIP_NONE);
+
+    void send(SDL_Texture* pTexture, SDL_Rect& sourceRect, SDL_Rect& destRect,
+        int32_t zIndex, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     void flush();
 
