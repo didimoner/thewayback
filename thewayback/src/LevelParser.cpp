@@ -171,5 +171,12 @@ void LevelParser::parseNpcs(XMLElement* pNpcsRoot, Level& level) {
         auto pNpc = std::dynamic_pointer_cast<Npc>(XmlHelper::parseGameObject(o));
         pNpc->setZIndex(zIndex);
         level.m_npcs.push_back(std::move(pNpc));
+
+        std::shared_ptr<SolidObject> pNpcCollider = std::make_shared<SolidObject>(
+            "obstacle",
+            o->FloatAttribute("x"), o->FloatAttribute("y"),
+            o->IntAttribute("width"), o->IntAttribute("height") / 2
+        );
+        level.m_pSolidObjectsGrid->addObject(pNpcCollider);
     }
 }

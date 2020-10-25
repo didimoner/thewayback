@@ -108,10 +108,13 @@ void PlayScene::changeLevel(const std::string& levelId) {
 
 void PlayScene::processCollisions() const {
     auto solidObjects = m_pActiveLevel->getObjectsNearby(m_pPlayer->getCollider());
-    ECollisionType collisionType;
     for (const auto& pObject : solidObjects) {
-        if (pObject->getType() == "portal") {
+        const std::string type = pObject->getType();
+        ECollisionType collisionType;
+        if (type == "portal") {
             collisionType = ECollisionType::PLAYER_PORTAL;
+        } else if (type == "npc") {
+            collisionType = ECollisionType::PLAYER_NPC;
         } else {
             collisionType = ECollisionType::PLAYER_OBSTACLE;
         }

@@ -33,6 +33,9 @@ void Player::onCollide(ECollisionType type, const std::shared_ptr<Collidable>& p
             m_acceleration.set(0, 0);
             m_position -= m_velocity;
         }
+        case ECollisionType::PLAYER_NPC:{
+            // todo: react
+        }
     }
 }
 
