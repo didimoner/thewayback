@@ -9,7 +9,7 @@ private:
     std::wstring m_text;
     SDL_Texture* m_pTexture = nullptr;
     uint8_t m_row = 0;
-    SDL_Color m_color = { 0, 0, 0, 1 };
+    SDL_Color m_color = { 255, 0, 0 };
 
 public:
     explicit TextBox(std::string& fontId);

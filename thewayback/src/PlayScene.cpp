@@ -64,10 +64,10 @@ void PlayScene::onActivate() {
 
     m_sceneObjects.clear();
 
-    //SoundPlayer::playMusic("main_theme", -1);
+    SoundPlayer::playMusic("main_theme", -1);
 
     std::string fontId = "pixel";
-    int32_t fontSize = 24;
+    int32_t fontSize = 32;
     FontManager::instance().loadFont("pixel.ttf", fontId, fontSize);
     m_text = std::make_shared<TextBox>(fontId);
 
