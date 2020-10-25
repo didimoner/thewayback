@@ -2,8 +2,9 @@
 #include "pch.h"
 #include "Vector2f.h"
 #include "Drawable.h"
+#include "Entity.h"
 
-class GameObject : public Drawable {
+class GameObject : public Entity, public Drawable {
 
 public:
     struct InitParams {
@@ -15,9 +16,6 @@ public:
     };
 
 protected:
-    uint32_t m_width = 0;
-    uint32_t m_height = 0;
-    Vector2f m_position;
     Vector2f m_velocity;
     Vector2f m_acceleration;
 
@@ -35,23 +33,5 @@ public:
     }
 
     virtual void clean() = 0;
-
-    Vector2f getPosition() const {
-        return m_position;
-    }
-    void setPosition(Vector2f position) {
-        m_position = position;
-    }
-    void setPosition(float_t x, float_t y) {
-        m_position.set(x, y);
-    }
-
-    int32_t getWidth() const {
-        return m_width;
-    }
-
-    int32_t getHeight() const {
-        return m_height;
-    }
 
 };

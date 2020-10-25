@@ -212,6 +212,7 @@
   <ItemGroup>
     <ClInclude Include="src\Drawable.h" />
     <ClInclude Include="src\Animation.h" />
+    <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\GameSceneCreator.h" />
     <ClInclude Include="src\GameSceneFactory.h" />
     <ClInclude Include="src\Npc.h" />
@@ -242,7 +243,7 @@
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\GameObjectCreator.h" />
     <ClInclude Include="src\SolidObjectsGrid.h" />
-    <ClInclude Include="src\SolidObject.h" />
+    <ClInclude Include="src\Obstacle.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\PlayScene.h" />

@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "SolidObjectsGrid.h"
-#include "SolidObject.h"
+#include "Obstacle.h"
 #include "Collision.h"
 
 SolidObjectsGrid::SolidObjectsGrid(uint32_t width, uint32_t height, uint8_t gridCols, uint8_t gridRows) {
@@ -14,7 +14,7 @@ SolidObjectsGrid::SolidObjectsGrid(uint32_t width, uint32_t height, uint8_t grid
     }
 }
 
-void SolidObjectsGrid::addObject(const std::shared_ptr<SolidObject>& pObject) {
+void SolidObjectsGrid::addObject(const std::shared_ptr<Collidable>& pObject) {
     for (uint8_t column = 0; column < m_gridRows; column++) {
         for (uint8_t row = 0; row < m_gridCols; row++) {
             SDL_FRect mapRect;
@@ -31,14 +31,14 @@ void SolidObjectsGrid::addObject(const std::shared_ptr<SolidObject>& pObject) {
     }
 }
 
-std::set<std::shared_ptr<SolidObject>> SolidObjectsGrid::getObjectsNearby(const SDL_FRect& collider) const {
+std::set<std::shared_ptr<Collidable>> SolidObjectsGrid::getObjectsNearby(const SDL_FRect& collider) const {
     std::set<uint32_t> indices;
     indices.insert(calculateIndex(collider.x, collider.y));
     indices.insert(calculateIndex(collider.x + collider.w, collider.y));
     indices.insert(calculateIndex(collider.x + collider.w, collider.y + collider.h));
     indices.insert(calculateIndex(collider.x, collider.y + collider.h));
 
-    std::set<std::shared_ptr<SolidObject>> result;
+    std::set<std::shared_ptr<Collidable>> result;
     for (uint32_t index : indices) {
         if (index >= m_objects.size()) {
             continue;

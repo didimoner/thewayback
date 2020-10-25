@@ -7,7 +7,7 @@
 #include "LevelParser.h"
 #include "Collision.h"
 #include "ECollisionType.h"
-#include "SolidObject.h"
+#include "Obstacle.h"
 #include "Portal.h"
 #include "SoundPlayer.h"
 #include "TextBox.h"
@@ -107,8 +107,8 @@ void PlayScene::changeLevel(const std::string& levelId) {
 }
 
 void PlayScene::processCollisions() const {
-    auto solidObjects = m_pActiveLevel->getObjectsNearby(m_pPlayer->getCollider());
-    for (const auto& pObject : solidObjects) {
+    auto collidableObjects = m_pActiveLevel->getObjectsNearby(m_pPlayer->getCollider());
+    for (const auto& pObject : collidableObjects) {
         const std::string type = pObject->getType();
         ECollisionType collisionType;
         if (type == "portal") {

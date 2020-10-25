@@ -260,9 +260,6 @@
     <ClInclude Include="src\SceneManager.h">
       <Filter>Engine\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="src\SolidObject.h">
-      <Filter>Game\Map</Filter>
-    </ClInclude>
     <ClInclude Include="src\SolidObjectsGrid.h">
       <Filter>Game\Map</Filter>
     </ClInclude>
@@ -280,6 +277,12 @@
     </ClInclude>
     <ClInclude Include="src\Npc.h">
       <Filter>Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obstacle.h">
+      <Filter>Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity.h">
+      <Filter>Engine\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

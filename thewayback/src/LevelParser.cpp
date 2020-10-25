@@ -10,7 +10,7 @@
 #include "Log.h"
 #include "TileLayer.h"
 #include "SolidObjectsGrid.h"
-#include "SolidObject.h"
+#include "Obstacle.h"
 #include "Portal.h"
 #include "XmlHelper.h"
 
@@ -142,7 +142,7 @@ void LevelParser::parseObjectLayers(XMLElement* pRoot, Level& level) {
 
 void LevelParser::parseObstacles(XMLElement* pObstaclesRoot, Level& level) {
     for (XMLElement* o = pObstaclesRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        std::shared_ptr<SolidObject> pObstacle = std::make_shared<SolidObject>(
+        std::shared_ptr<Obstacle> pObstacle = std::make_shared<Obstacle>(
             "obstacle",
             o->FloatAttribute("x"), o->FloatAttribute("y"),
             o->IntAttribute("width"), o->IntAttribute("height")
@@ -153,7 +153,7 @@ void LevelParser::parseObstacles(XMLElement* pObstaclesRoot, Level& level) {
 
 void LevelParser::parsePortals(XMLElement* pPortalsRoot, Level& level) {
     for (XMLElement* o = pPortalsRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        std::shared_ptr<SolidObject> pPortal = std::make_shared<Portal>(
+        std::shared_ptr<Obstacle> pPortal = std::make_shared<Portal>(
             "portal",
             o->FloatAttribute("x"), o->FloatAttribute("y"),
             o->IntAttribute("width"), o->IntAttribute("height"),
@@ -166,13 +166,14 @@ void LevelParser::parsePortals(XMLElement* pPortalsRoot, Level& level) {
 
 void LevelParser::parseNpcs(XMLElement* pNpcsRoot, Level& level) {
     const int32_t zIndex = XmlHelper::getIntProperty(pNpcsRoot, "zIndex");
-
     for (XMLElement* o = pNpcsRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
         auto pNpc = std::dynamic_pointer_cast<Npc>(XmlHelper::parseGameObject(o));
         pNpc->setZIndex(zIndex);
-        level.m_npcs.push_back(std::move(pNpc));
+        pNpc->setType("npc");
+        level.m_npcs.push_back(pNpc);
+        level.m_pSolidObjectsGrid->addObject(pNpc);
 
-        std::shared_ptr<SolidObject> pNpcCollider = std::make_shared<SolidObject>(
+        std::shared_ptr<Obstacle> pNpcCollider = std::make_shared<Obstacle>(
             "obstacle",
             o->FloatAttribute("x"), o->FloatAttribute("y"),
             o->IntAttribute("width"), o->IntAttribute("height") / 2

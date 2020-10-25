@@ -5,6 +5,7 @@
 #include "Npc.h"
 
 class TileLayer;
+class Collidable;
 
 class Level : public Drawable {
 
@@ -27,7 +28,7 @@ public:
     std::string getId() const;
     uint32_t getWidthPx() const;
     uint32_t getHeightPx() const;
-    std::set<std::shared_ptr<SolidObject>> getObjectsNearby(const SDL_FRect& collider) const;
+    std::set<std::shared_ptr<Collidable>> getObjectsNearby(const SDL_FRect& collider) const;
     const Tileset* getTilesetByGlobalTileId(uint32_t globalTileId);
 
     void update() override;

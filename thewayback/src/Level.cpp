@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Level.h"
 #include "SolidObjectsGrid.h"
-#include "SolidObject.h"
+#include "Obstacle.h"
 #include "TileLayer.h"
 
 void Level::update() {
@@ -34,7 +34,7 @@ uint32_t Level::getHeightPx() const {
     return m_height * m_tileHeight;
 }
 
-std::set<std::shared_ptr<SolidObject>> Level::getObjectsNearby(const SDL_FRect& collider) const {
+std::set<std::shared_ptr<Collidable>> Level::getObjectsNearby(const SDL_FRect& collider) const {
     return m_pSolidObjectsGrid->getObjectsNearby(collider);
 }
 
