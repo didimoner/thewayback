@@ -2,8 +2,8 @@
 #include "Tileset.h"
 #include "Drawable.h"
 #include "SolidObjectsGrid.h"
+#include "Npc.h"
 
-class DrawableLayer;
 class TileLayer;
 
 class Level : public Drawable {
@@ -19,7 +19,8 @@ private:
     uint16_t m_tileHeight = 0;
 
     std::vector<Tileset> m_tilesets;
-    std::vector<std::shared_ptr<DrawableLayer>> m_drawableLayers;
+    std::vector<std::shared_ptr<TileLayer>> m_map;
+    std::vector<std::shared_ptr<Npc>> m_npcs;
     std::unique_ptr<SolidObjectsGrid> m_pSolidObjectsGrid;
 
 public:

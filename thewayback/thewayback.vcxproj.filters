@@ -143,6 +143,9 @@
     <ClCompile Include="src\TextBox.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Npc.cpp">
+      <Filter>Game\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SystemUtils.h">
@@ -224,9 +227,6 @@
     <ClInclude Include="src\XmlHelper.h">
       <Filter>Game\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\DrawableLayer.h">
-      <Filter>Game\Map\Layers</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObjectCreator.h">
       <Filter>Engine\Factories</Filter>
     </ClInclude>
@@ -277,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="src\TextBox.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Npc.h">
+      <Filter>Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

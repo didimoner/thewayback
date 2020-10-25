@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="128">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" compressionlevel="6" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="131">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -42,6 +42,30 @@
    <property name="type" value="game_objects"/>
    <property name="zIndex" type="int" value="3"/>
   </properties>
+ </objectgroup>
+ <objectgroup id="9" name="npc">
+  <properties>
+   <property name="type" value="npc"/>
+   <property name="zIndex" type="int" value="3"/>
+  </properties>
+  <object id="128" name="Joan" type="npc" x="608" y="224" width="32" height="32">
+   <properties>
+    <property name="animated" type="bool" value="false"/>
+    <property name="frame" type="int" value="1"/>
+    <property name="row" type="int" value="0"/>
+    <property name="textureFile" value="newchar01-1.png"/>
+    <property name="textureId" value="npc_1"/>
+   </properties>
+  </object>
+  <object id="130" name="John" type="npc" x="576" y="448" width="32" height="32">
+   <properties>
+    <property name="animated" type="bool" value="false"/>
+    <property name="frame" type="int" value="1"/>
+    <property name="row" type="int" value="2"/>
+    <property name="textureFile" value="newchar05-5.png"/>
+    <property name="textureId" value="npc_2"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="collidables">
   <properties>

@@ -6,6 +6,8 @@
 #include "Game.h"
 #include "Log.h"
 #include "PlayScene.h"
+#include "Npc.h"
+#include "Player.h"
 
 const int32_t FPS = 60;
 const int32_t DELAY_TIME = static_cast<int32_t>(1000.0f / FPS);
@@ -58,6 +60,7 @@ private:
 
         // game object types
         GameObjectFactory::instance().registerType("player", std::make_unique<PlayerCreator>());
+        GameObjectFactory::instance().registerType("npc", std::make_unique<NpcCreator>());
     }
 
 };

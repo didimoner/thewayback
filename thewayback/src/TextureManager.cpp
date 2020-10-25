@@ -28,7 +28,7 @@ bool TextureManager::load(const std::string& filename, const std::string& id) {
         return true;
     }
 
-    Logger.debug("Loading texture: " + filename);
+    Logger.debug("Loading texture: " + filename + " with id " + id);
 
     const std::string resourcesPath = getResourcePath("images");
     const std::string filepath = resourcesPath + filename;

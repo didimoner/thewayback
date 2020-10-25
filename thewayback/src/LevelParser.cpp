@@ -111,7 +111,7 @@ void LevelParser::parseTileLayers(XMLElement* pRoot, const std::shared_ptr<Level
         pTileLayer->setZIndex(XmlHelper::getIntProperty(e, "zIndex"));
         pTileLayer->setName(e->Attribute("name"));
         pTileLayer->setTileIds(tileIds);
-        pLevel->m_drawableLayers.push_back(pTileLayer);
+        pLevel->m_map.push_back(std::move(pTileLayer));
     }
 }
 
@@ -134,8 +134,8 @@ void LevelParser::parseObjectLayers(XMLElement* pRoot, Level& level) {
             parseObstacles(e, level);
         } else if (layerType == "portals") {
             parsePortals(e, level);
-        } else if (layerType == "game_objects") {
-            parseGameObjects(e, level);
+        } else if (layerType == "npc") {
+            parseNpcs(e, level);
         }
     }
 }
@@ -164,10 +164,12 @@ void LevelParser::parsePortals(XMLElement* pPortalsRoot, Level& level) {
     }
 }
 
-void LevelParser::parseGameObjects(XMLElement* pGameObjectsRoot, Level& level) {
-    for (XMLElement* o = pGameObjectsRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        auto pGameObject = XmlHelper::parseGameObject(o);
-        // todo: create layer of game objects
-        // .insert(pGameObject);
+void LevelParser::parseNpcs(XMLElement* pNpcsRoot, Level& level) {
+    const int32_t zIndex = XmlHelper::getIntProperty(pNpcsRoot, "zIndex");
+
+    for (XMLElement* o = pNpcsRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
+        auto pNpc = std::dynamic_pointer_cast<Npc>(XmlHelper::parseGameObject(o));
+        pNpc->setZIndex(zIndex);
+        level.m_npcs.push_back(std::move(pNpc));
     }
 }

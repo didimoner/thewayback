@@ -2,17 +2,23 @@
 #include "Level.h"
 #include "SolidObjectsGrid.h"
 #include "SolidObject.h"
-#include "DrawableLayer.h"
+#include "TileLayer.h"
 
 void Level::update() {
-    for (const auto& pLayer : m_drawableLayers) {
+    for (const auto& pLayer : m_map) {
         pLayer->update();
+    }
+    for (const auto& pNpc: m_npcs) {
+        pNpc->update();
     }
 }
 
 void Level::draw() {
-    for (const auto& pLayer : m_drawableLayers) {
+    for (const auto& pLayer : m_map) {
         pLayer->draw();
+    }
+    for (const auto& pNpc : m_npcs) {
+        pNpc->draw();
     }
 }
 

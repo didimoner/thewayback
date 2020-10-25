@@ -3,6 +3,7 @@
 #include "Log.h"
 #include "Animation.h"
 #include "Player.h"
+#include "Npc.h"
 #include "GameObjectFactory.h"
 #include "TextureManager.h"
 
@@ -23,8 +24,8 @@ std::shared_ptr<GameObject> XmlHelper::parseGameObject(tinyxml2::XMLElement* pOb
 
     Sprite::InitParams spriteInitParams;
     spriteInitParams.gameObjectInitParams = gameObjectInitParams;
-    spriteInitParams.row = pObjectElement->UnsignedAttribute("row");
-    spriteInitParams.frame = pObjectElement->UnsignedAttribute("frame");
+    spriteInitParams.row = getUnsignedProperty(pObjectElement, "row");
+    spriteInitParams.frame = getUnsignedProperty(pObjectElement, "frame");
     spriteInitParams.textureId = getStringProperty(pObjectElement, "textureId");
 
     auto textureFile = getStringProperty(pObjectElement, "textureFile");
@@ -47,6 +48,10 @@ std::shared_ptr<GameObject> XmlHelper::parseGameObject(tinyxml2::XMLElement* pOb
         playerInitParams.walkingSpeed = getFloatProperty(pObjectElement, "walkingSpeed");
         playerInitParams.runningSpeed = getFloatProperty(pObjectElement, "runningSpeed");
         std::dynamic_pointer_cast<Player>(pGameObject)->init(playerInitParams);
+    } else if (gameObjectType == "npc") {
+        Npc::InitParams npcInitParams;
+        npcInitParams.spriteInitParams = spriteInitParams;
+        std::dynamic_pointer_cast<Npc>(pGameObject)->init(npcInitParams);
     }
 
     return pGameObject;

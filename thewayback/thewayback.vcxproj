@@ -167,6 +167,7 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\GameSceneFactory.cpp" />
+    <ClCompile Include="src\Npc.cpp" />
     <ClCompile Include="src\Portal.cpp" />
     <ClCompile Include="src\Properties.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
@@ -211,9 +212,9 @@
   <ItemGroup>
     <ClInclude Include="src\Drawable.h" />
     <ClInclude Include="src\Animation.h" />
-    <ClInclude Include="src\DrawableLayer.h" />
     <ClInclude Include="src\GameSceneCreator.h" />
     <ClInclude Include="src\GameSceneFactory.h" />
+    <ClInclude Include="src\Npc.h" />
     <ClInclude Include="src\Portal.h" />
     <ClInclude Include="src\Properties.h" />
     <ClInclude Include="src\Renderer.h" />
