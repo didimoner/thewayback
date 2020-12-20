@@ -16,6 +16,8 @@ private:
     friend class NpcCreator;
     static Log Logger;
 
+    bool m_collisionEnabled = true;
+
 public:
     void init(const InitParams& initParams);
     void update() override;

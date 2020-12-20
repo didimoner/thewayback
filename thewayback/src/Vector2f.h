@@ -26,7 +26,7 @@ public:
     }
 
     float_t length() const {
-        return sqrt(pow(m_x, 2) + pow(m_y, 2));
+        return static_cast<float_t>(sqrt(pow(m_x, 2) + pow(m_y, 2)));
     }
 
     Vector2f operator+(const Vector2f& other) const {

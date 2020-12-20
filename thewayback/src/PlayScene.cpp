@@ -7,11 +7,7 @@
 #include "LevelParser.h"
 #include "Collision.h"
 #include "ECollisionType.h"
-#include "Obstacle.h"
-#include "Portal.h"
 #include "SoundPlayer.h"
-#include "TextBox.h"
-#include "FontManager.h"
 
 Log PlayScene::Logger(typeid(PlayScene).name());
 const std::string PlayScene::SCENE_ID = "PLAY_SCENE";
@@ -24,20 +20,20 @@ void PlayScene::update() {
     m_pCamera->update();
 
     if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_P)) {
-        SoundPlayer::playSound("ding");
+        SoundPlayer::playSound("ding", 3);
     }
 
     if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_O)) {
-        SoundPlayer::playSound("collect");
+        SoundPlayer::playSound("collect", 2);
     }
 
-    m_text->update();
+    m_pUserInterface->update();
 }
 
 void PlayScene::draw() {
     m_pActiveLevel->draw();
     m_pPlayer->draw();
-    m_text->draw();
+    m_pUserInterface->draw();
 }
 
 void PlayScene::onEvent(uint16_t type, std::string data) {
@@ -60,27 +56,12 @@ void PlayScene::onActivate() {
         Game::instance().getWindowHeight(),
         0, 0, m_pPlayer
     );
+    m_pUserInterface = std::make_unique<UserInterface>();
     changeLevel(m_sceneProps.stringVal("defaultLevel"));
 
     m_sceneObjects.clear();
 
     SoundPlayer::playMusic("main_theme", -1);
-
-    std::string fontId = "pixel";
-    int32_t fontSize = 32;
-    FontManager::instance().loadFont("pixel.ttf", fontId, fontSize);
-    m_text = std::make_shared<TextBox>(fontId);
-
-    GameObject::InitParams initParams;
-    initParams.x = 200;
-    initParams.y = 32;
-    initParams.width = 480;
-    initParams.height = fontSize * 2;
-    initParams.zIndex = 200;
-    m_text->init(initParams);
-
-    std::wstring wstring = L"Привет, Мир! Это мое первое сообщение в виде текста для этой игры. Надеюсь, что оно понравится вам!";
-    m_text->setText(wstring);
 
     Logger.debug("Play activated");
 }

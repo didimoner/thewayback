@@ -140,11 +140,14 @@
     <ClCompile Include="src\Portal.cpp">
       <Filter>Game\Map</Filter>
     </ClCompile>
-    <ClCompile Include="src\TextBox.cpp">
-      <Filter>Engine\UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\Npc.cpp">
       <Filter>Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UserInterface.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Text.cpp">
+      <Filter>Engine\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,9 +275,6 @@
     <ClInclude Include="src\SoundPlayer.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\TextBox.h">
-      <Filter>Engine\UI</Filter>
-    </ClInclude>
     <ClInclude Include="src\Npc.h">
       <Filter>Game\Objects</Filter>
     </ClInclude>
@@ -283,6 +283,15 @@
     </ClInclude>
     <ClInclude Include="src\Entity.h">
       <Filter>Engine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserInterface.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Text.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIElement.h">
+      <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

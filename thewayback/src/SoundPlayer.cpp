@@ -6,6 +6,7 @@
 void SoundPlayer::playMusic(const std::string& musicId, int32_t loops) {
     auto* pMusic = SoundManager::instance().getMusic(musicId);
     Mix_PlayMusic(pMusic, loops);
+    Mix_VolumeMusic(32);
 }
 
 void SoundPlayer::playSound(const std::string& soundId, int32_t channel, int32_t loops) {
