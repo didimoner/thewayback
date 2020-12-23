@@ -29,6 +29,6 @@ public:
     // ----------------------------------
 
     void registerType(const std::string & type, std::unique_ptr<GameSceneCreator> pCreator);
-    std::unique_ptr<GameScene> create(const std::string & type);
+    std::shared_ptr<GameScene> create(const std::string & type);
 
 };

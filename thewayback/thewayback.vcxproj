@@ -166,6 +166,7 @@
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\Dialog.cpp" />
     <ClCompile Include="src\GameSceneFactory.cpp" />
     <ClCompile Include="src\Npc.cpp" />
     <ClCompile Include="src\Portal.cpp" />
@@ -211,6 +212,7 @@
     <ClCompile Include="src\XmlHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Dialog.h" />
     <ClInclude Include="src\Drawable.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\Entity.h" />

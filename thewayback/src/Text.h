@@ -4,26 +4,29 @@
 
 class Text : public UIElement {
 
+public:
+    struct InitParams {
+        GameObject::InitParams gameObjectInitParams;
+        std::string fontId;
+        SDL_Color color;
+    };
+
 private:
     std::string m_fontId;
     std::wstring m_text;
     SDL_Texture* m_pTexture = nullptr;
     uint8_t m_row = 0;
-    SDL_Color m_color = { 255, 0, 0 };
-    std::function<void()> m_callback = []() {};
+    SDL_Color m_color = {0, 0, 0};
 
 public:
-    explicit Text(std::string& fontId);
-
+    void init(const InitParams& initParams);
     void update() override;
     void draw() override;
     void clean() override;
 
     void setText(std::wstring& text);
-    void setCallback(std::function<void()>& callback);
 
 private:
     void reloadTexture();
-    void onComplete();
 
 };

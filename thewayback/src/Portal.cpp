@@ -11,6 +11,6 @@ void Portal::onCollide(ECollisionType type, const std::shared_ptr<Collidable>& p
         pPlayer->setPosition(m_destination);
         SoundPlayer::playSound("ding");
 
-        Game::instance().getActiveScene().onEvent(PlayScene::EventType::CHANGE_LEVEL, m_location);
+        Game::instance().getActiveScene().lock()->onEvent(PlayScene::EventType::CHANGE_LEVEL, m_location);
     }
 }

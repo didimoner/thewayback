@@ -76,7 +76,7 @@ SDL_Renderer* Game::getRenderer() const {
     return m_pRenderer;
 }
 
-GameScene& Game::getActiveScene() const {
+std::weak_ptr<GameScene> Game::getActiveScene() const {
     return m_pSceneManager->getActiveScene();
 }
 

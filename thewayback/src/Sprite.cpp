@@ -18,7 +18,7 @@ void Sprite::update() {
 }
 
 void Sprite::draw() {
-    const Vector2f cameraPos = Game::instance().getActiveScene().getCamera().getPosition();
+    const Vector2f cameraPos = Game::instance().getActiveScene().lock()->getCamera().getPosition();
 
     SDL_Rect sourceRect;
     sourceRect.x = m_width * m_frame;

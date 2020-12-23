@@ -29,7 +29,8 @@ private:
     float_t m_walkingSpeed = 1;
     float_t m_runningSpeed = 1;
     EPlayerState m_playerState = EPlayerState::IDLE;
-    bool m_isRunning = false;
+    bool m_running = false;
+    bool m_locked = false;
 
     static Log Logger;
 
@@ -38,6 +39,10 @@ public:
     void update() override;
     void draw() override;
     void clean() override;
+
+    void setLocked(bool locked);
+    void lock();
+    void unlock();
 
     void onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) override;
     SDL_FRect getCollider() const override;

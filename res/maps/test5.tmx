@@ -34,7 +34,7 @@
    <property name="zIndex" type="int" value="4"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzbysDAsHWQ48EKyHHfNDIwvd1HS/XIgBL3ERtuA+m+eXjwYHAfDEzEgpHVYZOnlvuIiTdi7SNVPSXly2BxHzHlxkC6D18eGAzuo8Q+VhLVo4OR7j5K1Y+6jzL11HQfqZie7ptJBqan+2gFBrrdTgwGADXBldE=
+   eJzbysDAsHWQ48EKyHHfNDIwvd3HTAIeKPcRE24D7b55ePBgcB8MTMSCkdVhk6eW+4iJN2LtI1U9Me4jJt0PpPuIKTcG0n348sBgcB8l9rGSqB4djHT3Uap+1H2Uqaem+0jF9HTfTDIwPd1HKzDQ7XZiMADKt5YZ
   </data>
  </layer>
  <objectgroup id="3" name="game_objects">

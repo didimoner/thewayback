@@ -11,7 +11,6 @@ class GameScene {
 
 protected:
     std::unique_ptr<Camera> m_pCamera;
-    std::unique_ptr<UserInterface> m_pUserInterface;
     std::unordered_map<std::string, std::shared_ptr<Drawable>> m_sceneObjects;
     Properties m_sceneProps;
 
@@ -30,10 +29,6 @@ public:
 
     const Camera& getCamera() const {
         return *m_pCamera;
-    }
-
-    UserInterface& getUserInterface() const {
-        return *m_pUserInterface;
     }
 
 };

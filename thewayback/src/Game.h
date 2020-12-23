@@ -48,7 +48,7 @@ public:
     uint16_t getWindowHeight() const;
 
     SDL_Renderer* getRenderer() const;
-    GameScene& getActiveScene() const;
+    std::weak_ptr<GameScene> getActiveScene() const;
 
 private:
     bool initSDL(const std::string& title, int32_t x, int32_t y, int32_t width, int32_t height, int32_t flags);

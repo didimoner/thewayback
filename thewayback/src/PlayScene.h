@@ -9,19 +9,19 @@ class Log;
 class PlayScene : public GameScene {
 
 public:
+    friend class PlaySceneCreator;
+
     enum EventType : uint16_t {
         CHANGE_LEVEL = 0
     };
 
 private:
-    friend class PlaySceneCreator;
-    PlayScene() = default;
-
     static const std::string SCENE_ID;
     static const std::string PLAYER_TYPE;
     static Log Logger;
 
     std::unordered_map<std::string, std::shared_ptr<Level>> m_levels;
+    std::shared_ptr<UserInterface> m_pUserInterface;
     std::shared_ptr<Level> m_pActiveLevel;
     std::shared_ptr<Player> m_pPlayer;
 
@@ -34,6 +34,7 @@ public:
     bool onDeactivate() override;
 
     std::string getSceneId() const override;
+    std::shared_ptr<UserInterface> getUserInterface() const;
 
 private:
     void changeLevel(const std::string& levelId);
@@ -44,8 +45,8 @@ private:
 class PlaySceneCreator final : public GameSceneCreator {
 
 public:
-    std::unique_ptr<GameScene> create() const override {
-        return std::unique_ptr<PlayScene>(new PlayScene);
+    std::shared_ptr<GameScene> create() const override {
+        return std::make_shared<PlayScene>();
     }
 
 };

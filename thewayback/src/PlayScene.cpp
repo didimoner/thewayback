@@ -56,7 +56,7 @@ void PlayScene::onActivate() {
         Game::instance().getWindowHeight(),
         0, 0, m_pPlayer
     );
-    m_pUserInterface = std::make_unique<UserInterface>();
+    m_pUserInterface = std::make_unique<UserInterface>(m_pPlayer);
     changeLevel(m_sceneProps.stringVal("defaultLevel"));
 
     m_sceneObjects.clear();
@@ -73,6 +73,10 @@ bool PlayScene::onDeactivate() {
 
 std::string PlayScene::getSceneId() const {
     return SCENE_ID;
+}
+
+std::shared_ptr<UserInterface> PlayScene::getUserInterface() const {
+    return m_pUserInterface;
 }
 
 void PlayScene::changeLevel(const std::string& levelId) {

@@ -16,7 +16,7 @@ private:
     friend class NpcCreator;
     static Log Logger;
 
-    bool m_collisionEnabled = true;
+    std::string m_id;
 
 public:
     void init(const InitParams& initParams);
@@ -25,7 +25,9 @@ public:
     void clean() override;
 
     void onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) override;
+
     SDL_FRect getCollider() const override;
+    std::string getId() const;
 
 };
 

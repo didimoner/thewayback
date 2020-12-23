@@ -4,6 +4,8 @@
 #include "ECollisionType.h"
 #include "Log.h"
 #include "Game.h"
+#include "PlayScene.h"
+#include "Npc.h"
 
 Log Player::Logger(typeid(Player).name());
 
@@ -14,9 +16,11 @@ void Player::init(const InitParams& initParams) {
 }
 
 void Player::update() {
-    handleKeyboardInput();
+    if (!m_locked) {
+        handleKeyboardInput();
+    }
+    
     updatePlayerState();
-
     Animation::update();
 }
 
@@ -27,14 +31,31 @@ void Player::draw() {
 void Player::clean() {
 }
 
+void Player::lock() {
+    m_playerState = EPlayerState::IDLE;
+    m_locked = true;
+}
+
+void Player::unlock() {
+    m_locked = false;
+}
+
 void Player::onCollide(ECollisionType type, const std::shared_ptr<Collidable>& pCollidable) {
     switch (type) {
         case ECollisionType::PLAYER_OBSTACLE: {
             m_acceleration.set(0, 0);
             m_position -= m_velocity;
+
+            break;
         }
+
         case ECollisionType::PLAYER_NPC:{
-            // todo: react
+            if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_E) && !m_locked) {
+                const auto pScene = std::dynamic_pointer_cast<PlayScene>(Game::instance().getActiveScene().lock());
+                pScene->getUserInterface()->startDialog(std::dynamic_pointer_cast<Npc>(pCollidable)->getId());
+            }
+
+            break;
         }
     }
 }
@@ -58,17 +79,17 @@ void Player::handleKeyboardInput() {
         m_playerState = EPlayerState::IDLE;
     }
 
-    m_isRunning = inputHandler.isKeyPressed(SDL_SCANCODE_LSHIFT);
+    m_running = inputHandler.isKeyPressed(SDL_SCANCODE_LSHIFT);
 }
 
 void Player::updatePlayerState() {
-    if (m_isRunning) {
+    if (m_running) {
         setAnimationSpeed(EAnimationSpeed::FAST);
     } else {
         setAnimationSpeed(EAnimationSpeed::NORMAL);
     }
 
-    const float_t speed = m_isRunning ? m_runningSpeed : m_walkingSpeed;
+    const float_t speed = m_running ? m_runningSpeed : m_walkingSpeed;
     switch (m_playerState) {
     case EPlayerState::MOVING_UP:
         m_velocity.setY(-1 * speed);

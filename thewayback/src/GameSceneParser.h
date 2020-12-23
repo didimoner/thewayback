@@ -11,7 +11,7 @@ private:
     static Log Logger;
 
 public:
-    static std::unique_ptr<GameScene> parse(const std::string& filename);
+    static std::shared_ptr<GameScene> parse(const std::string& filename);
 
 private:
     static void parseObjects(tinyxml2::XMLElement* pObjectsRoot, GameScene& gameScene);

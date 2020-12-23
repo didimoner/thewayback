@@ -2,30 +2,15 @@
 #include "UserInterface.h"
 #include "GameObject.h"
 #include "UIElement.h"
-#include "FontManager.h"
-#include "Text.h"
+#include "Dialog.h"
 
 
-void UserInterface::createTextBox(std::function<void()>& callback) {
-    std::string fontId = "pixel";
-    int32_t fontSize = 32;
-    FontManager::instance().loadFont("pixel.ttf", fontId, fontSize);
+UserInterface::UserInterface(std::shared_ptr<Player> pPlayer) {
+    m_pPlayer = std::move(pPlayer);
+}
 
-    auto pTextBox = std::make_shared<Text>(fontId);
-    pTextBox->setCallback(callback);
-
-    GameObject::InitParams initParams;
-    initParams.x = 200;
-    initParams.y = 32;
-    initParams.width = 480;
-    initParams.height = fontSize * 2;
-    initParams.zIndex = 200;
-    pTextBox->init(initParams);
-
-    std::wstring wstring = L"Привет, Мир! Это мое первое сообщение в виде текста для этой игры. Надеюсь, что оно понравится вам!";
-    pTextBox->setText(wstring);
-
-    m_uiElements.push_back(pTextBox);
+void UserInterface::startDialog(const std::string& npcId) {
+    m_uiElements.push_back(std::make_shared<Dialog>(npcId, m_pPlayer));
 }
 
 void UserInterface::update() {

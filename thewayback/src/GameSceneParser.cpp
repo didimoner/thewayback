@@ -12,7 +12,7 @@ using namespace tinyxml2;
 
 Log GameSceneParser::Logger(typeid(GameSceneParser).name());
 
-std::unique_ptr<GameScene> GameSceneParser::parse(const std::string& filename) {
+std::shared_ptr<GameScene> GameSceneParser::parse(const std::string& filename) {
     Logger.debug("Loading scene from " + filename);
 
     std::string resourcesPath = getResourcePath("scenes");

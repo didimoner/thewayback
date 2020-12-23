@@ -6,6 +6,6 @@ class GameSceneCreator {
 
 public:
     virtual ~GameSceneCreator() = default;
-    virtual std::unique_ptr<GameScene> create() const = 0;
+    virtual std::shared_ptr<GameScene> create() const = 0;
 
 };

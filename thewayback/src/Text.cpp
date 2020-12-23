@@ -9,8 +9,11 @@
 #include <chrono>
 #include <thread>
 
-Text::Text(std::string& fontId) {
-    m_fontId = std::move(fontId);
+
+void Text::init(const InitParams& initParams) {
+    GameObject::init(initParams.gameObjectInitParams);
+    m_fontId = initParams.fontId;
+    m_color = initParams.color;
 }
 
 void Text::update() {
@@ -55,18 +58,9 @@ void Text::draw() {
 void Text::clean() {
 }
 
-void Text::onComplete() {
-    m_active = false;
-    m_callback();
-}
-
 void Text::setText(std::wstring& text) {
     m_text = std::move(text);
     reloadTexture();
-}
-
-void Text::setCallback(std::function<void()>& callback) {
-    m_callback = std::move(callback);
 }
 
 void Text::reloadTexture() {

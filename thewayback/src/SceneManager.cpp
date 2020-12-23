@@ -2,8 +2,8 @@
 #include "GameScene.h"
 #include "SceneManager.h"
 
-void SceneManager::push(std::unique_ptr<GameScene> pScene) {
-    m_gameScenes.emplace_back(std::move(pScene));
+void SceneManager::push(std::shared_ptr<GameScene> pScene) {
+    m_gameScenes.push_back(std::move(pScene));
     m_gameScenes.back()->onActivate();
 }
 
@@ -17,7 +17,7 @@ void SceneManager::pop() {
     }
 }
 
-void SceneManager::change(std::unique_ptr<GameScene> pScene) {
+void SceneManager::change(std::shared_ptr<GameScene> pScene) {
     if (m_gameScenes.empty()
         || m_gameScenes.back()->getSceneId() == pScene->getSceneId()) {
         return;
@@ -43,6 +43,6 @@ void SceneManager::draw() {
     m_gameScenes.back()->draw();
 }
 
-GameScene& SceneManager::getActiveScene() const {
-    return *m_gameScenes.back();
+std::weak_ptr<GameScene> SceneManager::getActiveScene() const {
+    return m_gameScenes.back();
 }

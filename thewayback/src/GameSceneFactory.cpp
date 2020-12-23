@@ -15,7 +15,7 @@ void GameSceneFactory::registerType(const std::string& type, std::unique_ptr<Gam
     m_creators.emplace(type, std::move(pCreator));
 }
 
-std::unique_ptr<GameScene> GameSceneFactory::create(const std::string& type) {
+std::shared_ptr<GameScene> GameSceneFactory::create(const std::string& type) {
     Logger.debug("Creating game scene of type " + type);
     if (m_creators.find(type) == m_creators.end()) {
         Logger.warn("Game scene creator for type " + type + " doesn't exist.");
