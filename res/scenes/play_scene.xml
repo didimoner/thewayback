@@ -28,4 +28,7 @@
 		<sound type="effect" id="ding" filename="ding.ogg" />
 		<sound type="music" id="main_theme" filename="world1.ogg" />
 	</sounds>
+	<fonts>
+		<font id="pixel" filename="pixel.ttf" fontSizes="24,32" />
+	</fonts>
 </scene>

@@ -52,6 +52,7 @@ public:
 private:
     static void loadConfigs() {
         Config::instance().load("system.ini", "system");
+        Config::instance().load("game.ini", "game");
     }
 
     static void registerTypes() {

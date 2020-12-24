@@ -16,6 +16,7 @@ public:
 private:
     static void parseObjects(tinyxml2::XMLElement* pObjectsRoot, GameScene& gameScene);
     static void parseSounds(tinyxml2::XMLElement* pSoundsRoot, GameScene& gameScene);
+    static void parseFonts(tinyxml2::XMLElement* pFontsRoot, GameScene& gameScene);
     static void parseProps(tinyxml2::XMLElement* pPropsRoot, GameScene& gameScene);
 
 };

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GameSceneParser.h"
+#include "FontManager.h"
 #include "SystemUtils.h"
 #include "LevelParser.h"
 #include "XmlHelper.h"
@@ -38,6 +39,9 @@ std::shared_ptr<GameScene> GameSceneParser::parse(const std::string& filename) {
     XMLElement* pSoundsRoot = pRoot->FirstChildElement("sounds");
     parseSounds(pSoundsRoot, *pGameScene);
 
+    XMLElement* pFontsRoot = pRoot->FirstChildElement("fonts");
+    parseFonts(pFontsRoot, *pGameScene);
+
     XMLElement* pPropsRoot = pRoot->FirstChildElement("properties");
     parseProps(pPropsRoot, *pGameScene);
 
@@ -65,6 +69,17 @@ void GameSceneParser::parseSounds(XMLElement* pSoundsRoot, GameScene& gameScene)
             SoundManager::instance().loadSound(filename, id);
         } else if (type == "music") {
             SoundManager::instance().loadMusic(filename, id);
+        }
+    }
+}
+
+void GameSceneParser::parseFonts(tinyxml2::XMLElement* pFontsRoot, GameScene& gameScene) {
+    for (auto* s = pFontsRoot->FirstChildElement(); s != nullptr; s = s->NextSiblingElement()) {
+        const std::string id = s->Attribute("id");
+        const std::string filename = s->Attribute("filename");
+        const auto fontSizes = splitString(s->Attribute("fontSizes"), ',');
+        for (std::string fontSize : fontSizes) {
+            FontManager::instance().loadFont(filename, id + "_" + fontSize, std::stoi(fontSize));
         }
     }
 }

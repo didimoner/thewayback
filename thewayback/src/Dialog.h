@@ -8,6 +8,8 @@ class Dialog : public UIElement {
 
 private:
     Text m_text;
+    std::string m_fontId;
+    uint16_t m_fontSize = 0;
     std::shared_ptr<Player> m_pPlayer;
 
 public:

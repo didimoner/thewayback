@@ -30,7 +30,7 @@ public:
 
     // ---------------------
 
-    bool loadFont(const std::string& filename, std::string id, int32_t size);
+    bool loadFont(const std::string& filename, const std::string& id, int32_t size);
     TTF_Font* getFont(const std::string& fontId);
 
 };

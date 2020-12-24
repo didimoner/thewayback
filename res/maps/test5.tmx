@@ -34,7 +34,7 @@
    <property name="zIndex" type="int" value="4"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzbysDAsHWQ48EKyHHfNDIwvd3HTAIeKPcRE24D7b55ePBgcB8MTMSCkdVhk6eW+4iJN2LtI1U9Me4jJt0PpPuIKTcG0n348sBgcB8l9rGSqB4djHT3Uap+1H2Uqaem+0jF9HTfTDIwPd1HKzDQ7XZiMADKt5YZ
+   eJzbysDAsHWQ48EKyHHfNDIwvd3HTAIeKPcRE24D7b55ePBgcB8MTMSCkdVhk6eW+4iJN5h9PETaS033EZPuibWPFu4jptwYSPfhywODwX2U2MdKonp0MNLdR6n6UfdRpp6a7iMV09N9M8nA9HQfrcBAt9uJwQAotpYl
   </data>
  </layer>
  <objectgroup id="3" name="game_objects">
@@ -51,6 +51,7 @@
   <object id="128" name="Joan" type="npc" x="608" y="224" width="32" height="32">
    <properties>
     <property name="animated" type="bool" value="false"/>
+    <property name="dialogFile" value="npc1.xml"/>
     <property name="frame" type="int" value="1"/>
     <property name="row" type="int" value="0"/>
     <property name="textureFile" value="newchar01-1.png"/>
@@ -60,6 +61,7 @@
   <object id="130" name="John" type="npc" x="576" y="448" width="32" height="32">
    <properties>
     <property name="animated" type="bool" value="false"/>
+    <property name="dialogFile" value="npc2.xml"/>
     <property name="frame" type="int" value="1"/>
     <property name="row" type="int" value="2"/>
     <property name="textureFile" value="newchar05-5.png"/>

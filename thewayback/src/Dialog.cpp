@@ -1,12 +1,15 @@
 ﻿#include "pch.h"
 #include "Dialog.h"
 #include "Player.h"
-#include "FontManager.h"
+#include "Config.h"
 
 
 Dialog::Dialog(const std::string& npcId, std::shared_ptr<Player> pPlayer) {
     m_pPlayer = std::move(pPlayer);
     m_pPlayer->lock();
+
+    m_fontId = Config::instance().get("game").Get("dialog", "fontId", "default");
+    m_fontSize = static_cast<uint16_t>(Config::instance().get("game").GetInteger("dialog", "fontSize", 16));
 
     createText();
     playVoice();
@@ -29,19 +32,16 @@ void Dialog::clean() {
 }
 
 void Dialog::createText() {
-    std::string fontId = "pixel";
-    int32_t fontSize = 32;
-    FontManager::instance().loadFont("pixel.ttf", fontId, fontSize);
-
+    // todo: move to a config or outside
     GameObject::InitParams gameObjectInitParams;
     gameObjectInitParams.x = 200;
     gameObjectInitParams.y = 32;
     gameObjectInitParams.width = 480;
-    gameObjectInitParams.height = fontSize * 2;
+    gameObjectInitParams.height = m_fontSize * 2;
     gameObjectInitParams.zIndex = 200;
     Text::InitParams textInitParams;
     textInitParams.gameObjectInitParams = gameObjectInitParams;
-    textInitParams.fontId = fontId;
+    textInitParams.fontId = m_fontId;
     textInitParams.color = { 255, 0, 0 };
 
     m_text.init(textInitParams);

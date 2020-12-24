@@ -26,8 +26,12 @@ FontManager::~FontManager() {
     m_textures.clear();
 }
 
-bool FontManager::loadFont(const std::string& filename, std::string id, int32_t size) {
-    Logger.debug("Loading font: " + filename);
+bool FontManager::loadFont(const std::string& filename, const std::string& id, int32_t size) {
+    if (m_fonts.find(id) != m_fonts.end()) {
+        return true;
+    }
+
+    Logger.debug("Loading font " + filename + " of size " + std::to_string(size));
 
     const std::string resourcesPath = getResourcePath("fonts");
     const std::string filepath = resourcesPath + filename;
