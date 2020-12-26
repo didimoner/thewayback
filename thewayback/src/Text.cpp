@@ -58,8 +58,8 @@ void Text::draw() {
 void Text::clean() {
 }
 
-void Text::setText(std::wstring& text) {
-    m_text = std::move(text);
+void Text::setText(const std::wstring& text) {
+    m_text = text;
     reloadTexture();
 }
 

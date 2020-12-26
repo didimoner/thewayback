@@ -2,10 +2,11 @@
 #include "Npc.h"
 #include "ECollisionType.h"
 #include "Log.h"
+#include "DialogParser.h"
 
 Log Npc::Logger(typeid(Npc).name());
 
-void Npc::init(const InitParams& initParams) {
+void Npc::init(const Npc::InitParams& initParams) {
     Sprite::init(initParams.spriteInitParams);
 }
 
@@ -30,4 +31,8 @@ SDL_FRect Npc::getCollider() const {
 
 std::string Npc::getId() const {
     return m_id;
+}
+
+std::vector<std::shared_ptr<Dialog>>& Npc::getDialogs() {
+    return m_dialogs;
 }

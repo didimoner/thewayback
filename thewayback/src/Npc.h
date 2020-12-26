@@ -1,6 +1,7 @@
 #pragma once
 #include "Sprite.h"
 #include "Collidable.h"
+#include "Dialog.h"
 #include "GameObjectCreator.h"
 
 class Log;
@@ -17,9 +18,10 @@ private:
     static Log Logger;
 
     std::string m_id;
+    std::vector<std::shared_ptr<Dialog>> m_dialogs;
 
 public:
-    void init(const InitParams& initParams);
+    void init(const Npc::InitParams& initParams);
     void update() override;
     void draw() override;
     void clean() override;
@@ -28,6 +30,7 @@ public:
 
     SDL_FRect getCollider() const override;
     std::string getId() const;
+    std::vector<std::shared_ptr<Dialog>>& getDialogs();
 
 };
 

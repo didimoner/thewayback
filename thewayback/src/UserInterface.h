@@ -14,7 +14,7 @@ private:
 public:
     UserInterface(std::shared_ptr<Player> pPlayer);
 
-    void startDialog(const std::string& npcId);
+    void startDialog(const std::shared_ptr<Npc>& pNpc);
 
     void update() override;
     void draw() override;

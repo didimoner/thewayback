@@ -1,26 +1,22 @@
 #pragma once
-#include "Text.h"
-#include "UIElement.h"
+#include "pch.h"
 
-class Player;
-
-class Dialog : public UIElement {
-
-private:
-    Text m_text;
-    std::string m_fontId;
-    uint16_t m_fontSize = 0;
-    std::shared_ptr<Player> m_pPlayer;
+class Dialog {
 
 public:
-    Dialog(const std::string& npcId, std::shared_ptr<Player> pPlayer);
+    struct Phrase {
+        std::wstring text;
+        std::string character;
+    };
 
-    void update() override;
-    void draw() override;
-    void clean() override;
+    friend class DialogParser;
 
 private:
-    void createText();
-    void playVoice();
- 
+    std::vector<Phrase> m_phrases;
+
+public:
+    std::vector<Phrase>& getPhrases() {
+        return m_phrases;
+    }
+
 };

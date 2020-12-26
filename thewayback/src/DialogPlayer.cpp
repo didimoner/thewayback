@@ -1,12 +1,15 @@
 ﻿#include "pch.h"
-#include "Dialog.h"
+#include "DialogPlayer.h"
 #include "Player.h"
+#include "Npc.h"
 #include "Config.h"
+#include "Dialog.h"
 
 
-Dialog::Dialog(const std::string& npcId, std::shared_ptr<Player> pPlayer) {
+DialogPlayer::DialogPlayer(std::shared_ptr<Npc> pNpc, std::shared_ptr<Player> pPlayer) {
     m_pPlayer = std::move(pPlayer);
     m_pPlayer->lock();
+    m_pNpc = std::move(pNpc);
 
     m_fontId = Config::instance().get("game").Get("dialog", "fontId", "default");
     m_fontSize = static_cast<uint16_t>(Config::instance().get("game").GetInteger("dialog", "fontSize", 16));
@@ -15,7 +18,7 @@ Dialog::Dialog(const std::string& npcId, std::shared_ptr<Player> pPlayer) {
     playVoice();
 }
 
-void Dialog::update() {
+void DialogPlayer::update() {
     m_text.update();
 
     if (!m_text.isActive()) {
@@ -24,14 +27,14 @@ void Dialog::update() {
     }
 }
  
-void Dialog::draw() {
+void DialogPlayer::draw() {
     m_text.draw();
 }
 
-void Dialog::clean() {
+void DialogPlayer::clean() {
 }
 
-void Dialog::createText() {
+void DialogPlayer::createText() {
     // todo: move to a config or outside
     GameObject::InitParams gameObjectInitParams;
     gameObjectInitParams.x = 200;
@@ -45,10 +48,8 @@ void Dialog::createText() {
     textInitParams.color = { 255, 0, 0 };
 
     m_text.init(textInitParams);
-
-    std::wstring wstring = L"Привет, Мир! Это мое первое сообщение в виде текста для этой игры. Надеюсь, что оно понравится вам!";
-    m_text.setText(wstring);
+    m_text.setText(m_pNpc->getDialogs()[0]->getPhrases()[0].text);
 }
 
-void Dialog::playVoice() {
+void DialogPlayer::playVoice() {
 }

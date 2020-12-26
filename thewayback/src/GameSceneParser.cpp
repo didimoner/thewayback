@@ -3,7 +3,7 @@
 #include "FontManager.h"
 #include "SystemUtils.h"
 #include "LevelParser.h"
-#include "XmlHelper.h"
+#include "GameObjectParser.h"
 #include "Log.h"
 #include "GameScene.h"
 #include "GameSceneFactory.h"
@@ -53,7 +53,7 @@ void GameSceneParser::parseObjects(XMLElement* pObjectsRoot, GameScene& gameScen
         std::string objectType = o->Attribute("type");
         std::shared_ptr<Drawable> pGameObject;
         if (objectType == "player") {
-            pGameObject = XmlHelper::parseGameObject(o);
+            pGameObject = GameObjectParser::parse(o);
         }
 
         gameScene.m_sceneObjects.emplace(objectType, std::move(pGameObject));

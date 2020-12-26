@@ -13,6 +13,8 @@
 #include "Obstacle.h"
 #include "Portal.h"
 #include "XmlHelper.h"
+#include "GameObjectParser.h"
+#include "DialogParser.h"
 
 using namespace tinyxml2;
 
@@ -167,9 +169,14 @@ void LevelParser::parsePortals(XMLElement* pPortalsRoot, Level& level) {
 void LevelParser::parseNpcs(XMLElement* pNpcsRoot, Level& level) {
     const int32_t zIndex = XmlHelper::getIntProperty(pNpcsRoot, "zIndex");
     for (XMLElement* o = pNpcsRoot->FirstChildElement("object"); o != nullptr; o = o->NextSiblingElement()) {
-        auto pNpc = std::dynamic_pointer_cast<Npc>(XmlHelper::parseGameObject(o));
+        auto pNpc = std::dynamic_pointer_cast<Npc>(GameObjectParser::parse(o));
         pNpc->setZIndex(zIndex);
         pNpc->setType("npc");
+        
+        const std::string dialogFile = XmlHelper::getStringProperty(o, "dialogFile");
+        const auto dialogs = DialogParser::parse(dialogFile);
+        pNpc->getDialogs().insert(std::end(pNpc->getDialogs()), std::begin(dialogs), std::end(dialogs));
+
         level.m_npcs.push_back(pNpc);
         level.m_pSolidObjectsGrid->addObject(pNpc);
 

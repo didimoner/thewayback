@@ -40,8 +40,8 @@
     <Filter Include="Engine\UI">
       <UniqueIdentifier>{878df138-bc9a-44a0-ae66-64e2239aa8f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Scenes\Utils">
-      <UniqueIdentifier>{6af6d13a-f319-4cb8-957c-223ba6af2a04}</UniqueIdentifier>
+    <Filter Include="Game\Parsers">
+      <UniqueIdentifier>{b89b8f3e-cc56-4b2d-8bcd-37cba43072a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -71,9 +71,6 @@
     <ClCompile Include="src\TileLayer.cpp">
       <Filter>Game\Map\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="src\LevelParser.cpp">
-      <Filter>Game\Map</Filter>
-    </ClCompile>
     <ClCompile Include="src\FontManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>
@@ -95,9 +92,6 @@
     <ClCompile Include="src\vendor\tinyxml2.cpp">
       <Filter>Engine\Vendor</Filter>
     </ClCompile>
-    <ClCompile Include="src\XmlHelper.cpp">
-      <Filter>Game\Scenes\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObjectFactory.cpp">
       <Filter>Engine\Factories</Filter>
     </ClCompile>
@@ -115,9 +109,6 @@
     </ClCompile>
     <ClCompile Include="src\SplashScene.cpp">
       <Filter>Game\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameSceneParser.cpp">
-      <Filter>Game\Scenes\Utils</Filter>
     </ClCompile>
     <ClCompile Include="src\Properties.cpp">
       <Filter>Engine\Utils</Filter>
@@ -149,8 +140,23 @@
     <ClCompile Include="src\Text.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Dialog.cpp">
+    <ClCompile Include="src\DialogPlayer.cpp">
       <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\XmlHelper.cpp">
+      <Filter>Engine\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LevelParser.cpp">
+      <Filter>Game\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectParser.cpp">
+      <Filter>Game\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameSceneParser.cpp">
+      <Filter>Game\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DialogParser.cpp">
+      <Filter>Game\Parsers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,9 +193,6 @@
     </ClInclude>
     <ClInclude Include="src\TileLayer.h">
       <Filter>Game\Map\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\LevelParser.h">
-      <Filter>Game\Map</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObject.h">
       <Filter>Engine\GameObjects</Filter>
@@ -230,9 +233,6 @@
     <ClInclude Include="src\vendor\tinyxml2.h">
       <Filter>Engine\Vendor</Filter>
     </ClInclude>
-    <ClInclude Include="src\XmlHelper.h">
-      <Filter>Game\Scenes\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObjectCreator.h">
       <Filter>Engine\Factories</Filter>
     </ClInclude>
@@ -253,9 +253,6 @@
     </ClInclude>
     <ClInclude Include="src\SplashScene.h">
       <Filter>Game\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameSceneParser.h">
-      <Filter>Game\Scenes\Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\Properties.h">
       <Filter>Engine\Utils</Filter>
@@ -296,8 +293,26 @@
     <ClInclude Include="src\UIElement.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dialog.h">
+    <ClInclude Include="src\DialogPlayer.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XmlHelper.h">
+      <Filter>Engine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dialog.h">
+      <Filter>Engine\DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LevelParser.h">
+      <Filter>Game\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectParser.h">
+      <Filter>Game\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameSceneParser.h">
+      <Filter>Game\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DialogParser.h">
+      <Filter>Game\Parsers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -52,7 +52,7 @@ void Player::onCollide(ECollisionType type, const std::shared_ptr<Collidable>& p
         case ECollisionType::PLAYER_NPC:{
             if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_E) && !m_locked) {
                 const auto pScene = std::dynamic_pointer_cast<PlayScene>(Game::instance().getActiveScene().lock());
-                pScene->getUserInterface()->startDialog(std::dynamic_pointer_cast<Npc>(pCollidable)->getId());
+                pScene->getUserInterface()->startDialog(std::dynamic_pointer_cast<Npc>(pCollidable));
             }
 
             break;

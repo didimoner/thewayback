@@ -2,27 +2,27 @@
 <dialogs npcId="npc1">
 
 	<dialog id="0">
-		<sentence character="npc">
+		<phrase character="npc">
 			Эй, привет! Давно мы с тобой не виделись! Как ты там поживаешь?
-		</sentence>
-		<sentence character="player">
+		</phrase>
+		<phrase character="player">
 			Доброго тебе дня! Да уж, сколько лет, сколько зим! У меня все довольно-таки неплохо, а как сам? Как семья?
-		</sentence>
-		<sentence character="npc">
+		</phrase>
+		<phrase character="npc">
 			И у нас все отлично. Жена моя работу сменила, теперь трудится на дому - шьет платья на заказ. Сын подрос, помогает мне по хозяйству. В общем, жизнь как жизнь, ничего особенного.
-		</sentence>
-		<sentence character="npc">
+		</phrase>
+		<phrase character="npc">
 			А что, собственно, привело тебя сюда?
-		</sentence>
-		<sentence character="player">
+		</phrase>
+		<phrase character="player">
 			Я это... Хотел обсудить с тобой один важный вопрос.
-		</sentence>
-		<sentence character="npc">
+		</phrase>
+		<phrase character="npc">
 			Не томи, выкладывай!
-		</sentence>
-		<sentence character="player">
+		</phrase>
+		<phrase character="player">
 			В общем, дело такое...
-		</sentence>
+		</phrase>
 	</dialog>
 	
 </dialogs>

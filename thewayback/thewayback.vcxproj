@@ -166,7 +166,9 @@
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Animation.cpp" />
-    <ClCompile Include="src\Dialog.cpp" />
+    <ClCompile Include="src\DialogParser.cpp" />
+    <ClCompile Include="src\DialogPlayer.cpp" />
+    <ClCompile Include="src\GameObjectParser.cpp" />
     <ClCompile Include="src\GameSceneFactory.cpp" />
     <ClCompile Include="src\Npc.cpp" />
     <ClCompile Include="src\Portal.cpp" />
@@ -213,9 +215,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Dialog.h" />
+    <ClInclude Include="src\DialogParser.h" />
+    <ClInclude Include="src\DialogPlayer.h" />
     <ClInclude Include="src\Drawable.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\Entity.h" />
+    <ClInclude Include="src\GameObjectParser.h" />
     <ClInclude Include="src\GameSceneCreator.h" />
     <ClInclude Include="src\GameSceneFactory.h" />
     <ClInclude Include="src\Npc.h" />

@@ -24,7 +24,7 @@ public:
     void draw() override;
     void clean() override;
 
-    void setText(std::wstring& text);
+    void setText(const std::wstring& text);
 
 private:
     void reloadTexture();
