@@ -137,9 +137,6 @@
     <ClCompile Include="src\UserInterface.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\Text.cpp">
-      <Filter>Engine\UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\DialogPlayer.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
@@ -157,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="src\DialogParser.cpp">
       <Filter>Game\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScrollableText.cpp">
+      <Filter>Engine\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,9 +287,6 @@
     <ClInclude Include="src\UserInterface.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\Text.h">
-      <Filter>Engine\UI</Filter>
-    </ClInclude>
     <ClInclude Include="src\UIElement.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
@@ -313,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="src\DialogParser.h">
       <Filter>Game\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScrollableText.h">
+      <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

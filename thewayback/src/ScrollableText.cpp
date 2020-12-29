@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Text.h"
+#include "ScrollableText.h"
 #include <SDL_ttf.h>
 #include "Game.h"
 #include "FontManager.h"
@@ -10,13 +10,16 @@
 #include <thread>
 
 
-void Text::init(const InitParams& initParams) {
+void ScrollableText::init(const InitParams& initParams) {
     GameObject::init(initParams.gameObjectInitParams);
-    m_fontId = initParams.fontId;
+    m_pFont = FontManager::instance().getFont(initParams.fontId);
     m_color = initParams.color;
+    m_text = initParams.text;
+
+    loadTexture();
 }
 
-void Text::update() {
+void ScrollableText::update() {
     if (InputHandler::instance().isKeyPressed(SDL_SCANCODE_SPACE)) {
         int32_t textureHeight;
         SDL_QueryTexture(m_pTexture, nullptr, nullptr, nullptr, &textureHeight);
@@ -31,7 +34,7 @@ void Text::update() {
     }
 }
 
-void Text::draw() {
+void ScrollableText::draw() {
     int32_t textureWidth;
     int32_t textureHeight;
     SDL_QueryTexture(m_pTexture, nullptr, nullptr, &textureWidth, &textureHeight);
@@ -55,30 +58,23 @@ void Text::draw() {
     Renderer::instance().send(m_pTexture, sourceRect, destRect, m_zIndex);
 }
 
-void Text::clean() {
+void ScrollableText::clean() {
 }
 
-void Text::setText(const std::wstring& text) {
-    m_text = text;
-    reloadTexture();
-}
-
-void Text::reloadTexture() {
+void ScrollableText::onComplete() {
+    UIElement::onComplete();
     if (m_pTexture != nullptr) {
         SDL_DestroyTexture(m_pTexture);
-        m_pTexture = nullptr;
     }
+}
 
-    TTF_Font* pFont = FontManager::instance().getFont(m_fontId);
-    if (pFont == nullptr) {
+void ScrollableText::loadTexture() {
+    if (m_pFont == nullptr) {
         return;
     }
 
-    SDL_Surface* pSurface = TTF_RenderUNICODE_Blended_Wrapped(pFont, 
+    SDL_Surface* pSurface = TTF_RenderUNICODE_Blended_Wrapped(m_pFont, 
         reinterpret_cast<const Uint16*>(m_text.c_str()), m_color, m_width);
-    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(Game::instance().getRenderer(), pSurface);
+    m_pTexture = SDL_CreateTextureFromSurface(Game::instance().getRenderer(), pSurface);
     SDL_FreeSurface(pSurface);
-
-    m_pTexture = pTexture;
-    m_row = 0;
 }

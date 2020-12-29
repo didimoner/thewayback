@@ -18,7 +18,7 @@ public:
     }
 
 protected:
-    void onComplete() {
+    virtual void onComplete() {
         m_active = false;
         m_callback();
     }

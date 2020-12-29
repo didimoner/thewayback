@@ -15,7 +15,7 @@ FontManager::FontManager() {
 
 FontManager::~FontManager() {
     for (auto const& entry : m_fonts) {
-        SDL_free(entry.second);
+        TTF_CloseFont(entry.second);
     }
     m_fonts.clear();
 

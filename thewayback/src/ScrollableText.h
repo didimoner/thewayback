@@ -1,18 +1,20 @@
-#pragma once
+﻿#pragma once
 #include "UIElement.h"
 #include <SDL.h>
+#include <SDL_ttf.h>
 
-class Text : public UIElement {
+class ScrollableText : public UIElement {
 
 public:
     struct InitParams {
         GameObject::InitParams gameObjectInitParams;
         std::string fontId;
         SDL_Color color;
+        std::wstring text;
     };
 
 private:
-    std::string m_fontId;
+    TTF_Font* m_pFont = nullptr;
     std::wstring m_text;
     SDL_Texture* m_pTexture = nullptr;
     uint8_t m_row = 0;
@@ -24,9 +26,8 @@ public:
     void draw() override;
     void clean() override;
 
-    void setText(const std::wstring& text);
-
 private:
-    void reloadTexture();
+    void loadTexture();
+    void onComplete() override;
 
 };

@@ -42,13 +42,13 @@ void DialogPlayer::createText() {
     gameObjectInitParams.width = 480;
     gameObjectInitParams.height = m_fontSize * 2;
     gameObjectInitParams.zIndex = 200;
-    Text::InitParams textInitParams;
+    ScrollableText::InitParams textInitParams;
     textInitParams.gameObjectInitParams = gameObjectInitParams;
     textInitParams.fontId = m_fontId;
     textInitParams.color = { 255, 0, 0 };
+    textInitParams.text = m_pNpc->getDialogs()[0]->getPhrases()[0].text;
 
     m_text.init(textInitParams);
-    m_text.setText(m_pNpc->getDialogs()[0]->getPhrases()[0].text);
 }
 
 void DialogPlayer::playVoice() {
